@@ -78,3 +78,4 @@ lean_workspace/mathlib_project/.lake/
 lean_workspace/repl/
 **/.env_cache/
 *.olean
+lean_workspace/mathlib_project/.github/
