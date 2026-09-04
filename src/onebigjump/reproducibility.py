@@ -5,6 +5,7 @@ from __future__ import annotations
 import contextlib
 import hashlib
 import json
+import math
 import os
 import platform
 import random
@@ -19,15 +20,28 @@ from typing import Any
 import numpy as np
 
 TRACKED_PACKAGES = (
-    "numpy", "scipy", "pandas", "pyarrow", "pydantic", "scikit-learn", "statsmodels",
-    "matplotlib", "torch", "transformers", "tokenizers", "accelerate", "datasets",
+    "numpy",
+    "scipy",
+    "pandas",
+    "pyarrow",
+    "pydantic",
+    "scikit-learn",
+    "statsmodels",
+    "matplotlib",
+    "torch",
+    "transformers",
+    "tokenizers",
+    "accelerate",
+    "datasets",
 )
 
 
 def seed_everything(seed: int, deterministic: bool = True) -> int:
     """Seed python/numpy/torch. Returns the seed for logging."""
     random.seed(seed)
-    np.random.seed(seed % (2**32 - 1))
+    # Legacy global seeding on purpose: third-party code still draws from np.random.*.
+    # Project code uses `rng(seed)` below, which returns an explicit Generator.
+    np.random.seed(seed % (2**32 - 1))  # noqa: NPY002
     os.environ["PYTHONHASHSEED"] = str(seed)
     try:
         import torch
@@ -103,7 +117,9 @@ def hardware_info() -> dict[str, Any]:
         info["torch"] = torch.__version__
         info["cuda_available"] = torch.cuda.is_available()
         info["cuda_version"] = torch.version.cuda
-        info["mps_available"] = bool(getattr(torch.backends, "mps", None) and torch.backends.mps.is_available())
+        info["mps_available"] = bool(
+            getattr(torch.backends, "mps", None) and torch.backends.mps.is_available()
+        )
         if torch.cuda.is_available():
             info["gpus"] = [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]
         else:
@@ -145,9 +161,45 @@ def atomic_path(target: Path, suffix: str = "") -> Iterator[Path]:
 
 
 def write_json(target: Path, obj: Any, indent: int = 2) -> Path:
+    """Write `obj` as strict, standards-conformant JSON, atomically.
+
+    NaN and infinity are written as `null`. They occur legitimately -- the moment estimator
+    returns NaN where its denominator vanishes, and a bootstrap interval is NaN when too few
+    resamples survive -- but `json.dumps` would emit the bare tokens `NaN` and `Infinity`,
+    which are not JSON and which every strict reader rejects.
+    """
     with atomic_path(Path(target)) as tmp:
-        tmp.write_text(json.dumps(obj, indent=indent, default=_json_default), encoding="utf-8")
+        payload = json.dumps(_sanitize(obj), indent=indent, default=_json_default, allow_nan=False)
+        tmp.write_text(payload, encoding="utf-8")
     return Path(target)
+
+
+def _sanitize(obj: Any) -> Any:
+    """Recursively replace non-finite floats with None.
+
+    `numpy.float64` subclasses `float`, so `json.dumps` serialises it directly and never
+    consults the `default` hook; the replacement therefore has to happen before the dump.
+    """
+    if isinstance(obj, float):  # covers numpy.float64
+        return None if not math.isfinite(obj) else float(obj)
+    if isinstance(obj, np.floating):
+        v = float(obj)
+        return None if not math.isfinite(v) else v
+    if isinstance(obj, np.integer):
+        return int(obj)
+    if isinstance(obj, np.ndarray):
+        return _sanitize(obj.tolist())
+    if isinstance(obj, dict):
+        return {str(k): _sanitize(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_sanitize(v) for v in obj]
+    if isinstance(obj, set):
+        return [_sanitize(v) for v in sorted(obj)]
+    if hasattr(obj, "as_dict"):
+        return _sanitize(obj.as_dict())
+    if hasattr(obj, "model_dump"):
+        return _sanitize(obj.model_dump(mode="json"))
+    return obj
 
 
 def _json_default(o: Any) -> Any:

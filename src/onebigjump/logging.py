@@ -44,6 +44,8 @@ def _attach_file(logger: logging.Logger, log_file: Path) -> None:
         return
     fh = logging.FileHandler(log_file)
     fh.setFormatter(
-        logging.Formatter("%(asctime)s | %(levelname)-7s | %(name)s | %(message)s", "%Y-%m-%d %H:%M:%S")
+        logging.Formatter(
+            "%(asctime)s | %(levelname)-7s | %(name)s | %(message)s", "%Y-%m-%d %H:%M:%S"
+        )
     )
     logger.addHandler(fh)

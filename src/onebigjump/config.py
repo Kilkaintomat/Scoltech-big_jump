@@ -130,9 +130,7 @@ class RunConfig(Strict):
     """Top-level config; every command reads one of these from YAML."""
 
     name: str
-    kind: Literal[
-        "kesten", "lean", "generate", "activations", "analysis", "synthetic", "grokking"
-    ]
+    kind: Literal["kesten", "lean", "generate", "activations", "analysis", "synthetic", "grokking"]
     description: str = ""
     seed: int = 0
     out_root: Path = Path("results")
