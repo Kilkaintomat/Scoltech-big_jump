@@ -1,0 +1,136 @@
+{
+  "name": "figure1-kesten",
+  "kind": "kesten",
+  "out_dir": "results/simulations/kesten",
+  "seed": 20270101,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-04T14:23:21Z",
+  "finished_at": "2026-09-04T14:25:08Z",
+  "duration_s": 106.195,
+  "reproducible": false,
+  "config": {
+    "rho": 0.7,
+    "kappa": 2.5,
+    "p_values": [
+      0.0,
+      0.02,
+      0.05,
+      0.1
+    ],
+    "d": 8,
+    "n_traces": 3000,
+    "n_steps": 64,
+    "burn_in": 200,
+    "sigma": 1.0,
+    "tolerance_quantile": 0.999,
+    "seed": 20270101,
+    "tail": {
+      "k_min": 20,
+      "k_max_frac": 0.25,
+      "k_selector": "double_bootstrap",
+      "k_fixed_frac": 0.05,
+      "double_bootstrap_resamples": 200,
+      "double_bootstrap_n1_exponent": 0.9,
+      "bootstrap_resamples": 500,
+      "bootstrap_unit": "trace",
+      "ci_level": 0.95,
+      "estimators": [
+        "hill",
+        "moment",
+        "gpd"
+      ]
+    },
+    "out_dir": "results/simulations/kesten",
+    "figure_p_trace": 0.05
+  },
+  "metrics": {
+    "xi_theory_p0.00": 0.0,
+    "hill_p0.00": 0.07882964329971331,
+    "moment_p0.00": -0.10330826719927821,
+    "xi_theory_p0.02": 0.25167151865767845,
+    "hill_p0.02": 0.2609798211448344,
+    "moment_p0.02": 0.15220343978540174,
+    "xi_theory_p0.05": 0.3572446823296295,
+    "hill_p0.05": 0.3472083244221933,
+    "moment_p0.05": 0.31088899669958314,
+    "xi_theory_p0.10": 0.5496510342180939,
+    "hill_p0.10": 0.5220569883464548,
+    "moment_p0.10": 0.5374698509038317
+  },
+  "notes": [],
+  "outputs": [
+    {
+      "path": "results/simulations/kesten/figure1_metrics.json",
+      "role": "metrics",
+      "bytes": 726444,
+      "digest": "sha256:45af902933fce08e7a10096844960247db3dc0fece2be8d3ece68f2074432eb6"
+    },
+    {
+      "path": "results/simulations/kesten/figure1_summary.csv",
+      "role": "table",
+      "bytes": 628,
+      "digest": "sha256:040dfd3b4c136d1a9124da5f52c56a053bb7f1f317ab533126172b294f2f63a9"
+    },
+    {
+      "path": "paper_outputs/metrics/figure1.json",
+      "role": "metrics",
+      "bytes": 726444,
+      "digest": "sha256:45af902933fce08e7a10096844960247db3dc0fece2be8d3ece68f2074432eb6"
+    },
+    {
+      "path": "paper_outputs/figures/figure1_kesten_dichotomy.pdf",
+      "role": "figure",
+      "bytes": 44609,
+      "digest": "sha256:dcc84887250cde5ff104e7f9a418b4a40b6c871ae99c94b98f38507725fdbf11"
+    },
+    {
+      "path": "paper_outputs/figures/figure1_kesten_dichotomy.png",
+      "role": "figure",
+      "bytes": 392578,
+      "digest": "sha256:0668ce17c129f363031353ec577d6adc27baa6517163adb59673e3822ca0086c"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": "25a267fc07a2cd5424de89a4daaa839df17a14be",
+      "branch": "main",
+      "describe": "25a267f",
+      "dirty": true,
+      "status": "?? src/onebigjump/manifests.py\n?? src/onebigjump/reporting/plots.py\n?? src/onebigjump/reporting/style.py\n?? src/onebigjump/simulation/figure1.py\n?? src/onebigjump/simulation/kesten.py",
+      "remote": null
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.13.0",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "macOS-15.5-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "python": "3.11.15",
+      "cpu_count": 10,
+      "ram_gb": 17.18,
+      "torch": "2.13.0",
+      "cuda_available": false,
+      "cuda_version": null,
+      "mps_available": true,
+      "gpus": []
+    },
+    "python_build": [
+      "main",
+      "Jun 23 2026 15:46:51"
+    ]
+  }
+}
