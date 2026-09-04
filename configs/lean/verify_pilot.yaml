@@ -1,0 +1,15 @@
+# Label every tactic of a set of sampled proofs with the Lean 4 kernel (Appendix B.2).
+# `input_traces` is a JSONL file with one sampled proof per line:
+#   {"trace_id": ..., "problem_id": ..., "model_id": ..., "proof": "theorem ... := by\n  ..."}
+name: lean-verify-pilot
+kind: lean
+description: Replay tactics in the Lean REPL to obtain exact per-step labels.
+seed: 0
+
+lean:
+  workspace: lean_workspace
+  timeout_s: 180
+  per_step_timeout_s: 60
+  input_traces: tests/fixtures/lean_proofs.jsonl
+  out_dir: results/pilot/lean
+  max_traces: null

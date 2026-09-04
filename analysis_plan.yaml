@@ -1,0 +1,95 @@
+# The analysis plan, fixed before the numbers exist.
+#
+# Its purpose is to make the tests pre-specified rather than chosen after seeing the data:
+# which comparison, on which subset, against which null, and what would count as a refutation.
+# Anything not listed here is exploratory and is reported as exploratory.
+
+predictions:
+  P1:
+    statement: "Step deviations of refuted traces have a heavier tail than those of verified ones."
+    primary_statistic: "whitened deviations Z^w at layer floor(Lambda/2)"
+    subsets: [verified, refuted_pre, refuted_post]
+    estimator: "Hill, with the moment and GPD estimates reported alongside"
+    decision_rule: >-
+      Separation is declared only when the 95% trace-bootstrap interval for the refuted subset
+      lies strictly above the interval for the verified subset. Overlapping intervals mean the
+      data do not distinguish them, whatever the point estimates do.
+    expected_pattern: "verified ~ refuted_pre < refuted_post"
+    refuted_if: "the verified interval lies strictly above the refuted interval"
+    known_confound: >-
+      Where labels come from the coupling hypothesis rather than a verifier, a verified trace is
+      by definition one whose maximum stayed below tau, so its tail is truncated by selection.
+      This applies to the Kesten surrogate, not to the Lean experiments.
+
+  P2:
+    statement: "Among refuted traces, the first rejected step is the largest jump."
+    primary_statistic: "top-1 rate of T^max = t*"
+    nulls:
+      - "chance E[1/L] over the refuted traces (Theorem 4(iii))"
+      - "permutation of step positions within each trace, 2000 resamples"
+      - "token-surprisal baseline: the least likely step by mean token log-probability"
+    decision_rule: >-
+      The top-1 rate must exceed the permutation null at p < 0.05 AND exceed the surprisal
+      baseline. Beating chance alone is not sufficient: chance is what the permutation null
+      already estimates.
+    refuted_if: "the permutation p-value is >= 0.05, or the surprisal baseline is not beaten"
+
+  P3:
+    statement: "The overshoot Z_{t*}/tau is Pareto-like, not concentrated at 1."
+    thresholds: [1.0e-2, 1.0e-3]
+    threshold_source: "the (1-q)-quantile of Z on verified traces"
+    decision_rule: >-
+      Under H_heur the fitted GPD shape should be positive and compatible with the pooled
+      gamma_hat of Table 1; under H_alg it should be <= 0.
+    report_alongside:
+      - "the unconditional overshoot P(Z > tau y | Z > tau), which is what Proposition 1 states"
+      - "the overshoot of the trace maximum"
+      - "the extremal index theta at the same threshold"
+    rationale: >-
+      Measured on the surrogate, the first-exceedance shape is attenuated by a factor of three
+      relative to the unconditional one when theta = 0.13. Theorem 4(ii) derives its limit under
+      extremal independence; a small shape in that column is not evidence against H_heur unless
+      theta is near 1.
+
+  P4:
+    statement: "gamma_hat drops abruptly when a generalizing circuit forms."
+    model: "one-layer modular-addition transformer, p = 113, d = 128, 40k steps"
+    deviation: "depth-wise block output ||h^(1) - h^(0)||, pooled over all p^2 inputs"
+    alignment_measures: [test_accuracy, restricted_loss, excluded_loss]
+    decision_rule: >-
+      The drop must be located at the grokking transition, defined as the first checkpoint where
+      test accuracy crosses 0.9, and not merely somewhere during training. Report the value
+      before and after, and the step at which each progress measure turns.
+    refuted_if: "gamma_hat does not fall, or falls at a step unrelated to the transition"
+
+  P5:
+    statement: "P(V_L = 1) = exp(-theta L Fbar(tau))."
+    lengths: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    decision_rule: >-
+      The constrained law is compared with an unconstrained per-length model by a
+      likelihood-ratio test with n_lengths - 1 degrees of freedom. The law fits if it is not
+      rejected at p < 0.05.
+    identifiability_note: >-
+      The likelihood depends on (theta, tau) only through c = theta * Fbar(tau), so the pair is
+      not identified. theta is pinned from the extremal index and tau recovered by inverting
+      Fbar; the degrees of freedom count one free parameter, not two.
+
+controls:
+  positive_H_alg: "a Tracr-compiled deducer; the p = 0 arm of the Kesten surrogate"
+  positive_H_heur: "an n-gram lookup model; the p > 0 arms of the Kesten surrogate"
+
+ablations:
+  - read-out layer
+  - deviation statistic (raw / whitened / innovation)
+  - sampling temperature
+  - choice of k (full Hill plots)
+  - split-half reliability across problem splits
+  - label noise, checking that P2 degrades linearly
+
+reporting:
+  identified_tail: >-
+    A tail is called well identified only when the Hill plot has a plateau over at least one
+    decade of k AND the three estimators agree. Both parts are required.
+  multiplicity: >-
+    P1-P3 are run for every (model, layer, statistic) cell. The headline claim is the pre-declared
+    cell only: Z^w at layer floor(Lambda/2). Every other cell is an ablation.

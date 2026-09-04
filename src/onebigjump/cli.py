@@ -103,7 +103,7 @@ def run(
     """Run the experiment described by a config file."""
     cfg = load_config(config)
     console.print(f"[bold]{cfg.name}[/bold] ({cfg.kind}) - {cfg.description or 'no description'}")
-    dispatch = {"kesten": _run_kesten}
+    dispatch = {"kesten": _run_kesten, "grokking": _run_grokking, "lean": _run_lean}
     if cfg.kind not in dispatch:
         console.print(f"[red]kind '{cfg.kind}' is not implemented yet[/red]")
         raise typer.Exit(code=2)
@@ -116,6 +116,40 @@ def _run_kesten(cfg: RunConfig, out_dir: Path | None) -> None:
     section = cfg.kesten or KestenConfig()
     payload = run_figure_one(section, out_dir=out_dir or section.out_dir)
     _print_kesten_summary(payload)
+
+
+def _run_grokking(cfg: RunConfig, out_dir: Path | None) -> None:
+    from .config import GrokkingConfig
+    from .experiments.p4_grokking import run_p4
+
+    section = cfg.grokking or GrokkingConfig()
+    for seed in section.seeds:
+        payload = run_p4(section, out_dir=out_dir or section.out_dir, seed=seed)
+        console.print(
+            f"seed {seed}: grokking at step {payload['grokking_step']}, "
+            f"gamma_hat {payload['checkpoints'][0]['hill']:.4f} -> "
+            f"{payload['checkpoints'][-1]['hill']:.4f}"
+        )
+
+
+def _run_lean(cfg: RunConfig, out_dir: Path | None) -> None:
+    from .config import LeanConfig
+    from .lean.batch import read_requests, verify_batch
+
+    section = cfg.lean or LeanConfig()
+    if section.input_traces is None:
+        console.print("[red]lean.input_traces is not set in the config[/red]")
+        raise typer.Exit(code=2)
+    _, summary = verify_batch(
+        read_requests(section.input_traces),
+        out_dir or section.out_dir,
+        workspace=section.workspace,
+        max_traces=section.max_traces,
+        per_step_timeout_s=float(section.per_step_timeout_s),
+        whole_proof_timeout_s=float(section.timeout_s),
+        name=cfg.name,
+    )
+    console.print(summary.model_dump())
 
 
 @app.command()

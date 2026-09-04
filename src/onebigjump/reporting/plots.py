@@ -9,7 +9,7 @@ import numpy as np
 
 from .style import DASHES, ESTIMATOR, GRID, INK, MUTED, apply_style, p_colour
 
-__all__ = ["figure_one", "hill_plot_figure"]
+__all__ = ["figure_grokking", "figure_one", "hill_plot_figure"]
 
 
 def _save(fig: Any, out_dir: Path, stem: str) -> list[Path]:
@@ -226,5 +226,111 @@ def hill_plot_figure(
         ax.set_title(title, loc="left")
     ax.legend(loc="best")
     paths = _save(fig, Path(out_dir), stem)
+    plt.close(fig)
+    return paths
+
+
+def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int = 0) -> list[Path]:
+    """P4: the order parameter against training, next to accuracy and the progress measures.
+
+    Three stacked panels sharing a log-scaled step axis, because everything interesting about
+    grokking happens over two decades of training and a linear axis compresses it into the right
+    edge. The grokking step is marked in all three, so whether `gamma_hat` moves *there* rather
+    than somewhere else is a question the figure answers rather than invites.
+    """
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    apply_style()
+    cps = payload["checkpoints"]
+    step = np.array([c["step"] for c in cps], dtype=float)
+    step_plot = np.maximum(step, 1.0)  # step 0 has no place on a log axis
+    grok_at = payload.get("grokking_step")
+
+    fig, axes = plt.subplots(3, 1, figsize=(5.2, 6.2), sharex=True)
+    ax_acc, ax_prog, ax_tail = axes
+
+    ax_acc.plot(step_plot, [c["train_acc"] for c in cps], color=INK, lw=1.3, label="train")
+    ax_acc.plot(
+        step_plot,
+        [c["test_acc"] for c in cps],
+        color=ESTIMATOR["hill"],
+        lw=1.3,
+        dashes=(4, 1.5),
+        label="test",
+    )
+    ax_acc.set_ylabel("accuracy")
+    ax_acc.set_ylim(-0.03, 1.03)
+    ax_acc.set_title("(a) generalization", loc="left")
+    ax_acc.legend(loc="center left")
+
+    ax_prog.plot(
+        step_plot,
+        [c["restricted_loss"] for c in cps],
+        color=ESTIMATOR["gpd"],
+        lw=1.3,
+        label="restricted loss",
+    )
+    ax_prog.plot(
+        step_plot,
+        [c["excluded_loss"] for c in cps],
+        color=ESTIMATOR["moment"],
+        lw=1.3,
+        dashes=(3, 1.5),
+        label="excluded loss",
+    )
+    ax_prog.set_yscale("log")
+    ax_prog.set_ylabel("loss")
+    ax_prog.set_title("(b) progress measures (Nanda et al.)", loc="left")
+    ax_prog.legend(loc="center left")
+
+    ax_tail.plot(
+        step_plot,
+        [c["hill"] for c in cps],
+        color=ESTIMATOR["hill"],
+        lw=1.3,
+        label=r"Hill $\hat{\gamma}$",
+    )
+    ax_tail.plot(
+        step_plot,
+        [c["moment"] for c in cps],
+        color=ESTIMATOR["moment"],
+        lw=1.3,
+        dashes=(3, 1.5),
+        label="moment",
+    )
+    full = [(c["step"], c["full"]) for c in cps if c.get("full")]
+    if full:
+        xs = np.maximum(np.array([f[0] for f in full], dtype=float), 1.0)
+        lo = [f[1]["bootstrap"]["hill"]["ci_low"] for f in full]
+        hi = [f[1]["bootstrap"]["hill"]["ci_high"] for f in full]
+        ax_tail.fill_between(
+            xs, lo, hi, color=ESTIMATOR["hill"], alpha=0.18, lw=0, label="95% CI (full protocol)"
+        )
+    ax_tail.axhline(0.0, color=GRID, lw=0.8, zorder=0)
+    ax_tail.set_ylabel(r"$\hat{\gamma}$   ($\xi = \max(\hat{\gamma}, 0)$)")
+    ax_tail.set_xlabel("training step")
+    ax_tail.set_title("(c) order parameter", loc="left")
+    ax_tail.legend(loc="best")
+
+    if grok_at:
+        for ax in axes:
+            ax.axvline(
+                max(float(grok_at), 1.0), color=MUTED, dashes=DASHES["tolerance"], lw=0.9, zorder=0
+            )
+        ax_acc.annotate(
+            f"grokking at step {grok_at}",
+            xy=(max(float(grok_at), 1.0), 0.5),
+            xytext=(6, 0),
+            textcoords="offset points",
+            color=MUTED,
+            fontsize=7,
+            va="center",
+        )
+
+    ax_tail.set_xscale("log")
+    paths = _save(fig, Path(out_dir), f"p4_grokking_seed{seed}")
     plt.close(fig)
     return paths
