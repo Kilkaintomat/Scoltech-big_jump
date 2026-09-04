@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.png binary
+*.pdf binary
+*.parquet binary
+*.ipynb binary linguist-documentation
+uv.lock linguist-generated=true merge=binary

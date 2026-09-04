@@ -1,0 +1,74 @@
+# --- secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+.netrc
+**/token
+**/credentials.json
+
+# --- python ---
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.eggs/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- data / heavy artifacts (never committed) ---
+data/raw/**
+data/interim/**
+data/processed/**
+!data/**/.gitkeep
+artifacts/models/**
+artifacts/activations/**
+artifacts/calibration/**
+!artifacts/**/.gitkeep
+*.safetensors
+*.bin
+*.ckpt
+*.pt
+*.pth
+*.npy
+*.npz
+*.h5
+
+# --- lean ---
+lean_workspace/.lake/
+lean_workspace/build/
+lean_workspace/**/*.olean
+
+# --- caches ---
+.hf_cache/
+.cache/
+hf_home/
+wandb/
+lightning_logs/
+runs/
+
+# --- large results (small metrics/figures ARE committed, see .gitattributes) ---
+results/**/*.parquet
+results/**/*.arrow
+results/**/raw_*
+logs/
+*.log
+
+# --- os ---
+.DS_Store
+._*
+.idea/
+.vscode/
+
+# --- source paper draft (double-blind submission; kept local, not committed) ---
+docs/*.pdf
