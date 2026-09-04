@@ -1,0 +1,10 @@
+{"trace_id": "ok-addcomm", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t1 (a b : Nat) : a + b = b + a := by\n  rw [Nat.add_comm]"}
+{"trace_id": "ok-multistep", "problem_id": "nat_assoc", "model_id": "handwritten", "proof": "theorem oj_t2 (a b c : Nat) : a + (b + c) = (a + b) + c := by\n  rw [Nat.add_assoc]"}
+{"trace_id": "ok-structured", "problem_id": "nat_zero_add", "model_id": "handwritten", "proof": "theorem oj_t3 (n : Nat) : 0 + n = n := by\n  induction n with\n  | zero => rfl\n  | succ k ih => simp"}
+{"trace_id": "ok-have", "problem_id": "nat_have", "model_id": "handwritten", "proof": "theorem oj_t4 (a : Nat) : a + 0 = a := by\n  have h : a + 0 = a := by\n    simp\n  exact h"}
+{"trace_id": "bad-first", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t5 (a b : Nat) : a + b = b + a := by\n  exact oj_nonexistent_lemma\n  rw [Nat.add_comm]"}
+{"trace_id": "bad-middle", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t6 (a b : Nat) : a + b = b + a := by\n  have h : a = a := rfl\n  exact Nat.mul_comm a b\n  rw [Nat.add_comm]"}
+{"trace_id": "bad-unsolved", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t7 (a b : Nat) : a + b = b + a := by\n  have h : a = a := rfl"}
+{"trace_id": "bad-sorry", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t8 (a b : Nat) : a + b = b + a := by\n  sorry"}
+{"trace_id": "bad-parse", "problem_id": "nat_add_comm", "model_id": "handwritten", "proof": "theorem oj_t9 (a b : Nat) : a + b = b + a := by\n  rw [Nat.add_comm"}
+{"trace_id": "bad-late", "problem_id": "nat_chain", "model_id": "handwritten", "proof": "theorem oj_t10 (a b c : Nat) : a + b + c = c + b + a := by\n  rw [Nat.add_comm a b]\n  rw [Nat.add_assoc]\n  exact Nat.zero_lt_one"}

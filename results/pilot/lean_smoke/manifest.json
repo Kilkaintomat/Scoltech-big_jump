@@ -1,0 +1,100 @@
+{
+  "name": "lean-verify",
+  "kind": "lean",
+  "out_dir": "results/pilot/lean_smoke",
+  "seed": null,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-04T14:50:51Z",
+  "finished_at": "2026-09-04T14:53:01Z",
+  "duration_s": 130.18,
+  "reproducible": false,
+  "config": {
+    "workspace": "lean_workspace",
+    "per_step_timeout_s": 60.0,
+    "whole_proof_timeout_s": 180.0,
+    "n_requested": 10
+  },
+  "metrics": {
+    "lean_environment": {
+      "workspace": "lean_workspace",
+      "project": "lean_workspace/mathlib_project",
+      "repl_binary": "lean_workspace/repl/.lake/build/bin/repl",
+      "toolchain": "leanprover/lean4:v4.34.0-rc2",
+      "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+      "lake": "/Users/den/.elan/bin/lake",
+      "lean": "/Users/den/.elan/bin/lean",
+      "available": true,
+      "problems": []
+    },
+    "repl_restarts": 0,
+    "n_traces": 10,
+    "verified": 4,
+    "refuted": 5,
+    "parse_error_discarded": 1,
+    "timeout": 0,
+    "repl_failure": 0,
+    "n_steps_total": 15,
+    "mean_trace_length": 1.6666666666666667,
+    "mean_t_star": 0.6,
+    "elapsed_s": 0.2591400146484375,
+    "whole_proof_vs_replay_disagreements": 0
+  },
+  "notes": [],
+  "outputs": [
+    {
+      "path": "results/pilot/lean_smoke/traces.jsonl",
+      "role": "traces",
+      "bytes": 8474,
+      "digest": "sha256:15b7dd9cd60416968f61c455f736b129e19caa5bbbee1b13d90bbace196514ed"
+    },
+    {
+      "path": "results/pilot/lean_smoke/summary.json",
+      "role": "summary",
+      "bytes": 243,
+      "digest": "sha256:3c449d0c7e8599d0b292d2fad5ff0f79a8de6a400f3d456133440bd24af34732"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": "cf07057c29d1b93288e560f97e906a9da55051d1",
+      "branch": "main",
+      "describe": "cf07057-dirty",
+      "dirty": true,
+      "status": "M src/onebigjump/cli.py\n M src/onebigjump/lean/__init__.py\n?? lean_workspace/mathlib_project/\n?? lean_workspace/repl/\n?? scripts/setup_lean.sh\n?? src/onebigjump/lean/batch.py\n?? src/onebigjump/lean/environment.py\n?? src/onebigjump/lean/schemas.py\n?? src/onebigjump/lean/segmentation.py\n?? src/onebigjump/lean/verifier.py\n?? tests/fixtures/lean_proofs.jsonl\n?? tests/unit/test_lean_segmentation.py",
+      "remote": null
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.13.0",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "macOS-15.5-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "python": "3.11.15",
+      "cpu_count": 10,
+      "ram_gb": 17.18,
+      "torch": "2.13.0",
+      "cuda_available": false,
+      "cuda_version": null,
+      "mps_available": true,
+      "gpus": []
+    },
+    "python_build": [
+      "main",
+      "Jun 23 2026 15:46:51"
+    ]
+  }
+}

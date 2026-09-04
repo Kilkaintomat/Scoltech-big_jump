@@ -72,3 +72,9 @@ logs/
 
 # --- source paper draft (double-blind submission; kept local, not committed) ---
 docs/*.pdf
+
+# --- Lean toolchain and cached environments (large, machine-specific) ---
+lean_workspace/mathlib_project/.lake/
+lean_workspace/repl/
+**/.env_cache/
+*.olean

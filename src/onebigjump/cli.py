@@ -173,6 +173,57 @@ def _print_kesten_summary(payload: dict) -> None:
     console.print(f"chance level for localisation: {payload['settings'][0]['chance']:.4f} = 1/L")
 
 
+@app.command("lean-doctor")
+def lean_doctor(
+    workspace: Annotated[Path, typer.Option(help="the Lean workspace")] = Path("lean_workspace"),
+) -> None:
+    """Report whether the Lean toolchain, Mathlib and the REPL are usable."""
+    from .lean import discover
+
+    env = discover(workspace)
+    table = Table(title="Lean toolchain", header_style="bold")
+    table.add_column("item")
+    table.add_column("value")
+    for key, value in env.as_dict().items():
+        if key == "problems":
+            continue
+        table.add_row(key, str(value))
+    console.print(table)
+    if env.available:
+        console.print("[green]Lean is usable.[/green]")
+    else:
+        for problem in env.problems:
+            console.print(f"[yellow]- {problem}[/yellow]")
+        console.print("Run [bold]scripts/setup_lean.sh[/bold] to install it in user space.")
+        raise typer.Exit(code=1)
+
+
+@app.command("lean-verify")
+def lean_verify(
+    proofs: Annotated[Path, typer.Argument(help="JSONL of sampled proofs")],
+    out_dir: Annotated[Path, typer.Option()] = Path("results/pilot/lean"),
+    workspace: Annotated[Path, typer.Option()] = Path("lean_workspace"),
+    max_traces: Annotated[int | None, typer.Option(help="verify at most this many")] = None,
+    per_step_timeout: Annotated[float, typer.Option(help="seconds per tactic")] = 60.0,
+) -> None:
+    """Label every tactic of every sampled proof with the Lean 4 kernel (Appendix B.2)."""
+    from .lean.batch import read_requests, verify_batch
+
+    _, summary = verify_batch(
+        read_requests(proofs),
+        out_dir,
+        workspace=workspace,
+        max_traces=max_traces,
+        per_step_timeout_s=per_step_timeout,
+    )
+    table = Table(title="Verification", header_style="bold")
+    table.add_column("category")
+    table.add_column("count", justify="right")
+    for key, value in summary.model_dump().items():
+        table.add_row(key, f"{value:.3f}" if isinstance(value, float) else str(value))
+    console.print(table)
+
+
 @app.command()
 def show(
     metrics: Annotated[Path, typer.Argument(help="a metrics JSON written by a run")],
