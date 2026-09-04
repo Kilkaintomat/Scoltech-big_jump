@@ -42,7 +42,9 @@ class StepSpan:
 
     def __post_init__(self) -> None:
         if self.end <= self.start:
-            raise ValueError(f"empty character span for step {self.index}: [{self.start}, {self.end})")
+            raise ValueError(
+                f"empty character span for step {self.index}: [{self.start}, {self.end})"
+            )
 
 
 @dataclass
@@ -74,6 +76,20 @@ class TokenAlignment:
         }
 
 
+_MISSING = object()
+
+
+def _field(step: Any, name: str, default: Any = _MISSING) -> Any:
+    """Read a field from either a `Segment` dataclass or a plain record dict."""
+    if isinstance(step, dict):
+        value = step.get(name, default)
+    else:
+        value = getattr(step, name, default)
+    if value is _MISSING:
+        raise KeyError(f"step has no field {name!r}: {step!r}")
+    return value
+
+
 def line_offsets(text: str) -> list[int]:
     """Character offset at which each line of `text` starts."""
     offsets = [0]
@@ -82,9 +98,7 @@ def line_offsets(text: str) -> list[int]:
     return offsets
 
 
-def step_char_spans(
-    body: str, steps: Sequence[Any], *, base_offset: int = 0
-) -> list[StepSpan]:
+def step_char_spans(body: str, steps: Sequence[Any], *, base_offset: int = 0) -> list[StepSpan]:
     """Character spans of each step, from the line spans the segmenter recorded.
 
     A step's span ends at its last **non-whitespace** character: trailing spaces and the newline
@@ -92,21 +106,22 @@ def step_char_spans(
     has ended but before the next has begun -- which is neither `X_t` nor `X_{t+1}`.
     """
     starts = line_offsets(body)
+    lines = body.split("\n")
     n = len(starts)
     spans: list[StepSpan] = []
     for step in steps:
-        first = int(getattr(step, "line_start", step["line_start"]))
-        last = int(getattr(step, "line_end", step["line_end"]))
+        first = int(_field(step, "line_start"))
+        last = int(_field(step, "line_end"))
         if not (0 <= first < n):
             continue
         last = min(max(last, first), n - 1)
         start = starts[first]
-        end = starts[last] + len(body.split("\n")[last])
+        end = starts[last] + len(lines[last])
         text_slice = body[start:end]
         stripped = text_slice.rstrip()
         if not stripped:
             continue
-        idx = int(getattr(step, "index", step.get("index", len(spans))))
+        idx = int(_field(step, "index", len(spans)))
         spans.append(
             StepSpan(index=idx, start=base_offset + start, end=base_offset + start + len(stripped))
         )
