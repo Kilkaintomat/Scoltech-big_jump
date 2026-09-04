@@ -259,6 +259,19 @@ def lean_verify(
 
 
 @app.command()
+def report(
+    out: Annotated[Path, typer.Option(help="where to write the report")] = Path(
+        "reports/experimental_report.md"
+    ),
+) -> None:
+    """Assemble the reproducible report from the metrics files present in the tree."""
+    from .reporting.report import write_report
+
+    path = write_report(".", out)
+    console.print(f"wrote {path} ({path.stat().st_size} bytes)")
+
+
+@app.command()
 def show(
     metrics: Annotated[Path, typer.Argument(help="a metrics JSON written by a run")],
     key: Annotated[str | None, typer.Option(help="dotted path into the document")] = None,
