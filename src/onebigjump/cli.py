@@ -258,6 +258,37 @@ def lean_verify(
     console.print(table)
 
 
+@app.command("analyse-kesten")
+def analyse_kesten(
+    p: Annotated[float, typer.Option(help="off-support heuristic rate")] = 0.05,
+    n_traces: Annotated[int, typer.Option()] = 3000,
+    n_steps: Annotated[int, typer.Option()] = 64,
+    out_dir: Annotated[Path, typer.Option()] = Path("results/simulations/analysis"),
+) -> None:
+    """Run P1-P5 on the Kesten surrogate, where the answers are known in closed form."""
+    from .config import AnalysisConfig
+    from .experiments.analysis import run_analysis
+    from .experiments.dataset import from_kesten
+    from .simulation.kesten import simulate
+
+    traces = simulate(p, n_traces=n_traces, n_steps=n_steps)
+    df = from_kesten(traces)
+    payload = run_analysis(
+        df,
+        AnalysisConfig(),
+        out_dir=out_dir,
+        name=f"kesten-p{p:.2f}",
+        tau_override=df.attrs["tau"],
+    )
+    console.print(
+        f"xi theory = {traces.xi_theory:.4f}; "
+        f"P1 {len(payload['P1'])} cells, P2 {len(payload['P2'])}, "
+        f"P3 {len(payload['P3'])}, P5 {len(payload['P5'])}"
+    )
+    if payload["not_run"]:
+        console.print(f"[yellow]not run on this table: {', '.join(payload['not_run'])}[/yellow]")
+
+
 @app.command()
 def report(
     out: Annotated[Path, typer.Option(help="where to write the report")] = Path(

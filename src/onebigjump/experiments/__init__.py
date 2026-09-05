@@ -1,5 +1,6 @@
 """The five predictions of Section 5, each testable against the surrogate and against real traces."""
 
+from .analysis import run_analysis
 from .dataset import COLUMNS, SUBSETS, from_kesten, from_traces, subset, validate_table
 from .p1_tail_separation import P1Result, run_p1, tail_separation
 from .p2_localization import P2Result, localization_rates, run_p2
@@ -18,6 +19,7 @@ __all__ = [
     "from_kesten",
     "from_traces",
     "localization_rates",
+    "run_analysis",
     "run_p1",
     "run_p2",
     "run_p3",
