@@ -1,13 +1,13 @@
 {
-  "name": "p4-grokking-seed1",
+  "name": "p4-grokking-seed2",
   "kind": "grokking",
   "out_dir": "results/full/grokking",
-  "seed": 1,
+  "seed": 2,
   "status": "ok",
   "error": null,
-  "started_at": "2026-09-05T16:35:11Z",
-  "finished_at": "2026-09-05T16:55:51Z",
-  "duration_s": 1239.849,
+  "started_at": "2026-09-05T17:14:13Z",
+  "finished_at": "2026-09-05T17:49:01Z",
+  "duration_s": 2087.673,
   "reproducible": true,
   "config": {
     "p": 113,
@@ -49,68 +49,70 @@
     "out_dir": "results/full/grokking"
   },
   "metrics": {
-    "grokking_step": 23700,
-    "memorisation_step": 600,
+    "grokking_step": 13500,
+    "memorisation_step": 400,
     "final_test_acc": 1.0,
-    "analysis_grokking_step": 23700,
-    "analysis_memorisation_step": 600,
-    "analysis_gamma_first": 0.021339808849827724,
-    "analysis_gamma_last": 0.032947185087221914,
-    "analysis_gamma_max": 0.18011687533925402,
-    "analysis_gamma_argmax_step": 22700,
-    "analysis_sharpest_drop_step": 22800,
-    "analysis_test_acc_turn_step": 23500,
-    "analysis_restricted_turn_step": 1300,
-    "analysis_excluded_turn_step": 22800,
-    "analysis_drop_coincides_with_progress_measures": false,
+    "analysis_grokking_step": 13500,
+    "analysis_memorisation_step": 400,
+    "analysis_gamma_first": 0.026141612470085937,
+    "analysis_gamma_last": 0.025710541770249618,
+    "analysis_gamma_max": 0.06911854125082462,
+    "analysis_gamma_argmax_step": 12100,
+    "analysis_sharpest_drop_step": 12600,
+    "analysis_test_acc_turn_step": 13200,
+    "analysis_restricted_turn_step": 13600,
+    "analysis_excluded_turn_step": 12700,
+    "analysis_drop_coincides_with_excluded_loss": true,
+    "analysis_drop_coincides_with_restricted_loss": false,
+    "analysis_drop_coincides_with_progress_measures": true,
     "analysis_drop_coincides_with_generalization": false,
     "analysis_drop_leads_generalization_by": 900,
-    "analysis_gamma_before_transition": 0.05550836114080706,
-    "analysis_gamma_after_transition": 0.04574532969671752,
-    "analysis_drop_at_transition": 0.009763031444089541,
+    "analysis_gamma_before_transition": 0.04315548704818875,
+    "analysis_gamma_after_transition": 0.036221687813624566,
+    "analysis_drop_at_transition": 0.006933799234564185,
     "analysis_drops_at_transition": true,
-    "analysis_gamma_peak_to_trough": 0.07496477153591258
+    "analysis_gamma_peak_to_trough": 0.012552138537810398
   },
   "notes": [
     "gamma_hat is a fixed-fraction point estimate (k = 5% of n) at every checkpoint; the full Section 4 protocol with intervals runs every 20 checkpoints."
   ],
   "outputs": [
     {
-      "path": "results/full/grokking/p4_grokking_seed1.json",
+      "path": "results/full/grokking/p4_grokking_seed2.json",
       "role": "metrics",
-      "bytes": 320565,
-      "digest": "sha256:863d6387a821b040955a4825dcb24accd099635c8fd0102991d368bbd6a7bcd6"
+      "bytes": 319535,
+      "digest": "sha256:904e664455c12671a2d6ad8c5a45ab8de7558c25f7557956836895125e45a7e0"
     },
     {
-      "path": "results/full/grokking/p4_grokking_seed1.csv",
+      "path": "results/full/grokking/p4_grokking_seed2.csv",
       "role": "table",
-      "bytes": 40520,
-      "digest": "sha256:aaac0e94d6f318c440455ac972f0a17bfdaa4da7c99c4db605b3850b3fc8820b"
+      "bytes": 40545,
+      "digest": "sha256:929315483c3cd1fdf3991060ee94126a4f803ef8cebff8b6bd1ee353210ce6a4"
     },
     {
-      "path": "paper_outputs/metrics/p4_grokking_seed1.json",
+      "path": "paper_outputs/metrics/p4_grokking_seed2.json",
       "role": "metrics",
-      "bytes": 320565,
-      "digest": "sha256:863d6387a821b040955a4825dcb24accd099635c8fd0102991d368bbd6a7bcd6"
+      "bytes": 319535,
+      "digest": "sha256:904e664455c12671a2d6ad8c5a45ab8de7558c25f7557956836895125e45a7e0"
     },
     {
-      "path": "paper_outputs/figures/p4_grokking_seed1.pdf",
+      "path": "paper_outputs/figures/p4_grokking_seed2.pdf",
       "role": "figure",
-      "bytes": 32546,
-      "digest": "sha256:d3931392e3192f6a88442b3a743ebc69ed89e9e64081f7d22d00d6a1b14efed9"
+      "bytes": 33366,
+      "digest": "sha256:81a2934e9a7052716fb1e93271088beebd4cad94c9af19465b2dc0887ee755d2"
     },
     {
-      "path": "paper_outputs/figures/p4_grokking_seed1.png",
+      "path": "paper_outputs/figures/p4_grokking_seed2.png",
       "role": "figure",
-      "bytes": 248895,
-      "digest": "sha256:4f1b0115e84803a8f3b3b4c8353ea278c5c056e9e0a955c637659e94cad07f0b"
+      "bytes": 275832,
+      "digest": "sha256:9b7508ceb926f093ad45164959fbdd5dd936ada61785507fa586f4caac4dbecd"
     }
   ],
   "environment": {
     "git": {
-      "commit": "247f06243ffd57489eeb43c76eebeb40fb8c2cdd",
+      "commit": "ab2384bef0cb1ef77c3478cf90a495df0afdbd5b",
       "branch": "main",
-      "describe": "247f062",
+      "describe": "ab2384b",
       "dirty": false,
       "status": "",
       "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"

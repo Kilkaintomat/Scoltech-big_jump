@@ -60,23 +60,29 @@ The paper's caption states 185 refuted traces at `p = 0`; we get 184. Chance is 
 against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.85 and a
 *simulated* 0.80 in the paper.
 
-### P4, run for real, on two seeds
+### P4, run for real, on three seeds
 
 40,000 steps of the one-layer modular-addition transformer on MPS, checkpoints every 100 steps.
 Both seeds memorise early and grok at essentially the same step.
 
-| event | seed 0 | seed 1 |
-|---|---|---|
-| test accuracy crosses 0.9 | 23600 | 23700 |
-| `gamma_hat` peaks | **0.1753** at 22700 | **0.1801** at 22700 |
-| **sharpest fall in `gamma_hat`** | **22800** | **22800** |
-| excluded loss half-transition | 22800 | 22900 |
-| test accuracy half-transition | 23200 | 23300 |
-| restricted loss half-transition | 23700 | 23800 |
-| `gamma_hat` after the transition | 0.0388 | 0.0457 |
+| event | seed 0 | seed 1 | seed 2 |
+|---|---|---|---|
+| test accuracy crosses 0.9 | 23600 | 23700 | **13500** |
+| `gamma_hat` peaks | 0.1753 at 22700 | 0.1801 at 22700 | 0.0691 at 12100 |
+| **sharpest fall in `gamma_hat`** | **22800** | **22800** | **12600** |
+| excluded loss half-transition | 22800 | 22900 | 12700 |
+| test accuracy half-transition | 23200 | 23300 | 13200 |
+| restricted loss half-transition | 23700 | 23800 | 13600 |
+| `gamma_hat` after the transition | 0.0388 | 0.0457 | 0.0362 |
+| lead over the generalization jump | 800 | 900 | 900 |
 
-The ordering replicates exactly. `gamma_hat` turns **first**, on the same checkpoint as the
-excluded loss, and leads the generalization jump by 800 and 900 steps.
+The ordering replicates on all three, including seed 2, whose transition happens ten thousand
+steps earlier than the other two. `gamma_hat` turns **first**, within one checkpoint of the
+excluded loss, and leads the generalization jump by 800-900 steps every time.
+
+The *size* of the transient does not replicate: seed 2 peaks at 0.069 against 0.175 and 0.180.
+So the timing of the signal is robust and its amplitude is not, which matters for anyone hoping
+to read circuit formation off a single threshold on `gamma_hat`.
 
 That is more specific than P4 as stated. The paper asks for the drop to coincide "with the
 mechanistic progress measures of Nanda et al. **and** the generalization jump"; those are ~900

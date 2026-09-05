@@ -34,8 +34,19 @@ fi
 cd "$WS/mathlib_project"
 echo "== toolchain: $(cat lean-toolchain) =="
 
+# `lake update` is deliberately NOT run when a manifest is already committed. The manifest pins
+# Mathlib at the exact revision the step labels were produced against, but several of its
+# dependencies are pinned to `main`; re-resolving would silently move them and verify future
+# proofs against a different Mathlib than the recorded one. The manifest is only written when the
+# project is created for the first time, which is where `lake new` above left it.
+if [ -f lake-manifest.json ]; then
+  echo "== using the committed lake-manifest.json (mathlib pinned) =="
+else
+  echo "== no manifest: resolving dependencies for the first time =="
+  lake update
+fi
+
 echo "== fetching the Mathlib binary cache (this is the slow step) =="
-lake update -R || lake update
 lake exe cache get
 
 echo "== building =="
