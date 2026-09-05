@@ -1,13 +1,13 @@
 {
-  "name": "lean-verify",
+  "name": "lean-verify-pilot",
   "kind": "lean",
-  "out_dir": "results/pilot/lean_smoke",
+  "out_dir": "results/pilot/lean",
   "seed": null,
   "status": "ok",
   "error": null,
-  "started_at": "2026-09-04T14:50:51Z",
-  "finished_at": "2026-09-04T14:53:01Z",
-  "duration_s": 130.18,
+  "started_at": "2026-09-05T16:21:30Z",
+  "finished_at": "2026-09-05T16:27:03Z",
+  "duration_s": 332.753,
   "reproducible": false,
   "config": {
     "workspace": "lean_workspace",
@@ -28,6 +28,7 @@
       "problems": []
     },
     "repl_restarts": 0,
+    "repl_recoveries": 0,
     "n_traces": 10,
     "verified": 4,
     "refuted": 5,
@@ -37,32 +38,32 @@
     "n_steps_total": 15,
     "mean_trace_length": 1.6666666666666667,
     "mean_t_star": 0.6,
-    "elapsed_s": 0.2591400146484375,
+    "elapsed_s": 0.4896533489227295,
     "whole_proof_vs_replay_disagreements": 0
   },
   "notes": [],
   "outputs": [
     {
-      "path": "results/pilot/lean_smoke/traces.jsonl",
+      "path": "results/pilot/lean/traces.jsonl",
       "role": "traces",
-      "bytes": 8474,
-      "digest": "sha256:15b7dd9cd60416968f61c455f736b129e19caa5bbbee1b13d90bbace196514ed"
+      "bytes": 8470,
+      "digest": "sha256:da3feaefbba510dcc8007a844b9100bf7b3c877459bfb10366f47a2bae3091a5"
     },
     {
-      "path": "results/pilot/lean_smoke/summary.json",
+      "path": "results/pilot/lean/summary.json",
       "role": "summary",
       "bytes": 243,
-      "digest": "sha256:3c449d0c7e8599d0b292d2fad5ff0f79a8de6a400f3d456133440bd24af34732"
+      "digest": "sha256:b142b2dc867415c4e7d73a81a9e48d96c30399d98bad2e527a2c7ee107d883fd"
     }
   ],
   "environment": {
     "git": {
-      "commit": "cf07057c29d1b93288e560f97e906a9da55051d1",
+      "commit": "905d85c18f9664c4a4095cb3b5a415fa6f68adfd",
       "branch": "main",
-      "describe": "cf07057-dirty",
+      "describe": "905d85c-dirty",
       "dirty": true,
-      "status": "M src/onebigjump/cli.py\n M src/onebigjump/lean/__init__.py\n?? lean_workspace/mathlib_project/\n?? lean_workspace/repl/\n?? scripts/setup_lean.sh\n?? src/onebigjump/lean/batch.py\n?? src/onebigjump/lean/environment.py\n?? src/onebigjump/lean/schemas.py\n?? src/onebigjump/lean/segmentation.py\n?? src/onebigjump/lean/verifier.py\n?? tests/fixtures/lean_proofs.jsonl\n?? tests/unit/test_lean_segmentation.py",
-      "remote": null
+      "status": "M paper_outputs/figures/figure1_kesten_dichotomy.pdf\n M paper_outputs/figures/figure1_kesten_dichotomy.png\n M paper_outputs/metrics/figure1.json\n D results/pilot/lean_smoke/manifest.json\n D results/pilot/lean_smoke/summary.json\n D results/pilot/lean_smoke/traces.jsonl\n M results/simulations/kesten/figure1_metrics.json\n M results/simulations/kesten/figure1_summary.csv\n M results/simulations/kesten/manifest.json",
+      "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
     },
     "packages": {
       "numpy": "2.3.5",

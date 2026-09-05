@@ -5,10 +5,10 @@
   "seed": 20270101,
   "status": "ok",
   "error": null,
-  "started_at": "2026-09-04T14:23:21Z",
-  "finished_at": "2026-09-04T14:25:08Z",
-  "duration_s": 106.195,
-  "reproducible": false,
+  "started_at": "2026-09-05T16:14:41Z",
+  "finished_at": "2026-09-05T16:21:06Z",
+  "duration_s": 384.603,
+  "reproducible": true,
   "config": {
     "rho": 0.7,
     "kappa": 2.5,
@@ -16,7 +16,9 @@
       0.0,
       0.02,
       0.05,
-      0.1
+      0.1,
+      0.15,
+      0.2
     ],
     "d": 8,
     "n_traces": 3000,
@@ -56,49 +58,55 @@
     "moment_p0.05": 0.31088899669958314,
     "xi_theory_p0.10": 0.5496510342180939,
     "hill_p0.10": 0.5220569883464548,
-    "moment_p0.10": 0.5374698509038317
+    "moment_p0.10": 0.5374698509038317,
+    "xi_theory_p0.15": 0.8483059994113037,
+    "hill_p0.15": 0.8499996267890384,
+    "moment_p0.15": 0.8415341099383682,
+    "xi_theory_p0.20": 1.4825045568911308,
+    "hill_p0.20": 1.5356255236057734,
+    "moment_p0.20": 1.5309102069062792
   },
   "notes": [],
   "outputs": [
     {
       "path": "results/simulations/kesten/figure1_metrics.json",
       "role": "metrics",
-      "bytes": 726444,
-      "digest": "sha256:45af902933fce08e7a10096844960247db3dc0fece2be8d3ece68f2074432eb6"
+      "bytes": 1078154,
+      "digest": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66"
     },
     {
       "path": "results/simulations/kesten/figure1_summary.csv",
       "role": "table",
-      "bytes": 628,
-      "digest": "sha256:040dfd3b4c136d1a9124da5f52c56a053bb7f1f317ab533126172b294f2f63a9"
+      "bytes": 873,
+      "digest": "sha256:dac7d6f514196b775ed35b85925be9e73b8c3ddfb19f9708a2f6a79643fe6ba8"
     },
     {
       "path": "paper_outputs/metrics/figure1.json",
       "role": "metrics",
-      "bytes": 726444,
-      "digest": "sha256:45af902933fce08e7a10096844960247db3dc0fece2be8d3ece68f2074432eb6"
+      "bytes": 1078154,
+      "digest": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66"
     },
     {
       "path": "paper_outputs/figures/figure1_kesten_dichotomy.pdf",
       "role": "figure",
-      "bytes": 44609,
-      "digest": "sha256:dcc84887250cde5ff104e7f9a418b4a40b6c871ae99c94b98f38507725fdbf11"
+      "bytes": 48361,
+      "digest": "sha256:88d6cd80b51ef19d126b272da1fbca4a2262e186dc0f9a1cd46a4f5f169eac13"
     },
     {
       "path": "paper_outputs/figures/figure1_kesten_dichotomy.png",
       "role": "figure",
-      "bytes": 392578,
-      "digest": "sha256:0668ce17c129f363031353ec577d6adc27baa6517163adb59673e3822ca0086c"
+      "bytes": 410137,
+      "digest": "sha256:1f0ad2923a08bf91b276b68b83195eeab5557ef5940debe8c0ee7025b2a71459"
     }
   ],
   "environment": {
     "git": {
-      "commit": "25a267fc07a2cd5424de89a4daaa839df17a14be",
+      "commit": "905d85c18f9664c4a4095cb3b5a415fa6f68adfd",
       "branch": "main",
-      "describe": "25a267f",
-      "dirty": true,
-      "status": "?? src/onebigjump/manifests.py\n?? src/onebigjump/reporting/plots.py\n?? src/onebigjump/reporting/style.py\n?? src/onebigjump/simulation/figure1.py\n?? src/onebigjump/simulation/kesten.py",
-      "remote": null
+      "describe": "905d85c",
+      "dirty": false,
+      "status": "",
+      "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
     },
     "packages": {
       "numpy": "2.3.5",
