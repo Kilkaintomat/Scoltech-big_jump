@@ -1,6 +1,6 @@
 # Experimental report
 
-Generated 2026-09-05 16:27:37Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
+Generated 2026-09-05 16:35:07Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
 
 A negative or inconclusive result is reported as one. Sections whose run has not happened say so rather than being omitted.
 
@@ -36,11 +36,11 @@ Toolchain `leanprover/lean4:v4.34.0-rc2`, Mathlib `85e3a25e`.
 | n_steps_total | 15 |
 | mean_trace_length | 1.667 |
 | mean_t_star | 0.600 |
-| elapsed_s | 0.490 |
+| elapsed_s | 0.439 |
 
 Whole-proof compilation and step replay disagree on **0** traces. Appendix B.2 requires them to agree by construction; `sorry` is the one documented exception and is excluded from the count.
 
-Run `lean-verify-pilot` at commit `905d85c1` (**dirty working tree -- not reproducible from any commit**), 333s, status `ok`.
+Run `lean-verify-pilot` at commit `b22446a9` (clean), 211s, status `ok`.
 
 ## P4 -- the order parameter across the grokking transition
 

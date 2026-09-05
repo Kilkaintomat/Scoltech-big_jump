@@ -5,10 +5,10 @@
   "seed": null,
   "status": "ok",
   "error": null,
-  "started_at": "2026-09-05T16:21:30Z",
-  "finished_at": "2026-09-05T16:27:03Z",
-  "duration_s": 332.753,
-  "reproducible": false,
+  "started_at": "2026-09-05T16:31:13Z",
+  "finished_at": "2026-09-05T16:34:45Z",
+  "duration_s": 211.468,
+  "reproducible": true,
   "config": {
     "workspace": "lean_workspace",
     "per_step_timeout_s": 60.0,
@@ -38,7 +38,7 @@
     "n_steps_total": 15,
     "mean_trace_length": 1.6666666666666667,
     "mean_t_star": 0.6,
-    "elapsed_s": 0.4896533489227295,
+    "elapsed_s": 0.43947577476501465,
     "whole_proof_vs_replay_disagreements": 0
   },
   "notes": [],
@@ -46,23 +46,23 @@
     {
       "path": "results/pilot/lean/traces.jsonl",
       "role": "traces",
-      "bytes": 8470,
-      "digest": "sha256:da3feaefbba510dcc8007a844b9100bf7b3c877459bfb10366f47a2bae3091a5"
+      "bytes": 8473,
+      "digest": "sha256:1df053d669c3004019a6c7571c0651e038e46c96b38891ffe09ca895da84e7e2"
     },
     {
       "path": "results/pilot/lean/summary.json",
       "role": "summary",
-      "bytes": 243,
-      "digest": "sha256:b142b2dc867415c4e7d73a81a9e48d96c30399d98bad2e527a2c7ee107d883fd"
+      "bytes": 244,
+      "digest": "sha256:4e23b8569a8a8bd234515c4360cefb6819ae6be46d4e46689c3d0aeae3ce53b3"
     }
   ],
   "environment": {
     "git": {
-      "commit": "905d85c18f9664c4a4095cb3b5a415fa6f68adfd",
+      "commit": "b22446a938a8dde7527e4ac996028ec4ddfa3577",
       "branch": "main",
-      "describe": "905d85c-dirty",
-      "dirty": true,
-      "status": "M paper_outputs/figures/figure1_kesten_dichotomy.pdf\n M paper_outputs/figures/figure1_kesten_dichotomy.png\n M paper_outputs/metrics/figure1.json\n D results/pilot/lean_smoke/manifest.json\n D results/pilot/lean_smoke/summary.json\n D results/pilot/lean_smoke/traces.jsonl\n M results/simulations/kesten/figure1_metrics.json\n M results/simulations/kesten/figure1_summary.csv\n M results/simulations/kesten/manifest.json",
+      "describe": "b22446a",
+      "dirty": false,
+      "status": "",
       "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
     },
     "packages": {
