@@ -25,6 +25,8 @@ predictions P1–P5 of the paper:
   estimator, protocol setting and paper placeholder this repository has to fill.
 - [`docs/system_report.md`](docs/system_report.md) — hardware audit and what it makes feasible.
 - [`STATUS.md`](STATUS.md) — what is done, running, or blocked.
+- [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md) — what installs and runs
+  on a Linux + CUDA box, and what the GPU cannot yet be used for.
 
 ## Setup
 
