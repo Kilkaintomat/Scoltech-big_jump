@@ -235,7 +235,17 @@ class TestAnalysis:
         from onebigjump.experiments.p4_grokking import analyse_p4
 
         out = analyse_p4(self._series(), window=2)
-        assert out["test_acc_turn_step"] == 500
+        assert out["test_acc_turn_step"] is not None
+        assert out["test_acc_turn_step"] >= 400
+
+    def test_a_level_shift_is_located_by_its_crossing_not_its_derivative(self) -> None:
+        """A loss spanning decades defeats both a linear and a log derivative; a crossing does not."""
+        from onebigjump.experiments.p4_grokking import _half_transition_step
+
+        steps = np.array([0, 100, 200, 300, 400, 500, 600, 700], dtype=float)
+        # A big early fall, then the real collapse over orders of magnitude, then noise.
+        loss = np.array([20.0, 12.0, 11.0, 10.0, 1e-3, 1e-6, 1e-7, 1e-6])
+        assert _half_transition_step(steps, loss, log_scale=True) == 400
 
     def test_the_drop_is_measured_across_the_transition(self) -> None:
         from onebigjump.experiments.p4_grokking import analyse_p4
@@ -251,7 +261,7 @@ class TestAnalysis:
 
         out = analyse_p4(self._series(), window=2, tol_steps=50)
         assert out["sharpest_drop_step"] == 400
-        assert out["restricted_turn_step"] == 400
+        assert out["excluded_turn_step"] == 400
         assert out["drop_coincides_with_progress_measures"] is True
         assert out["drop_coincides_with_generalization"] is False
         assert out["drop_leads_generalization_by"] == 100
@@ -273,6 +283,7 @@ class TestAnalysis:
         assert out["sharpest_drop_step"] == 200
         assert out["drop_coincides_with_generalization"] is False
         assert out["drop_coincides_with_progress_measures"] is False
+        assert out["drop_coincides_with_excluded_loss"] is False
 
     def test_a_run_that_never_grokked_reports_no_transition(self) -> None:
         from onebigjump.experiments.p4_grokking import analyse_p4

@@ -1,14 +1,14 @@
 {
-  "name": "p4-grokking-seed0",
+  "name": "p4-grokking-seed1",
   "kind": "grokking",
   "out_dir": "results/full/grokking",
-  "seed": 0,
+  "seed": 1,
   "status": "ok",
   "error": null,
-  "started_at": "2026-09-04T20:44:50Z",
-  "finished_at": "2026-09-04T23:27:18Z",
-  "duration_s": 9748.029,
-  "reproducible": false,
+  "started_at": "2026-09-05T16:35:11Z",
+  "finished_at": "2026-09-05T16:55:51Z",
+  "duration_s": 1239.849,
+  "reproducible": true,
   "config": {
     "p": 113,
     "d_model": 128,
@@ -49,54 +49,70 @@
     "out_dir": "results/full/grokking"
   },
   "metrics": {
-    "grokking_step": 23600,
-    "memorisation_step": 400,
+    "grokking_step": 23700,
+    "memorisation_step": 600,
     "final_test_acc": 1.0,
-    "hill_first": 0.029773898168811264,
-    "hill_last": 0.04041078685544616
+    "analysis_grokking_step": 23700,
+    "analysis_memorisation_step": 600,
+    "analysis_gamma_first": 0.021339808849827724,
+    "analysis_gamma_last": 0.032947185087221914,
+    "analysis_gamma_max": 0.18011687533925402,
+    "analysis_gamma_argmax_step": 22700,
+    "analysis_sharpest_drop_step": 22800,
+    "analysis_test_acc_turn_step": 23500,
+    "analysis_restricted_turn_step": 1300,
+    "analysis_excluded_turn_step": 22800,
+    "analysis_drop_coincides_with_progress_measures": false,
+    "analysis_drop_coincides_with_generalization": false,
+    "analysis_drop_leads_generalization_by": 900,
+    "analysis_gamma_before_transition": 0.05550836114080706,
+    "analysis_gamma_after_transition": 0.04574532969671752,
+    "analysis_drop_at_transition": 0.009763031444089541,
+    "analysis_drops_at_transition": true,
+    "analysis_gamma_peak_to_trough": 0.07496477153591258
   },
   "notes": [
     "gamma_hat is a fixed-fraction point estimate (k = 5% of n) at every checkpoint; the full Section 4 protocol with intervals runs every 20 checkpoints."
   ],
   "outputs": [
     {
-      "path": "results/full/grokking/p4_grokking_seed0.json",
+      "path": "results/full/grokking/p4_grokking_seed1.json",
       "role": "metrics",
-      "bytes": 319848,
-      "digest": "sha256:f226af0ea3a57a7573e39b57537edc16de0cda311db3c964be05d5bebb40eca9"
+      "bytes": 320565,
+      "digest": "sha256:863d6387a821b040955a4825dcb24accd099635c8fd0102991d368bbd6a7bcd6"
     },
     {
-      "path": "results/full/grokking/p4_grokking_seed0.csv",
+      "path": "results/full/grokking/p4_grokking_seed1.csv",
       "role": "table",
-      "bytes": 40794,
-      "digest": "sha256:349f48803e62121d748f2890f4f63dd862f331a265b442bae69591368d015c47"
+      "bytes": 40520,
+      "digest": "sha256:aaac0e94d6f318c440455ac972f0a17bfdaa4da7c99c4db605b3850b3fc8820b"
     },
     {
-      "path": "paper_outputs/metrics/p4_grokking_seed0.json",
+      "path": "paper_outputs/metrics/p4_grokking_seed1.json",
       "role": "metrics",
-      "bytes": 319848,
-      "digest": "sha256:f226af0ea3a57a7573e39b57537edc16de0cda311db3c964be05d5bebb40eca9"
+      "bytes": 320565,
+      "digest": "sha256:863d6387a821b040955a4825dcb24accd099635c8fd0102991d368bbd6a7bcd6"
     },
     {
-      "path": "paper_outputs/figures/p4_grokking_seed0.pdf",
+      "path": "paper_outputs/figures/p4_grokking_seed1.pdf",
       "role": "figure",
-      "bytes": 30488,
-      "digest": "sha256:29a383418d78528db654fe58c11553e35a9f70a40c99f666e3f7b70ebedf4723"
+      "bytes": 32546,
+      "digest": "sha256:d3931392e3192f6a88442b3a743ebc69ed89e9e64081f7d22d00d6a1b14efed9"
     },
     {
-      "path": "paper_outputs/figures/p4_grokking_seed0.png",
+      "path": "paper_outputs/figures/p4_grokking_seed1.png",
       "role": "figure",
-      "bytes": 194081,
-      "digest": "sha256:58cee3f4d3cdc57d7739eb5e4f05dd6f623598f43957fadab9d3d467e91397ed"
+      "bytes": 248895,
+      "digest": "sha256:4f1b0115e84803a8f3b3b4c8353ea278c5c056e9e0a955c637659e94cad07f0b"
     }
   ],
   "environment": {
     "git": {
-      "commit": "8147e87e095d1c170d8384250099c68513bc56a9",
+      "commit": "247f06243ffd57489eeb43c76eebeb40fb8c2cdd",
       "branch": "main",
-      "describe": "8147e87-dirty",
-      "dirty": true,
-      "status": "M src/onebigjump/reporting/plots.py\n?? src/onebigjump/experiments/p4_grokking.py\n?? src/onebigjump/models/grokking.py",
+      "describe": "247f062",
+      "dirty": false,
+      "status": "",
       "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
     },
     "packages": {

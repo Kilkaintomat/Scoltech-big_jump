@@ -1,6 +1,6 @@
 # Experimental report
 
-Generated 2026-09-05 16:35:07Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
+Generated 2026-09-05 17:00:43Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
 
 A negative or inconclusive result is reported as one. Sections whose run has not happened say so rather than being omitted.
 
@@ -47,22 +47,23 @@ Run `lean-verify-pilot` at commit `b22446a9` (clean), 211s, status `ok`.
 | seed | grokking step | final test acc | `gamma` peak | `gamma` after | peak-to-trough |
 |---|---|---|---|---|---|
 | 0 | 23600 | 1.000 | 0.1753 at step 22700 | 0.0388 | 0.0907 |
+| 1 | 23700 | 1.000 | 0.1801 at step 22700 | 0.0457 | 0.0750 |
 
-**Where the drop sits.** P4 names two references and they are not the same step:
+**Where the drop sits** (seed 0). P4 names two references and they are not the same step:
 
 | event | step |
 |---|---|
 | sharpest fall in `gamma_hat` | 22800 |
-| restricted loss turns | 22800 |
-| excluded loss turns | 22800 |
-| test accuracy turns | 23400 |
+| excluded loss half-transition | 22800 |
+| test accuracy half-transition | 23200 |
 | test accuracy crosses 0.9 | 23600 |
+| restricted loss half-transition | 23700 |
 
-The fall in `gamma_hat` lands on the **same checkpoint** as the turn in both mechanistic progress measures, and leads the generalization jump by 800 steps.
+The fall in `gamma_hat` lands on the **same checkpoint** as the turn in the excluded loss, and leads the generalization jump by 800 steps.
 
 That ordering is the substantive part: the order parameter tracks circuit formation, which is what the progress measures detect, rather than the downstream accuracy that follows it.
 
-Run `p4-grokking-seed0` at commit `8147e87e` (**dirty working tree -- not reproducible from any commit**), 9748s, status `ok`.
+Run `p4-grokking-seed1` at commit `247f0624` (clean), 1240s, status `ok`.
 
 ## What could not be run here, and why
 

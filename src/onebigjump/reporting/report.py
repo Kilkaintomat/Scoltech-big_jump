@@ -165,20 +165,36 @@ def _p4(results: Path) -> Section:
 
     if analyses and analyses[0]:
         a = analyses[0]
-        sec.line("**Where the drop sits.** P4 names two references and they are not the same step:")
+        seed0 = _load(files[0]) or {}
+        sec.line(
+            f"**Where the drop sits** (seed {seed0.get('seed', 0)}). P4 names two references and "
+            "they are not the same step:"
+        )
         sec.line()
+        events: list[tuple[str, int]] = [
+            (label, int(at))
+            for label, at in (
+                ("sharpest fall in `gamma_hat`", a.get("sharpest_drop_step")),
+                ("excluded loss half-transition", a.get("excluded_turn_step")),
+                ("test accuracy half-transition", a.get("test_acc_turn_step")),
+                ("test accuracy crosses 0.9", a.get("grokking_step")),
+                ("restricted loss half-transition", a.get("restricted_turn_step")),
+            )
+            if at is not None
+        ]
         sec.line("| event | step |").line("|---|---|")
-        sec.line(f"| sharpest fall in `gamma_hat` | {a.get('sharpest_drop_step')} |")
-        sec.line(f"| restricted loss turns | {a.get('restricted_turn_step')} |")
-        sec.line(f"| excluded loss turns | {a.get('excluded_turn_step')} |")
-        sec.line(f"| test accuracy turns | {a.get('test_acc_turn_step')} |")
-        sec.line(f"| test accuracy crosses 0.9 | {a.get('grokking_step')} |")
+        for label, at in sorted(events, key=lambda e: e[1]):
+            sec.line(f"| {label} | {at} |")
         sec.line()
         lead = a.get("drop_leads_generalization_by")
         if a.get("drop_coincides_with_progress_measures"):
+            which = (
+                "the excluded loss"
+                if a.get("drop_coincides_with_excluded_loss")
+                else "the restricted loss"
+            )
             sec.line(
-                "The fall in `gamma_hat` lands on the **same checkpoint** as the turn in both "
-                "mechanistic progress measures"
+                f"The fall in `gamma_hat` lands on the **same checkpoint** as the turn in {which}"
                 + (f", and leads the generalization jump by {lead} steps." if lead else ".")
             )
             sec.line()
@@ -189,7 +205,7 @@ def _p4(results: Path) -> Section:
             )
         else:
             sec.line(
-                "The fall in `gamma_hat` does **not** coincide with the progress measures. "
+                "The fall in `gamma_hat` does **not** coincide with either progress measure. "
                 "P4 is not supported by this run."
             )
         sec.line()

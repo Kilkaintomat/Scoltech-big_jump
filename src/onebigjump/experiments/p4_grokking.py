@@ -246,16 +246,28 @@ def grokking_step(checkpoints: list[Checkpoint], threshold: float = 0.9) -> int 
 
 
 def _turning_point(
-    steps: np.ndarray, values: np.ndarray, *, rising: bool, after_step: float = -1.0
+    steps: np.ndarray,
+    values: np.ndarray,
+    *,
+    rising: bool,
+    after_step: float = -1.0,
+    log_scale: bool = False,
 ) -> int | None:
     """The step at which a curve makes its sharpest move, by largest single-interval change.
 
     `after_step` exists because the largest *rise* in test accuracy is the memorisation jump in
     the first few hundred steps, not the grokking transition tens of thousands of steps later.
     Searching the whole curve returns the wrong one and makes the coincidence test meaningless.
+
+    `log_scale` is needed for the progress-measure losses, which span six orders of magnitude. On
+    a linear scale an early fall from 14 to 8 can outweigh the collapse at the transition, where
+    the restricted loss drops from 1 to 1e-6; measured on one seed, the linear reading put the
+    turn at step 1300 instead of 22800. A fractional change is the scale-appropriate one.
     """
     if steps.size < 3:
         return None
+    if log_scale:
+        values = np.log(np.maximum(values, 1e-12))
     delta = np.diff(values)
     mask = steps[1:] > after_step
     if not np.any(mask & np.isfinite(delta)):
@@ -263,6 +275,43 @@ def _turning_point(
     candidates = np.where(mask & np.isfinite(delta), delta, -np.inf if rising else np.inf)
     idx = int(np.argmax(candidates) if rising else np.argmin(candidates))
     return int(steps[idx + 1])
+
+
+def _half_transition_step(
+    steps: np.ndarray,
+    values: np.ndarray,
+    *,
+    after_step: float = -1.0,
+    log_scale: bool = False,
+    tail_frac: float = 0.1,
+) -> int | None:
+    """The step at which a curve completes half of its transition.
+
+    A crossing time, not a derivative. The progress measures make a *level shift* -- the
+    restricted loss falls from about 10 to below 1e-6 -- and a derivative is the wrong instrument
+    for one: on a linear scale an early fall from 14 to 8 outweighs the collapse, and on a log
+    scale the post-collapse noise between 1e-6 and 1e-7 outweighs everything. Measured on two
+    seeds, those two readings put the turn at step 1300 and at step 32400 respectively, when the
+    transition is at 22800.
+
+    The level before is the median over the window's first tenth, the level after its last
+    `tail_frac`, and the answer is the first step that crosses the midpoint between them.
+    """
+    mask = steps > after_step
+    if int(mask.sum()) < 5:
+        return None
+    s, v = steps[mask], values[mask]
+    if log_scale:
+        v = np.log(np.maximum(v, 1e-12))
+    head = max(int(0.1 * v.size), 2)
+    tail = max(int(tail_frac * v.size), 2)
+    before, after = float(np.median(v[:head])), float(np.median(v[-tail:]))
+    if not np.isfinite(before) or not np.isfinite(after) or before == after:
+        return None
+    mid = 0.5 * (before + after)
+    crossed = v <= mid if after < before else v >= mid
+    idx = np.flatnonzero(crossed)
+    return int(s[idx[0]]) if idx.size else None
 
 
 def analyse_p4(
@@ -288,14 +337,18 @@ def analyse_p4(
     after = float(memorised[0]) if memorised.size else -1.0
 
     drop_step = _turning_point(steps, hill, rising=False, after_step=after)
-    restricted_turn = _turning_point(
-        steps, np.array([c.restricted_loss for c in checkpoints]), rising=False, after_step=after
+    # The reference curves make level shifts, so they are located by a crossing time. gamma_hat
+    # does not: it rises to a transient peak and comes back to roughly where it started, so its
+    # signature is the fall itself and it is located by the sharpest single-interval drop. Using
+    # a crossing time for it would find nothing, and that difference is itself a result.
+    restricted_turn = _half_transition_step(
+        steps, np.array([c.restricted_loss for c in checkpoints]), after_step=after, log_scale=True
     )
-    excluded_turn = _turning_point(
-        steps, np.array([c.excluded_loss for c in checkpoints]), rising=False, after_step=after
+    excluded_turn = _half_transition_step(
+        steps, np.array([c.excluded_loss for c in checkpoints]), after_step=after, log_scale=True
     )
-    acc_turn = _turning_point(
-        steps, np.array([c.test_acc for c in checkpoints]), rising=True, after_step=after
+    acc_turn = _half_transition_step(
+        steps, np.array([c.test_acc for c in checkpoints]), after_step=after
     )
 
     out: dict[str, Any] = {
@@ -314,7 +367,15 @@ def analyse_p4(
     def near(a: int | None, b: int | None) -> bool | None:
         return None if a is None or b is None else bool(abs(a - b) <= tol_steps)
 
-    out["drop_coincides_with_progress_measures"] = near(drop_step, restricted_turn)
+    # Each reference separately. The two progress measures do not turn together: the excluded
+    # loss shifts when the memorised solution is displaced, while the restricted loss collapses
+    # over six orders of magnitude and its half-way point sits well down that collapse. Folding
+    # them into one boolean would hide which of the two gamma_hat actually tracks.
+    out["drop_coincides_with_excluded_loss"] = near(drop_step, excluded_turn)
+    out["drop_coincides_with_restricted_loss"] = near(drop_step, restricted_turn)
+    out["drop_coincides_with_progress_measures"] = bool(
+        out["drop_coincides_with_excluded_loss"] or out["drop_coincides_with_restricted_loss"]
+    )
     out["drop_coincides_with_generalization"] = near(drop_step, grok)
     if drop_step is not None and grok is not None:
         out["drop_leads_generalization_by"] = int(grok - drop_step)
@@ -372,12 +433,17 @@ def run_p4(
             [Checkpoint(**{**c.__dict__, "test_acc": c.train_acc}) for c in checkpoints], 0.99
         )
 
+        # The analysis has to be in the payload before it is written: the figure and the report
+        # both read `analysis` out of the metrics file, and an earlier ordering left it absent
+        # from the file while still recording it in the manifest.
+        analysis = analyse_p4(checkpoints)
         payload = {
             "config": cfg.model_dump(mode="json"),
             "seed": seed,
             "meta": meta,
             "grokking_step": grok_at,
             "memorisation_step": memorised_at,
+            "analysis": analysis,
             "checkpoints": [c.__dict__ for c in checkpoints],
         }
         man.add_output(write_json(out / f"p4_grokking_seed{seed}.json", payload), "metrics")
@@ -398,8 +464,6 @@ def run_p4(
         man.add_metric("grokking_step", grok_at)
         man.add_metric("memorisation_step", memorised_at)
         man.add_metric("final_test_acc", checkpoints[-1].test_acc)
-        analysis = analyse_p4(checkpoints)
-        payload["analysis"] = analysis
         for key, value in analysis.items():
             man.add_metric(f"analysis_{key}", value)
         man.note(

@@ -60,34 +60,41 @@ The paper's caption states 185 refuted traces at `p = 0`; we get 184. Chance is 
 against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.85 and a
 *simulated* 0.80 in the paper.
 
-### P4, run for real
+### P4, run for real, on two seeds
 
-40,000 steps of the one-layer modular-addition transformer on MPS, 8742 seconds, checkpoints
-every 100 steps. The model memorises by step 400 and groks at step 23600.
+40,000 steps of the one-layer modular-addition transformer on MPS, checkpoints every 100 steps.
+Both seeds memorise early and grok at essentially the same step.
 
-| event | step |
-|---|---|
-| train accuracy saturates | 400 |
-| `gamma_hat` peaks at 0.1753 | 22700 |
-| **sharpest fall in `gamma_hat`** | **22800** |
-| **restricted loss turns** | **22800** |
-| **excluded loss turns** | **22800** |
-| test accuracy turns | 23400 |
-| test accuracy crosses 0.9 | 23600 |
+| event | seed 0 | seed 1 |
+|---|---|---|
+| test accuracy crosses 0.9 | 23600 | 23700 |
+| `gamma_hat` peaks | **0.1753** at 22700 | **0.1801** at 22700 |
+| **sharpest fall in `gamma_hat`** | **22800** | **22800** |
+| excluded loss half-transition | 22800 | 22900 |
+| test accuracy half-transition | 23200 | 23300 |
+| restricted loss half-transition | 23700 | 23800 |
+| `gamma_hat` after the transition | 0.0388 | 0.0457 |
 
-`gamma_hat` falls from a peak of **0.1753** to **0.0388**, and the fall lands on the *same
-checkpoint* as the turn in both mechanistic progress measures, 800 steps **before** the
-generalization jump.
+The ordering replicates exactly. `gamma_hat` turns **first**, on the same checkpoint as the
+excluded loss, and leads the generalization jump by 800 and 900 steps.
 
-That ordering is the substantive part, and it is more specific than P4 as stated. The paper says
-the drop should coincide "with the mechanistic progress measures of Nanda et al. **and** the
-generalization jump"; those are 800 steps apart here, and the order parameter goes with the
-former. It tracks circuit formation, not the downstream accuracy that follows it.
+That is more specific than P4 as stated. The paper asks for the drop to coincide "with the
+mechanistic progress measures of Nanda et al. **and** the generalization jump"; those are ~900
+steps apart here, and the order parameter goes with circuit formation, not with the downstream
+accuracy that follows it.
 
-The rise beforehand -- from a plateau at 0.041 up to 0.175 over the two thousand steps preceding
-the transition -- is not predicted by P4 either. It is consistent with the mechanism: the
-representation is being reorganised, so increments are transiently large and heavy-tailed, and
-only once the circuit is in place does the update become the constrained map `H_alg` describes.
+Two things not predicted by P4 at all, both present on both seeds:
+
+1. **`gamma_hat` rises before it falls** -- from a plateau at 0.041 to a peak of 0.175-0.180 over
+   the two thousand steps preceding the transition. This is consistent with the mechanism rather
+   than against it: while the representation is being reorganised the increments are transiently
+   large and heavy-tailed, and only once the circuit is in place does the update become the
+   constrained map `H_alg` describes. But it means `gamma_hat` is not monotone in training, and a
+   measurement taken at a single checkpoint near the transition could report either sign.
+2. **The signature is a peak, not a level shift.** `gamma_hat` returns to roughly where it
+   started (0.030 -> 0.039 over the whole run). What identifies the transition is the transient,
+   not the endpoints -- which is why the two progress measures are located here by a crossing
+   time and `gamma_hat` by its sharpest fall.
 
 ### Three things the measurements say that the paper does not
 
