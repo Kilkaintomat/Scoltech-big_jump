@@ -1,0 +1,135 @@
+{
+  "name": "p4-grokking-seed0",
+  "kind": "grokking",
+  "out_dir": "results/full/grokking",
+  "seed": 0,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-04T20:44:50Z",
+  "finished_at": "2026-09-04T23:27:18Z",
+  "duration_s": 9748.029,
+  "reproducible": false,
+  "config": {
+    "p": 113,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 1,
+    "d_mlp": null,
+    "lr": 0.001,
+    "weight_decay": 1.0,
+    "betas": [
+      0.9,
+      0.98
+    ],
+    "train_frac": 0.3,
+    "steps": 40000,
+    "checkpoint_every": 100,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "device": "mps",
+    "tail": {
+      "k_min": 20,
+      "k_max_frac": 0.25,
+      "k_selector": "double_bootstrap",
+      "k_fixed_frac": 0.05,
+      "double_bootstrap_resamples": 200,
+      "double_bootstrap_n1_exponent": 0.9,
+      "bootstrap_resamples": 500,
+      "bootstrap_unit": "trace",
+      "ci_level": 0.95,
+      "estimators": [
+        "hill",
+        "moment",
+        "gpd"
+      ]
+    },
+    "out_dir": "results/full/grokking"
+  },
+  "metrics": {
+    "grokking_step": 23600,
+    "memorisation_step": 400,
+    "final_test_acc": 1.0,
+    "hill_first": 0.029773898168811264,
+    "hill_last": 0.04041078685544616
+  },
+  "notes": [
+    "gamma_hat is a fixed-fraction point estimate (k = 5% of n) at every checkpoint; the full Section 4 protocol with intervals runs every 20 checkpoints."
+  ],
+  "outputs": [
+    {
+      "path": "results/full/grokking/p4_grokking_seed0.json",
+      "role": "metrics",
+      "bytes": 319848,
+      "digest": "sha256:f226af0ea3a57a7573e39b57537edc16de0cda311db3c964be05d5bebb40eca9"
+    },
+    {
+      "path": "results/full/grokking/p4_grokking_seed0.csv",
+      "role": "table",
+      "bytes": 40794,
+      "digest": "sha256:349f48803e62121d748f2890f4f63dd862f331a265b442bae69591368d015c47"
+    },
+    {
+      "path": "paper_outputs/metrics/p4_grokking_seed0.json",
+      "role": "metrics",
+      "bytes": 319848,
+      "digest": "sha256:f226af0ea3a57a7573e39b57537edc16de0cda311db3c964be05d5bebb40eca9"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed0.pdf",
+      "role": "figure",
+      "bytes": 30488,
+      "digest": "sha256:29a383418d78528db654fe58c11553e35a9f70a40c99f666e3f7b70ebedf4723"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed0.png",
+      "role": "figure",
+      "bytes": 194081,
+      "digest": "sha256:58cee3f4d3cdc57d7739eb5e4f05dd6f623598f43957fadab9d3d467e91397ed"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": "8147e87e095d1c170d8384250099c68513bc56a9",
+      "branch": "main",
+      "describe": "8147e87-dirty",
+      "dirty": true,
+      "status": "M src/onebigjump/reporting/plots.py\n?? src/onebigjump/experiments/p4_grokking.py\n?? src/onebigjump/models/grokking.py",
+      "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
+    },
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.13.0",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "macOS-15.5-arm64-arm-64bit",
+      "machine": "arm64",
+      "processor": "arm",
+      "python": "3.11.15",
+      "cpu_count": 10,
+      "ram_gb": 17.18,
+      "torch": "2.13.0",
+      "cuda_available": false,
+      "cuda_version": null,
+      "mps_available": true,
+      "gpus": []
+    },
+    "python_build": [
+      "main",
+      "Jun 23 2026 15:46:51"
+    ]
+  }
+}

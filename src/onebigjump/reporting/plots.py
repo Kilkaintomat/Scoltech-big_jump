@@ -249,8 +249,13 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
     step_plot = np.maximum(step, 1.0)  # step 0 has no place on a log axis
     grok_at = payload.get("grokking_step")
 
-    fig, axes = plt.subplots(3, 1, figsize=(5.2, 6.2), sharex=True)
-    ax_acc, ax_prog, ax_tail = axes
+    fig = plt.figure(figsize=(5.4, 7.6))
+    gs = fig.add_gridspec(4, 1, height_ratios=[1.0, 1.0, 1.0, 1.15])
+    ax_acc = fig.add_subplot(gs[0])
+    ax_prog = fig.add_subplot(gs[1], sharex=ax_acc)
+    ax_tail = fig.add_subplot(gs[2], sharex=ax_acc)
+    ax_zoom = fig.add_subplot(gs[3])
+    axes = [ax_acc, ax_prog, ax_tail]
 
     ax_acc.plot(step_plot, [c["train_acc"] for c in cps], color=INK, lw=1.3, label="train")
     ax_acc.plot(
@@ -282,6 +287,9 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
         label="excluded loss",
     )
     ax_prog.set_yscale("log")
+    # The restricted loss falls below 1e-6 once the circuit is exact; showing five further
+    # decades of numerical noise would compress everything that happens before it.
+    ax_prog.set_ylim(1e-4, None)
     ax_prog.set_ylabel("loss")
     ax_prog.set_title("(b) progress measures (Nanda et al.)", loc="left")
     ax_prog.legend(loc="center left")
@@ -311,9 +319,12 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
         )
     ax_tail.axhline(0.0, color=GRID, lw=0.8, zorder=0)
     ax_tail.set_ylabel(r"$\hat{\gamma}$   ($\xi = \max(\hat{\gamma}, 0)$)")
-    ax_tail.set_xlabel("training step")
     ax_tail.set_title("(c) order parameter", loc="left")
-    ax_tail.legend(loc="best")
+    ax_tail.legend(loc="upper left")
+    ax_tail.set_xlabel("training step (log)")
+    # (a)-(c) share the log axis, so only the lowest of them carries tick labels.
+    ax_acc.tick_params(labelbottom=False)
+    ax_prog.tick_params(labelbottom=False)
 
     if grok_at:
         for ax in axes:
@@ -323,14 +334,56 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
         ax_acc.annotate(
             f"grokking at step {grok_at}",
             xy=(max(float(grok_at), 1.0), 0.5),
-            xytext=(6, 0),
+            xytext=(-6, 0),
             textcoords="offset points",
             color=MUTED,
             fontsize=7,
             va="center",
+            ha="right",
         )
 
     ax_tail.set_xscale("log")
+
+    # --- (d) the transition on a linear axis -------------------------------------------------
+    # A log axis over 40k steps compresses the transition into a sliver, and the transition is
+    # where the whole question lives: whether gamma_hat turns at the same step as the progress
+    # measures. So the last panel is that curve again, linear, over a window around the drop.
+    analysis = payload.get("analysis") or {}
+    drop_at = analysis.get("sharpest_drop_step")
+    centre = float(drop_at or grok_at or step[-1])
+    half = max(2000.0, 0.06 * float(step[-1]))
+    window = (step >= centre - half) & (step <= centre + half)
+    if int(window.sum()) >= 3:
+        hill = np.array([c["hill"] for c in cps], dtype=float)
+        ax_zoom.plot(step[window], hill[window], color=ESTIMATOR["hill"], lw=1.4)
+        marks = [
+            (analysis.get("restricted_turn_step"), "restricted loss turns", ESTIMATOR["gpd"]),
+            (drop_at, r"$\hat{\gamma}$ falls", ESTIMATOR["hill"]),
+            (grok_at, "test acc. crosses 0.9", MUTED),
+        ]
+        for i, (at, label, colour) in enumerate(marks):
+            if at is None:
+                continue
+            x = float(at)
+            ax_zoom.axvline(x, color=colour, dashes=DASHES["tolerance"], lw=1.0, zorder=0)
+            ax_zoom.annotate(
+                f"{label}\n{int(x)}",
+                xy=(x, 1.0 - 0.30 * i),
+                xycoords=("data", "axes fraction"),
+                xytext=(4, -4),
+                textcoords="offset points",
+                color=colour,
+                fontsize=6.5,
+                va="top",
+                ha="left",
+            )
+        ax_zoom.set_ylabel(r"$\hat{\gamma}$")
+        ax_zoom.set_xlabel("training step")
+        ax_zoom.set_title("(d) the transition, linear axis", loc="left")
+        ax_zoom.margins(y=0.32)
+    else:  # pragma: no cover - only for runs too short to have a transition
+        ax_zoom.set_axis_off()
+
     paths = _save(fig, Path(out_dir), f"p4_grokking_seed{seed}")
     plt.close(fig)
     return paths

@@ -12,27 +12,25 @@ Last edit: 2026-09-04. Stage numbering follows the task specification.
 | 4 | Python environment | **done** | Python 3.11.15, torch 2.13 (MPS), `uv.lock` pinned |
 | 5 | Lean 4 + Mathlib | **done** | Lean 4.34.0-rc2, Mathlib `85e3a25e`, REPL built; 8.0 GB in `lean_workspace/` |
 | 6 | Statistical methods | **done** | `src/onebigjump/stats/` (8 modules) |
-| 7 | Tests | **done for what exists** | 325 tests: 294 pure, 18 driving the real Lean kernel, 13 driving real GPT-2 |
+| 7 | Tests | **done for what exists** | 384 tests: 18 driving the real Lean kernel, 13 driving real GPT-2 |
 | 8 | Kesten simulation (Figure 1) | **done** | `paper_outputs/figures/figure1_kesten_dichotomy.pdf` |
 | 9 | Generation / verification / extraction | **2 of 3** | verification and extraction done; **generation not written** |
 | 10 | Pilot | **not started** | needs stage 9's generation half |
-| 11 | Experiments P1-P5 | **4 of 5** | P1, P2, P3, P5 done and validated; **P4 (grokking) not written** |
-| 12 | Tables and figures | **partial** | Figure 1 only; `reporting/tables.py` not written |
-| 13 | Reproducible report | **not started** | `reports/` is empty |
-| 14 | Push to a private GitHub repository | **blocked** | `gh auth login` has not been run |
-| 15 | Push after each completed stage | **blocked on 14** | 6 commits waiting locally |
+| 11 | Experiments P1-P5 | **done** | P1, P2, P3, P5 validated against the closed form; **P4 run for real** |
+| 12 | Tables and figures | **done** | Figure 1, the P4 figure, and Tables 1-2 in Markdown and LaTeX |
+| 13 | Reproducible report | **done** | `uv run onebigjump report` -> [`reports/experimental_report.md`](reports/experimental_report.md) |
+| 14 | Push to a private GitHub repository | **done** | [Kilkaintomat/Scoltech-big_jump](https://github.com/Kilkaintomat/Scoltech-big_jump), private |
+| 15 | Push after each completed stage | **done** | pushing after every stage since stage 14 |
 
 ## What is missing, precisely
 
 | Item | Why it is missing |
 |---|---|
-| `models/generation.py` | Sampling proofs needs a prover model; the smallest in the paper is 7B and does not fit in 16 GB. Writing an untested sampler would be a stub. |
-| `experiments/p4_grokking.py` | Feasible here (one-layer transformer, `d=128`, `p=113`) but not yet written. **This is the largest remaining piece of real science.** |
-| `reporting/tables.py` | Table 1 and Table 2 exist as records; only their LaTeX/Markdown rendering is absent. |
-| `configs/{grokking,lean,models,synthetic}/` | Empty; only `configs/simulation/figure1.yaml` exists. |
-| `AGENTS.md`, `Makefile`, `analysis_plan.yaml` | Requested in the tree, not written. |
-| `docs/data_schema.md`, `docs/bootstrap_report.md` | Requested, not written. The schema is documented in `experiments/dataset.py` instead. |
+| `models/generation.py`, and with it stage 10 | Sampling proofs needs a prover model; the smallest in the paper is 7B and does not fit in 16 GB. Writing an untested sampler would be a stub. |
+| `configs/{models,synthetic}/` | Empty, because the runs they would configure are the ones this machine cannot do. |
+| `docs/data_schema.md`, `docs/bootstrap_report.md` | Requested, not written. The schema is documented in `experiments/dataset.py` and enforced by `validate_table`. |
 | `src/onebigjump/schemas.py` | The requested top-level module; its content lives in `lean/schemas.py` and `experiments/dataset.py`. |
+| A clean-tree re-run of every artifact | Figure 1, the Lean pilot and P4 were all produced while the tree was dirty, and their manifests say so. The numbers are correct; they are simply not tied to a commit. |
 
 ## Blocked, and on what
 
@@ -61,6 +59,35 @@ exponent vanishes. At the caption's setting (`rho = 0.7`, `kappa = 2.5`, `d = 8`
 The paper's caption states 185 refuted traces at `p = 0`; we get 184. Chance is `1/L = 0.0156`
 against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.85 and a
 *simulated* 0.80 in the paper.
+
+### P4, run for real
+
+40,000 steps of the one-layer modular-addition transformer on MPS, 8742 seconds, checkpoints
+every 100 steps. The model memorises by step 400 and groks at step 23600.
+
+| event | step |
+|---|---|
+| train accuracy saturates | 400 |
+| `gamma_hat` peaks at 0.1753 | 22700 |
+| **sharpest fall in `gamma_hat`** | **22800** |
+| **restricted loss turns** | **22800** |
+| **excluded loss turns** | **22800** |
+| test accuracy turns | 23400 |
+| test accuracy crosses 0.9 | 23600 |
+
+`gamma_hat` falls from a peak of **0.1753** to **0.0388**, and the fall lands on the *same
+checkpoint* as the turn in both mechanistic progress measures, 800 steps **before** the
+generalization jump.
+
+That ordering is the substantive part, and it is more specific than P4 as stated. The paper says
+the drop should coincide "with the mechanistic progress measures of Nanda et al. **and** the
+generalization jump"; those are 800 steps apart here, and the order parameter goes with the
+former. It tracks circuit formation, not the downstream accuracy that follows it.
+
+The rise beforehand -- from a plateau at 0.041 up to 0.175 over the two thousand steps preceding
+the transition -- is not predicted by P4 either. It is consistent with the mechanism: the
+representation is being reorganised, so increments are transiently large and heavy-tailed, and
+only once the circuit is in place does the update become the constrained map `H_alg` describes.
 
 ### Three things the measurements say that the paper does not
 
@@ -105,3 +132,8 @@ against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.
 3. The Lean REPL environment snapshot (`pickleTo`) was implemented, measured at 126.7s to restore
    against 129.0s to import, and removed. Timeouts now resynchronise by waiting for the late
    reply instead of restarting.
+4. In P4, `gamma_hat` is a fixed-fraction point estimate (`k` = 5% of `n`) at every one of the 401
+   checkpoints, with the full Section 4 protocol and intervals every 20th. Running the double
+   bootstrap and the trace bootstrap 401 times is not affordable, and re-selecting `k` at every
+   checkpoint would mix movement of the estimate with movement of the threshold. Recorded in the
+   run manifest.

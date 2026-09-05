@@ -31,7 +31,7 @@ from ..reproducibility import seed_everything, write_json
 from ..stats import estimate_tail, hill, moment, sorted_positive_desc
 from ..stats.gpd import gpd_from_order_statistics
 
-__all__ = ["Checkpoint", "run_p4", "train_grokking"]
+__all__ = ["Checkpoint", "analyse_p4", "run_p4", "train_grokking"]
 
 log = get_logger(__name__)
 
@@ -245,6 +245,106 @@ def grokking_step(checkpoints: list[Checkpoint], threshold: float = 0.9) -> int 
     return None
 
 
+def _turning_point(
+    steps: np.ndarray, values: np.ndarray, *, rising: bool, after_step: float = -1.0
+) -> int | None:
+    """The step at which a curve makes its sharpest move, by largest single-interval change.
+
+    `after_step` exists because the largest *rise* in test accuracy is the memorisation jump in
+    the first few hundred steps, not the grokking transition tens of thousands of steps later.
+    Searching the whole curve returns the wrong one and makes the coincidence test meaningless.
+    """
+    if steps.size < 3:
+        return None
+    delta = np.diff(values)
+    mask = steps[1:] > after_step
+    if not np.any(mask & np.isfinite(delta)):
+        return None
+    candidates = np.where(mask & np.isfinite(delta), delta, -np.inf if rising else np.inf)
+    idx = int(np.argmax(candidates) if rising else np.argmin(candidates))
+    return int(steps[idx + 1])
+
+
+def analyse_p4(
+    checkpoints: list[Checkpoint], *, window: int = 3, tol_steps: int = 300
+) -> dict[str, Any]:
+    """Locate the transition and say whether, and where, `gamma_hat` moves.
+
+    The analysis plan requires the drop to be *located at* the transition, not merely to happen
+    during training. But "the transition" has two readings, and P4 names both: the paper says the
+    drop should coincide "with the mechanistic progress measures of Nanda et al. **and** the
+    generalization jump". Those are not the same step, so coincidence is reported against each
+    separately rather than collapsed into one boolean -- and the lag between them is itself a
+    result, since a drop that leads generalization is evidence the order parameter tracks circuit
+    formation rather than downstream accuracy.
+    """
+    steps = np.array([c.step for c in checkpoints], dtype=float)
+    hill = np.array([c.hill for c in checkpoints], dtype=float)
+    train_acc = np.array([c.train_acc for c in checkpoints], dtype=float)
+    grok = grokking_step(checkpoints)
+
+    # Ignore the memorisation phase when looking for turns: it ends when train accuracy saturates.
+    memorised = steps[train_acc >= 0.99]
+    after = float(memorised[0]) if memorised.size else -1.0
+
+    drop_step = _turning_point(steps, hill, rising=False, after_step=after)
+    restricted_turn = _turning_point(
+        steps, np.array([c.restricted_loss for c in checkpoints]), rising=False, after_step=after
+    )
+    excluded_turn = _turning_point(
+        steps, np.array([c.excluded_loss for c in checkpoints]), rising=False, after_step=after
+    )
+    acc_turn = _turning_point(
+        steps, np.array([c.test_acc for c in checkpoints]), rising=True, after_step=after
+    )
+
+    out: dict[str, Any] = {
+        "grokking_step": grok,
+        "memorisation_step": int(after) if after >= 0 else None,
+        "gamma_first": float(hill[0]),
+        "gamma_last": float(hill[-1]),
+        "gamma_max": float(np.nanmax(hill)),
+        "gamma_argmax_step": int(steps[int(np.nanargmax(hill))]),
+        "sharpest_drop_step": drop_step,
+        "test_acc_turn_step": acc_turn,
+        "restricted_turn_step": restricted_turn,
+        "excluded_turn_step": excluded_turn,
+    }
+
+    def near(a: int | None, b: int | None) -> bool | None:
+        return None if a is None or b is None else bool(abs(a - b) <= tol_steps)
+
+    out["drop_coincides_with_progress_measures"] = near(drop_step, restricted_turn)
+    out["drop_coincides_with_generalization"] = near(drop_step, grok)
+    if drop_step is not None and grok is not None:
+        out["drop_leads_generalization_by"] = int(grok - drop_step)
+
+    if grok is not None:
+        i = int(np.argmin(np.abs(steps - grok)))
+        lo = slice(max(i - window, 0), i)
+        hi = slice(i + 1, min(i + 1 + window, hill.size))
+        before = float(np.nanmean(hill[lo])) if hill[lo].size else float("nan")
+        after_g = float(np.nanmean(hill[hi])) if hill[hi].size else float("nan")
+        out |= {
+            "gamma_before_transition": before,
+            "gamma_after_transition": after_g,
+            "drop_at_transition": before - after_g,
+            "drops_at_transition": bool(
+                np.isfinite(before) and np.isfinite(after_g) and after_g < before
+            ),
+        }
+    if drop_step is not None:
+        j = int(np.argmin(np.abs(steps - drop_step)))
+        pre = slice(max(j - window, 0), j)
+        post = slice(j, min(j + window, hill.size))
+        out["gamma_peak_to_trough"] = (
+            float(np.nanmax(hill[pre])) - float(np.nanmin(hill[post]))
+            if hill[pre].size and hill[post].size
+            else float("nan")
+        )
+    return out
+
+
 def run_p4(
     cfg: GrokkingConfig | None = None,
     *,
@@ -298,8 +398,10 @@ def run_p4(
         man.add_metric("grokking_step", grok_at)
         man.add_metric("memorisation_step", memorised_at)
         man.add_metric("final_test_acc", checkpoints[-1].test_acc)
-        man.add_metric("hill_first", checkpoints[0].hill)
-        man.add_metric("hill_last", checkpoints[-1].hill)
+        analysis = analyse_p4(checkpoints)
+        payload["analysis"] = analysis
+        for key, value in analysis.items():
+            man.add_metric(f"analysis_{key}", value)
         man.note(
             f"gamma_hat is a fixed-fraction point estimate (k = {meta['tail_k_frac']:.0%} of n) "
             f"at every checkpoint; the full Section 4 protocol with intervals runs every "

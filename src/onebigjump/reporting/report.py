@@ -143,24 +143,56 @@ def _p4(results: Path) -> Section:
         )
     sec = Section("P4 -- the order parameter across the grokking transition")
     sec.line(
-        "| seed | grokking step | test acc (final) | `gamma` before | `gamma` after | change |"
-    )
-    sec.line("|---|---|---|---|---|---|")
+        "| seed | grokking step | final test acc | `gamma` peak | `gamma` after | peak-to-trough |"
+    ).line("|---|---|---|---|---|---|")
+    analyses: list[dict[str, Any]] = []
     for path in files:
         payload = _load(path)
         if payload is None:
             continue
         cps = payload["checkpoints"]
-        grok = payload.get("grokking_step")
-        before = next((c for c in cps if grok is not None and c["step"] <= grok), cps[0])
-        after = cps[-1]
-        delta = after["hill"] - before["hill"]
+        a = payload.get("analysis", {})
+        analyses.append(a)
+        grok = a.get("grokking_step", payload.get("grokking_step"))
         sec.line(
             f"| {payload['seed']} | {grok if grok is not None else '**never**'} "
-            f"| {after['test_acc']:.3f} | {before['hill']:.4f} | {after['hill']:.4f} "
-            f"| {delta:+.4f} |"
+            f"| {cps[-1]['test_acc']:.3f} "
+            f"| {a.get('gamma_max', float('nan')):.4f} at step {a.get('gamma_argmax_step', '?')} "
+            f"| {a.get('gamma_after_transition', float('nan')):.4f} "
+            f"| {a.get('gamma_peak_to_trough', float('nan')):.4f} |"
         )
     sec.line()
+
+    if analyses and analyses[0]:
+        a = analyses[0]
+        sec.line("**Where the drop sits.** P4 names two references and they are not the same step:")
+        sec.line()
+        sec.line("| event | step |").line("|---|---|")
+        sec.line(f"| sharpest fall in `gamma_hat` | {a.get('sharpest_drop_step')} |")
+        sec.line(f"| restricted loss turns | {a.get('restricted_turn_step')} |")
+        sec.line(f"| excluded loss turns | {a.get('excluded_turn_step')} |")
+        sec.line(f"| test accuracy turns | {a.get('test_acc_turn_step')} |")
+        sec.line(f"| test accuracy crosses 0.9 | {a.get('grokking_step')} |")
+        sec.line()
+        lead = a.get("drop_leads_generalization_by")
+        if a.get("drop_coincides_with_progress_measures"):
+            sec.line(
+                "The fall in `gamma_hat` lands on the **same checkpoint** as the turn in both "
+                "mechanistic progress measures"
+                + (f", and leads the generalization jump by {lead} steps." if lead else ".")
+            )
+            sec.line()
+            sec.line(
+                "That ordering is the substantive part: the order parameter tracks circuit "
+                "formation, which is what the progress measures detect, rather than the "
+                "downstream accuracy that follows it."
+            )
+        else:
+            sec.line(
+                "The fall in `gamma_hat` does **not** coincide with the progress measures. "
+                "P4 is not supported by this run."
+            )
+        sec.line()
     sec.line(_provenance(_load(results / "full" / "grokking" / "manifest.json")))
     return sec
 

@@ -178,3 +178,113 @@ class TestTraining:
         cps = [cp(0, 0.1), cp(100, 0.5), cp(200, 0.95), cp(300, 0.99)]
         assert grokking_step(cps) == 200
         assert grokking_step(cps, threshold=0.999) is None
+
+
+class TestAnalysis:
+    """The analysis plan asks whether the drop is *located at* the transition."""
+
+    @staticmethod
+    def _cp(
+        step: int,
+        hill: float,
+        test_acc: float,
+        restricted: float = 1.0,
+        excluded: float = 1.0,
+        train_acc: float = 1.0,
+    ):
+        from onebigjump.experiments.p4_grokking import Checkpoint
+
+        return Checkpoint(
+            step=step,
+            train_loss=0.0,
+            test_loss=0.0,
+            train_acc=train_acc,
+            test_acc=test_acc,
+            restricted_loss=restricted,
+            excluded_loss=excluded,
+            hill=hill,
+            moment=0.0,
+            gpd=0.0,
+            k=100,
+            n=1000,
+            median_deviation=1.0,
+        )
+
+    def _series(self):
+        # Memorisation, a plateau, the circuit forming, then the generalization jump.
+        return [
+            self._cp(0, 0.03, 0.01, 10.0, 10.0, train_acc=0.01),
+            self._cp(100, 0.04, 0.24, 9.0, 14.0),
+            self._cp(200, 0.04, 0.24, 8.0, 14.0),
+            self._cp(300, 0.17, 0.30, 7.0, 14.0),
+            self._cp(400, 0.05, 0.37, 1.0, 8.0),  # progress measures turn here
+            self._cp(500, 0.04, 0.95, 0.1, 7.0),  # generalization follows
+            self._cp(600, 0.03, 1.00, 0.0, 6.5),
+            self._cp(700, 0.03, 1.00, 0.0, 6.5),
+        ]
+
+    def test_the_transition_is_located(self) -> None:
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        out = analyse_p4(self._series(), window=2)
+        assert out["grokking_step"] == 500
+        assert out["memorisation_step"] == 100
+
+    def test_the_memorisation_jump_is_not_mistaken_for_grokking(self) -> None:
+        """The largest rise in test accuracy over the whole curve is memorisation, not grokking."""
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        out = analyse_p4(self._series(), window=2)
+        assert out["test_acc_turn_step"] == 500
+
+    def test_the_drop_is_measured_across_the_transition(self) -> None:
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        out = analyse_p4(self._series(), window=2)
+        assert out["gamma_before_transition"] > out["gamma_after_transition"]
+        assert out["drops_at_transition"]
+        assert out["gamma_peak_to_trough"] > 0
+
+    def test_coincidence_is_reported_against_both_references(self) -> None:
+        """P4 names two: the progress measures and the generalization jump. They differ."""
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        out = analyse_p4(self._series(), window=2, tol_steps=50)
+        assert out["sharpest_drop_step"] == 400
+        assert out["restricted_turn_step"] == 400
+        assert out["drop_coincides_with_progress_measures"] is True
+        assert out["drop_coincides_with_generalization"] is False
+        assert out["drop_leads_generalization_by"] == 100
+
+    def test_a_drop_far_from_everything_is_not_credited(self) -> None:
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        cps = [
+            self._cp(0, 0.30, 0.01, train_acc=0.01),
+            self._cp(100, 0.30, 0.02),
+            self._cp(200, 0.03, 0.02),  # the drop happens here, long before anything else
+            self._cp(300, 0.03, 0.02),
+            self._cp(400, 0.03, 0.02),
+            self._cp(500, 0.03, 0.02),
+            self._cp(600, 0.03, 0.98, 0.1, 7.0),  # ... and grokking happens here
+        ]
+        out = analyse_p4(cps, window=2, tol_steps=50)
+        assert out["grokking_step"] == 600
+        assert out["sharpest_drop_step"] == 200
+        assert out["drop_coincides_with_generalization"] is False
+        assert out["drop_coincides_with_progress_measures"] is False
+
+    def test_a_run_that_never_grokked_reports_no_transition(self) -> None:
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        out = analyse_p4([self._cp(s, 0.03, 0.2) for s in (0, 100, 200, 300)])
+        assert out["grokking_step"] is None
+        assert "drops_at_transition" not in out
+        assert out["drop_coincides_with_generalization"] is None
+
+    def test_the_analysis_is_serialisable(self) -> None:
+        import json
+
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        json.loads(json.dumps(analyse_p4(self._series())))

@@ -1,6 +1,6 @@
 # Experimental report
 
-Generated 2026-09-04 20:51:35Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
+Generated 2026-09-05 16:11:36Z by `uv run onebigjump report`. Every number below is read from a metrics file written by a run; none is entered by hand.
 
 A negative or inconclusive result is reported as one. Sections whose run has not happened say so rather than being omitted.
 
@@ -42,7 +42,25 @@ Run `lean-verify` at commit `cf07057c` (**dirty working tree -- not reproducible
 
 ## P4 -- the order parameter across the grokking transition
 
-**Not run.** no `results/full/grokking/p4_grokking_seed*.json`; run `make p4`.
+| seed | grokking step | final test acc | `gamma` peak | `gamma` after | peak-to-trough |
+|---|---|---|---|---|---|
+| 0 | 23600 | 1.000 | 0.1753 at step 22700 | 0.0388 | 0.0907 |
+
+**Where the drop sits.** P4 names two references and they are not the same step:
+
+| event | step |
+|---|---|
+| sharpest fall in `gamma_hat` | 22800 |
+| restricted loss turns | 22800 |
+| excluded loss turns | 22800 |
+| test accuracy turns | 23400 |
+| test accuracy crosses 0.9 | 23600 |
+
+The fall in `gamma_hat` lands on the **same checkpoint** as the turn in both mechanistic progress measures, and leads the generalization jump by 800 steps.
+
+That ordering is the substantive part: the order parameter tracks circuit formation, which is what the progress measures detect, rather than the downstream accuracy that follows it.
+
+Run `p4-grokking-seed0` at commit `8147e87e` (**dirty working tree -- not reproducible from any commit**), 9748s, status `ok`.
 
 ## What could not be run here, and why
 
@@ -53,7 +71,7 @@ The machine is an Apple M4 with 16 GB of unified memory: no CUDA, no Slurm. See 
 | Kesten simulation, Figure 1 | run |
 | Estimators, bootstrap, tests | run |
 | Lean 4 + Mathlib step replay | run |
-| Modular-addition grokking (P4) | **not run** |
+| Modular-addition grokking (P4) | run |
 | Prover traces from DeepSeek-Prover-V2-7B, Goedel-8B, Kimina-8B | **not run**: an 8B model in bfloat16 is ~16 GB of weights alone, before activations and the KV cache |
 | Synthetic deduction on 7-8B general models | **not run**: same constraint; `vllm` is Linux + CUDA only |
 
