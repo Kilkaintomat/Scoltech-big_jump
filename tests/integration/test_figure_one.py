@@ -107,3 +107,46 @@ class TestRun:
         assert reloaded == payload or np.isclose(
             reloaded["settings"][1]["tail"]["hill"], payload["settings"][1]["tail"]["hill"]
         )
+
+
+class TestHillPlotFigure:
+    """Section 4 requires the full Hill plot alongside any point estimate."""
+
+    def test_it_is_drawn_from_the_metrics_alone(self, tmp_path) -> None:
+        import json
+
+        from onebigjump.reporting.plots import figure_hill_plots
+        from onebigjump.simulation.figure1 import run_figure_one
+
+        out = tmp_path / "run"
+        payload = run_figure_one(
+            SMALL,
+            out_dir=out,
+            figure_dir=tmp_path / "figs",
+            metrics_dir=tmp_path / "metrics",
+            make_figure=True,
+        )
+        assert (tmp_path / "figs" / "hill_plots_kesten.pdf").is_file()
+
+        reloaded = json.loads((out / "figure1_metrics.json").read_text(encoding="utf-8"))
+        paths = figure_hill_plots(reloaded, tmp_path / "again")
+        assert all(p.is_file() and p.stat().st_size > 0 for p in paths)
+        assert payload["settings"][0]["tail"]["hill_plot"]["k"]
+
+    def test_the_manifest_registers_both_figures(self, tmp_path) -> None:
+        import json
+
+        from onebigjump.simulation.figure1 import run_figure_one
+
+        out = tmp_path / "run"
+        run_figure_one(
+            SMALL,
+            out_dir=out,
+            figure_dir=tmp_path / "figs",
+            metrics_dir=tmp_path / "metrics",
+            make_figure=True,
+        )
+        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        figures = [o["path"] for o in man["outputs"] if o["role"] == "figure"]
+        assert any("figure1_kesten_dichotomy" in f for f in figures)
+        assert any("hill_plots_kesten" in f for f in figures)

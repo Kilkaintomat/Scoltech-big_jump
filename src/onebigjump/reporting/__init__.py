@@ -1,6 +1,6 @@
 """Figures and tables. Everything here is rendered from a metrics file."""
 
-from .plots import figure_grokking, figure_one, hill_plot_figure
+from .plots import figure_grokking, figure_hill_plots, figure_one, hill_plot_figure
 from .style import ESTIMATOR, INK, P_RAMP, apply_style, p_colour
 from .tables import (
     PLACEHOLDER,
@@ -18,6 +18,7 @@ __all__ = [
     "P_RAMP",
     "apply_style",
     "figure_grokking",
+    "figure_hill_plots",
     "figure_one",
     "hill_plot_figure",
     "p_colour",

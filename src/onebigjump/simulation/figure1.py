@@ -244,10 +244,13 @@ def run_figure_one(
             man.add_metric(f"moment_p{r.p:.2f}", r.tail["moment"])
 
         if make_figure:
-            from ..reporting.plots import figure_one
+            from ..reporting.plots import figure_hill_plots, figure_one
 
-            fig_paths = figure_one(payload, Path(figure_dir))
-            for fp in fig_paths:
+            for fp in figure_one(payload, Path(figure_dir)):
+                man.add_output(fp, "figure")
+            # Section 4 requires the full Hill plot alongside any point estimate, and it is what
+            # the identifiability criterion is read off; it is not an optional appendix figure.
+            for fp in figure_hill_plots(payload, Path(figure_dir)):
                 man.add_output(fp, "figure")
 
         return payload

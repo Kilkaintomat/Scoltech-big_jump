@@ -24,8 +24,11 @@ INK = "#1a1a1a"  # reference / control / theory lines
 MUTED = "#6b6b6b"  # secondary annotation
 GRID = "#d8d8d8"
 
-# Sequential, light -> dark with increasing p. Validated: monotone L, dL >= 0.06, single hue.
-P_RAMP = ["#6baed6", "#2171b5", "#08306b"]
+# Sequential, light -> dark with increasing p. Validated: monotone lightness, adjacent dL >= 0.06,
+# a single hue, and a light end that clears 2:1 against white. Five steps rather than three
+# because the configured sweep has five positive rates, and mapping five onto three made
+# p = 0.02 and p = 0.05 indistinguishable in the Hill plot.
+P_RAMP = ["#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]
 
 # Categorical. Validated all-pairs: worst CVD dE 11.6 (deutan), worst normal-vision dE 18.8.
 ESTIMATOR = {"hill": "#2171b5", "moment": "#d95f02", "gpd": "#1b9e77"}

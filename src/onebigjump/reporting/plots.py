@@ -9,7 +9,7 @@ import numpy as np
 
 from .style import DASHES, ESTIMATOR, GRID, INK, MUTED, apply_style, p_colour
 
-__all__ = ["figure_grokking", "figure_one", "hill_plot_figure"]
+__all__ = ["figure_grokking", "figure_hill_plots", "figure_one", "hill_plot_figure"]
 
 
 def _save(fig: Any, out_dir: Path, stem: str) -> list[Path]:
@@ -385,5 +385,66 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
         ax_zoom.set_axis_off()
 
     paths = _save(fig, Path(out_dir), f"p4_grokking_seed{seed}")
+    plt.close(fig)
+    return paths
+
+
+def figure_hill_plots(payload: dict[str, Any], out_dir: Path | str) -> list[Path]:
+    """The full Hill and moment plots for every setting, with the selected `k` marked.
+
+    Section 4 requires this alongside any point estimate, and it is what the identifiability
+    criterion is read off: a plateau over a decade of `k` *together with* agreement of the
+    estimators. Showing the curve makes the criterion checkable instead of asserted -- and it is
+    where the difference between the two estimators is visible, since Hill cannot go below zero
+    while the moment estimator can.
+    """
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    apply_style()
+    settings = {float(s["p"]): s for s in payload["settings"]}
+    rates = sorted(settings)
+    positive = [p for p in rates if p > 0]
+
+    fig, (ax_h, ax_m) = plt.subplots(1, 2, figsize=(7.2, 3.2), sharex=True)
+    for p in rates:
+        s = settings[p]
+        hp = s["tail"].get("hill_plot") or {}
+        if not hp.get("k"):
+            continue
+        colour = p_colour(p, positive)
+        k = np.asarray(hp["k"], dtype=float)
+        label = f"$p={p:.2f}$"
+        ax_h.plot(k, hp["hill"], color=colour, lw=1.2, label=label)
+        ax_m.plot(k, hp["moment"], color=colour, lw=1.2, label=label)
+        if "ci_low" in hp:
+            ax_h.fill_between(k, hp["ci_low"], hp["ci_high"], color=colour, alpha=0.15, lw=0)
+
+        xi = s.get("xi_theory")
+        if xi is not None and np.isfinite(xi):
+            for ax in (ax_h, ax_m):
+                ax.axhline(xi, color=colour, dashes=DASHES["theory"], lw=0.7, zorder=0)
+        chosen = s["tail"].get("k")
+        if chosen:
+            for ax, series in ((ax_h, hp["hill"]), (ax_m, hp["moment"])):
+                i = int(np.argmin(np.abs(k - float(chosen))))
+                ax.plot([k[i]], [series[i]], marker="o", ms=4, color=colour, zorder=3)
+
+    for ax, name in ((ax_h, r"Hill $\hat{\gamma}^H_k$"), (ax_m, r"moment $\hat{\gamma}^M_k$")):
+        ax.set_xscale("log")
+        ax.set_xlabel("$k$ (upper order statistics)")
+        ax.set_ylabel(name)
+        ax.axhline(0.0, color=GRID, lw=0.8, zorder=0)
+    ax_h.set_title("(a) Hill plot; dashed: closed form; dot: selected $k$", loc="left")
+    ax_m.set_title("(b) moment plot", loc="left")
+    # Headroom first, then the legend into it. A figure-level legend below the panels lands on
+    # the x-axis labels, and inside a panel without headroom it lands on the curves.
+    lo, hi = ax_h.get_ylim()
+    ax_h.set_ylim(lo, hi + 0.30 * (hi - lo))
+    ax_h.legend(loc="upper left", ncol=3, fontsize=6.5, columnspacing=1.0, handlelength=1.4)
+
+    paths = _save(fig, Path(out_dir), "hill_plots_kesten")
     plt.close(fig)
     return paths
