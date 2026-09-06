@@ -22,7 +22,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Protocol, cast
 
-from ..lean.problems import Problem, build_prompt, extract_lean_block
+from ..lean.problems import Problem, build_prompt, extract_lean_block, header_directives
 from ..logging import get_logger
 
 __all__ = ["Backend", "HFBackend", "Sample", "VLLMBackend", "generate", "make_backend"]
@@ -40,6 +40,7 @@ class Sample:
     temperature: float
     sample_index: int
     proof: str
+    directives: str = ""
     prompt: str = ""
     completion: str = ""
     n_prompt_tokens: int = 0
@@ -233,6 +234,13 @@ def generate(
                     temperature=float(temperature),
                     sample_index=index,
                     proof=proof,
+                    # The `open` lines travel with the sample. `extract_lean_block` cuts
+                    # everything before `theorem`, so without this they are gone by the time the
+                    # kernel sees the proof -- and dropping `open Real` turns a valid miniF2F
+                    # theorem into a parse error that reads as a failed proof.
+                    directives=(
+                        problem.meta.get("directives") or header_directives(problem.header)
+                    ),
                     prompt=build_prompt(problem, model_id),
                     completion=completion if keep_completion else "",
                     meta={"split": problem.split, "source": problem.source},

@@ -6,9 +6,11 @@
 #   uv run onebigjump run configs/models/prover_sampling.yaml
 #   uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl --out-dir results/full/lean
 #
-# `problems` is a JSONL of theorem statements or a Hugging Face dataset id. Nothing in this
-# repository downloads a benchmark: which of miniF2F-test, ProofNet and PutnamBench the paper
-# finally uses is one of its open placeholders.
+# Fetch the statements first:
+#   uv run python scripts/fetch_problems.py --all
+# That writes data/raw/{minif2f,proofnet,putnambench}_*.jsonl, normalised and checked against
+# this repository's Mathlib. Which benchmark the paper finally uses is one of its own open
+# placeholders, so point `problems` at whichever you want.
 name: prover-sampling
 kind: generate
 description: Sample whole Lean 4 proofs without verifier feedback (Section 2, Appendix B.3).
@@ -16,9 +18,11 @@ seed: 1234
 
 model:
   model_id: deepseek-ai/DeepSeek-Prover-V2-7B
-  problems: data/raw/problems.jsonl
-  problem_split: test
-  max_problems: null
+  # One of the files scripts/fetch_problems.py wrote. Start with max_problems set: confirm the
+  # output looks like Lean before committing a GPU-day to it.
+  problems: data/raw/minif2f_test.jsonl
+  problem_split: null
+  max_problems: 20
   backend: auto        # vllm where available, transformers otherwise
   dtype: bfloat16
   device: auto

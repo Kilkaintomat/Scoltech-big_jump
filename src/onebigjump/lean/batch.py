@@ -8,6 +8,7 @@ timeout costs seconds rather than another two minutes.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import time
 from collections.abc import Iterable, Iterator
@@ -41,6 +42,22 @@ class ProofRequest(dict[str, Any]):
     def proof(self) -> str:
         return str(self.get("proof") or self.get("proof_text") or self.get("text") or "")
 
+    @property
+    def directives(self) -> str:
+        """`open` and `set_option` lines the statement needs but the proof text does not carry."""
+        return str(self.get("directives") or "")
+
+    @property
+    def source(self) -> str:
+        """What to hand the kernel: the directives, then the proof.
+
+        Prepending rather than passing them separately keeps the header, the line spans the
+        segmenter records and the token alignment all consistent with one text.
+        """
+        directives = self.directives.strip()
+        proof = self.proof
+        return f"{directives}\n{proof}" if directives and proof else proof
+
 
 def read_requests(path: Path | str) -> Iterator[ProofRequest]:
     """Read a JSONL file of sampled proofs, skipping blank lines."""
@@ -62,13 +79,40 @@ def verify_batch(
     whole_proof_timeout_s: float = 180.0,
     max_traces: int | None = None,
     name: str = "lean-verify",
+    shard: int = 0,
+    n_shards: int = 1,
+    resume: bool = True,
 ) -> tuple[list[ProofTrace], VerificationSummary]:
-    """Label every proof in `requests`, writing traces, a summary and a manifest into `out_dir`."""
+    """Label every proof in `requests`, writing traces, a summary and a manifest into `out_dir`.
+
+    Two concessions to the length of a real run. The Lean kernel is single-threaded per REPL and
+    this is usually the slowest stage of the pipeline, so `shard`/`n_shards` splits the input
+    deterministically by trace id and several processes can work on disjoint parts. And `resume`
+    skips traces already present in the output, so an interrupted run of several hours continues
+    rather than starting again -- with a full Mathlib import costing two minutes on each restart,
+    losing the work is not a small thing.
+    """
     out = Path(out_dir)
     env = discover(workspace)
     items = [ProofRequest(r) for r in requests]
+    if n_shards > 1:
+        items = [
+            r
+            for r in items
+            if hashlib.sha1(r.trace_id.encode()).digest()[0] % n_shards == shard % n_shards
+        ]
     if max_traces is not None:
         items = items[:max_traces]
+
+    trace_path = out / ("traces.jsonl" if n_shards == 1 else f"traces.shard{shard:02d}.jsonl")
+    done: set[str] = set()
+    if resume and trace_path.is_file():
+        with trace_path.open(encoding="utf-8") as fh:
+            for line in fh:
+                if line.strip():
+                    done.add(str(json.loads(line).get("trace_id", "")))
+        items = [r for r in items if r.trace_id not in done]
+        log.info("resuming: %d already verified, %d to go", len(done), len(items))
 
     with run_manifest(
         name,
@@ -82,17 +126,18 @@ def verify_batch(
         },
     ) as man:
         man.add_metric("lean_environment", env.as_dict())
+        man.add_metric("shard", {"index": shard, "of": n_shards})
+        man.add_metric("resumed_from", len(done))
         env.require()
 
         traces: list[ProofTrace] = []
         t0 = time.time()
         with LeanREPL(env) as repl:
-            trace_path = out / "traces.jsonl"
-            with trace_path.open("w", encoding="utf-8") as fh:
+            with trace_path.open("a" if done else "w", encoding="utf-8") as fh:
                 for i, req in enumerate(items):
                     tr = verify_trace(
                         repl,
-                        req.proof,
+                        req.source,
                         trace_id=req.trace_id,
                         problem_id=req.problem_id,
                         model_id=str(req.get("model_id", "")),
@@ -105,6 +150,7 @@ def verify_batch(
                         raise AssertionError(f"non-absorbing labels on trace {tr.trace_id}")
                     traces.append(tr)
                     fh.write(tr.model_dump_json() + "\n")
+                    fh.flush()  # so an interrupted run can resume from what it finished
                     if (i + 1) % 25 == 0:
                         log.info(
                             "verified %d/%d traces (%.1fs, %d REPL restarts)",
@@ -116,6 +162,9 @@ def verify_batch(
             man.add_metric("repl_restarts", repl.restarts)
             man.add_metric("repl_recoveries", repl.recoveries)
 
+        if done:
+            # The summary must describe the whole file, not only this session's additions.
+            traces = read_traces(trace_path)
         summary = VerificationSummary.from_traces(traces)
         man.add_output(trace_path, "traces")
         man.add_output(write_json(out / "summary.json", summary.model_dump()), "summary")
@@ -153,3 +202,13 @@ def verify_batch(
             summary.repl_failure,
         )
         return traces, summary
+
+
+def read_traces(path: Path | str) -> list[ProofTrace]:
+    """Read back a traces JSONL, for resuming or for the extraction stage."""
+    out: list[ProofTrace] = []
+    with Path(path).open(encoding="utf-8") as fh:
+        for line in fh:
+            if line.strip():
+                out.append(ProofTrace.model_validate(json.loads(line)))
+    return out

@@ -299,6 +299,9 @@ def lean_verify(
     workspace: Annotated[Path, typer.Option()] = Path("lean_workspace"),
     max_traces: Annotated[int | None, typer.Option(help="verify at most this many")] = None,
     per_step_timeout: Annotated[float, typer.Option(help="seconds per tactic")] = 60.0,
+    shard: Annotated[int, typer.Option(help="which shard of the input this process takes")] = 0,
+    n_shards: Annotated[int, typer.Option(help="run this many processes over disjoint shards")] = 1,
+    no_resume: Annotated[bool, typer.Option("--no-resume", help="re-verify everything")] = False,
 ) -> None:
     """Label every tactic of every sampled proof with the Lean 4 kernel (Appendix B.2)."""
     from .lean.batch import read_requests, verify_batch
@@ -309,6 +312,9 @@ def lean_verify(
         workspace=workspace,
         max_traces=max_traces,
         per_step_timeout_s=per_step_timeout,
+        shard=shard,
+        n_shards=n_shards,
+        resume=not no_resume,
     )
     table = Table(title="Verification", header_style="bold")
     table.add_column("category")

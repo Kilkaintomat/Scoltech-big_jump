@@ -72,22 +72,27 @@ Lean tests are *skipped* rather than passing, step 2 did not finish.
 
 ### 4. Problems to prove
 
-Put a JSONL at `data/raw/problems.jsonl`, one theorem per line:
+The statements are committed, so there is nothing to do unless you want to refetch:
 
-```json
-{"problem_id": "mathd_algebra_10", "formal_statement": "theorem ... := by", "header": "import Mathlib"}
+```bash
+uv run python scripts/fetch_problems.py --all
 ```
 
-or point `model.problems` in the config at a Hugging Face dataset id. The loader also accepts
-`statement`, `goal`, `name` and `id`, which is what the miniF2F and ProofNet releases actually use.
-**Nothing here downloads a benchmark**: which of miniF2F-test, ProofNet and PutnamBench the paper
-uses is one of its own open placeholders.
+1086 problems, about 1 MB: miniF2F 226 test + 231 valid, ProofNet 179 + 178, PutnamBench 272.
+They are normalised against **this repository's Mathlib** -- statements opened at `:= by`, the
+deprecated `∑ x in S` binder rewritten, stale import blocks split from the `open` lines that
+matter, 38 commented-out placeholder rows dropped, and the scopes PutnamBench's `n !` and `uᵀ`
+need supplied. A 180-statement sample elaborates at 98%, with miniF2F and PutnamBench at 60 of 60.
 
 **Check:**
 
 ```bash
-uv run python -c "from onebigjump.lean import load_problems; ps = load_problems('data/raw/problems.jsonl'); print(len(ps), ps[0].problem_id)"
+uv run python -c "from onebigjump.lean import load_problems; ps = load_problems('data/raw/minif2f_test.jsonl'); print(len(ps), ps[0].problem_id)"
 ```
+
+142 of PutnamBench's 272 problems open with an `abbrev ..._solution := sorry` the model must fill
+as well; they are flagged `requires_solution_term` and cannot verify as pure proofs. Filter them
+out if you want a clean P1-P3 set.
 
 ### 5. Sample proofs
 
@@ -115,8 +120,19 @@ verified traces and a prover that proved nothing gives nothing to fit on. A larg
 `whole_proof_vs_replay_disagreements`, which should be **0**; anything else means the labels are
 not trustworthy and the run says so.
 
-The Lean kernel is single-threaded per REPL and this is usually the slowest stage. Split the JSONL
-and run several shards in parallel if the box has cores to spare.
+The Lean kernel is single-threaded per REPL and this is usually the slowest stage. Shard it:
+
+```bash
+for i in 0 1 2 3; do
+  uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl \
+      --out-dir results/full/lean --shard $i --n-shards 4 &
+done; wait
+```
+
+Shards are assigned by a hash of the trace id, so they are disjoint and stable. Each writes its
+own `traces.shard0N.jsonl`. An interrupted run **resumes** by default, skipping traces already in
+its output -- a full Mathlib import costs two minutes on every restart, so losing hours of work
+to one crash is not a small thing. `--no-resume` re-verifies everything.
 
 ### 7. Residual streams, the table, and P1-P5
 

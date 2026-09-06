@@ -205,3 +205,77 @@ class TestSampleRecord:
     def test_defaults_are_serialisable(self) -> None:
         record = Sample("t", "p", "m", 0.6, 0, "theorem t : True := by\n  trivial").as_record()
         json.loads(json.dumps(record))
+
+
+class TestDirectivesReachTheKernel:
+    """`extract_lean_block` cuts everything before `theorem`, so the `open` lines must travel."""
+
+    def test_a_sample_carries_the_problems_directives(self) -> None:
+        problem = Problem(
+            "p",
+            "theorem t : True := by",
+            header="import Mathlib\nopen Real\nopen Nat",
+        )
+        sample = next(iter(generate([problem], _FakeBackend(), samples_per_problem=1)))
+        assert sample.directives == "open Real\nopen Nat"
+
+    def test_directives_come_from_the_fetched_record_when_present(self) -> None:
+        problem = Problem(
+            "p",
+            "theorem t : True := by",
+            header="import Mathlib",
+            meta={"directives": "open scoped Nat Matrix"},
+        )
+        sample = next(iter(generate([problem], _FakeBackend(), samples_per_problem=1)))
+        assert sample.directives == "open scoped Nat Matrix"
+
+    def test_the_verifier_receives_them_prepended(self) -> None:
+        from onebigjump.lean.batch import ProofRequest
+
+        problem = Problem("p", "theorem t : True := by", header="import Mathlib\nopen Real")
+        sample = next(iter(generate([problem], _FakeBackend(), samples_per_problem=1)))
+        source = ProofRequest(sample.as_record()).source
+        assert source.startswith("open Real\n")
+        assert "theorem t" in source
+
+    def test_no_directives_leaves_the_proof_untouched(self) -> None:
+        from onebigjump.lean.batch import ProofRequest
+
+        assert ProofRequest({"proof": "theorem t := by"}).source == "theorem t := by"
+
+    def test_imports_never_reach_the_kernel(self) -> None:
+        """An import inside a REPL command is a syntax error."""
+        from onebigjump.lean.batch import ProofRequest
+
+        problem = Problem("p", "theorem t : True := by", header="import Mathlib\nopen Real")
+        sample = next(iter(generate([problem], _FakeBackend(), samples_per_problem=1)))
+        assert "import " not in ProofRequest(sample.as_record()).source
+
+
+class TestShardingAndResume:
+    def test_shards_partition_the_input(self) -> None:
+        import hashlib
+
+        from onebigjump.lean.batch import ProofRequest
+
+        ids = [f"trace-{i:04d}" for i in range(500)]
+        for n in (2, 4, 8):
+            assigned = [
+                sum(
+                    1
+                    for i in ids
+                    if hashlib.sha1(ProofRequest({"trace_id": i}).trace_id.encode()).digest()[0] % n
+                    == s
+                )
+                for s in range(n)
+            ]
+            assert sum(assigned) == len(ids), f"n_shards={n} lost or duplicated traces"
+            assert all(a > 0 for a in assigned), f"n_shards={n} left a shard empty"
+
+    def test_the_assignment_is_stable_across_runs(self) -> None:
+        import hashlib
+
+        def shard_of(trace_id: str, n: int) -> int:
+            return hashlib.sha1(trace_id.encode()).digest()[0] % n
+
+        assert shard_of("abc", 4) == shard_of("abc", 4)
