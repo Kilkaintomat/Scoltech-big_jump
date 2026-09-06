@@ -59,19 +59,34 @@ class LeanConfig(Strict):
 
 
 class ModelConfig(Strict):
+    """Sampling settings for Section 5.1 and 5.2 (Appendix B.3)."""
+
     model_id: str
     revision: str | None = None
     dtype: Literal["float32", "float16", "bfloat16", "auto"] = "auto"
     device: Literal["auto", "cpu", "mps", "cuda"] = "auto"
+    backend: Literal["auto", "vllm", "hf"] = "auto"
     max_new_tokens: int = Field(512, ge=1)
     temperatures: list[float] = [0.6, 1.0]
     samples_per_problem: int = Field(4, ge=1)
     seed: int = 1234
     trust_remote_code: bool = False
     attn_implementation: str | None = None
+    problems: str | None = Field(
+        None, description="a JSONL path or a Hugging Face dataset id of theorem statements"
+    )
+    problem_split: str | None = None
+    max_problems: int | None = None
 
 
 class ActivationConfig(Strict):
+    """Read-out settings for Appendix B.1."""
+
+    model_id: str = "gpt2"
+    traces: Path | None = Field(None, description="JSONL written by `onebigjump lean-verify`")
+    device: Literal["auto", "cpu", "mps", "cuda"] = "auto"
+    dtype: Literal["float32", "float16", "bfloat16", "auto"] = "bfloat16"
+    max_tokens: int | None = Field(4096, description="skip traces longer than this")
     layer_fractions: list[float] = [0.25, 0.5, 0.75]
     statistics: list[Literal["raw", "whitened", "innovation"]] = ["raw", "whitened", "innovation"]
     shrinkage: float = Field(0.1, ge=0.0, le=1.0, description="Ledoit-Wolf-style ridge on Sigma")

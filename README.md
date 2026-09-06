@@ -25,8 +25,8 @@ predictions P1–P5 of the paper:
   estimator, protocol setting and paper placeholder this repository has to fill.
 - [`docs/system_report.md`](docs/system_report.md) — hardware audit and what it makes feasible.
 - [`STATUS.md`](STATUS.md) — what is done, running, or blocked.
-- [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md) — what installs and runs
-  on a Linux + CUDA box, and what the GPU cannot yet be used for.
+- [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md) — running the pipeline on
+  a Linux + CUDA box, verified by resolving the lock against that platform.
 
 ## Setup
 
@@ -34,6 +34,19 @@ predictions P1–P5 of the paper:
 uv sync --extra stats --extra viz --extra ml --extra dev
 uv run onebigjump --help
 ```
+
+The full pipeline, once Lean is installed (`./scripts/setup_lean.sh`):
+
+```bash
+uv run onebigjump run configs/models/prover_sampling.yaml      # sample whole proofs
+uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl \
+    --out-dir results/full/lean                                 # exact per-step labels
+uv run onebigjump run configs/models/extract_activations.yaml  # trajectories, table, P1-P5
+uv run onebigjump report
+```
+
+Stage 1 needs a GPU for the 7-8B provers the paper uses; the rest does not. See
+[`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md).
 
 The source paper draft is expected at `docs/onebigjumpdraft.pdf` and is deliberately git-ignored.
 

@@ -25,6 +25,12 @@ figure1:  ## reproduce Figure 1 (about 2 minutes)
 p4:  ## run the grokking experiment (about 20 minutes on MPS)
 	uv run onebigjump run configs/grokking/modular_addition.yaml
 
+generate:  ## sample proofs from a prover (needs a GPU; edit configs/models/prover_sampling.yaml)
+	uv run onebigjump run configs/models/prover_sampling.yaml
+
+extract:  ## read residual streams of labelled traces and run P1-P5
+	uv run onebigjump run configs/models/extract_activations.yaml
+
 lean-verify:  ## label the fixture proofs with the Lean kernel
 	uv run onebigjump lean-verify tests/fixtures/lean_proofs.jsonl --out-dir results/pilot/lean
 

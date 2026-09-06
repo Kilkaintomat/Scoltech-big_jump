@@ -103,7 +103,13 @@ def run(
     """Run the experiment described by a config file."""
     cfg = load_config(config)
     console.print(f"[bold]{cfg.name}[/bold] ({cfg.kind}) - {cfg.description or 'no description'}")
-    dispatch = {"kesten": _run_kesten, "grokking": _run_grokking, "lean": _run_lean}
+    dispatch = {
+        "kesten": _run_kesten,
+        "grokking": _run_grokking,
+        "lean": _run_lean,
+        "generate": _run_generate,
+        "activations": _run_activations,
+    }
     if cfg.kind not in dispatch:
         console.print(f"[red]kind '{cfg.kind}' is not implemented yet[/red]")
         raise typer.Exit(code=2)
@@ -150,6 +156,60 @@ def _run_lean(cfg: RunConfig, out_dir: Path | None) -> None:
         name=cfg.name,
     )
     console.print(summary.model_dump())
+
+
+def _run_generate(cfg: RunConfig, out_dir: Path | None) -> None:
+    from .config import ModelConfig
+    from .experiments.pipeline import run_generation
+
+    section = cfg.model or ModelConfig(model_id="gpt2")
+    if section.problems is None:
+        console.print("[red]model.problems is not set in the config[/red]")
+        raise typer.Exit(code=2)
+    out = run_generation(
+        section.problems,
+        section.model_id,
+        out_dir or Path("data/raw") / cfg.name,
+        backend=section.backend,
+        samples_per_problem=section.samples_per_problem,
+        temperatures=tuple(section.temperatures),
+        max_new_tokens=section.max_new_tokens,
+        limit=section.max_problems,
+        split=section.problem_split,
+        device=section.device,
+        dtype=section.dtype,
+        trust_remote_code=section.trust_remote_code,
+        name=cfg.name,
+    )
+    console.print(f"{out['n_samples']} samples over {out['n_problems']} problems -> {out['path']}")
+
+
+def _run_activations(cfg: RunConfig, out_dir: Path | None) -> None:
+    from .config import ActivationConfig
+    from .experiments.pipeline import run_extraction
+
+    section = cfg.activations or ActivationConfig()
+    if section.traces is None:
+        console.print("[red]activations.traces is not set in the config[/red]")
+        raise typer.Exit(code=2)
+    payload = run_extraction(
+        section.traces,
+        section.model_id,
+        out_dir or section.out_dir,
+        layer_fractions=tuple(section.layer_fractions),
+        statistics=tuple(section.statistics),
+        calibration_frac=section.calibration_frac,
+        device=section.device,
+        dtype=section.dtype,
+        max_tokens=section.max_tokens,
+        seed=cfg.seed,
+        name=cfg.name,
+    )
+    summary = payload["extraction"]
+    console.print(
+        f"{summary['rows']} rows from {summary['n_extracted']} traces "
+        f"at layers {summary['layers']}; skipped {summary['skipped']}"
+    )
 
 
 @app.command()

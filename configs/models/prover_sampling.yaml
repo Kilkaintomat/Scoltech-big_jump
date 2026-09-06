@@ -1,0 +1,29 @@
+# Section 5.1: sample whole proofs from an open-weight prover.
+#
+# Needs a GPU: the smallest model named in the paper is 7B, which is ~14 GB in bfloat16.
+# On Linux with CUDA, `backend: auto` picks vLLM if the `inference` extra is installed.
+#
+#   uv run onebigjump run configs/models/prover_sampling.yaml
+#   uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl --out-dir results/full/lean
+#
+# `problems` is a JSONL of theorem statements or a Hugging Face dataset id. Nothing in this
+# repository downloads a benchmark: which of miniF2F-test, ProofNet and PutnamBench the paper
+# finally uses is one of its open placeholders.
+name: prover-sampling
+kind: generate
+description: Sample whole Lean 4 proofs without verifier feedback (Section 2, Appendix B.3).
+seed: 1234
+
+model:
+  model_id: deepseek-ai/DeepSeek-Prover-V2-7B
+  problems: data/raw/problems.jsonl
+  problem_split: test
+  max_problems: null
+  backend: auto        # vllm where available, transformers otherwise
+  dtype: bfloat16
+  device: auto
+  samples_per_problem: 8
+  temperatures: [0.6, 1.0]
+  max_new_tokens: 1024
+  trust_remote_code: false
+  seed: 1234

@@ -14,8 +14,8 @@ Last edit: 2026-09-04. Stage numbering follows the task specification.
 | 6 | Statistical methods | **done** | `src/onebigjump/stats/` (8 modules) |
 | 7 | Tests | **done for what exists** | 384 tests: 18 driving the real Lean kernel, 13 driving real GPT-2 |
 | 8 | Kesten simulation (Figure 1) | **done** | `paper_outputs/figures/figure1_kesten_dichotomy.pdf` |
-| 9 | Generation / verification / extraction | **2 of 3** | verification and extraction done; **generation not written** |
-| 10 | Pilot | **not started** | needs stage 9's generation half |
+| 9 | Generation / verification / extraction | **done** | sampling (vLLM or HuggingFace), Lean labelling, and the extraction driver |
+| 10 | Pilot | **runnable, not run here** | the pipeline is wired end to end; a 7-8B prover does not fit in 16 GB |
 | 11 | Experiments P1-P5 | **done** | P1, P2, P3, P5 validated against the closed form; **P4 run for real** |
 | 12 | Tables and figures | **done** | Figure 1, the P4 figure, and Tables 1-2 in Markdown and LaTeX |
 | 13 | Reproducible report | **done** | `uv run onebigjump report` -> [`reports/experimental_report.md`](reports/experimental_report.md) |
@@ -26,8 +26,9 @@ Last edit: 2026-09-04. Stage numbering follows the task specification.
 
 | Item | Why it is missing |
 |---|---|
-| `models/generation.py`, and with it stage 10 | Sampling proofs needs a prover model; the smallest in the paper is 7B and does not fit in 16 GB. Writing an untested sampler would be a stub. |
-| `configs/{models,synthetic}/` | Empty, because the runs they would configure are the ones this machine cannot do. |
+| A prover run of stage 10 | The pipeline is complete and tested end to end on GPT-2, but the smallest model the paper names is 7B and does not fit in 16 GB. It needs a GPU box; see [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). |
+| Benchmark acquisition | Nothing downloads miniF2F, ProofNet or PutnamBench: which of them the paper uses is one of its own placeholders, so the loader accepts either a local JSONL or a Hugging Face dataset id and the choice is left open. |
+| `configs/synthetic/`, the PrOntoQA-style generator | Section 5.2 and P5 on real models. Not written. |
 | `docs/data_schema.md`, `docs/bootstrap_report.md` | Requested, not written. The schema is documented in `experiments/dataset.py` and enforced by `validate_table`. |
 | `src/onebigjump/schemas.py` | The requested top-level module; its content lives in `lean/schemas.py` and `experiments/dataset.py`. |
 | A clean-tree re-run of every artifact | Figure 1, the Lean pilot and P4 were all produced while the tree was dirty, and their manifests say so. The numbers are correct; they are simply not tied to a commit. |

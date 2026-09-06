@@ -44,40 +44,66 @@ uv run python -c "import torch; print(torch.cuda.is_available(), torch.version.c
 If the driver is older, pin an earlier torch in `pyproject.toml` and re-lock; nothing else in the
 repository depends on the torch version.
 
-## What will run, and whether the GPU helps
+## The full pipeline
 
-| Command | Runs? | Does the GPU help? |
-|---|---|---|
-| `make figure1` | yes | no -- pure NumPy, ~6 min |
-| `uv run onebigjump analyse-kesten` | yes | no |
-| `make lean-verify` | yes | no -- the Lean kernel is CPU-bound |
-| `make p4` | yes | somewhat: 20-35 min per seed on an M4; a GPU shaves it, but this is a `d=128` one-layer model |
-| `make test-all` | yes | no |
+```bash
+# 1. sample whole proofs -- no verifier in the loop (Section 2)
+uv run onebigjump run configs/models/prover_sampling.yaml
 
-**So a GPU buys almost nothing on what exists today.** That is not an accident of tuning: the
-stages that need one are the stages that were never written, because they could not be tested on
-the machine this was built on.
+# 2. label every tactic with the Lean 4 kernel (Appendix B.2)
+uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl \
+    --out-dir results/full/lean
 
-## What is missing before the GPU is worth having
+# 3. read the residual streams, build the table, run P1-P5 (Appendix B.1, Section 5)
+uv run onebigjump run configs/models/extract_activations.yaml
 
-The paper's GPU-bound work is Section 5.1 (prover traces) and Section 5.2 (synthetic deduction on
-7-8B models). Neither can run yet.
+# 4. assemble the report
+uv run onebigjump report
+```
 
-| Missing | What it would have to do |
+Stage 1 is the only one that wants the GPU badly; stage 3 wants it too, but less. Stage 2 is
+CPU-bound in the Lean kernel and is usually the wall-clock bottleneck for a large batch.
+
+`configs/models/prover_sampling.yaml` points `problems` at a JSONL of theorem statements or a
+Hugging Face dataset id. **Nothing here downloads a benchmark**: which of miniF2F-test, ProofNet
+and PutnamBench the paper finally uses is one of its open placeholders, so the choice is left to
+whoever runs it. The loader accepts the field spellings those datasets actually use
+(`formal_statement`, `statement`, `goal`, `name`, `id`).
+
+Prompts are per model family, not guessed: a prover fine-tuned on one template produces very
+different output under another, and the mismatch surfaces as a wall of parse errors rather than
+as an error message. Templates for the DeepSeek, Goedel and Kimina families are in
+`lean/problems.py`; add yours there rather than editing the config.
+
+## What runs without a GPU
+
+| Command | GPU helps? |
 |---|---|
-| `src/onebigjump/models/generation.py` | sample whole proofs from a prover with vLLM or HF `generate`, and write the JSONL that `onebigjump lean-verify` already reads |
-| Benchmark acquisition | nothing in the repository mentions miniF2F, ProofNet or PutnamBench; the theorem statements have to come from somewhere |
-| An extraction driver | load the model onto the device, teacher-force each labelled trace, fit the calibration on a **disjoint** verified split, and build the table. The pieces exist and are tested (`extract_trajectory`, `fit_calibration`, `from_traces`); what is absent is the loop that wires them together |
-| `configs/models/`, `configs/synthetic/` | empty |
-| CLI dispatch for `generate`, `activations`, `synthetic` | declared in `config.py` as valid `kind` values but not wired in `cli.py`, so `onebigjump run` on such a config exits with code 2 |
+| `make figure1` | no -- pure NumPy, ~6 min |
+| `uv run onebigjump analyse-kesten` | no |
+| `make lean-verify` | no -- the Lean kernel is CPU-bound |
+| `make p4` | somewhat: 20-35 min per seed on an M4 |
+| `make test-all` | no |
 
-Everything downstream of that is done and tested: verification, the three deviation statistics,
-P1-P5, the tables, the figures and the report.
+## Two things that will bite on a first real run
 
-## Memory, once those exist
+**The whitening needs a big calibration split.** `(mu, Sigma)` is fitted on verified traces of a
+disjoint problem split, and a residual stream of width `d` needs on the order of `2d` increments
+before the fit is determined. At `d = 4096` and ~10 steps per trace that is several hundred
+verified traces in the *held-out* half alone. Below that the fit is refused, the run continues
+with the raw statistic, and both the log and the manifest say so -- it does not silently return a
+statistic with no spread left. If `whitened` and `innovation` are missing from your table, that
+is why.
+
+**A prover that proves nothing gives you no calibration.** The split prefers problems with at
+least one verified trace, but if the model verifies nothing there is nothing to fit on. Check the
+verified count from stage 2 before running stage 3.
+
+## Memory
 
 An 8B model in bfloat16 is about 16 GB of weights, so a 24 GB card is the practical floor for
-Section 5.1 and 40 GB is comfortable. The activations themselves are negligible: three read-out
+Section 5.1 and 40 GB is comfortable. Sampling and extraction load the model separately, in two
+runs, so they never have to share a card. The activations themselves are negligible: three read-out
 layers times `(L+1)` positions times `d` in float32 is a few megabytes per trace. The binding
 constraint is the model, not the extraction -- which is why `hooks.py` keeps only the requested
 token positions rather than whole `(batch, seq, d)` tensors.

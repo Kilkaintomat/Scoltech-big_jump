@@ -1,0 +1,30 @@
+# Appendix B.1: teacher-force the labelled traces and read the residual stream.
+#
+# Run after `onebigjump lean-verify`, on its traces.jsonl. Activations are recorded with the
+# HuggingFace implementation in bfloat16 with float32 accumulation of the norms, which is why
+# this stage does not use vLLM even where vLLM did the sampling.
+#
+#   uv run onebigjump run configs/models/extract_activations.yaml
+#
+# The calibration split is by problem and disjoint from the analysed set. A residual stream of
+# width d needs on the order of 2d increments for the whitening to be determined; at ~10 steps
+# per trace that is hundreds of traces, and below it the fit is refused rather than returned flat.
+name: extract-activations
+kind: activations
+description: Residual-stream trajectories and the three deviation statistics of equation 1.
+seed: 0
+
+activations:
+  model_id: deepseek-ai/DeepSeek-Prover-V2-7B
+  traces: results/full/lean/traces.jsonl
+  device: auto
+  dtype: bfloat16
+  max_tokens: 4096
+  layer_fractions: [0.25, 0.5, 0.75]
+  statistics: [raw, whitened, innovation]
+  calibration_split: verified_disjoint
+  calibration_frac: 0.5
+  shrinkage: 0.1
+  ridge_alpha: 1.0
+  batch_size: 1
+  out_dir: results/full/activations
