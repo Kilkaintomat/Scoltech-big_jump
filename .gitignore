@@ -79,3 +79,6 @@ lean_workspace/repl/
 **/.env_cache/
 *.olean
 lean_workspace/mathlib_project/.github/
+
+# --- smoke-test artefacts must not sit in paper_outputs beside real results ---
+paper_outputs/**/*activations-analysis*

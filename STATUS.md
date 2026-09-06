@@ -2,6 +2,11 @@
 
 Last edit: 2026-09-04. Stage numbering follows the task specification.
 
+**On a GPU server**, the pipeline is complete and the runbook is
+[`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). What remains to be *run*
+there, rather than written, is stage 10: sampling from a 7-8B prover, labelling those traces, and
+extracting their residual streams. Nothing on this machine can do that in 16 GB without CUDA.
+
 ## Stages
 
 | # | Stage | State | Where |
@@ -12,7 +17,7 @@ Last edit: 2026-09-04. Stage numbering follows the task specification.
 | 4 | Python environment | **done** | Python 3.11.15, torch 2.13 (MPS), `uv.lock` pinned |
 | 5 | Lean 4 + Mathlib | **done** | Lean 4.34.0-rc2, Mathlib `85e3a25e`, REPL built; 8.0 GB in `lean_workspace/` |
 | 6 | Statistical methods | **done** | `src/onebigjump/stats/` (8 modules) |
-| 7 | Tests | **done for what exists** | 384 tests: 18 driving the real Lean kernel, 13 driving real GPT-2 |
+| 7 | Tests | **done for what exists** | 429 tests: 18 driving the real Lean kernel, 29 driving real transformer activations |
 | 8 | Kesten simulation (Figure 1) | **done** | `paper_outputs/figures/figure1_kesten_dichotomy.pdf` |
 | 9 | Generation / verification / extraction | **done** | sampling (vLLM or HuggingFace), Lean labelling, and the extraction driver |
 | 10 | Pilot | **runnable, not run here** | the pipeline is wired end to end; a 7-8B prover does not fit in 16 GB |

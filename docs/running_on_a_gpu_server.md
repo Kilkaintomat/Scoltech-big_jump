@@ -1,22 +1,11 @@
 # Running this repository on a GPU server
 
-What was checked, what works, and what is still missing. Verified by resolving the lockfile
-against `x86_64-unknown-linux-gnu`, not by assumption.
+A runbook and the audit behind it. Portability was checked by resolving the lockfile against
+`x86_64-unknown-linux-gnu`, not by assumption.
 
-## Setup
-
-```bash
-git clone <repo> && cd Scoltech-big_jump
-curl -LsSf https://astral.sh/uv/install.sh | sh          # if uv is absent
-uv sync --python 3.11 --extra stats --extra viz --extra ml --extra dev
-uv run onebigjump doctor                                  # confirms CUDA is seen
-./scripts/setup_lean.sh                                   # ~8 GB, no sudo, user space
-uv run onebigjump lean-doctor
-make test
-```
-
-Add `--extra inference` to install `vllm` for sampling. It is behind a
-`sys_platform == 'linux'` marker and is the reason it is not in the default set.
+**Read [section 0](#0-before-booking-the-machine) before booking a machine**: the lock pins the
+CUDA 13 runtime, which needs a driver of the 580 series or newer, and on an older one the install
+succeeds while `torch.cuda.is_available()` quietly returns false.
 
 ## What was verified
 
@@ -29,51 +18,124 @@ Add `--extra inference` to install `vllm` for sampling. It is behind a
 | Device selection | `cuda` before `mps` before `cpu`; the MPS probe is guarded and is safe where the backend is absent |
 | Lean toolchain | `elan` installs on Linux in user space; the toolchain and `lake-manifest.json` are committed, so the Mathlib revision is the one the labels were produced against |
 
-### The one hard requirement to check before booking a machine
+If the driver is older than the 580 series, pin an earlier torch in `pyproject.toml` and re-lock;
+nothing else in the repository depends on the torch version.
 
-The lock pins the **CUDA 13** runtime (`nvidia-cuda-runtime==13.0.96`,
-`nvidia-cudnn-cu13`, `nvidia-nccl-cu13`). That needs an NVIDIA driver of the 580 series or
-newer. On an older driver the install succeeds and `torch.cuda.is_available()` then returns
-false, so check it before anything else:
+## Runbook: what to do on the server, in order
+
+Each step has a check. Do not go past a failing one -- every later stage inherits the fault, and
+the failure surfaces as a wall of parse errors or an empty table rather than as an error message.
+
+### 0. Before booking the machine
 
 ```bash
-nvidia-smi --query-gpu=driver_version,memory.total --format=csv
-uv run python -c "import torch; print(torch.cuda.is_available(), torch.version.cuda)"
+nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv
 ```
 
-If the driver is older, pin an earlier torch in `pyproject.toml` and re-lock; nothing else in the
-repository depends on the torch version.
+**Check:** driver 580 or newer (the lock pins the CUDA 13 runtime) and at least 24 GB of memory
+for a 7-8B prover. On an older driver the install still succeeds and
+`torch.cuda.is_available()` then quietly returns false.
 
-## The full pipeline
+### 1. Environment
 
 ```bash
-# 1. sample whole proofs -- no verifier in the loop (Section 2)
+git clone <repo> && cd Scoltech-big_jump
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv sync --python 3.11 --extra stats --extra viz --extra ml --extra dev --extra inference
+uv run onebigjump doctor
+```
+
+**Check:** `doctor` prints a CUDA version rather than `-`. Drop `--extra inference` if vLLM is not
+wanted; sampling then falls back to `transformers`.
+
+### 2. Lean
+
+```bash
+./scripts/setup_lean.sh          # ~8 GB, user space, no sudo, 10-30 min
+uv run onebigjump lean-doctor
+```
+
+**Check:** `Lean is usable`, and the toolchain reads `leanprover/lean4:v4.34.0-rc2` with Mathlib
+`85e3a25e`. Those come from the committed `lean-toolchain` and `lake-manifest.json`; the script
+deliberately does **not** run `lake update`, because several of Mathlib's dependencies are pinned
+to `main` and re-resolving would verify against a different Mathlib than the recorded one.
+
+### 3. Everything that needs no GPU, as a smoke test
+
+```bash
+make test-all                    # 429 tests, ~15 min, includes the live kernel
+make figure1                     # ~6 min
+```
+
+**Check:** all tests pass and `paper_outputs/figures/figure1_kesten_dichotomy.pdf` appears. If the
+Lean tests are *skipped* rather than passing, step 2 did not finish.
+
+### 4. Problems to prove
+
+Put a JSONL at `data/raw/problems.jsonl`, one theorem per line:
+
+```json
+{"problem_id": "mathd_algebra_10", "formal_statement": "theorem ... := by", "header": "import Mathlib"}
+```
+
+or point `model.problems` in the config at a Hugging Face dataset id. The loader also accepts
+`statement`, `goal`, `name` and `id`, which is what the miniF2F and ProofNet releases actually use.
+**Nothing here downloads a benchmark**: which of miniF2F-test, ProofNet and PutnamBench the paper
+uses is one of its own open placeholders.
+
+**Check:**
+
+```bash
+uv run python -c "from onebigjump.lean import load_problems; ps = load_problems('data/raw/problems.jsonl'); print(len(ps), ps[0].problem_id)"
+```
+
+### 5. Sample proofs
+
+Edit `configs/models/prover_sampling.yaml` -- at least `model_id` and `problems`. Start small:
+set `max_problems: 20` and confirm the output looks like Lean before committing a GPU-day.
+
+```bash
 uv run onebigjump run configs/models/prover_sampling.yaml
+head -1 data/raw/prover-sampling/samples.jsonl | python -m json.tool | head -20
+```
 
-# 2. label every tactic with the Lean 4 kernel (Appendix B.2)
-uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl \
-    --out-dir results/full/lean
+**Check:** the `proof` field starts with `theorem` and contains tactics. If it is prose, the prompt
+template is wrong for this model family -- add one to `PROMPT_TEMPLATES` in
+`src/onebigjump/lean/problems.py` rather than editing the config.
 
-# 3. read the residual streams, build the table, run P1-P5 (Appendix B.1, Section 5)
+### 6. Label every tactic
+
+```bash
+uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl --out-dir results/full/lean
+```
+
+**Check:** the printed table. `verified` must be well above zero -- stage 7 fits the whitening on
+verified traces and a prover that proved nothing gives nothing to fit on. A large
+`parse_error_discarded` count means the prompt template is still wrong. The manifest records
+`whole_proof_vs_replay_disagreements`, which should be **0**; anything else means the labels are
+not trustworthy and the run says so.
+
+The Lean kernel is single-threaded per REPL and this is usually the slowest stage. Split the JSONL
+and run several shards in parallel if the box has cores to spare.
+
+### 7. Residual streams, the table, and P1-P5
+
+```bash
 uv run onebigjump run configs/models/extract_activations.yaml
+```
 
-# 4. assemble the report
+**Check:** the printed row count and the statistics present. If only `raw` appears, the calibration
+was refused -- see the sizing note above; you need several hundred verified traces in the held-out
+half. The manifest carries the reason.
+
+### 8. Report
+
+```bash
 uv run onebigjump report
 ```
 
-Stage 1 is the only one that wants the GPU badly; stage 3 wants it too, but less. Stage 2 is
-CPU-bound in the Lean kernel and is usually the wall-clock bottleneck for a large batch.
-
-`configs/models/prover_sampling.yaml` points `problems` at a JSONL of theorem statements or a
-Hugging Face dataset id. **Nothing here downloads a benchmark**: which of miniF2F-test, ProofNet
-and PutnamBench the paper finally uses is one of its open placeholders, so the choice is left to
-whoever runs it. The loader accepts the field spellings those datasets actually use
-(`formal_statement`, `statement`, `goal`, `name`, `id`).
-
-Prompts are per model family, not guessed: a prover fine-tuned on one template produces very
-different output under another, and the mismatch surfaces as a wall of parse errors rather than
-as an error message. Templates for the DeepSeek, Goedel and Kimina families are in
-`lean/problems.py`; add yours there rather than editing the config.
+**Check:** no section says `dirty working tree`. If one does, the run was made from a modified
+tree and its numbers cannot be tied to a commit; commit and re-run that stage.
 
 ## What runs without a GPU
 
