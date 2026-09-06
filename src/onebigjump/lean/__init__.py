@@ -5,7 +5,11 @@ from .problems import (
     Problem,
     build_prompt,
     extract_lean_block,
+    has_declaration,
+    header_directives,
     load_problems,
+    modernise_binders,
+    open_for_tactics,
     split_problems,
 )
 from .schemas import ProofTrace, StepLabel, StepStatus, TraceOutcome, VerificationSummary
@@ -27,7 +31,11 @@ __all__ = [
     "build_prompt",
     "discover",
     "extract_lean_block",
+    "has_declaration",
+    "header_directives",
     "load_problems",
+    "modernise_binders",
+    "open_for_tactics",
     "segment_proof",
     "split_header_and_proof",
     "split_problems",

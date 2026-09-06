@@ -1,0 +1,49 @@
+{
+  "benchmarks": [
+    {
+      "benchmark": "minif2f",
+      "split": "test",
+      "problems": 226,
+      "requires_solution_term": 0,
+      "bytes": 234925,
+      "path": "data/raw/minif2f_test.jsonl"
+    },
+    {
+      "benchmark": "minif2f",
+      "split": "validation",
+      "problems": 231,
+      "requires_solution_term": 0,
+      "bytes": 239136,
+      "path": "data/raw/minif2f_validation.jsonl"
+    },
+    {
+      "benchmark": "proofnet",
+      "split": "test",
+      "problems": 179,
+      "requires_solution_term": 0,
+      "bytes": 105452,
+      "path": "data/raw/proofnet_test.jsonl"
+    },
+    {
+      "benchmark": "proofnet",
+      "split": "valid",
+      "problems": 178,
+      "requires_solution_term": 0,
+      "bytes": 106421,
+      "path": "data/raw/proofnet_valid.jsonl"
+    },
+    {
+      "benchmark": "putnambench",
+      "split": "test",
+      "problems": 272,
+      "requires_solution_term": 142,
+      "bytes": 319235,
+      "path": "data/raw/putnambench_test.jsonl"
+    }
+  ],
+  "notes": {
+    "minif2f": "statements end `:= sorry`; each row also carries its own `split` column",
+    "proofnet": "statements end with a bare `:=`",
+    "putnambench": "statements end `:=\\nsorry`; many also open with an `abbrev ..._solution := sorry` that the model must fill as well, so those cannot verify as pure proofs; the factorial and transpose notations need scopes the benchmark never opens"
+  }
+}

@@ -31,6 +31,10 @@ data/raw/**
 data/interim/**
 data/processed/**
 !data/**/.gitkeep
+# Benchmark statements are ~1 MB of text and pin what was actually proved against; committing
+# them is what makes a run reproducible from the repository alone.
+!data/raw/*.jsonl
+!data/raw/benchmarks.json
 artifacts/models/**
 artifacts/activations/**
 artifacts/calibration/**

@@ -24,7 +24,11 @@ __all__ = [
     "Problem",
     "build_prompt",
     "extract_lean_block",
+    "has_declaration",
+    "header_directives",
     "load_problems",
+    "modernise_binders",
+    "open_for_tactics",
     "split_problems",
 ]
 
@@ -72,15 +76,94 @@ class Problem:
         }
 
 
+_BIG_OPERATOR_IN = re.compile(r"(?<=[\u2211\u220f\u2a06\u2a05\u22c3\u22c2])([^,]*?)\s+in\s+")
+
+
+def modernise_binders(statement: str) -> str:
+    """Rewrite the deprecated big-operator binder `\u2211 x in S,` as `\u2211 x \u2208 S,`.
+
+    Mathlib renamed this and current versions reject the old spelling outright: against Mathlib
+    85e3a25e the old form fails with `unexpected token 'in'; expected ','`. The Lean 4 ports of
+    all three benchmarks predate the change -- 70 of the 702 test-split statements use it -- so
+    without this rewrite one statement in eight is a parse error that looks like a broken
+    benchmark rather than a stale one.
+    """
+    return _BIG_OPERATOR_IN.sub("\\1 \u2208 ", statement)
+
+
+def has_declaration(statement: str) -> bool:
+    """Is there a real declaration here, or only commented-out text?
+
+    The Lean 4 port of miniF2F keeps rows whose whole statement is commented out, with a note
+    about why it could not be ported (`-- Error: Real^Real`). They carry no theorem, and appended
+    to a `sorry` they produce `unexpected token 'sorry'; expected command` -- an error that looks
+    like a broken pipeline rather than a placeholder row.
+    """
+    from .segmentation import strip_comments
+
+    live = [line for line in strip_comments(statement).splitlines() if line.strip()]
+    return any(_THEOREM_START.match(line) for line in live)
+
+
+def header_directives(header: str, extra: str = "") -> str:
+    """The part of a problem's header that can be re-issued inside a REPL command.
+
+    Benchmark headers carry `import` lines, and those cannot go into a command: the REPL imports
+    all of Mathlib once at startup, and an import inside a command is a syntax error. Worse, the
+    lines they carry are often stale -- miniF2F's Lean 4 port still asks for
+    `Mathlib.Algebra.BigOperators.Basic`, which current Mathlib has renamed away.
+
+    What must be kept is everything else. `open BigOperators`, `open Real`,
+    `open scoped Topology` change how the statement elaborates, and dropping them turns a valid
+    theorem into a parse error that looks like a model failure.
+
+    `extra` appends directives a benchmark needs but does not declare. PutnamBench writes `n !`
+    and `u\u1d40`, whose notations live in scoped namespaces it never opens, so its statements fail
+    with `unexpected token '!'` and `unexpected token '\u1d40'` until `open scoped Nat Matrix` is
+    supplied.
+    """
+    kept = [
+        line
+        for line in header.splitlines()
+        if line.strip() and not line.lstrip().startswith("import ")
+    ]
+    if extra:
+        kept.append(extra)
+    return "\n".join(kept)
+
+
+def open_for_tactics(statement: str) -> str:
+    """End a statement at `:= by`, so a prover continues with a tactic block.
+
+    The three benchmarks terminate their statements three different ways, and none of them is
+    what the sampler needs:
+
+        miniF2F (cat-searcher/minif2f-lean4)   `... := sorry`
+        ProofNet (HaimingW/proofnet-lean4)     `... :=`        (bare)
+        PutnamBench (HaimingW/...-lean4)       `... :=\nsorry`
+
+    Left alone, the first and third hand the model a finished declaration and the second an
+    incomplete one. Both produce garbage rather than an error.
+    """
+    text = statement.rstrip()
+    if text.endswith("sorry"):
+        text = text[: -len("sorry")].rstrip()
+    if text.endswith(":="):
+        return text + " by"
+    if re.search(r":=\s*by\s*$", text):
+        return text
+    return text + " := by" if not text.endswith("by") else text
+
+
 def _normalise(record: dict[str, Any], source: str, index: int) -> Problem | None:
     """Map one dataset row onto a `Problem`, or `None` if it carries no statement.
 
-    Field names differ between miniF2F releases, ProofNet and hand-written files, so several
-    spellings are accepted. A row without a statement is skipped rather than turned into an empty
-    problem that would later look like a model failure.
+    Field names differ between miniF2F releases, ProofNet, PutnamBench and hand-written files, so
+    several spellings are accepted. A row without a statement is skipped rather than turned into
+    an empty problem that would later look like a model failure.
     """
     statement = ""
-    for key in ("formal_statement", "statement", "formal", "theorem", "goal"):
+    for key in ("formal_statement", "lean4_statement", "statement", "formal", "theorem", "goal"):
         value = record.get(key)
         if isinstance(value, str) and value.strip():
             statement = value.strip()
@@ -169,9 +252,17 @@ def split_problems(
 
 
 def build_prompt(problem: Problem, model_id: str) -> str:
-    """The prompt for this model family, with the statement substituted in."""
+    """The prompt for this model family, with the statement substituted in.
+
+    The header shown to the model is `import Mathlib` plus the problem's own directives, not the
+    benchmark's raw import block: those lists are stale (miniF2F still asks for
+    `Mathlib.Algebra.BigOperators.Basic`, renamed away) and a prover shown an import that no
+    longer resolves tends to reproduce it.
+    """
     key = next((k for k in PROMPT_TEMPLATES if k != "default" and k in model_id.lower()), "default")
-    return PROMPT_TEMPLATES[key].format(header=problem.header, statement=problem.statement)
+    directives = problem.meta.get("directives") or header_directives(problem.header)
+    header = "import Mathlib" + (f"\n{directives}" if directives else "")
+    return PROMPT_TEMPLATES[key].format(header=header, statement=problem.statement)
 
 
 def extract_lean_block(completion: str, problem: Problem) -> str:
