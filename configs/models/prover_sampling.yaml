@@ -23,11 +23,12 @@ model:
   problems: data/raw/minif2f_test.jsonl
   problem_split: null
   max_problems: null   # 226 problems in miniF2F-test after the placeholder rows are dropped
-  # `hf`, not `auto`. vLLM 0.8.5 is the only build pinned to torch 2.6.0 -- which the driver
-  # forces -- and it predates transformers 5, failing with
-  # `LlamaTokenizer has no attribute all_special_tokens_extended`. There is no vLLM that takes
-  # both torch 2.6 and transformers 5, so sampling goes through `generate` with a batch instead.
-  backend: hf
+  # The transformers 5 / vLLM 0.8.5 conflict that forced `hf` here is gone: transformers is now
+  # pinned below 5 for a separate and more serious reason (its tokenizer silently deleted every
+  # space, newline and non-ASCII character from the completions -- see cluster-constraints.txt),
+  # and 4.51.3 is exactly what vLLM 0.8.5.post1 wants. `auto` therefore takes vLLM where it
+  # imports and falls back to `generate` elsewhere, which is what a laptop gets.
+  backend: auto
   batch_size: 4        # 4 prompts x 8 samples x ~1500 tokens of KV fits an A100-80GB
   dtype: bfloat16
   device: auto
