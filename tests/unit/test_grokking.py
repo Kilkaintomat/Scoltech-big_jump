@@ -299,3 +299,76 @@ class TestAnalysis:
         from onebigjump.experiments.p4_grokking import analyse_p4
 
         json.loads(json.dumps(analyse_p4(self._series())))
+
+
+class TestShuffledLabelNull:
+    """The control that decides whether P4's surviving claim means anything.
+
+    P4 now claims only that the tail index declines monotonically through training, and reads that
+    as the network acquiring algorithmic structure. The competing explanation is that it declines
+    in *any* long optimisation run -- weights grow, the loss falls, activations settle -- and has
+    nothing to do with a circuit being found. Training on a random permutation of the labels
+    separates the two: memorisation is still possible, generalisation is not.
+
+    For that comparison to be honest the null must differ from the real task in exactly one way.
+    """
+
+    @pytest.fixture(scope="class")
+    def pair(self):
+        from onebigjump.models.grokking import make_data
+
+        return (
+            make_data(p=P, train_frac=0.3, seed=0),
+            make_data(p=P, train_frac=0.3, seed=0, shuffle_labels=True),
+        )
+
+    def test_inputs_and_split_are_untouched(self, pair) -> None:
+        import torch
+
+        real, null = pair
+        assert torch.equal(real.inputs, null.inputs)
+        assert torch.equal(real.train_idx, null.train_idx)
+        assert torch.equal(real.test_idx, null.test_idx)
+
+    def test_the_label_histogram_is_preserved(self, pair) -> None:
+        """A permutation, not fresh draws, so the entropy being fitted is the task's own."""
+        import torch
+
+        real, null = pair
+        assert torch.equal(real.targets.bincount(minlength=P), null.targets.bincount(minlength=P))
+
+    def test_the_arithmetic_relation_is_destroyed(self, pair) -> None:
+        real, null = pair
+        a, b = real.inputs[:, 0], real.inputs[:, 1]
+        assert (real.targets == (a + b) % P).float().mean().item() == 1.0
+        agreement = (null.targets == (a + b) % P).float().mean().item()
+        assert agreement < 4.0 / P, "shuffled labels still predict a + b; this is not a null"
+
+    def test_the_null_is_reproducible_from_the_seed(self) -> None:
+        import torch
+
+        from onebigjump.models.grokking import make_data
+
+        one = make_data(p=P, train_frac=0.3, seed=3, shuffle_labels=True)
+        two = make_data(p=P, train_frac=0.3, seed=3, shuffle_labels=True)
+        assert torch.equal(one.targets, two.targets)
+
+    def test_different_seeds_give_different_nulls(self) -> None:
+        import torch
+
+        from onebigjump.models.grokking import make_data
+
+        one = make_data(p=P, train_frac=0.3, seed=3, shuffle_labels=True)
+        two = make_data(p=P, train_frac=0.3, seed=4, shuffle_labels=True)
+        assert not torch.equal(one.targets, two.targets)
+
+    def test_the_config_carries_it_through_to_the_trainer(self) -> None:
+        """A flag the runner silently drops would produce a null identical to the real run."""
+        import inspect
+
+        from onebigjump.config import GrokkingConfig
+        from onebigjump.experiments import p4_grokking
+
+        assert GrokkingConfig().shuffle_labels is False
+        source = inspect.getsource(p4_grokking.train_grokking)
+        assert "shuffle_labels=cfg.shuffle_labels" in source

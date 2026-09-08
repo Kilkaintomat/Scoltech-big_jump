@@ -47,8 +47,19 @@ class ModularAdditionData:
         return int(self.inputs.shape[0])
 
 
-def make_data(p: int = 113, train_frac: float = 0.3, seed: int = 0) -> ModularAdditionData:
-    """All `p^2` pairs, shuffled once and split. The token `p` is the `=` marker."""
+def make_data(
+    p: int = 113, train_frac: float = 0.3, seed: int = 0, shuffle_labels: bool = False
+) -> ModularAdditionData:
+    """All `p^2` pairs, shuffled once and split. The token `p` is the `=` marker.
+
+    `shuffle_labels` replaces `(a + b) mod p` with a fixed random permutation of the same label
+    multiset. This is the null run for P4. With random labels there is no algorithm to find: the
+    model can memorise the training pairs but no circuit generalises, so test accuracy stays at
+    chance and the progress measures never turn. If the tail index still declines through training
+    under this condition, then its decline is a fact about optimisation -- weights growing, the
+    loss falling -- and not about the network acquiring algorithmic structure, which is the whole
+    claim P4 is supposed to support.
+    """
     import torch
 
     a = torch.arange(p).repeat_interleave(p)
@@ -56,6 +67,11 @@ def make_data(p: int = 113, train_frac: float = 0.3, seed: int = 0) -> ModularAd
     equals = torch.full_like(a, p)
     inputs = torch.stack([a, b, equals], dim=1)
     targets = (a + b) % p
+    if shuffle_labels:
+        # A permutation of the labels, not fresh uniform draws: the label histogram, and so the
+        # entropy the model is fitting against, stays exactly what the real task has.
+        noise = torch.Generator().manual_seed(seed + 10_000)
+        targets = targets[torch.randperm(p * p, generator=noise)]
 
     g = torch.Generator().manual_seed(seed)
     perm = torch.randperm(p * p, generator=g)

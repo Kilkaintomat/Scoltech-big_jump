@@ -272,8 +272,17 @@ def extract_lean_block(completion: str, problem: Problem) -> str:
     5.1 labels only the formal tactics. The returned text always begins at the theorem statement,
     so that `split_header_and_proof` sees a well-formed declaration.
     """
-    blocks = _LEAN_BLOCK.findall(completion)
-    text = max(blocks, key=len) if blocks else completion
+    # The prompt templates hand the model an already-open ``` fence and ask it to continue, so a
+    # completion normally contains only the *closing* one. Two things follow, and both bit:
+    # `_LEAN_BLOCK` happily reads that closer as an opener and captures whatever prose comes
+    # after it ("I hope this helps!"), and where nothing follows it the fence itself survives into
+    # the proof. In one sampled corpus 3500 of 3616 completions ended in ``` -- a parse error
+    # apiece, which reads as a useless model rather than as three stray characters.
+    #
+    # So a fenced block is only preferred when it actually contains a declaration; otherwise the
+    # text is whatever precedes the first fence.
+    blocks = [b for b in _LEAN_BLOCK.findall(completion) if _THEOREM_START.search(b)]
+    text = max(blocks, key=len) if blocks else completion.split("```", 1)[0]
 
     match = _THEOREM_START.search(text)
     if match:

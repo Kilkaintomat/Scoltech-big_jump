@@ -336,3 +336,47 @@ class TestTokenizerRoundTrip:
         with pytest.raises(RuntimeError) as exc:
             assert_tokenizer_roundtrips(self._Tokenizer(lambda s: ""), "m")
         assert "transformers" in str(exc.value) and "4.51.3" in str(exc.value)
+
+
+class TestFenceHandling:
+    """Where the model's closing ``` goes.
+
+    Every prompt template hands the model an already-open fence and asks it to continue, so a
+    completion normally carries only the closing one. Both consequences were live bugs: the block
+    regex read that closer as an opener and captured the prose after it, and where no prose
+    followed, the fence survived into the proof text. 3500 of 3616 completions in one sampled
+    corpus ended in ```, one parse error each.
+    """
+
+    @staticmethod
+    def _problem():
+        from onebigjump.lean.problems import Problem
+
+        return Problem(problem_id="x", statement="theorem foo : 1 = 1 := by")
+
+    @pytest.mark.parametrize(
+        ("completion", "wanted"),
+        [
+            ("theorem foo : 1 = 1 := by\n  norm_num\n```", "norm_num"),
+            ("  norm_num\n", "norm_num"),
+            ("blah\n```lean4\ntheorem foo : 1 = 1 := by\n  norm_num\n```\nprose", "norm_num"),
+            ("theorem foo : 1 = 1 := by\n  norm_num\n```\nI hope this helps!", "norm_num"),
+            ("Let me think.\n```lean4\ntheorem foo : 1 = 1 := by\n  simp\n```", "simp"),
+        ],
+        ids=["closing-fence", "bare", "fenced-block", "fence-then-prose", "reasoning-then-proof"],
+    )
+    def test_no_fence_survives_and_the_tactic_does(self, completion: str, wanted: str) -> None:
+        from onebigjump.lean.problems import extract_lean_block
+
+        out = extract_lean_block(completion, self._problem())
+        assert "```" not in out, "a fence reached the kernel; that is a parse error"
+        assert wanted in out, "the tactic was lost"
+
+    def test_prose_after_a_closing_fence_is_not_mistaken_for_the_proof(self) -> None:
+        """The regex used to read a closing fence as an opening one and return what followed."""
+        from onebigjump.lean.problems import extract_lean_block
+
+        out = extract_lean_block(
+            "theorem foo : 1 = 1 := by\n  norm_num\n```\nI hope this helps!", self._problem()
+        )
+        assert "helps" not in out

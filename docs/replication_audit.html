@@ -1,0 +1,637 @@
+<title>One Big Jump Replication Audit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+:root {
+  --paper:        #f5f6f8;
+  --surface:      #ffffff;
+  --surface-sunk: #eceef2;
+  --ink:          #14171f;
+  --ink-2:        #454b5a;
+  --ink-3:        #6d7486;
+  --rule:         #d8dbe3;
+  --rule-strong:  #b9bec9;
+  --accent:       #35439b;
+  --accent-soft:  #e6e8f5;
+  --ok:           #0d6b58;
+  --ok-soft:      #dcefea;
+  --bad:          #9d2b2b;
+  --bad-soft:     #f6e2e1;
+  --wait:         #8a5a10;
+  --wait-soft:    #f6ebd8;
+
+  --serif: "Source Serif 4", ui-serif, Georgia, serif;
+  --sans:  "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:        #101219;
+    --surface:      #171a23;
+    --surface-sunk: #1e222c;
+    --ink:          #e8eaf0;
+    --ink-2:        #b0b6c4;
+    --ink-3:        #838b9c;
+    --rule:         #2b303c;
+    --rule-strong:  #3d4351;
+    --accent:       #97a2ee;
+    --accent-soft:  #21263f;
+    --ok:           #5ec5aa;
+    --ok-soft:      #142a26;
+    --bad:          #e58b85;
+    --bad-soft:     #2d1b1b;
+    --wait:         #d9ab5f;
+    --wait-soft:    #2a2113;
+  }
+}
+:root[data-theme="dark"] {
+  --paper:        #101219;
+  --surface:      #171a23;
+  --surface-sunk: #1e222c;
+  --ink:          #e8eaf0;
+  --ink-2:        #b0b6c4;
+  --ink-3:        #838b9c;
+  --rule:         #2b303c;
+  --rule-strong:  #3d4351;
+  --accent:       #97a2ee;
+  --accent-soft:  #21263f;
+  --ok:           #5ec5aa;
+  --ok-soft:      #142a26;
+  --bad:          #e58b85;
+  --bad-soft:     #2d1b1b;
+  --wait:         #d9ab5f;
+  --wait-soft:    #2a2113;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  padding: 56px 0 28px;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.kicker {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(30px, 4.6vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+.standfirst {
+  font-size: 19px;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0;
+}
+.dateline {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+.dateline b { color: var(--ink-2); font-weight: 500; }
+
+/* ---------- layout ---------- */
+
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 56px;
+  align-items: start;
+}
+@media (min-width: 980px) {
+  .body-grid { grid-template-columns: 200px minmax(0, 1fr); }
+  nav.toc { position: sticky; top: 28px; }
+}
+
+nav.toc {
+  padding: 32px 0 0;
+  font-family: var(--sans);
+  font-size: 13px;
+}
+nav.toc h2 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 12px;
+}
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+nav.toc a {
+  color: var(--ink-2);
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 4px;
+  line-height: 1.35;
+}
+nav.toc a:hover { color: var(--accent); }
+nav.toc a span { color: var(--ink-3); font-family: var(--mono); font-size: 11.5px; }
+nav.toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+main { min-width: 0; padding-top: 8px; }
+
+section { padding: 40px 0 8px; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: none; }
+
+h2.sec {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  text-wrap: balance;
+}
+h2.sec em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+h3 {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .005em;
+  margin: 30px 0 8px;
+  color: var(--ink);
+}
+p { margin: 0 0 15px; max-width: 68ch; }
+main > section > p:first-of-type { margin-top: 10px; }
+ul, ol.body { max-width: 68ch; padding-left: 20px; margin: 0 0 16px; }
+li { margin-bottom: 7px; }
+a { color: var(--accent); }
+code {
+  font-family: var(--mono);
+  font-size: .855em;
+  background: var(--surface-sunk);
+  padding: 1px 5px;
+  border-radius: 3px;
+  word-break: break-word;
+}
+strong { font-weight: 600; }
+
+/* ---------- verdict chips ---------- */
+
+.chip {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 3px 8px 2px;
+  border-radius: 3px;
+  white-space: nowrap;
+  vertical-align: 3px;
+}
+.chip.ok   { background: var(--ok-soft);   color: var(--ok);   }
+.chip.bad  { background: var(--bad-soft);  color: var(--bad);  }
+.chip.wait { background: var(--wait-soft); color: var(--wait); }
+.chip.info { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- claim blocks: the spine of the document ---------- */
+
+.claim {
+  display: grid;
+  grid-template-columns: 4px 1fr;
+  gap: 0 16px;
+  margin: 22px 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.claim > .stripe { background: var(--rule-strong); }
+.claim.ok   > .stripe { background: var(--ok); }
+.claim.bad  > .stripe { background: var(--bad); }
+.claim.wait > .stripe { background: var(--wait); }
+.claim > .inner { padding: 16px 18px 4px 2px; min-width: 0; }
+.claim .claim-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin-bottom: 8px;
+}
+.claim .claim-head b {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.claim p { font-size: 15.5px; margin-bottom: 12px; }
+.claim p:last-child { margin-bottom: 14px; }
+
+/* ---------- data tables ---------- */
+
+.tablewrap {
+  overflow-x: auto;
+  margin: 20px 0 8px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--surface);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 12.8px;
+  font-variant-numeric: tabular-nums;
+}
+caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-2);
+  padding: 11px 14px 9px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface-sunk);
+}
+th, td { padding: 6px 14px; text-align: right; white-space: nowrap; }
+th {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-strong);
+}
+td:first-child, th:first-child { text-align: left; }
+tbody tr + tr td { border-top: 1px solid var(--rule); }
+tr.hilite td { background: var(--bad-soft); }
+tr.hilite td:first-child { font-weight: 600; }
+td.good { color: var(--ok); }
+td.bad  { color: var(--bad); }
+.note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  max-width: 68ch;
+  margin: 8px 0 0;
+}
+
+/* ---------- inventory ---------- */
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(238px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  margin: 22px 0 6px;
+  overflow: hidden;
+}
+.inventory div {
+  background: var(--surface);
+  padding: 13px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.inventory h4 {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--accent);
+  word-break: break-word;
+}
+.inventory p { font-family: var(--sans); font-size: 13px; line-height: 1.45; color: var(--ink-2); margin: 0; max-width: none; }
+
+/* ---------- code / transcript ---------- */
+
+pre {
+  font-family: var(--mono);
+  font-size: 12.6px;
+  line-height: 1.55;
+  background: var(--surface-sunk);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-strong);
+  border-radius: 4px;
+  padding: 13px 16px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+pre.bad { border-left-color: var(--bad); }
+pre b { color: var(--bad); font-weight: 600; }
+pre i { color: var(--ok); font-style: normal; font-weight: 600; }
+
+/* ---------- ask / questions ---------- */
+
+.asks { counter-reset: ask; list-style: none; padding: 0; margin: 20px 0 0; max-width: 72ch; display: flex; flex-direction: column; gap: 14px; }
+.asks li {
+  counter-increment: ask;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  margin: 0;
+}
+.asks li::before {
+  content: "Q" counter(ask);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  padding-top: 3px;
+}
+.asks p { margin: 0; font-size: 15.5px; }
+
+footer {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  max-width: 72ch;
+}
+</style>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="kicker">Replication audit · internal</div>
+  <h1>One Big Jump: what the pipeline has actually established</h1>
+  <p class="standfirst">A self-contained account of the experimental code written for the ICLR&nbsp;2027 submission, the results it has produced on a GPU cluster, and the two silent failures found by checking its output rather than its tests. Written to be reviewable without reading the code.</p>
+  <div class="dateline">
+    <span><b>Repo</b> Kilkaintomat/Scoltech-big_jump (private)</span>
+    <span><b>Head</b> 28b5f7c</span>
+    <span><b>Cluster</b> Skoltech Zhores</span>
+    <span><b>As of</b> 8 Sep 2026</span>
+  </div>
+</header>
+
+<div class="body-grid">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#claim"><span>01</span>The paper's claim</a></li>
+    <li><a href="#built"><span>02</span>What was built</a></li>
+    <li><a href="#solid"><span>03</span>What holds up</a></li>
+    <li><a href="#p4"><span>04</span>A withdrawn finding</a></li>
+    <li><a href="#tokenizer"><span>05</span>The silent tokenizer</a></li>
+    <li><a href="#provenance"><span>06</span>False provenance</a></li>
+    <li><a href="#now"><span>07</span>Running now</a></li>
+    <li><a href="#missing"><span>08</span>Not yet built</a></li>
+    <li><a href="#ask"><span>09</span>Where I want scrutiny</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section id="claim">
+<h2 class="sec">The paper's claim <em>§1</em></h2>
+<p>The submission argues that the distribution of step-to-step deviations in a transformer's residual stream, measured along a reasoning trajectory, is an <strong>order parameter</strong> for whether the model is running an algorithm or improvising. Formally: fit a tail index to the deviation magnitudes and report <code>ξ = 1/α</code>. The two hypotheses are</p>
+<ul>
+  <li><strong>H<sub>alg</sub></strong> — algorithmic computation gives <code>ξ = 0</code>: a light tail, no single step dominating the trajectory;</li>
+  <li><strong>H<sub>heur</sub></strong> — heuristic search gives <code>ξ &gt; 0</code>: a heavy tail, where one big jump carries the trajectory.</li>
+</ul>
+<p>The mechanism offered is a Kesten stochastic recurrence <code>E_t = a_t E_{t-1} + B_t</code>, in which a multiplicative shock with probability <code>p</code> produces a power-law tail with a closed-form index solving <code>(1−p)ρ^α + p·κ^α = 1</code>. The experimental section is meant to test five predictions (P1–P5) on real models: tail separation between verified and refuted proofs, localisation of the jump at the error step, overshoot behaviour, a signature at the grokking transition, and a length law.</p>
+<p class="note">Everything below concerns the experimental section only. I did not write the theory; I built the code that is supposed to test it, and this document reports what that code has and has not shown.</p>
+</section>
+
+<section id="built">
+<h2 class="sec">What was built <em>§2</em></h2>
+<p>Roughly 9,800 lines of Python across 40 modules, with 478 tests. The repository began this work essentially empty; every component below is new.</p>
+
+<div class="inventory">
+  <div><h4>stats/</h4><p>Hill, Dekkers–Einmahl–de Haan moment estimator, GPD maximum likelihood via Grimshaw's profile reparameterisation, Danielsson double-bootstrap selection of the tail fraction <code>k</code>, extremal index by three methods, trace-level bootstrap.</p></div>
+  <div><h4>simulation/</h4><p>The Kesten recurrence and the paper's Figure 1, regenerated from scratch rather than traced.</p></div>
+  <div><h4>lean/</h4><p>Drives a Lean 4 + Mathlib REPL to obtain <em>exact</em> per-step labels: which tactic in a proof first fails. Tactic segmentation, absorbing labels, sharding, resume.</p></div>
+  <div><h4>models/</h4><p>Forward hooks on decoder blocks, token alignment by character offset, three deviation statistics (raw, whitened, innovation) with Ledoit–Wolf shrinkage, sampling backends, the grokking transformer and its progress measures.</p></div>
+  <div><h4>experiments/</h4><p>P1–P5 as separate, individually testable analyses, plus a driver that turns a table of traces into metrics files.</p></div>
+  <div><h4>reporting/</h4><p>Figures and the paper's Tables 1, 2 and B.3, assembled from the metrics files so they cannot drift from the run that produced them.</p></div>
+</div>
+
+<h3>How claims are meant to be checkable</h3>
+<p>Every run writes a manifest recording the resolved config, the git commit, whether the working tree was dirty, package versions, hardware, and a digest of each output file. Tables and figures are generated from those metrics files rather than typed. This machinery is the reason two of the failures below were catchable at all — and, as §6 shows, it also contained the most embarrassing bug.</p>
+</section>
+
+<section id="solid">
+<h2 class="sec">What holds up <em>§3</em></h2>
+
+<div class="claim ok">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>Figure 1 reproduces the paper's numbers</b> <span class="chip ok">verified</span></div>
+    <p>The closed-form tail index at the three jump rates the paper prints comes out at α = 3.9734, 2.7992, 1.8193 against the paper's 3.97, 2.80, 1.82. More importantly the <em>estimators</em> recover the truth on simulated data where the truth is known — which is the only setting where that can be checked at all.</p>
+  </div>
+</div>
+
+<div class="tablewrap">
+<table>
+  <caption>Kesten simulation: three estimators against the closed form. 3,000 traces × 64 steps, ρ = 0.7, κ = 2.5, d = 8.</caption>
+  <thead><tr><th>p</th><th>ξ theory</th><th>ξ̂ reported</th><th>Hill</th><th>Moment</th><th>GPD</th><th>θ</th><th>top-1</th></tr></thead>
+  <tbody>
+    <tr><td>0.00</td><td>0.0000</td><td class="good">0.0000</td><td>0.0788</td><td>−0.1033</td><td>−0.1064</td><td>1.000</td><td>0.984</td></tr>
+    <tr><td>0.02</td><td>0.2517</td><td>0.1522</td><td>0.2610</td><td>0.1522</td><td>0.1390</td><td>0.268</td><td>0.903</td></tr>
+    <tr><td>0.05</td><td>0.3572</td><td>0.3109</td><td>0.3472</td><td>0.3109</td><td>0.2927</td><td>0.596</td><td>0.846</td></tr>
+    <tr><td>0.10</td><td>0.5497</td><td class="good">0.5375</td><td>0.5221</td><td>0.5375</td><td>0.5445</td><td>0.496</td><td>0.680</td></tr>
+    <tr><td>0.15</td><td>0.8483</td><td class="good">0.8415</td><td>0.8500</td><td>0.8415</td><td>0.8471</td><td>0.210</td><td>0.646</td></tr>
+    <tr><td>0.20</td><td>1.4825</td><td class="good">1.5309</td><td>1.5356</td><td>1.5309</td><td>1.5354</td><td>0.187</td><td>0.200</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">Two things a reviewer should notice. At p = 0 the estimator correctly returns ξ = 0 — the moment and GPD estimators go negative, i.e. bounded tail — while Hill returns 0.0788, because Hill cannot express a light tail and is biased upward by construction. This is why ξ̂ is taken from the moment estimator, not Hill. And at p = 0.02 the estimate (0.152) sits well below the truth (0.252): with a shock every fifty steps, 64-step traces contain too few shocks to identify the tail. That is a real limitation, not a bug, and it should be stated in the paper rather than smoothed over.</p>
+
+<div class="claim ok">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>The Lean verifier gives real labels</b> <span class="chip ok">verified</span></div>
+    <p>Lean 4 (toolchain v4.34.0-rc2) with Mathlib pinned at 85e3a25e, driven through a REPL. A 10-trace pilot returned 4 verified, 5 refuted, 1 discarded as a parse error — meaning the kernel, not a heuristic, decides which step of a proof is wrong. This is the piece that makes P1 and P2 possible; without exact labels there is no error step to localise.</p>
+  </div>
+</div>
+
+<div class="claim ok">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>The benchmarks are installed and known to elaborate</b> <span class="chip ok">verified</span></div>
+    <p>1,086 problems, about 1&nbsp;MB, committed to the repository so a run is reproducible from the repo alone: miniF2F test/validation (226/231), ProofNet test/valid (179/178), PutnamBench test (272).</p>
+  </div>
+</div>
+
+<h3>The benchmarks needed real repair, and I only found that by running them</h3>
+<p>Sending each downloaded statement to the kernel with a <code>sorry</code> body took the elaboration rate from 87% to 98%. The five faults were:</p>
+<ol class="body">
+  <li>The three benchmarks terminate statements three different ways (<code>:= sorry</code>, bare <code>:=</code>, <code>:=\nsorry</code>); each needs a different rewrite before a prover can continue with tactics.</li>
+  <li><code>∑ x in S</code> is deprecated and current Mathlib rejects it outright — 70 of 702 test-split statements, one in eight, would have read as model failures.</li>
+  <li><code>import</code> lines cannot be re-issued inside a REPL command, but the <code>open</code> lines beside them must be kept or statements silently change meaning.</li>
+  <li>38 rows in miniF2F's Lean 4 port are entirely commented out — placeholders that never ported.</li>
+  <li>PutnamBench writes <code>n !</code> and <code>uᵀ</code> without opening the scoped namespaces those notations live in.</li>
+</ol>
+<p>I measured the fourth item's fix honestly rather than assuming it mattered: carrying the <code>open</code> directives rescues 1 statement in 40 on PutnamBench and 0 in 30 on miniF2F. It is correct, and it is nearly worthless. Both facts are in the commit message.</p>
+</section>
+
+<section id="p4">
+<h2 class="sec">A finding I am withdrawing <em>§4</em></h2>
+
+<div class="claim bad">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>The transient spike in ξ̂ at the grokking transition</b> <span class="chip bad">withdrawn</span></div>
+    <p>On my laptop, P4 looked like the paper's best result. Training a small transformer on modular arithmetic to grokking, the tail index ξ̂ spiked sharply just before the test accuracy jumped, and the spike coincided with the turn in the excluded-loss progress measure — exactly the "the order parameter turns with the circuit, not with the accuracy" story. I committed it under that headline.</p>
+    <p>It does not survive on other hardware. The laptop runs on Apple MPS. On an A100 the spike is gone; on CPU float32 — the reference implementation, no fast maths, no reduced precision — it is also gone, and CPU agrees with CUDA. The spike was a numerical artefact of the MPS backend.</p>
+  </div>
+</div>
+
+<div class="tablewrap">
+<table>
+  <caption>The same seeds and the same config on three backends. "Lead" is the peak's distance from the grokking step; negative means earlier.</caption>
+  <thead><tr><th>Backend</th><th>Seed</th><th>Grok step</th><th>Peak ξ̂</th><th>Peak step</th><th>Lead</th><th>ρ(step, ξ̂)</th></tr></thead>
+  <tbody>
+    <tr class="hilite"><td>MPS</td><td>0</td><td>22800</td><td>0.1753</td><td>22700</td><td>−100</td><td>−0.428</td></tr>
+    <tr class="hilite"><td>MPS</td><td>1</td><td>23100</td><td>0.1801</td><td>22700</td><td>−400</td><td>−0.490</td></tr>
+    <tr><td>MPS</td><td>2</td><td>13000</td><td>0.0691</td><td>12100</td><td>−900</td><td>−0.714</td></tr>
+    <tr><td>CUDA</td><td>0</td><td>21100</td><td>0.0761</td><td>5800</td><td>−15300</td><td>−0.848</td></tr>
+    <tr><td>CUDA</td><td>1</td><td>20500</td><td>0.0673</td><td>100</td><td>−20400</td><td>−0.805</td></tr>
+    <tr><td>CUDA</td><td>2</td><td>14500</td><td>0.0733</td><td>4100</td><td>−10400</td><td>−0.829</td></tr>
+    <tr><td>CPU fp32</td><td>0</td><td>18000</td><td>0.0679</td><td>100</td><td>−17900</td><td>−0.771</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Read the peak column. Every non-MPS run peaks between 0.067 and 0.076. MPS seeds 0 and 1 peak at 0.175 and 0.180 — more than twice as high — and only those two land at the transition. MPS seed 2 behaves like the others, which is why running three seeds on one backend was not enough to catch this: two of three agreeing looked like replication.</p>
+
+<h3>What survives</h3>
+<p>The rightmost column. Spearman correlation between training step and ξ̂ is strongly negative on every backend, and <em>more</em> so on the two trustworthy ones: −0.85 and −0.81 and −0.83 on CUDA, −0.77 on CPU, against −0.43 and −0.49 on the MPS runs that carried the spike. The order parameter declines monotonically as the network moves from memorisation to a generalising circuit.</p>
+<p>That is a weaker claim than the one I committed, and it is weaker in a specific way worth being explicit about in the paper: the decline is <strong>not localised at the transition</strong>. Across the grokking step itself the median ξ̂ moves only from 0.043 to 0.038 on CUDA and 0.046 to 0.032 on CPU — small, and not separable from the global downward drift. So P4 supports "ξ tracks the degree of algorithmic structure" but does <em>not</em> support "ξ has a signature at the phase transition." The second is the more interesting claim and I do not currently have evidence for it.</p>
+<p class="note">The decisive control was a single CPU job (Slurm 8461874, 28 minutes). It was worth running precisely because it could only embarrass me: CPU float32 is the arithmetic every other backend is approximating, so agreement between CPU and CUDA leaves MPS with nowhere to hide.</p>
+</section>
+
+<section id="tokenizer">
+<h2 class="sec">A tokenizer that silently destroyed its own output <em>§5</em></h2>
+
+<div class="claim bad">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>94 minutes of A100 time produced 3,616 unusable samples</b> <span class="chip bad">discarded</span></div>
+    <p>The first full sampling run against DeepSeek-Prover-V2-7B completed successfully, wrote 3,616 completions, and reported no error. The completions were garbage. Under <code>transformers</code> 5.16.1 that model's byte-level BPE tokenizer loads without a byte decoder, so decoding returns the text with every space, every newline and every non-ASCII character deleted.</p>
+  </div>
+</div>
+
+<pre class="bad">probe   : theorem foo (x : ℝ) : 1 = 1 := by
+            norm_num
+
+transformers 5.16.1  ->  <b>theoremfoo(x:):1=1:=bynorm_num</b>
+transformers 4.51.3  ->  <i>theorem foo (x : ℝ) : 1 = 1 := by\n  norm_num</i></pre>
+
+<p>Note what is missing from the broken line: the spaces, the newline, the indentation — and the <code>ℝ</code>. Lean is written in Unicode, so this does not merely reformat proofs, it deletes their mathematical content.</p>
+
+<h3>Why nothing caught it</h3>
+<p>This is the part I think is worth a reviewer's attention, because the failure was invisible at every layer that could plausibly have checked it. The output was still a string. It still contained the word <code>theorem</code>. It was still 3,616 records of roughly the expected length. A crude "does this look like Lean" filter I ran against it passed 3,614 of 3,616. Only the Lean kernel would eventually have objected — and it would have objected to <em>all</em> of them, which reads as a bad model or a bad prompt template, not a broken decoder. I would probably have spent a day tuning prompts.</p>
+<p>The fix is two parts. The version is pinned (<code>transformers&gt;=4.40,&lt;5</code>) with the reason written next to the pin rather than in a commit message someone would have to find. And a guard now asserts, once per backend before the weights load, that the tokenizer round-trips a probe carrying indentation, a newline and a <code>ℝ</code> — because a pin only protects environments we control, and the failure mode is silent everywhere else.</p>
+<p>A side effect worth having: 4.51.3 is exactly the version vLLM 0.8.5.post1 wants. The conflict that had forced the slow generation path is gone, so sampling can now use vLLM.</p>
+</section>
+
+<section id="provenance">
+<h2 class="sec">Manifests that claimed a clean checkout they never had <em>§6</em></h2>
+
+<div class="claim bad">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>Every cluster result was stamped reproducible without evidence</b> <span class="chip bad">fixed</span></div>
+    <p>The manifest records <code>dirty: false</code> to mean "this figure came from a clean checkout." On the cluster it recorded <code>dirty: false</code> for every run — and the cluster tree was a copied directory with no <code>.git</code> at all. <code>git status</code> returned nothing, and <code>bool(None)</code> is <code>False</code>.</p>
+  </div>
+</div>
+
+<p>So a run whose source version was entirely unknown was recorded as the strongest possible claim about its own provenance. This is the one direction the field must never fail in, and it failed silently in exactly that direction, in the machinery whose entire purpose is to make failures loud. An integration test caught it — <code>assert man["environment"]["git"]["commit"]</code> — and I had let that test sit red while reading it as a cluster environment quirk rather than a result about the results.</p>
+<p>Three changes. <code>dirty</code> is now <code>None</code>, never <code>False</code>, when git cannot be asked, and <code>reproducible</code> requires an actual <code>False</code> rather than a falsy value. The cluster tree is now a real clone — pushed over SSH to a bare repository on the cluster, since the GitHub repo is private and the cluster has no credentials. And because the Singularity container has no <code>git</code> binary, so a run inside it cannot read its own commit however clean the checkout outside is, the launcher reads the commit on the host and passes it in — labelled <code>source: environment</code>, because an exported variable is weaker evidence than asking git and the manifest should not pass one off as the other.</p>
+<p class="note">Consequence for the paper: the P4 CUDA and CPU results in §4 were produced before this fix and carry a null commit. Their config and environment are recorded and the code path is unchanged, but if a reviewer demands commit-level provenance for those specific numbers, they need re-running. They are cheap — 26 minutes each.</p>
+</section>
+
+<section id="now">
+<h2 class="sec">Running now <em>§7</em></h2>
+
+<div class="claim wait">
+  <div class="stripe"></div>
+  <div class="inner">
+    <div class="claim-head"><b>Re-sampling on the corrected stack</b> <span class="chip wait">in flight</span></div>
+    <p>Slurm 8461989 on an A100-80GB. 226 miniF2F-test problems × 8 samples × 2 temperatures (0.6 and 1.0) = 3,616 traces, this time with a tokenizer that round-trips and a manifest that carries a commit. This is the input every real-model result depends on: nothing in P1, P2, P3 or P5 can be computed until proofs exist to verify and extract activations from.</p>
+  </div>
+</div>
+
+<h3>The remaining stages, in order</h3>
+<ol class="body">
+  <li><strong>Verify</strong> the sampled proofs through the Lean kernel to get per-step labels. Blocked on the Mathlib cache finishing its build on the cluster.</li>
+  <li><strong>Extract</strong> residual-stream trajectories for the verified and refuted traces, aligned to the tactic boundaries the verifier labelled.</li>
+  <li><strong>Analyse</strong> — at which point P1, P2, P3 and P5 produce numbers on real data for the first time. Everything reported in §3 above is simulation or pilot.</li>
+</ol>
+<p class="note">This is the honest headline of the whole document: the statistical machinery is validated, the labelling pipeline works, the infrastructure runs — and the paper's central experimental claims have not yet been tested on a real model. P4 is the only prediction touched by real training so far, and §4 is what it gave.</p>
+</section>
+
+<section id="missing">
+<h2 class="sec">Specified but not yet built <em>§8</em></h2>
+<p>Reading the experimental specification against what exists, these are the gaps. None is blocked by anything except time.</p>
+<div class="inventory">
+  <div><h4>Hill plots, real data</h4><p>Across all layers and all three deviation statistics. The identifiability criterion is read off these; without them the choice of <code>k</code> is unauditable.</p></div>
+  <div><h4>Ablations</h4><p>Over layer, statistic, sampling temperature and tail fraction <code>k</code>. Currently a single configuration is reported with no evidence it was not chosen after the fact.</p></div>
+  <div><h4>Split-half reliability</h4><p>Does ξ̂ computed on half the traces agree with the other half? Cheap, and it bounds how much of any effect is noise.</p></div>
+  <div><h4>Label-noise degradation</h4><p>How fast the P2 localisation result decays as step labels are corrupted — the check that it is not an artefact of perfect labels.</p></div>
+  <div><h4>Spectral measure</h4><p>The direction structure of the largest jumps, §B.9. Speaks to whether the big jump is a coherent direction or a magnitude spike.</p></div>
+  <div><h4>Llama-3.1-8B (§5.2)</h4><p>Gated on Hugging Face. Needs licence acceptance and a token before it can be run at all.</p></div>
+</div>
+<p style="margin-top:20px">Newly added this session and not yet exercised on real data: ROC curves stored as curves rather than as a single AUC, survival-curve figures for the three P3 overshoot variants, the P5 length-law figure with binomial error bars and a residual panel, and Table B.3 assembled directly from the generation manifest and verification summary so it cannot drift from the run it describes.</p>
+</section>
+
+<section id="ask">
+<h2 class="sec">Where I want scrutiny <em>§9</em></h2>
+<p>A reviewer with no code access can still press hardest on these.</p>
+<ol class="asks">
+  <li><p><strong>Is the P4 withdrawal complete enough?</strong> I am keeping "ξ̂ declines monotonically through training" and dropping "ξ̂ spikes at the transition." But the surviving claim rests on a Spearman correlation over a training run, where step and almost any smoothly-varying quantity will correlate. Is that a real result or a restatement of "the model gets more structured"? I think it needs a null — the same correlation measured on a run that never groks.</p></li>
+  <li><p><strong>Two of three MPS seeds agreed on a false result.</strong> My seed-replication protocol could not distinguish a finding from a backend artefact. Should every headline number be produced on two backends as a matter of course, or is that overcorrecting from one bad experience?</p></li>
+  <li><p><strong>The tokenizer bug was found by reading the output, not by any test.</strong> The guard I added catches this specific failure. What is the general version — what other pipeline stages currently produce output that would look plausible if it were completely wrong?</p></li>
+  <li><p><strong>P1's identification at low jump rates.</strong> The simulation table shows the estimator undershoots badly at p = 0.02 because 64-step traces contain too few shocks. Real proof traces are short — the pilot averaged 1.7 steps. If trace length is the binding constraint, the real-data P1 result may be unidentifiable for the same reason, and I would rather know that before running it than after.</p></li>
+  <li><p><strong>Am I reporting the negative results prominently enough?</strong> The withdrawn P4 spike, the near-worthless directives fix, the p = 0.02 undershoot and the discarded sampling run are all in commit messages and in this document. They are not yet in the paper draft.</p></li>
+</ol>
+</section>
+
+<footer>
+Prepared for review of the experimental section only. All numbers here are reproducible from the repository at 28b5f7c; the simulation table comes from <code>results/simulations/kesten/figure1_metrics.json</code> and the backend comparison from the seven <code>p4_grokking_seed*.csv</code> files under <code>results/full/</code>.
+</footer>
+
+</main>
+</div>
+</div>

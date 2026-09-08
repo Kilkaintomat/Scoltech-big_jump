@@ -120,6 +120,9 @@ class GrokkingConfig(Strict):
     weight_decay: float = 1.0
     betas: tuple[float, float] = (0.9, 0.98)
     train_frac: float = Field(0.3, gt=0, lt=1)
+    #: Train against a random permutation of the labels. The null for P4: nothing generalises, so
+    #: any decline in the tail index cannot be attributed to the network finding an algorithm.
+    shuffle_labels: bool = False
     steps: int = Field(40000, ge=100)
     checkpoint_every: int = Field(100, ge=1)
     seeds: list[int] = [0, 1, 2]

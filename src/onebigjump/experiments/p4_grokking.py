@@ -104,7 +104,9 @@ def train_grokking(
 
     seed_everything(seed)
     device = _device(cfg.device)
-    data = make_data(p=cfg.p, train_frac=cfg.train_frac, seed=seed)
+    data = make_data(
+        p=cfg.p, train_frac=cfg.train_frac, seed=seed, shuffle_labels=cfg.shuffle_labels
+    )
     model = build_model(
         p=cfg.p, d_model=cfg.d_model, n_heads=cfg.n_heads, d_mlp=cfg.d_mlp, seed=seed
     ).to(device)
