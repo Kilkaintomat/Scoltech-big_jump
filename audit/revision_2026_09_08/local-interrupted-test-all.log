@@ -1,0 +1,8 @@
+./scripts/run_tests.sh
+== ruff ==
+All checks passed!
+77 files already formatted
+== mypy ==
+Success: no issues found in 47 source files
+== pytest ==
+.....................................make: *** [test-all] Terminated: 15

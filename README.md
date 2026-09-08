@@ -5,6 +5,11 @@ Trajectories as an Order Parameter for Algorithmic Computation* (ICLR 2027 submi
 
 **Private repository. No license is declared until the paper is public.**
 
+> **Current audit:** [September revision](audit/revision_2026_09_08/REPORT.md).
+> The experiment implementation is incomplete. Existing P4 archives do not establish the
+> proposed order-parameter transition, and Lean P1–P3 have no model activation results yet.
+> Historical artifact digests must be checked before using any published numbers.
+
 ## What the paper claims, and what this measures
 
 A reasoning trace is a trajectory of residual-stream states `X_t`. The paper's claim is that the
@@ -19,16 +24,17 @@ together heuristics. This repository estimates it and tests the five predictions
 
 | | Prediction | State |
 |---|---|---|
-| P1 | Tail separation — refuted traces have a heavier tail than verified ones | implemented, validated against the closed form |
-| P2 | Localization — the first rejected step is the largest jump | implemented, reproduces the paper's numbers |
+| P1 | Tail separation — refuted traces have a heavier tail than verified ones | implemented; surrogate checks, model experiment pending |
+| P2 | Localization — the first rejected step is the largest jump | implemented, surrogate checks; model experiment pending |
 | P3 | Overshoot — `Z_{t*}/tau` is Pareto-like, not concentrated at 1 | implemented; **see the finding below** |
-| P4 | Order parameter — `xi` drops when a circuit forms during grokking | **run for real, on three seeds** |
+| P4 | Order parameter — `xi` drops when a circuit forms during grokking | training archives exist; proposed signal unconfirmed |
 | P5 | Length law — `P(V_L=1) ≈ exp(-theta L Fbar(tau))` | implemented; **see the finding below** |
 
 ## Three things the measurements say that the paper does not
 
-These are the substantive output of the work so far, and they are recorded with the runs that
-produced them in [`STATUS.md`](STATUS.md) and [`reports/experimental_report.md`](reports/experimental_report.md).
+These are historical observations, predating the current revision. Their archived reports and
+numerical artifacts require the provenance checks described in the
+[revision report](audit/revision_2026_09_08/REPORT.md); they do not replace the missing model experiments.
 
 1. **P3 as written measures the wrong thing when steps cluster.** On the Kesten surrogate at
    `p = 0.05`, where `gamma = 0.357` exactly, the 99.9% threshold gives shape **+0.454** for the
@@ -55,11 +61,11 @@ produced them in [`STATUS.md`](STATUS.md) and [`reports/experimental_report.md`]
 the Lyapunov exponent vanishes; 184 refuted traces at `p = 0` against the caption's 185; top-1
 localisation 0.846 at `p = 0.05` against a predicted 0.85.
 
-**P4, on three seeds.** `gamma_hat` rises to a transient peak, then falls on the *same checkpoint*
-as the turn in Nanda et al.'s excluded loss, 800–900 steps **before** the generalization jump. That
-is more specific than P4 as stated: the order parameter tracks circuit formation, not the accuracy
-that follows it. The timing replicates on a seed whose transition is ten thousand steps earlier;
-the amplitude does not (peaks of 0.175, 0.180, 0.069).
+**P4.** Modular-addition training and a shuffled-label control have been run. The earlier
+interpretation of a Hill transient as a transition in `xi` is withdrawn. The current audit also
+corrects the Fourier projection and the evaluation split for excluded loss. Archived progress
+losses require a new run; the signed tail estimates can be reanalysed from saved checkpoints.
+See the [generated audit measurements](audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md).
 
 ## Layout
 

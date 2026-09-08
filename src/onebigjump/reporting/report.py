@@ -63,7 +63,12 @@ def _provenance(manifest: dict[str, Any] | None) -> str:
     git = manifest.get("environment", {}).get("git", {})
     commit = (git.get("commit") or "unknown")[:8]
     dirty = git.get("dirty")
-    state = "**dirty working tree -- not reproducible from any commit**" if dirty else "clean"
+    if dirty is True:
+        state = "**dirty working tree -- not reproducible from any commit**"
+    elif git.get("commit") and dirty is False:
+        state = "clean"
+    else:
+        state = "**unknown provenance -- reproducibility unverified**"
     return (
         f"Run `{manifest.get('name')}` at commit `{commit}` ({state}), "
         f"{manifest.get('duration_s', 0):.0f}s, status `{manifest.get('status')}`."
@@ -148,81 +153,62 @@ def _lean(results: Path) -> Section:
 
 
 def _p4(results: Path) -> Section:
-    files = sorted(results.glob("full/grokking/p4_grokking_seed*.json"))
+    files = sorted(results.glob("full/grokking*/p4_grokking*.json"))
     if not files:
         return _missing(
             "P4 -- the order parameter across the grokking transition",
-            "no `results/full/grokking/p4_grokking_seed*.json`; run `make p4`.",
+            "no P4 checkpoint metrics; run `make p4`.",
         )
     sec = Section("P4 -- the order parameter across the grokking transition")
     sec.line(
-        "| seed | grokking step | final test acc | `gamma` peak | `gamma` after | peak-to-trough |"
-    ).line("|---|---|---|---|---|---|")
-    analyses: list[dict[str, Any]] = []
+        "Signed gamma is the moment estimate; xi = max(gamma, 0). Hill is a diagnostic."
+    ).line()
+    sec.line(
+        "Archived gamma_* summaries may use Hill and are not used below. "
+        "The presence of training metrics does not establish P4 or certify their provenance."
+    ).line()
     for path in files:
         payload = _load(path)
-        if payload is None:
+        if payload is None or not payload.get("checkpoints"):
             continue
         cps = payload["checkpoints"]
-        a = payload.get("analysis", {})
-        analyses.append(a)
-        grok = a.get("grokking_step", payload.get("grokking_step"))
+        sec.line(f"### `{path.parent.name}/{path.name}`").line()
+        sec.line(
+            "| seed | grokking step | final test acc | moment first | moment last | Hill last |"
+        ).line("|---|---|---|---|---|---|")
+        grok = payload.get("grokking_step")
         sec.line(
             f"| {payload['seed']} | {grok if grok is not None else '**never**'} "
             f"| {cps[-1]['test_acc']:.3f} "
-            f"| {a.get('gamma_max', float('nan')):.4f} at step {a.get('gamma_argmax_step', '?')} "
-            f"| {a.get('gamma_after_transition', float('nan')):.4f} "
-            f"| {a.get('gamma_peak_to_trough', float('nan')):.4f} |"
-        )
-    sec.line()
-
-    if analyses and analyses[0]:
-        a = analyses[0]
-        seed0 = _load(files[0]) or {}
-        sec.line(
-            f"**Where the drop sits** (seed {seed0.get('seed', 0)}). P4 names two references and "
-            "they are not the same step:"
-        )
-        sec.line()
-        events: list[tuple[str, int]] = [
-            (label, int(at))
-            for label, at in (
-                ("sharpest fall in `gamma_hat`", a.get("sharpest_drop_step")),
-                ("excluded loss half-transition", a.get("excluded_turn_step")),
-                ("test accuracy half-transition", a.get("test_acc_turn_step")),
-                ("test accuracy crosses 0.9", a.get("grokking_step")),
-                ("restricted loss half-transition", a.get("restricted_turn_step")),
-            )
-            if at is not None
-        ]
-        sec.line("| event | step |").line("|---|---|")
-        for label, at in sorted(events, key=lambda e: e[1]):
-            sec.line(f"| {label} | {at} |")
-        sec.line()
-        lead = a.get("drop_leads_generalization_by")
-        if a.get("drop_coincides_with_progress_measures"):
-            which = (
-                "the excluded loss"
-                if a.get("drop_coincides_with_excluded_loss")
-                else "the restricted loss"
-            )
+            f"| {cps[0].get('moment', float('nan')):+.4f} "
+            f"| {cps[-1].get('moment', float('nan')):+.4f} | {cps[-1]['hill']:.4f} |"
+        ).line()
+        if all(c.get("moment") is not None for c in cps):
+            xi = [max(float(c["moment"]), 0.0) for c in cps]
             sec.line(
-                f"The fall in `gamma_hat` lands on the **same checkpoint** as the turn in {which}"
-                + (f", and leads the generalization jump by {lead} steps." if lead else ".")
-            )
-            sec.line()
-            sec.line(
-                "That ordering is the substantive part: the order parameter tracks circuit "
-                "formation, which is what the progress measures detect, rather than the "
-                "downstream accuracy that follows it."
-            )
+                f"Maximum estimated xi: {max(xi):.4f}. "
+                f"Positive at {sum(x > 0 for x in xi)}/{len(xi)} checkpoints."
+            ).line()
         else:
             sec.line(
-                "The fall in `gamma_hat` does **not** coincide with either progress measure. "
-                "P4 is not supported by this run."
-            )
-        sec.line()
-    sec.line(_provenance(_load_manifest(results / "full" / "grokking")))
+                "Signed moment estimates are missing; xi cannot be recovered from Hill."
+            ).line()
+        protocol = payload.get("meta", {}).get("progress_measure_protocol")
+        sec.line(
+            f"Progress-measure protocol: {protocol}."
+            if protocol
+            else "Legacy progress losses: require recomputation after the Fourier-mask correction."
+        ).line()
+        manifests = [_load(p) for p in find_manifests(path.parent)]
+        matched = next(
+            (
+                m
+                for m in manifests
+                if m and any(Path(o["path"]).name == path.name for o in m.get("outputs", []))
+            ),
+            None,
+        )
+        sec.line(_provenance(matched)).line()
     return sec
 
 
@@ -230,8 +216,8 @@ def _feasibility(root: Path, results: Path) -> Section:
     """What this machine can run, derived from what is on disk rather than asserted."""
     sec = Section("What could not be run here, and why")
     sec.line(
-        "The machine is an Apple M4 with 16 GB of unified memory: no CUDA, no Slurm. "
-        "See `docs/system_report.md`, which is generated from the machine rather than written."
+        "Run availability below is inferred from saved artifacts. Hardware must be read from "
+        "each run manifest; a local machine report does not describe the cluster."
     ).line()
 
     def ran(pattern: str) -> str:
@@ -239,17 +225,21 @@ def _feasibility(root: Path, results: Path) -> Section:
 
     rows = [
         ("Kesten simulation, Figure 1", ran("simulations/kesten/figure1_metrics.json")),
-        ("Estimators, bootstrap, tests", "run" if (root / "tests").is_dir() else "**not run**"),
+        (
+            "Estimators, bootstrap, tests",
+            "test suite present; execution requires test logs"
+            if (root / "tests").is_dir()
+            else "**not run**",
+        ),
         ("Lean 4 + Mathlib step replay", ran("pilot/*/summary.json")),
-        ("Modular-addition grokking (P4)", ran("full/grokking/p4_grokking_seed*.json")),
+        ("Modular-addition grokking (P4)", ran("full/grokking*/p4_grokking*.json")),
         (
             "Prover traces from DeepSeek-Prover-V2-7B, Goedel-8B, Kimina-8B",
-            "**not run**: an 8B model in bfloat16 is ~16 GB of weights alone, before "
-            "activations and the KV cache",
+            ran("full/activations/deviations.parquet"),
         ),
         (
             "Synthetic deduction on 7-8B general models",
-            "**not run**: same constraint; `vllm` is Linux + CUDA only",
+            "**not run**: the synthetic deduction pipeline is not implemented",
         ),
     ]
     sec.line("| Stage | Status |").line("|---|---|")

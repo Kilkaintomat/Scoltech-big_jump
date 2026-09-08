@@ -1,0 +1,44 @@
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: a3988f76ca27ff5ecc476a192b9d61797e861b65 on main (git 2.43.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+........................................................................ [ 13%]
+........................................................................ [ 26%]
+........................................................................ [ 40%]
+........................................................................ [ 53%]
+........................................................................ [ 67%]
+...................................................................FF... [ 80%]
+........................................................................ [ 94%]
+...............................                                          [100%]
+=================================== FAILURES ===================================
+_____ TestEnvironmentCapture.test_git_info_on_a_non_repository_is_all_none _____
+
+self = <tests.unit.test_reproducibility.TestEnvironmentCapture object at 0x1555292a8f50>
+tmp_path = PosixPath('/tmp/pytest-of-denis.rakhmankin/pytest-0/test_git_info_on_a_non_reposit0')
+
+    def test_git_info_on_a_non_repository_is_all_none(self, tmp_path: Path) -> None:
+        info = git_info(tmp_path / "nowhere")
+>       assert info["commit"] is None
+E       AssertionError: assert 'a3988f76ca27ff5ecc476a192b9d61797e861b65' is None
+
+tests/unit/test_reproducibility.py:60: AssertionError
+_ TestEnvironmentCapture.test_no_repository_is_unknown_provenance_not_a_clean_tree _
+
+self = <tests.unit.test_reproducibility.TestEnvironmentCapture object at 0x1555292a9290>
+tmp_path = PosixPath('/tmp/pytest-of-denis.rakhmankin/pytest-0/test_no_repository_is_unknown_0')
+
+    def test_no_repository_is_unknown_provenance_not_a_clean_tree(self, tmp_path: Path) -> None:
+        """The failure this guards against actually happened.
+    
+        The cluster tree is an rsynced copy with no `.git`, and `git status` there returns None,
+        which `bool()` turned into False -- so every manifest written on the cluster claimed
+        `dirty: false`, a clean checkout, when in truth nothing was known about the source at all.
+        """
+        info = git_info(tmp_path / "nowhere")
+>       assert info["dirty"] is None
+E       assert True is None
+
+tests/unit/test_reproducibility.py:70: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_reproducibility.py::TestEnvironmentCapture::test_git_info_on_a_non_repository_is_all_none
+FAILED tests/unit/test_reproducibility.py::TestEnvironmentCapture::test_no_repository_is_unknown_provenance_not_a_clean_tree
+2 failed, 533 passed, 18 deselected in 425.85s (0:07:05)

@@ -1,0 +1,129 @@
+{
+  "name": "revision-diagnostics",
+  "kind": "audit",
+  "out_dir": "audit/revision_2026_09_08/server-diagnostics",
+  "seed": 20270101,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-08T14:56:20Z",
+  "finished_at": "2026-09-08T14:56:27Z",
+  "duration_s": 6.901,
+  "reproducible": false,
+  "config": {
+    "archive": "audit/revision_2026_09_08/baseline",
+    "script_digest": "sha256:4f7cbc1c6c5cc86088070808364b5d6cadbc06e0416ce053874b32718b1a5962"
+  },
+  "metrics": {},
+  "notes": [
+    "Exploratory code audit, not a preregistered paper experiment. Archived files remain untouched."
+  ],
+  "outputs": [
+    {
+      "path": "audit/revision_2026_09_08/server-diagnostics/diagnostics.json",
+      "role": "audit-metrics",
+      "bytes": 33114,
+      "digest": "sha256:1f967324aa6946501194c753dcaa6df0025b0115289c234c6f5ae222cffa8000"
+    },
+    {
+      "path": "audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md",
+      "role": "audit-report",
+      "bytes": 2320,
+      "digest": "sha256:a1c1869999d7e47f5b05f7b6a17f6d1a8f6f57de0ccbaae0f6e7089162080026"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": "a3988f76ca27ff5ecc476a192b9d61797e861b65",
+      "branch": "main",
+      "describe": "a3988f7-dirty",
+      "dirty": true,
+      "status": " M README.md\n M STATUS.md\n M docs/data_schema.md\n M docs/running_on_a_gpu_server.md\n M scripts/slurm/common.sh\n M scripts/slurm/lean_verify.sbatch\n M src/onebigjump/cli.py\n M src/onebigjump/config.py\n M src/onebigjump/experiments/dataset.py\n M src/onebigjump/experiments/p1_tail_separation.py\n M src/onebigjump/experiments/p2_localization.py\n M src/onebigjump/experiments/p3_overshoot.py\n M src/onebigjump/experiments/p4_grokking.py\n M src/onebigjump/experiments/pipeline.py\n M src/onebigjump/lean/batch.py\n M src/onebigjump/lean/schemas.py\n M src/onebigjump/manifests.py\n M src/onebigjump/models/activations.py\n M src/onebigjump/models/extraction.py\n M src/onebigjump/models/generation.py\n M src/onebigjump/models/grokking.py\n M src/onebigjump/models/token_alignment.py\n M src/onebigjump/reporting/report.py\n M src/onebigjump/reproducibility.py\n M src/onebigjump/stats/diagnostics.py\n M src/onebigjump/stats/gpd.py\n M src/onebigjump/stats/thresholds.py\n M tests/integration/test_analysis.py\n M tests/integration/test_figure_one.py\n M tests/integration/test_pipeline.py\n M tests/unit/test_estimate_tail.py\n M tests/unit/test_experiments.py\n M tests/unit/test_gpd.py\n?? audit/provcheck-8462143.out\n?? audit/provcheck.sbatch\n?? audit/revision_2026_09_08/\n?? results/full/grokking_null/\n?? scripts/revision_diagnostics.py\n?? tests/unit/test_revision_regressions.py",
+      "remote": "/trinity/home/denis.rakhmankin/onebigjump.git",
+      "available": true,
+      "source": "environment"
+    },
+    "packages": {
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.6.0+cu124",
+      "transformers": "4.51.3",
+      "tokenizers": "0.21.4",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "python": "3.11.11",
+      "cpu_count": 64,
+      "ram_gb": 1081.85,
+      "torch": "2.6.0+cu124",
+      "cuda_available": false,
+      "cuda_version": "12.4",
+      "mps_available": false,
+      "gpus": []
+    },
+    "python_build": [
+      "main",
+      "Dec  5 2024 14:17:24"
+    ],
+    "source_files": {
+      "__init__.py": "sha256:d2108d6946c6cab055fb5a203ee7c12baee4ffba4b7bdb9963e33efdbdb3ff8b",
+      "cli.py": "sha256:f7bcb0772d592a79a22b27fd7e1d495ff5912b9b52122dab10bc923b01fd6f75",
+      "config.py": "sha256:5c770038898e82516ff974499724f2608ffa24faa57c0a8c7fdac96d2ce97ba9",
+      "experiments/__init__.py": "sha256:cf513e976e2bbc83315036303d418594411766ae6f0d482a84f5158475440d9a",
+      "experiments/analysis.py": "sha256:2a195c19062166c74226de78070396d87a777b611980d2dc0edd5efd65b1f4dd",
+      "experiments/dataset.py": "sha256:eb2466c01cab2526616eff3a086b64c89235027c132947c4ecd650011a200d64",
+      "experiments/p1_tail_separation.py": "sha256:10823bc80f9f8504c8189371bb7f76f53cedfc5fe1ed3d9e456d62d3c6a8d016",
+      "experiments/p2_localization.py": "sha256:ce78f1866f3d91fe3569789b78b8591e7d75d8117ae7a68ee3a3fc58134614b7",
+      "experiments/p3_overshoot.py": "sha256:fbacc5895f6336b3ea1a161212cdd817b3cdf07c531db0a9ab63e892028a1404",
+      "experiments/p4_grokking.py": "sha256:26549cd9162ba9013d262ead34d771201d12f971743fb7c190d9c9eb0ab9a27c",
+      "experiments/p5_length_law.py": "sha256:b05bb0cd01c145eee8aa978e547c1b95734aa17d21b51d50060267c1261f2d34",
+      "experiments/pipeline.py": "sha256:0b98d4b7a05bec0329c6cb5602522cd2b14149297a5ccab1729862b8d8631751",
+      "lean/__init__.py": "sha256:18eff76dabe569b4c423512b6205e6e445f99765c16e6dcaed46ef0e7c3e3713",
+      "lean/batch.py": "sha256:b49573960b5fbfc42a13a7df017e10ef6d57ab890432c70888843cd0fc8a0c20",
+      "lean/environment.py": "sha256:6b6d4f59a48c0e7843cc973e1457b36df10476dfe566b0b12134a411f2facbff",
+      "lean/problems.py": "sha256:af7dc2102177bbb74ce0f6b2fb1d371b2bcd5cf030fc65c513e81d3dabafc4b0",
+      "lean/schemas.py": "sha256:4fef156201fdf0edc0c2178aac8e3c657df538d87856acf7df9673269b9dc463",
+      "lean/segmentation.py": "sha256:c891d159c843489cc6a49de7ab99e72af6df146f34f053cacb9e15776d5203c1",
+      "lean/verifier.py": "sha256:9cddde2d68fba3d014308318c221ae69315327f6cc15e3fdbb9bfef3b4d1f238",
+      "logging.py": "sha256:acd058837dab63b5143ec4fb103503059fb880c656205b69135d602865e7fe95",
+      "manifests.py": "sha256:2aef4172677453963c474455c70997414a5f5a945bba63039b97d70ccd70a879",
+      "models/__init__.py": "sha256:1c02a5ab53f09f4cc0ce46cecf0936e2158e2fd7d450c4a2fd675d94108d9dd0",
+      "models/activations.py": "sha256:dce7ca7ff5613e35561b79fffad8f06f6db5f34ee98bb8c9e643b01e4191a45f",
+      "models/extraction.py": "sha256:c11d1e9f68c7ccede1d2def534a909d54126f02f9a73b22eb8689444df2680fa",
+      "models/generation.py": "sha256:6beaa2f40b175547e40f52c9f50190ab6495d76a29a2652c39b23f4a79db3c7e",
+      "models/grokking.py": "sha256:144cacccbb569f607a684634c179e0d5e376df10cbe9ed617eb5c4899b923df3",
+      "models/hooks.py": "sha256:3e99b71c8b5f3550afb99c979d24b95eb3cb5a71c3404b8cc828f8a31c165842",
+      "models/token_alignment.py": "sha256:2281fe4d38e46213a2aaa2d8154e6c8258926217aa5ee9df31e4627896ce73fc",
+      "reporting/._report.py": "sha256:1981f03f7f08eb0d76752cc44cdd579a683fe08893f355180e3b9e35e52c9be5",
+      "reporting/__init__.py": "sha256:56efdff21f534a463cdf2365f7dc00c116eb1efa4081b82ed618db9720fa8116",
+      "reporting/plots.py": "sha256:ad0f605af5a534fcf76aed64e1e9b07fecbb797db26016e7140f02b28c94fff9",
+      "reporting/report.py": "sha256:ca180f1d03372b5c9e7a8cb5a64fbe9f30305fc2e7c7d9c8d24da9cb9d488ecf",
+      "reporting/style.py": "sha256:6bda0034960689b01d0dcf5fe233c37c019bd92908de68b0fbbe44ce385ce1a6",
+      "reporting/tables.py": "sha256:5d1c8fd0e4e23e661aa992750a707a0cda38456f30dfd769bed89082cf311f9b",
+      "reproducibility.py": "sha256:31db8ce0253a08f0485ca786ab1f7221ff768066a5cbb3323928fecd8e7d0cd6",
+      "simulation/__init__.py": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "simulation/figure1.py": "sha256:a4940156b7d1ba994ee9c8eab9bd437c5a4c5675e47bbc27b7b6506c9ce5421e",
+      "simulation/kesten.py": "sha256:8c6c8dd0453dfb93695f608a961a1ef3ed897289a82dbf88b2c9aa5b951fe8dc",
+      "stats/__init__.py": "sha256:8c132c25412927ae4434cbb1a4c4fa4dd0153a259baafe99677cbd6ee70f24f4",
+      "stats/bootstrap.py": "sha256:98b47749291e6e566fb7f07f1aab6fbd21bf4a9b324b9cbde63a57906663a45e",
+      "stats/diagnostics.py": "sha256:aed97fb85749649f1d186ccbc3e657f2c2a0be5060b566186f37def6f8b9e6cb",
+      "stats/estimators.py": "sha256:e8ed7f188a194a6e9bb708efab49b2b230d1a43dc6f5b1834dff31d4c050c74f",
+      "stats/extremal_index.py": "sha256:934c977d864f06b9324f7d9f32c8068f7fa17e250605a9c3c3a6f81b7ccc3996",
+      "stats/gpd.py": "sha256:04214e8397a2362e9f3bf4379357d417d5a2531c31a41b86f300619076dbefaa",
+      "stats/hill.py": "sha256:d215ee9815bcceb77df7c824c5de3f43714769af2d0b91bf5e200047921ecce1",
+      "stats/moment.py": "sha256:28a042341380139605afd714bbd4426a68d4b7a83dc464f6853be428c809656c",
+      "stats/reliability.py": "sha256:97c9196115a5192f5b5bb5086dc836b2990073246caaef3c24739a7c7535a03a",
+      "stats/thresholds.py": "sha256:5e197f636dd9f11650446efa8802e78832148b7cc0bbfb5b112717b28c8cf3b9"
+    },
+    "source_root": "/beegfs/home/denis.rakhmankin/onebigjump/src/onebigjump"
+  }
+}

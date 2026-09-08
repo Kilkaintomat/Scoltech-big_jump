@@ -1,158 +1,56 @@
 # Status
 
-Last edit: 2026-09-04. Stage numbering follows the task specification.
+Updated after the 2026-09-08 revision against the supplied paper draft and the Zhores archive.
 
-**On a GPU server**, the pipeline is complete and the runbook is
-[`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). What remains to be *run*
-there, rather than written, is stage 10: sampling from a 7-8B prover, labelling those traces, and
-extracting their residual streams. Nothing on this machine can do that in 16 GB without CUDA.
+The paper's experimental programme is **not complete**. Working estimators, a simulation and
+modular-addition training exist; these are not a replication of all experiments in Sections 5
+and B. The previous claim that the remaining work was only to run the GPU pipeline is withdrawn.
 
-## Stages
+Read the [revision report](audit/revision_2026_09_08/REPORT.md),
+[generated measurements](audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md) and
+[validation record](audit/revision_2026_09_08/VALIDATION.md).
+The [previous status](audit/revision_2026_09_08/STATUS-before.md) is retained as historical evidence;
+its P4 interpretation and claims of completeness are superseded.
 
-| # | Stage | State | Where |
-|---|---|---|---|
-| 1 | Study the paper, write the specification | **done** | [`docs/experimental_specification.md`](docs/experimental_specification.md) (430 lines) |
-| 2 | System audit | **done** | [`docs/system_report.md`](docs/system_report.md), `scripts/doctor.py` |
-| 3 | Repository from scratch | **done** | this tree |
-| 4 | Python environment | **done** | Python 3.11.15, torch 2.13 (MPS), `uv.lock` pinned |
-| 5 | Lean 4 + Mathlib | **done** | Lean 4.34.0-rc2, Mathlib `85e3a25e`, REPL built; 8.0 GB in `lean_workspace/` |
-| 6 | Statistical methods | **done** | `src/onebigjump/stats/` (8 modules) |
-| 7 | Tests | **done for what exists** | 429 tests: 18 driving the real Lean kernel, 29 driving real transformer activations |
-| 8 | Kesten simulation (Figure 1) | **done** | `paper_outputs/figures/figure1_kesten_dichotomy.pdf` |
-| 9 | Generation / verification / extraction | **done** | sampling (vLLM or HuggingFace), Lean labelling, and the extraction driver |
-| 10 | Pilot | **runnable, not run here** | the pipeline is wired end to end; a 7-8B prover does not fit in 16 GB |
-| 11 | Experiments P1-P5 | **done** | P1, P2, P3, P5 validated against the closed form; **P4 run for real** |
-| 12 | Tables and figures | **done** | Figure 1, the P4 figure, and Tables 1-2 in Markdown and LaTeX |
-| 13 | Reproducible report | **done** | `uv run onebigjump report` -> [`reports/experimental_report.md`](reports/experimental_report.md) |
-| 14 | Push to a private GitHub repository | **done** | [Kilkaintomat/Scoltech-big_jump](https://github.com/Kilkaintomat/Scoltech-big_jump), private |
-| 15 | Push after each completed stage | **done** | pushing after every stage since stage 14 |
-
-## What is missing, precisely
-
-| Item | Why it is missing |
-|---|---|
-| A prover run of stage 10 | The pipeline is complete and tested end to end on GPT-2, but the smallest model the paper names is 7B and does not fit in 16 GB. It needs a GPU box; see [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). |
-| Benchmark acquisition | Nothing downloads miniF2F, ProofNet or PutnamBench: which of them the paper uses is one of its own placeholders, so the loader accepts either a local JSONL or a Hugging Face dataset id and the choice is left open. |
-| `configs/synthetic/`, the PrOntoQA-style generator | Section 5.2 and P5 on real models. Not written. |
-| `docs/data_schema.md`, `docs/bootstrap_report.md` | Requested, not written. The schema is documented in `experiments/dataset.py` and enforced by `validate_table`. |
-| `src/onebigjump/schemas.py` | The requested top-level module; its content lives in `lean/schemas.py` and `experiments/dataset.py`. |
-| A clean-tree re-run of every artifact | Figure 1, the Lean pilot and P4 were all produced while the tree was dirty, and their manifests say so. The numbers are correct; they are simply not tied to a commit. |
-
-## Blocked, and on what
-
-| Blocker | Consequence | What unblocks it |
+| Component | Implemented and checked | Still needed |
 |---|---|---|
-| `gh` is not authenticated | 6 commits sit on local `main`; stages 14 and 15 cannot start | `gh auth login` in a terminal |
-| No CUDA (Apple M4, 16 GB) | Section 5.1 prover runs are not tractable at the paper's scale | a CUDA machine, or a documented reduction in scale |
-| No Hugging Face token | gated weights unavailable (not currently binding) | `HF_TOKEN` in `.env` |
+| Statistical core | Hill, signed moment, GPD, threshold selection, trace/prompt bootstrap, extremal index; numerical and regression tests | Full stability bands and secondary threshold selection in the production analysis; calibrated inference under dependence |
+| Figure 1 / Kesten | Simulation, closed-form checks, fresh diagnostic threshold sweep | An immutable publication run with reconciled protocol choices and verified artifact digests |
+| Lean labels | Native local Lean/Mathlib/REPL integration; absorbing labels; sampled-goal guard | Install and validate Mathlib/REPL on Zhores; broader syntax and timeout/recovery coverage |
+| Model sampling | Hugging Face and vLLM adapters; seed/revision forwarding; saved expected statement and generation IDs | Regenerate legacy samples lacking original IDs/context; validate actual prover template and pinned weights |
+| Activation extraction | Exact saved IDs/context where alignment is verifiable; whitening; problem-disjoint calibration; shard reading | A real prover end-to-end pilot and complete activation dataset; coverage checks for non-roundtripping tokenizers |
+| P1–P3 | Analysis modules and surrogate/integration tests; fixes for ties, missing evidence and resampling metadata | Measurements on kernel-labelled model trajectories, stratified by model, temperature and task family |
+| P4 | Archived modular-addition and shuffled-label training; corrected Fourier projection and excluded training loss | Rerun corrected mechanistic measurements, freeze frequencies from final weights, test a prespecified transition criterion |
+| P5 | Identified exponential rate fit and independent extremal-index input | Controlled deduction lengths, uncertainty calibration and a guard for incompatible recovered tolerance |
+| Other draft experiments | No complete implementation found | Synthetic deduction and code tasks; two-hop composition; recurrent-depth experiment; Tracr/ngram controls; supervised hidden-state baseline |
+| Reporting/provenance | Manifests, source digests, generated tables/figures; P4 report corrected | Enforce digest verification before publication; unique run directories; submission-side provenance where GPU nodes lack git |
 
-## What has actually been reproduced or measured
+## Interpretation of existing results
 
-### Figure 1, in full
+The archived P4 models learn modular addition, but a transient in Hill alone is not a transition
+in the paper's `xi`. Reanalysis of signed moment estimates and the shuffled-label control does
+not establish the claimed mechanistic signal. The archived Fourier losses used an incorrect
+projection/evaluation split and must be rerun from weights or training; scalar logs cannot repair
+them. Negative finite-sample estimates alone do not prove bounded support or algorithmic computation.
 
-The closed form of Theorem 5(v) returns `alpha = 3.9734, 2.7992, 1.8193` at `p = 0.02, 0.05, 0.10`
-against the caption's `3.97, 2.80, 1.82`, and `p_c = 0.2802` is exactly where the Lyapunov
-exponent vanishes. At the caption's setting (`rho = 0.7`, `kappa = 2.5`, `d = 8`, 3000 traces of
-64 steps):
+The Kesten diagnostic preserves disagreement between estimators and across thresholds. Its
+verified/refuted labels are defined by the deviation threshold, so it cannot independently
+validate the latent-to-kernel coupling that the real Lean experiments are meant to test.
 
-| `p` | `xi` theory | Hill [95% CI] | moment | GPD | refuted | top-1 | chance |
-|---|---|---|---|---|---|---|---|
-| 0.00 | 0.0000 | 0.0788 [0.0773, 0.0801] | **-0.1033** | -0.1064 | 184 | 0.984 | 0.0156 |
-| 0.02 | 0.2517 | 0.2610 [0.2523, 0.2711] | 0.1522 | 0.1390 | 144 | 0.903 | 0.0156 |
-| 0.05 | 0.3572 | 0.3472 [0.3379, 0.3587] | 0.3109 | 0.2927 | 130 | 0.846 | 0.0156 |
-| 0.10 | 0.5497 | 0.5221 [0.5088, 0.5368] | 0.5375 | 0.5445 | 75 | 0.680 | 0.0156 |
+Historical P3 clustering observations and the P5 identifiability correction predate this
+revision. They motivate protocol checks; they do not fill the missing model experiments.
 
-The paper's caption states 185 refuted traces at `p = 0`; we get 184. Chance is `1/L = 0.0156`
-against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.85 and a
-*simulated* 0.80 in the paper.
+## Current execution environment
 
-### P4, run for real, on three seeds
+The authoritative working tree is on Zhores. Per user instruction, all further edits and tests run on the server; the last local repeat was stopped and is not counted as a successful run.
 
-40,000 steps of the one-layer modular-addition transformer on MPS, checkpoints every 100 steps.
-Both seeds memorise early and grok at essentially the same step.
+Both checkouts started at `a3988f76ca27ff5ecc476a192b9d61797e861b65`. Zhores is reachable with the
+existing `zhores` SSH alias; SSH/VPN configuration was not changed. The audit runs used an uncommitted
+working tree and their diagnostic manifests correctly report that historical dirty state.
 
-| event | seed 0 | seed 1 | seed 2 |
-|---|---|---|---|
-| test accuracy crosses 0.9 | 23600 | 23700 | **13500** |
-| `gamma_hat` peaks | 0.1753 at 22700 | 0.1801 at 22700 | 0.0691 at 12100 |
-| **sharpest fall in `gamma_hat`** | **22800** | **22800** | **12600** |
-| excluded loss half-transition | 22800 | 22900 | 12700 |
-| test accuracy half-transition | 23200 | 23300 | 13200 |
-| restricted loss half-transition | 23700 | 23800 | 13600 |
-| `gamma_hat` after the transition | 0.0388 | 0.0457 | 0.0362 |
-| lead over the generalization jump | 800 | 900 | 900 |
+Cluster validation uses Slurm and the existing container environment. Local live Lean tests do
+not establish that the remote Lean installation is ready. Exact test results and job evidence
+are recorded in [VALIDATION.md](audit/revision_2026_09_08/VALIDATION.md).
 
-The ordering replicates on all three, including seed 2, whose transition happens ten thousand
-steps earlier than the other two. `gamma_hat` turns **first**, within one checkpoint of the
-excluded loss, and leads the generalization jump by 800-900 steps every time.
-
-The *size* of the transient does not replicate: seed 2 peaks at 0.069 against 0.175 and 0.180.
-So the timing of the signal is robust and its amplitude is not, which matters for anyone hoping
-to read circuit formation off a single threshold on `gamma_hat`.
-
-That is more specific than P4 as stated. The paper asks for the drop to coincide "with the
-mechanistic progress measures of Nanda et al. **and** the generalization jump"; those are ~900
-steps apart here, and the order parameter goes with circuit formation, not with the downstream
-accuracy that follows it.
-
-Two things not predicted by P4 at all, both present on both seeds:
-
-1. **`gamma_hat` rises before it falls** -- from a plateau at 0.041 to a peak of 0.175-0.180 over
-   the two thousand steps preceding the transition. This is consistent with the mechanism rather
-   than against it: while the representation is being reorganised the increments are transiently
-   large and heavy-tailed, and only once the circuit is in place does the update become the
-   constrained map `H_alg` describes. But it means `gamma_hat` is not monotone in training, and a
-   measurement taken at a single checkpoint near the transition could report either sign.
-2. **The signature is a peak, not a level shift.** `gamma_hat` returns to roughly where it
-   started (0.030 -> 0.039 over the whole run). What identifies the transition is the transient,
-   not the endpoints -- which is why the two progress measures are located here by a crossing
-   time and `gamma_hat` by its sharpest fall.
-
-### Three things the measurements say that the paper does not
-
-1. **P3 as written does not measure the Pareto index when steps cluster.** At `p = 0.05`, where
-   `gamma = 0.357` exactly, the 99.9% threshold gives shape **+0.454** for the unconditional
-   overshoot of Proposition 1 and **+0.478** for the trace maximum, but only **+0.127** for the
-   first exceedance `Z_{t*}`, which is what P3 specifies. Figure 1(d)'s caption attributes the
-   gap to pre-asymptotics; raising the threshold across two decades leaves it at 0.06-0.13, so it
-   is not that. The extremal index at those thresholds is `theta = 0.41` and `0.13`: exceedances
-   arrive in clusters, and conditioning on the *first* one selects smaller overshoots.
-   Theorem 4(ii) derives its limit under extremal independence, which Theorem 5's own model
-   violates. At `p = 0`, where `theta = 1.000`, all three variants agree to within 0.05.
-
-2. **P5's `(theta, tau)` is not identified.** The likelihood depends on them only through
-   `c = theta * Fbar(tau)`, so the fit is one-parameter: a free search returned
-   `theta = 0.178, tau = 4.385` where the labelling threshold was `7.871`. The likelihood-ratio
-   test therefore has `n_lengths - 1` degrees of freedom, not `n_lengths - 2`. Fixed by fitting
-   `c` and pinning `theta` from the extremal index.
-
-3. **Under the coupling hypothesis, P1 is partly true by selection.** A "verified" trace is
-   *defined* as one whose maximum stayed below `tau`, so its deviations are truncated above and
-   its tail is light for reasons unrelated to the mechanism. This affects the surrogate, not the
-   Lean experiments, where "verified" means the kernel accepted the proof.
-
-### Bugs found by running against real systems, not by reading
-
-| Where | What |
-|---|---|
-| Lean REPL | A tactic failing on a type mismatch returns a top-level `{"message": ...}` with **no** `proofState`, not a `messages` array. Reading only `messages` marked the step valid and replayed the rest against a stale state, turning refuted proofs into verified ones. |
-| GPT-2 whitening | 12 increments in 768 dimensions gave whitened deviations 3.249, 3.249, 3.267, 3.269 -- a statistic with no variance left to have a tail. Now refused rather than silently flattening P1. |
-| Shrinkage target | Shrinking towards `tr(S)/d * I` inflates low-variance coordinates under the massive-activation anisotropy whitening exists to remove: at 2500:1, an optimal intensity of 0.0011 left the whitened covariance at 0.81 instead of 1. Target is now `diag(S)`. |
-| GPD profile fit | The search bracket scaled by the mean collapses as the mean diverges at `gamma -> 1`; it returned 0.74 for a true 0.90. Now bracketed in units of the median, where the optimum sits at `2^gamma - 1`. |
-| P1 bootstrap | Resampling prompts collapses the interval to a point when there is one prompt, reading as impossible precision. Falls back to traces below 20 prompts. |
-| `write_json` | `numpy.float64` subclasses `float`, so `json.dumps` wrote bare `NaN` tokens past the default hook, producing files no strict JSON reader accepts. |
-
-## Deviations from the paper's protocol
-
-1. `tau` in the simulation is per setting, not shared. A single `tau` cannot produce the caption's
-   own counts (185 refuted at `p = 0` against 114 at `p = 0.05`); a per-setting `tau` does, and
-   the ratio is the extremal index.
-2. `vllm` and `flash-attn` are not installed: both are Linux + CUDA only.
-3. The Lean REPL environment snapshot (`pickleTo`) was implemented, measured at 126.7s to restore
-   against 129.0s to import, and removed. Timeouts now resynchronise by waiting for the late
-   reply instead of restarting.
-4. In P4, `gamma_hat` is a fixed-fraction point estimate (`k` = 5% of `n`) at every one of the 401
-   checkpoints, with the full Section 4 protocol and intervals every 20th. Running the double
-   bootstrap and the trace bootstrap 401 times is not affordable, and re-selecting `k` at every
-   checkpoint would mix movement of the estimate with movement of the threshold. Recorded in the
-   run manifest.
+Before a paper run: settle the protocol, freeze this reviewed source/config/model revision,
+validate a small real-prover pilot, then run into a new output directory with complete manifests.

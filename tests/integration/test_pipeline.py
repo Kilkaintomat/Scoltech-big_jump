@@ -147,14 +147,14 @@ class TestRunExtraction:
 
     def test_the_manifest_records_the_run(self, run) -> None:
         _, out = run
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         assert man["status"] == "ok"
         assert man["kind"] == "activations"
         assert "table" in {o["role"] for o in man["outputs"]}
 
     def test_missing_statistics_are_noted_not_hidden(self, run) -> None:
         _, out = run
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         assert any("whitened" in note for note in man["notes"])
 
     def test_the_analysis_runs_on_the_extracted_table(self, run) -> None:

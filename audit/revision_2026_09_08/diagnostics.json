@@ -1,0 +1,944 @@
+{
+  "inventory": {
+    "manifests": [
+      {
+        "path": "results/full/grokking/manifest.json",
+        "name": "p4-grokking-seed2",
+        "git": {
+          "commit": "ab2384bef0cb1ef77c3478cf90a495df0afdbd5b",
+          "branch": "main",
+          "describe": "ab2384b",
+          "dirty": false,
+          "status": "",
+          "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
+        },
+        "status": "ok",
+        "digest": "sha256:682bcd39767813a0cbb2e1af69767d17fd73631731df57684d8bc7cecebb9095"
+      },
+      {
+        "path": "results/full/grokking_cpu/manifest.json",
+        "name": "p4-grokking-seed0",
+        "git": {
+          "commit": null,
+          "branch": null,
+          "describe": null,
+          "dirty": false,
+          "status": "",
+          "remote": null
+        },
+        "status": "ok",
+        "digest": "sha256:f05e6e49032b0bbe11fb45cbce45e56f176b8d9df12212d12a5e30e403c2bb95"
+      },
+      {
+        "path": "results/full/grokking_cuda/manifest.json",
+        "name": "p4-grokking-seed2",
+        "git": {
+          "commit": null,
+          "branch": null,
+          "describe": null,
+          "dirty": false,
+          "status": "",
+          "remote": null
+        },
+        "status": "ok",
+        "digest": "sha256:4f1822b1ddaf440d799fc7aad0294ff228c7639a8d3b082cdcd8c462c2bd9306"
+      },
+      {
+        "path": "results/full/grokking_null/manifest.json",
+        "name": "p4-grokking-seed2",
+        "git": {
+          "source": "unavailable",
+          "commit": null,
+          "branch": null,
+          "describe": null,
+          "dirty": null,
+          "status": "",
+          "remote": null,
+          "available": false
+        },
+        "status": "ok",
+        "digest": "sha256:d5f357957e683f592c9c7e57c9c705b2d1211e49e308db733e60356c40cd1c00"
+      },
+      {
+        "path": "results/pilot/lean/manifest.json",
+        "name": "lean-verify-pilot",
+        "git": {
+          "commit": "b22446a938a8dde7527e4ac996028ec4ddfa3577",
+          "branch": "main",
+          "describe": "b22446a",
+          "dirty": false,
+          "status": "",
+          "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
+        },
+        "status": "ok",
+        "digest": "sha256:c3a12acbbfaaf938353a7587de43ac52e3f3f4fed3facedb5690ce6713bc0555"
+      },
+      {
+        "path": "results/simulations/kesten/manifest.json",
+        "name": "figure1-kesten",
+        "git": {
+          "commit": "905d85c18f9664c4a4095cb3b5a415fa6f68adfd",
+          "branch": "main",
+          "describe": "905d85c",
+          "dirty": false,
+          "status": "",
+          "remote": "https://github.com/Kilkaintomat/Scoltech-big_jump.git"
+        },
+        "status": "ok",
+        "digest": "sha256:8456fd2b02d6737f2db43e440101eaa0e0700fd9cfbc1da9966ef2898632cea5"
+      },
+      {
+        "path": "data/raw/prover-sampling/manifest.json",
+        "name": "prover-sampling",
+        "git": {
+          "source": "unavailable",
+          "commit": null,
+          "branch": null,
+          "describe": null,
+          "dirty": null,
+          "status": "",
+          "remote": null,
+          "available": false
+        },
+        "status": "ok",
+        "digest": "sha256:ebf7c0ce753984671ccb515eb9693e9cc129a93275be95d9a2802a19de35e876"
+      }
+    ],
+    "outputs": [
+      {
+        "manifest": "results/full/grokking/manifest.json",
+        "path": "results/full/grokking/p4_grokking_seed2.json",
+        "expected": "sha256:904e664455c12671a2d6ad8c5a45ab8de7558c25f7557956836895125e45a7e0",
+        "actual": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking/manifest.json",
+        "path": "results/full/grokking/p4_grokking_seed2.csv",
+        "expected": "sha256:929315483c3cd1fdf3991060ee94126a4f803ef8cebff8b6bd1ee353210ce6a4",
+        "actual": "sha256:929315483c3cd1fdf3991060ee94126a4f803ef8cebff8b6bd1ee353210ce6a4",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking/manifest.json",
+        "path": "paper_outputs/metrics/p4_grokking_seed2.json",
+        "expected": "sha256:904e664455c12671a2d6ad8c5a45ab8de7558c25f7557956836895125e45a7e0",
+        "actual": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.pdf",
+        "expected": "sha256:81a2934e9a7052716fb1e93271088beebd4cad94c9af19465b2dc0887ee755d2",
+        "actual": "sha256:b6196cc8d73c5cbfa5154a6e5977db1f1941574f0309682781c2a2d6193133e0",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.png",
+        "expected": "sha256:9b7508ceb926f093ad45164959fbdd5dd936ada61785507fa586f4caac4dbecd",
+        "actual": "sha256:9b7508ceb926f093ad45164959fbdd5dd936ada61785507fa586f4caac4dbecd",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking_cpu/manifest.json",
+        "path": "results/full/grokking_cpu/p4_grokking_seed0.json",
+        "expected": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03",
+        "actual": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking_cpu/manifest.json",
+        "path": "results/full/grokking_cpu/p4_grokking_seed0.csv",
+        "expected": "sha256:395c8c9dd886d5abf9728c9d6422b7f9570b9ee5c0e7ecaf9b1f28d08aca6dd1",
+        "actual": "sha256:395c8c9dd886d5abf9728c9d6422b7f9570b9ee5c0e7ecaf9b1f28d08aca6dd1",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking_cpu/manifest.json",
+        "path": "paper_outputs/metrics/p4_grokking_seed0.json",
+        "expected": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03",
+        "actual": "sha256:b5330efc25dc58f83a5c8d7f301b696e3ff2aff2fd5fb7928d54d0c0cc4cd8d2",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cpu/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed0.pdf",
+        "expected": "sha256:7dc742a7832e7561ff830143e5602df14c0857f0dc398e60fa5285b9d8c1f00c",
+        "actual": "sha256:e90ad2acc586dac0786ea2f58755a17bae35e85f036c79cfc7b1fe073bf9f4d3",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cpu/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed0.png",
+        "expected": "sha256:96a8d914d2184a7fb8c7ab291f5b2c5a70b51eb19d795e68a1c439fe18b315be",
+        "actual": "sha256:65424ade59e5162dbf3b1f35a12e5b3bb3ed0b25ea8547df21b98e42b02e3277",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cuda/manifest.json",
+        "path": "results/full/grokking/p4_grokking_seed2.json",
+        "expected": "sha256:6b4b081858ccd36e34aac9e151236b0b3935e5d3478ff2543bd8a29e81d558c6",
+        "actual": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cuda/manifest.json",
+        "path": "results/full/grokking/p4_grokking_seed2.csv",
+        "expected": "sha256:3b68035b5cd3b320396ec5c6f99af1d954b267a1a3d28feb18de82cbd98ea0ec",
+        "actual": "sha256:929315483c3cd1fdf3991060ee94126a4f803ef8cebff8b6bd1ee353210ce6a4",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cuda/manifest.json",
+        "path": "paper_outputs/metrics/p4_grokking_seed2.json",
+        "expected": "sha256:6b4b081858ccd36e34aac9e151236b0b3935e5d3478ff2543bd8a29e81d558c6",
+        "actual": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cuda/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.pdf",
+        "expected": "sha256:7ea9d5c85ebf973461a91ca2ff97d7f532751f17cba9ef08d0d23ab5d129fd97",
+        "actual": "sha256:b6196cc8d73c5cbfa5154a6e5977db1f1941574f0309682781c2a2d6193133e0",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_cuda/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.png",
+        "expected": "sha256:a9e126e097c64d1df5d81152a1280382b3c1c733c0ca31543244a489227e5d45",
+        "actual": "sha256:9b7508ceb926f093ad45164959fbdd5dd936ada61785507fa586f4caac4dbecd",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_null/manifest.json",
+        "path": "results/full/grokking_null/p4_grokking_seed2.json",
+        "expected": "sha256:73e1d9a6d3f4ebce8e28e17051d6efabc79771a57414a70ec888718c34892c07",
+        "actual": "sha256:73e1d9a6d3f4ebce8e28e17051d6efabc79771a57414a70ec888718c34892c07",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking_null/manifest.json",
+        "path": "results/full/grokking_null/p4_grokking_seed2.csv",
+        "expected": "sha256:74b2823fadb539f29e01b95a7a2cc600975967551bd760a2192e15f0c260b5f4",
+        "actual": "sha256:74b2823fadb539f29e01b95a7a2cc600975967551bd760a2192e15f0c260b5f4",
+        "status": "match"
+      },
+      {
+        "manifest": "results/full/grokking_null/manifest.json",
+        "path": "paper_outputs/metrics/p4_grokking_seed2.json",
+        "expected": "sha256:73e1d9a6d3f4ebce8e28e17051d6efabc79771a57414a70ec888718c34892c07",
+        "actual": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_null/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.pdf",
+        "expected": "sha256:5d251f88d048b44d62ceeba3576ebe8a324ab7571cb20336d36c6a79a0cbbe3e",
+        "actual": "sha256:b6196cc8d73c5cbfa5154a6e5977db1f1941574f0309682781c2a2d6193133e0",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/full/grokking_null/manifest.json",
+        "path": "paper_outputs/figures/p4_grokking_seed2.png",
+        "expected": "sha256:96a130e210ac55f5cf44fc6851a72dd5452a55d6d07f526e6670d65dcc2b9964",
+        "actual": "sha256:9b7508ceb926f093ad45164959fbdd5dd936ada61785507fa586f4caac4dbecd",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/pilot/lean/manifest.json",
+        "path": "results/pilot/lean/traces.jsonl",
+        "expected": "sha256:1df053d669c3004019a6c7571c0651e038e46c96b38891ffe09ca895da84e7e2",
+        "actual": "sha256:1df053d669c3004019a6c7571c0651e038e46c96b38891ffe09ca895da84e7e2",
+        "status": "match"
+      },
+      {
+        "manifest": "results/pilot/lean/manifest.json",
+        "path": "results/pilot/lean/summary.json",
+        "expected": "sha256:4e23b8569a8a8bd234515c4360cefb6819ae6be46d4e46689c3d0aeae3ce53b3",
+        "actual": "sha256:4e23b8569a8a8bd234515c4360cefb6819ae6be46d4e46689c3d0aeae3ce53b3",
+        "status": "match"
+      },
+      {
+        "manifest": "results/simulations/kesten/manifest.json",
+        "path": "results/simulations/kesten/figure1_metrics.json",
+        "expected": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66",
+        "actual": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66",
+        "status": "match"
+      },
+      {
+        "manifest": "results/simulations/kesten/manifest.json",
+        "path": "results/simulations/kesten/figure1_summary.csv",
+        "expected": "sha256:dac7d6f514196b775ed35b85925be9e73b8c3ddfb19f9708a2f6a79643fe6ba8",
+        "actual": "sha256:dac7d6f514196b775ed35b85925be9e73b8c3ddfb19f9708a2f6a79643fe6ba8",
+        "status": "match"
+      },
+      {
+        "manifest": "results/simulations/kesten/manifest.json",
+        "path": "paper_outputs/metrics/figure1.json",
+        "expected": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66",
+        "actual": "sha256:c3c14a6b83b12fb0e33dbb36c5bafaeef0b9f6191484823b70af65fefbcc9e66",
+        "status": "match"
+      },
+      {
+        "manifest": "results/simulations/kesten/manifest.json",
+        "path": "paper_outputs/figures/figure1_kesten_dichotomy.pdf",
+        "expected": "sha256:88d6cd80b51ef19d126b272da1fbca4a2262e186dc0f9a1cd46a4f5f169eac13",
+        "actual": "sha256:fb0d18e945b1ddf1175e8f83d24289a8ddd852c8cec8a5ca53cba6ccaeca5e6f",
+        "status": "changed"
+      },
+      {
+        "manifest": "results/simulations/kesten/manifest.json",
+        "path": "paper_outputs/figures/figure1_kesten_dichotomy.png",
+        "expected": "sha256:1f0ad2923a08bf91b276b68b83195eeab5557ef5940debe8c0ee7025b2a71459",
+        "actual": "sha256:ac094685f6c3ad4e80a43b3f93dd496cbda229d4fc5a26d870db0c61fe0eb466",
+        "status": "changed"
+      },
+      {
+        "manifest": "data/raw/prover-sampling/manifest.json",
+        "path": "data/raw/prover-sampling/samples.jsonl",
+        "expected": "sha256:c81c8f81799f7632a0a0bb0473b8f49568931ab28d514853d3984dad2c56ca44",
+        "actual": "sha256:c81c8f81799f7632a0a0bb0473b8f49568931ab28d514853d3984dad2c56ca44",
+        "status": "match"
+      },
+      {
+        "manifest": "data/raw/prover-sampling/manifest.json",
+        "path": "data/raw/prover-sampling/problems.json",
+        "expected": "sha256:710f1faf79d829d5107c298dc61486f30ede0e1d5bc9329daa1d14d2682e41fd",
+        "actual": "sha256:710f1faf79d829d5107c298dc61486f30ede0e1d5bc9329daa1d14d2682e41fd",
+        "status": "match"
+      }
+    ],
+    "digest_counts": {
+      "changed": 16,
+      "match": 13
+    },
+    "sampling": {
+      "n_samples": 3616,
+      "n_problems": 226,
+      "temperatures": [
+        0.6,
+        1.0
+      ],
+      "with_exact_ids": 0,
+      "with_raw_completion": 0,
+      "with_expected_statement": 0,
+      "digest": "sha256:c81c8f81799f7632a0a0bb0473b8f49568931ab28d514853d3984dad2c56ca44"
+    },
+    "activation_tables": [],
+    "lean_trace_files": [
+      "results/pilot/lean/traces.jsonl"
+    ]
+  },
+  "p4_recomputed": [
+    {
+      "run": "grokking",
+      "seed": 0,
+      "input": "results/full/grokking/p4_grokking_seed0.json",
+      "input_digest": "sha256:b5330efc25dc58f83a5c8d7f301b696e3ff2aff2fd5fb7928d54d0c0cc4cd8d2",
+      "n_checkpoints": 401,
+      "grokking_step": 23600,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.07481296758104738,
+      "xi_max": 0.0771715597389343,
+      "moment_first": -0.04426526891342464,
+      "moment_last": -0.1954987732115372,
+      "hill_first": 0.029773898168811264,
+      "hill_last": 0.04041078685544616,
+      "rho_step_hill": -0.4281049242565229,
+      "rho_step_xi": -0.13851070752018063,
+      "moment_before_transition": -0.15703079874341377,
+      "moment_after_transition": -0.11110432141841982,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking",
+      "seed": 1,
+      "input": "results/full/grokking/p4_grokking_seed1.json",
+      "input_digest": "sha256:9950c640c025a730b60c1baaf163a174085df71d0a5c732cebed6cc78082e422",
+      "n_checkpoints": 401,
+      "grokking_step": 23700,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.00997506234413965,
+      "xi_max": 0.04792040909562745,
+      "moment_first": 0.04792040909562745,
+      "moment_last": -0.16113755199523738,
+      "hill_first": 0.021339808849827724,
+      "hill_last": 0.032947185087221914,
+      "rho_step_hill": -0.49006290244537914,
+      "rho_step_xi": -0.00410959500114268,
+      "moment_before_transition": -0.13686465182848373,
+      "moment_after_transition": -0.10428654150096135,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking",
+      "seed": 2,
+      "input": "results/full/grokking/p4_grokking_seed2.json",
+      "input_digest": "sha256:2c3610630f27051b4ca3dc2148df139b34eb279956de0783436b0d97c5abf3ea",
+      "n_checkpoints": 401,
+      "grokking_step": 13500,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.0024937655860349127,
+      "xi_max": 0.0014790703735343413,
+      "moment_first": 0.0014790703735343413,
+      "moment_last": -0.17506738116950182,
+      "hill_first": 0.026141612470085937,
+      "hill_last": 0.025710541770249618,
+      "rho_step_hill": -0.7144225257751146,
+      "rho_step_xi": -0.08638684255813601,
+      "moment_before_transition": -0.20875155586973593,
+      "moment_after_transition": -0.2556733460373997,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_cpu",
+      "seed": 0,
+      "input": "results/full/grokking_cpu/p4_grokking_seed0.json",
+      "input_digest": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03",
+      "n_checkpoints": 401,
+      "grokking_step": 18800,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.012468827930174564,
+      "xi_max": 0.11815710333905272,
+      "moment_first": -0.04426280966851759,
+      "moment_last": -0.12589996592950436,
+      "hill_first": 0.029773832750723067,
+      "hill_last": 0.03175632505484827,
+      "rho_step_hill": -0.7712692150221462,
+      "rho_step_xi": -0.12629819678511486,
+      "moment_before_transition": -0.08364296841937091,
+      "moment_after_transition": -0.15231989894436446,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_cuda",
+      "seed": 0,
+      "input": "results/full/grokking_cuda/p4_grokking_seed0.json",
+      "input_digest": "sha256:c51570969e80d8be3a29be34f50ce04732e340cd83116f9840e178a2ede0ef1a",
+      "n_checkpoints": 401,
+      "grokking_step": 21900,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.012468827930174564,
+      "xi_max": 0.11820018794691922,
+      "moment_first": -0.04426574685367535,
+      "moment_last": -0.13594688961456813,
+      "hill_first": 0.02977390730453855,
+      "hill_last": 0.028156385350788765,
+      "rho_step_hill": -0.8484214836044219,
+      "rho_step_xi": -0.07099680410130524,
+      "moment_before_transition": -0.133790475959133,
+      "moment_after_transition": -0.19823699521498317,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_cuda",
+      "seed": 1,
+      "input": "results/full/grokking_cuda/p4_grokking_seed1.json",
+      "input_digest": "sha256:ce78adffea2850fd99163bd27c0192ea3600b2650fa46ac9333fa38a4b38fb9b",
+      "n_checkpoints": 401,
+      "grokking_step": 21300,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.014962593516209476,
+      "xi_max": 0.049590469107298474,
+      "moment_first": 0.04791801633602233,
+      "moment_last": -0.2989707910800423,
+      "hill_first": 0.02133986731059985,
+      "hill_last": 0.020834481494803048,
+      "rho_step_hill": -0.8052402575650426,
+      "rho_step_xi": -0.03308747874584375,
+      "moment_before_transition": -0.17394681604204573,
+      "moment_after_transition": -0.20333921188407725,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_cuda",
+      "seed": 2,
+      "input": "results/full/grokking_cuda/p4_grokking_seed2.json",
+      "input_digest": "sha256:6b4b081858ccd36e34aac9e151236b0b3935e5d3478ff2543bd8a29e81d558c6",
+      "n_checkpoints": 401,
+      "grokking_step": 15100,
+      "final_test_accuracy": 1.0,
+      "xi_positive_fraction": 0.0024937655860349127,
+      "xi_max": 0.0014808726605080036,
+      "moment_first": 0.0014808726605080036,
+      "moment_last": -0.20685501683508756,
+      "hill_first": 0.026141563266861137,
+      "hill_last": 0.031020366570909313,
+      "rho_step_hill": -0.8287328320988574,
+      "rho_step_xi": -0.08638684255813601,
+      "moment_before_transition": -0.14812683636751442,
+      "moment_after_transition": -0.2112226663568002,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_null",
+      "seed": 0,
+      "input": "results/full/grokking_null/p4_grokking_seed0.json",
+      "input_digest": "sha256:b28e3dd3de082f7c4904ed64c2889c474230edda7082a8feeccf003bfc8c116c",
+      "n_checkpoints": 401,
+      "grokking_step": null,
+      "final_test_accuracy": 0.008949547074735165,
+      "xi_positive_fraction": 0.0,
+      "xi_max": 0.0,
+      "moment_first": -0.04426574685367535,
+      "moment_last": -0.2227686231317978,
+      "hill_first": 0.02977390730453855,
+      "hill_last": 0.03702822836870437,
+      "rho_step_hill": -0.6045354896341237,
+      "rho_step_xi": null,
+      "moment_before_transition": null,
+      "moment_after_transition": null,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_null",
+      "seed": 1,
+      "input": "results/full/grokking_null/p4_grokking_seed1.json",
+      "input_digest": "sha256:107fe47c2ae7222fbed90fce763fd9284924d3f705ca8bceb132a2f8fee6c799",
+      "n_checkpoints": 401,
+      "grokking_step": null,
+      "final_test_accuracy": 0.010515717789530754,
+      "xi_positive_fraction": 0.014962593516209476,
+      "xi_max": 0.04791801633602233,
+      "moment_first": 0.04791801633602233,
+      "moment_last": -0.13707330152201602,
+      "hill_first": 0.02133986731059985,
+      "hill_last": 0.039500883864552305,
+      "rho_step_hill": -0.8337760077418396,
+      "rho_step_xi": -0.17665387821914372,
+      "moment_before_transition": null,
+      "moment_after_transition": null,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    },
+    {
+      "run": "grokking_null",
+      "seed": 2,
+      "input": "results/full/grokking_null/p4_grokking_seed2.json",
+      "input_digest": "sha256:73e1d9a6d3f4ebce8e28e17051d6efabc79771a57414a70ec888718c34892c07",
+      "n_checkpoints": 401,
+      "grokking_step": null,
+      "final_test_accuracy": 0.009061416611075401,
+      "xi_positive_fraction": 0.0024937655860349127,
+      "xi_max": 0.0014808726605080036,
+      "moment_first": 0.0014808726605080036,
+      "moment_last": -0.16516007360805696,
+      "hill_first": 0.026141563266861137,
+      "hill_last": 0.04283760891149763,
+      "rho_step_hill": -0.8250772322924036,
+      "rho_step_xi": -0.08638684255813601,
+      "moment_before_transition": null,
+      "moment_after_transition": null,
+      "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints"
+    }
+  ],
+  "kesten": [
+    {
+      "p": 0.0,
+      "alpha_theory": null,
+      "xi_theory": 0.0,
+      "selected_k": {
+        "k": 9600,
+        "method": "double_bootstrap:fallback",
+        "n": 192000,
+        "objective": null,
+        "diagnostics": {
+          "n1": 56882,
+          "n2": 16852,
+          "reason": "stage-2 minimum did not fall below stage-1 minimum",
+          "k1": 157,
+          "k2": 175
+        }
+      },
+      "grid": [
+        {
+          "k": 960,
+          "fraction": 0.005,
+          "hill": 0.05382602137203896,
+          "moment": -0.07343106766116403,
+          "gpd": -0.09149881193854378
+        },
+        {
+          "k": 1920,
+          "fraction": 0.01,
+          "hill": 0.05820002049390438,
+          "moment": -0.05831131101441045,
+          "gpd": -0.07238570035002516
+        },
+        {
+          "k": 3840,
+          "fraction": 0.02,
+          "hill": 0.06607890103424485,
+          "moment": -0.09176946989400103,
+          "gpd": -0.09466841778868143
+        },
+        {
+          "k": 9600,
+          "fraction": 0.05,
+          "hill": 0.07882964329971331,
+          "moment": -0.10330826719927821,
+          "gpd": -0.10639390021876445
+        },
+        {
+          "k": 19200,
+          "fraction": 0.1,
+          "hill": 0.09376135699330557,
+          "moment": -0.13799312040040457,
+          "gpd": -0.12958372225920842
+        }
+      ],
+      "n_refuted": 184,
+      "top1": 0.9836956521739131,
+      "config": {
+        "rho": 0.7,
+        "kappa": 2.5,
+        "p_values": [
+          0.0,
+          0.02,
+          0.05,
+          0.1
+        ],
+        "d": 8,
+        "n_traces": 3000,
+        "n_steps": 64,
+        "burn_in": 200,
+        "sigma": 1.0,
+        "tolerance_quantile": 0.999,
+        "seed": 20270101,
+        "tail": {
+          "k_min": 20,
+          "k_max_frac": 0.25,
+          "k_selector": "double_bootstrap",
+          "k_fixed_frac": 0.05,
+          "double_bootstrap_resamples": 200,
+          "double_bootstrap_n1_exponent": 0.9,
+          "bootstrap_resamples": 500,
+          "bootstrap_unit": "trace",
+          "ci_level": 0.95,
+          "estimators": [
+            "hill",
+            "moment",
+            "gpd"
+          ]
+        },
+        "out_dir": "results/simulations/kesten",
+        "figure_p_trace": 0.05
+      }
+    },
+    {
+      "p": 0.02,
+      "alpha_theory": 3.9734333282273067,
+      "xi_theory": 0.25167151865767845,
+      "selected_k": {
+        "k": 3813,
+        "method": "double_bootstrap",
+        "n": 192000,
+        "objective": 8.990247501156153e-06,
+        "diagnostics": {
+          "n1": 56882,
+          "n2": 16852,
+          "k1_star": 1757,
+          "k2_star": 533,
+          "k_raw": 3813.3407248194776,
+          "resamples": 200,
+          "n1_exponent": 0.9,
+          "k_grid_stage1": [
+            20,
+            14220
+          ]
+        }
+      },
+      "grid": [
+        {
+          "k": 960,
+          "fraction": 0.005,
+          "hill": 0.21189185203102712,
+          "moment": 0.31197310134791933,
+          "gpd": 0.35314432655157296
+        },
+        {
+          "k": 1920,
+          "fraction": 0.01,
+          "hill": 0.2237580125333305,
+          "moment": 0.2303061671881964,
+          "gpd": 0.2171970468426029
+        },
+        {
+          "k": 3813,
+          "fraction": 0.019859375,
+          "hill": 0.2609798211448344,
+          "moment": 0.15220343978540174,
+          "gpd": 0.1390151765684625
+        },
+        {
+          "k": 3840,
+          "fraction": 0.02,
+          "hill": 0.2609840414236202,
+          "moment": 0.15312012520219476,
+          "gpd": 0.1396807518131193
+        },
+        {
+          "k": 9600,
+          "fraction": 0.05,
+          "hill": 0.2096718300066902,
+          "moment": 0.3153533215999327,
+          "gpd": 0.4371929437650702
+        },
+        {
+          "k": 19200,
+          "fraction": 0.1,
+          "hill": 0.17721769668121623,
+          "moment": 0.33611479910100983,
+          "gpd": 0.4385744861103756
+        }
+      ],
+      "n_refuted": 144,
+      "top1": 0.9027777777777778,
+      "config": {
+        "rho": 0.7,
+        "kappa": 2.5,
+        "p_values": [
+          0.0,
+          0.02,
+          0.05,
+          0.1
+        ],
+        "d": 8,
+        "n_traces": 3000,
+        "n_steps": 64,
+        "burn_in": 200,
+        "sigma": 1.0,
+        "tolerance_quantile": 0.999,
+        "seed": 20270101,
+        "tail": {
+          "k_min": 20,
+          "k_max_frac": 0.25,
+          "k_selector": "double_bootstrap",
+          "k_fixed_frac": 0.05,
+          "double_bootstrap_resamples": 200,
+          "double_bootstrap_n1_exponent": 0.9,
+          "bootstrap_resamples": 500,
+          "bootstrap_unit": "trace",
+          "ci_level": 0.95,
+          "estimators": [
+            "hill",
+            "moment",
+            "gpd"
+          ]
+        },
+        "out_dir": "results/simulations/kesten",
+        "figure_p_trace": 0.05
+      }
+    },
+    {
+      "p": 0.05,
+      "alpha_theory": 2.7992019180772587,
+      "xi_theory": 0.3572446823296295,
+      "selected_k": {
+        "k": 12484,
+        "method": "double_bootstrap",
+        "n": 192000,
+        "objective": 1.1605942931909469e-05,
+        "diagnostics": {
+          "n1": 56882,
+          "n2": 16852,
+          "k1_star": 4632,
+          "k2_star": 1388,
+          "k_raw": 12483.856550566526,
+          "resamples": 200,
+          "n1_exponent": 0.9,
+          "k_grid_stage1": [
+            20,
+            14220
+          ]
+        }
+      },
+      "grid": [
+        {
+          "k": 960,
+          "fraction": 0.005,
+          "hill": 0.3554445612173116,
+          "moment": 0.2873359004498621,
+          "gpd": 0.2658779192324592
+        },
+        {
+          "k": 1920,
+          "fraction": 0.01,
+          "hill": 0.35719790975239274,
+          "moment": 0.33531037535669506,
+          "gpd": 0.33950381563870663
+        },
+        {
+          "k": 3840,
+          "fraction": 0.02,
+          "hill": 0.3183419866572632,
+          "moment": 0.38500909358937396,
+          "gpd": 0.4502847084075847
+        },
+        {
+          "k": 9600,
+          "fraction": 0.05,
+          "hill": 0.344111786690239,
+          "moment": 0.3054512416725168,
+          "gpd": 0.2840365814271892
+        },
+        {
+          "k": 12484,
+          "fraction": 0.06502083333333333,
+          "hill": 0.3472083244221933,
+          "moment": 0.31088899669958314,
+          "gpd": 0.29268806670446257
+        },
+        {
+          "k": 19200,
+          "fraction": 0.1,
+          "hill": 0.32159023257029307,
+          "moment": 0.36203470226726464,
+          "gpd": 0.4014844069020127
+        }
+      ],
+      "n_refuted": 130,
+      "top1": 0.8461538461538461,
+      "config": {
+        "rho": 0.7,
+        "kappa": 2.5,
+        "p_values": [
+          0.0,
+          0.02,
+          0.05,
+          0.1
+        ],
+        "d": 8,
+        "n_traces": 3000,
+        "n_steps": 64,
+        "burn_in": 200,
+        "sigma": 1.0,
+        "tolerance_quantile": 0.999,
+        "seed": 20270101,
+        "tail": {
+          "k_min": 20,
+          "k_max_frac": 0.25,
+          "k_selector": "double_bootstrap",
+          "k_fixed_frac": 0.05,
+          "double_bootstrap_resamples": 200,
+          "double_bootstrap_n1_exponent": 0.9,
+          "bootstrap_resamples": 500,
+          "bootstrap_unit": "trace",
+          "ci_level": 0.95,
+          "estimators": [
+            "hill",
+            "moment",
+            "gpd"
+          ]
+        },
+        "out_dir": "results/simulations/kesten",
+        "figure_p_trace": 0.05
+      }
+    },
+    {
+      "p": 0.1,
+      "alpha_theory": 1.8193361564807207,
+      "xi_theory": 0.5496510342180939,
+      "selected_k": {
+        "k": 24551,
+        "method": "double_bootstrap",
+        "n": 192000,
+        "objective": 4.354874174939767e-05,
+        "diagnostics": {
+          "n1": 56882,
+          "n2": 16852,
+          "k1_star": 8717,
+          "k2_star": 2749,
+          "k_raw": 24550.83573701082,
+          "resamples": 200,
+          "n1_exponent": 0.9,
+          "k_grid_stage1": [
+            20,
+            14220
+          ]
+        }
+      },
+      "grid": [
+        {
+          "k": 960,
+          "fraction": 0.005,
+          "hill": 0.5342479696636304,
+          "moment": 0.5216837139002899,
+          "gpd": 0.52360673176597
+        },
+        {
+          "k": 1920,
+          "fraction": 0.01,
+          "hill": 0.553533734597266,
+          "moment": 0.5165229633204407,
+          "gpd": 0.4953310320276234
+        },
+        {
+          "k": 3840,
+          "fraction": 0.02,
+          "hill": 0.5273048870901929,
+          "moment": 0.5397320002709981,
+          "gpd": 0.5564826106216363
+        },
+        {
+          "k": 9600,
+          "fraction": 0.05,
+          "hill": 0.5455176615881352,
+          "moment": 0.533771031767085,
+          "gpd": 0.5298459349550256
+        },
+        {
+          "k": 19200,
+          "fraction": 0.1,
+          "hill": 0.5178621081771708,
+          "moment": 0.5460850562244081,
+          "gpd": 0.5720823452520665
+        },
+        {
+          "k": 24551,
+          "fraction": 0.12786979166666668,
+          "hill": 0.5220569883464548,
+          "moment": 0.5374698509038317,
+          "gpd": 0.5444989804374489
+        }
+      ],
+      "n_refuted": 75,
+      "top1": 0.68,
+      "config": {
+        "rho": 0.7,
+        "kappa": 2.5,
+        "p_values": [
+          0.0,
+          0.02,
+          0.05,
+          0.1
+        ],
+        "d": 8,
+        "n_traces": 3000,
+        "n_steps": 64,
+        "burn_in": 200,
+        "sigma": 1.0,
+        "tolerance_quantile": 0.999,
+        "seed": 20270101,
+        "tail": {
+          "k_min": 20,
+          "k_max_frac": 0.25,
+          "k_selector": "double_bootstrap",
+          "k_fixed_frac": 0.05,
+          "double_bootstrap_resamples": 200,
+          "double_bootstrap_n1_exponent": 0.9,
+          "bootstrap_resamples": 500,
+          "bootstrap_unit": "trace",
+          "ci_level": 0.95,
+          "estimators": [
+            "hill",
+            "moment",
+            "gpd"
+          ]
+        },
+        "out_dir": "results/simulations/kesten",
+        "figure_p_trace": 0.05
+      }
+    }
+  ]
+}

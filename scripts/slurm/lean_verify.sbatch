@@ -8,14 +8,15 @@
 #SBATCH --output=%x-%A_%a.out
 #
 # Stage 2: exact per-step labels from the Lean 4 kernel. CPU-bound and usually the slowest stage,
-# so it runs as an array over disjoint shards. Lean runs on the host, not in the container.
+# so it runs as an array over disjoint shards. The Python environment needs the container;
+# the installed Lean binaries and workspace remain available through the home bind.
 source "$HOME/onebigjump/scripts/slurm/common.sh"
 cd "$REPO"
 
 SAMPLES="${SAMPLES:-data/raw/prover-sampling/samples.jsonl}"
 OUT="${OUT:-results/full/lean}"
 
-"$REPO/.venvc/bin/onebigjump" lean-verify "$SAMPLES" \
+obj lean-verify "$SAMPLES" \
     --out-dir "$OUT" \
     --shard "${SLURM_ARRAY_TASK_ID:-0}" \
     --n-shards "${SLURM_ARRAY_TASK_COUNT:-1}"

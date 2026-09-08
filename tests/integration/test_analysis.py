@@ -35,6 +35,7 @@ def result(table, tmp_path_factory):
         name="unit",
         tables_dir=out / "tables",
         metrics_dir=out / "metrics",
+        figures_dir=out / "figures",
         tau_override=table.attrs["tau"],
     )
     return payload, out
@@ -55,7 +56,7 @@ class TestPredictions:
 
     def test_the_manifest_records_why(self, result) -> None:
         _, out = result
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         assert man["status"] == "ok"
         assert any("P5" in note for note in man["notes"])
 
@@ -101,7 +102,7 @@ class TestArtifacts:
 
     def test_outputs_are_registered_with_digests(self, result) -> None:
         _, out = result
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         roles = {o["role"] for o in man["outputs"]}
         assert {"metrics", "table"} <= roles
         assert all(o["digest"] for o in man["outputs"])
@@ -138,6 +139,7 @@ class TestEmptyCases:
             name="verified-only",
             tables_dir=tmp_path / "t",
             metrics_dir=tmp_path / "m",
+            figures_dir=tmp_path / "figures",
         )
         assert payload["P1"]
         assert "P2" in payload["not_run"]

@@ -137,8 +137,8 @@ def split_half_reliability(
     the dependence between neighbouring steps rather than the stability of the estimate.
     """
     cfg = cfg or TailEstimationConfig()
-    x = np.asarray(z, dtype=np.float64).ravel()
-    g = np.asarray(groups).ravel()
+    x: np.ndarray = np.asarray(z, dtype=np.float64).ravel()
+    g: np.ndarray = np.asarray(groups).ravel()
     if g.size != x.size:
         raise ValueError(f"groups has length {g.size}, expected {x.size}")
 
@@ -193,8 +193,8 @@ def split_half_reliability(
             delta_median=float("nan"),
             delta_iqr=(float("nan"), float("nan")),
             delta_p90=float("nan"),
-            xi_left=la.tolist(),
-            xi_right=ra.tolist(),
+            xi_left=left,
+            xi_right=right,
             note="no split produced an estimate on both halves; the sample is too small",
         )
 
@@ -209,8 +209,8 @@ def split_half_reliability(
         delta_median=float(np.median(d)),
         delta_iqr=(float(np.percentile(d, 25)), float(np.percentile(d, 75))),
         delta_p90=float(np.percentile(d, 90)),
-        xi_left=la.tolist(),
-        xi_right=ra.tolist(),
+        xi_left=left,
+        xi_right=right,
         note=""
         if d.size == n_splits
         else f"{n_splits - d.size} of {n_splits} splits were unusable",

@@ -1,0 +1,2435 @@
+diff --git a/AGENTS.md b/AGENTS.md
+index 37da07b..7b87fa5 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -56,3 +56,10 @@ the kernel labels must not look like a run that checked them.
+ * `vllm` and `flash-attn`: Linux + CUDA only.
+ * Sampling from a prover model: the smallest in the paper is 7B and does not fit in 16 GB. See
+   `docs/system_report.md` for what this machine can and cannot run.
++
++## Working environment (user instruction, 2026-09-08)
++
++The working repository is on Zhores at `/beegfs/home/denis.rakhmankin/onebigjump`.
++Perform all further edits and tests on the server. Do not run local experiments or tests.
++Use the existing `zhores` SSH alias without changing SSH/VPN settings.
++Submit tests and computation through Slurm; keep login-node work to file and job management.
+diff --git a/README.md b/README.md
+index 78b324a..dbbab07 100644
+--- a/README.md
++++ b/README.md
+@@ -5,6 +5,11 @@ Trajectories as an Order Parameter for Algorithmic Computation* (ICLR 2027 submi
+ 
+ **Private repository. No license is declared until the paper is public.**
+ 
++> **Current audit:** [September revision](audit/revision_2026_09_08/REPORT.md).
++> The experiment implementation is incomplete. Existing P4 archives do not establish the
++> proposed order-parameter transition, and Lean P1–P3 have no model activation results yet.
++> Historical artifact digests must be checked before using any published numbers.
++
+ ## What the paper claims, and what this measures
+ 
+ A reasoning trace is a trajectory of residual-stream states `X_t`. The paper's claim is that the
+@@ -19,16 +24,17 @@ together heuristics. This repository estimates it and tests the five predictions
+ 
+ | | Prediction | State |
+ |---|---|---|
+-| P1 | Tail separation — refuted traces have a heavier tail than verified ones | implemented, validated against the closed form |
+-| P2 | Localization — the first rejected step is the largest jump | implemented, reproduces the paper's numbers |
++| P1 | Tail separation — refuted traces have a heavier tail than verified ones | implemented; surrogate checks, model experiment pending |
++| P2 | Localization — the first rejected step is the largest jump | implemented, surrogate checks; model experiment pending |
+ | P3 | Overshoot — `Z_{t*}/tau` is Pareto-like, not concentrated at 1 | implemented; **see the finding below** |
+-| P4 | Order parameter — `xi` drops when a circuit forms during grokking | **run for real, on three seeds** |
++| P4 | Order parameter — `xi` drops when a circuit forms during grokking | training archives exist; proposed signal unconfirmed |
+ | P5 | Length law — `P(V_L=1) ≈ exp(-theta L Fbar(tau))` | implemented; **see the finding below** |
+ 
+ ## Three things the measurements say that the paper does not
+ 
+-These are the substantive output of the work so far, and they are recorded with the runs that
+-produced them in [`STATUS.md`](STATUS.md) and [`reports/experimental_report.md`](reports/experimental_report.md).
++These are historical observations, predating the current revision. Their archived reports and
++numerical artifacts require the provenance checks described in the
++[revision report](audit/revision_2026_09_08/REPORT.md); they do not replace the missing model experiments.
+ 
+ 1. **P3 as written measures the wrong thing when steps cluster.** On the Kesten surrogate at
+    `p = 0.05`, where `gamma = 0.357` exactly, the 99.9% threshold gives shape **+0.454** for the
+@@ -55,11 +61,11 @@ produced them in [`STATUS.md`](STATUS.md) and [`reports/experimental_report.md`]
+ the Lyapunov exponent vanishes; 184 refuted traces at `p = 0` against the caption's 185; top-1
+ localisation 0.846 at `p = 0.05` against a predicted 0.85.
+ 
+-**P4, on three seeds.** `gamma_hat` rises to a transient peak, then falls on the *same checkpoint*
+-as the turn in Nanda et al.'s excluded loss, 800–900 steps **before** the generalization jump. That
+-is more specific than P4 as stated: the order parameter tracks circuit formation, not the accuracy
+-that follows it. The timing replicates on a seed whose transition is ten thousand steps earlier;
+-the amplitude does not (peaks of 0.175, 0.180, 0.069).
++**P4.** Modular-addition training and a shuffled-label control have been run. The earlier
++interpretation of a Hill transient as a transition in `xi` is withdrawn. The current audit also
++corrects the Fourier projection and the evaluation split for excluded loss. Archived progress
++losses require a new run; the signed tail estimates can be reanalysed from saved checkpoints.
++See the [generated audit measurements](audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md).
+ 
+ ## Layout
+ 
+diff --git a/STATUS.md b/STATUS.md
+index 5ed63e9..e7f61e7 100644
+--- a/STATUS.md
++++ b/STATUS.md
+@@ -1,158 +1,56 @@
+ # Status
+ 
+-Last edit: 2026-09-04. Stage numbering follows the task specification.
++Updated after the 2026-09-08 revision against the supplied paper draft and the Zhores archive.
+ 
+-**On a GPU server**, the pipeline is complete and the runbook is
+-[`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). What remains to be *run*
+-there, rather than written, is stage 10: sampling from a 7-8B prover, labelling those traces, and
+-extracting their residual streams. Nothing on this machine can do that in 16 GB without CUDA.
++The paper's experimental programme is **not complete**. Working estimators, a simulation and
++modular-addition training exist; these are not a replication of all experiments in Sections 5
++and B. The previous claim that the remaining work was only to run the GPU pipeline is withdrawn.
+ 
+-## Stages
++Read the [revision report](audit/revision_2026_09_08/REPORT.md),
++[generated measurements](audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md) and
++[validation record](audit/revision_2026_09_08/VALIDATION.md).
++The [previous status](audit/revision_2026_09_08/STATUS-before.md) is retained as historical evidence;
++its P4 interpretation and claims of completeness are superseded.
+ 
+-| # | Stage | State | Where |
+-|---|---|---|---|
+-| 1 | Study the paper, write the specification | **done** | [`docs/experimental_specification.md`](docs/experimental_specification.md) (430 lines) |
+-| 2 | System audit | **done** | [`docs/system_report.md`](docs/system_report.md), `scripts/doctor.py` |
+-| 3 | Repository from scratch | **done** | this tree |
+-| 4 | Python environment | **done** | Python 3.11.15, torch 2.13 (MPS), `uv.lock` pinned |
+-| 5 | Lean 4 + Mathlib | **done** | Lean 4.34.0-rc2, Mathlib `85e3a25e`, REPL built; 8.0 GB in `lean_workspace/` |
+-| 6 | Statistical methods | **done** | `src/onebigjump/stats/` (8 modules) |
+-| 7 | Tests | **done for what exists** | 429 tests: 18 driving the real Lean kernel, 29 driving real transformer activations |
+-| 8 | Kesten simulation (Figure 1) | **done** | `paper_outputs/figures/figure1_kesten_dichotomy.pdf` |
+-| 9 | Generation / verification / extraction | **done** | sampling (vLLM or HuggingFace), Lean labelling, and the extraction driver |
+-| 10 | Pilot | **runnable, not run here** | the pipeline is wired end to end; a 7-8B prover does not fit in 16 GB |
+-| 11 | Experiments P1-P5 | **done** | P1, P2, P3, P5 validated against the closed form; **P4 run for real** |
+-| 12 | Tables and figures | **done** | Figure 1, the P4 figure, and Tables 1-2 in Markdown and LaTeX |
+-| 13 | Reproducible report | **done** | `uv run onebigjump report` -> [`reports/experimental_report.md`](reports/experimental_report.md) |
+-| 14 | Push to a private GitHub repository | **done** | [Kilkaintomat/Scoltech-big_jump](https://github.com/Kilkaintomat/Scoltech-big_jump), private |
+-| 15 | Push after each completed stage | **done** | pushing after every stage since stage 14 |
+-
+-## What is missing, precisely
+-
+-| Item | Why it is missing |
+-|---|---|
+-| A prover run of stage 10 | The pipeline is complete and tested end to end on GPT-2, but the smallest model the paper names is 7B and does not fit in 16 GB. It needs a GPU box; see [`docs/running_on_a_gpu_server.md`](docs/running_on_a_gpu_server.md). |
+-| Benchmark acquisition | Nothing downloads miniF2F, ProofNet or PutnamBench: which of them the paper uses is one of its own placeholders, so the loader accepts either a local JSONL or a Hugging Face dataset id and the choice is left open. |
+-| `configs/synthetic/`, the PrOntoQA-style generator | Section 5.2 and P5 on real models. Not written. |
+-| `docs/data_schema.md`, `docs/bootstrap_report.md` | Requested, not written. The schema is documented in `experiments/dataset.py` and enforced by `validate_table`. |
+-| `src/onebigjump/schemas.py` | The requested top-level module; its content lives in `lean/schemas.py` and `experiments/dataset.py`. |
+-| A clean-tree re-run of every artifact | Figure 1, the Lean pilot and P4 were all produced while the tree was dirty, and their manifests say so. The numbers are correct; they are simply not tied to a commit. |
+-
+-## Blocked, and on what
+-
+-| Blocker | Consequence | What unblocks it |
++| Component | Implemented and checked | Still needed |
+ |---|---|---|
+-| `gh` is not authenticated | 6 commits sit on local `main`; stages 14 and 15 cannot start | `gh auth login` in a terminal |
+-| No CUDA (Apple M4, 16 GB) | Section 5.1 prover runs are not tractable at the paper's scale | a CUDA machine, or a documented reduction in scale |
+-| No Hugging Face token | gated weights unavailable (not currently binding) | `HF_TOKEN` in `.env` |
+-
+-## What has actually been reproduced or measured
+-
+-### Figure 1, in full
+-
+-The closed form of Theorem 5(v) returns `alpha = 3.9734, 2.7992, 1.8193` at `p = 0.02, 0.05, 0.10`
+-against the caption's `3.97, 2.80, 1.82`, and `p_c = 0.2802` is exactly where the Lyapunov
+-exponent vanishes. At the caption's setting (`rho = 0.7`, `kappa = 2.5`, `d = 8`, 3000 traces of
+-64 steps):
+-
+-| `p` | `xi` theory | Hill [95% CI] | moment | GPD | refuted | top-1 | chance |
+-|---|---|---|---|---|---|---|---|
+-| 0.00 | 0.0000 | 0.0788 [0.0773, 0.0801] | **-0.1033** | -0.1064 | 184 | 0.984 | 0.0156 |
+-| 0.02 | 0.2517 | 0.2610 [0.2523, 0.2711] | 0.1522 | 0.1390 | 144 | 0.903 | 0.0156 |
+-| 0.05 | 0.3572 | 0.3472 [0.3379, 0.3587] | 0.3109 | 0.2927 | 130 | 0.846 | 0.0156 |
+-| 0.10 | 0.5497 | 0.5221 [0.5088, 0.5368] | 0.5375 | 0.5445 | 75 | 0.680 | 0.0156 |
+-
+-The paper's caption states 185 refuted traces at `p = 0`; we get 184. Chance is `1/L = 0.0156`
+-against its printed 0.016. Top-1 at `p = 0.05` is 0.846 against a *predicted* 0.85 and a
+-*simulated* 0.80 in the paper.
+-
+-### P4, run for real, on three seeds
+-
+-40,000 steps of the one-layer modular-addition transformer on MPS, checkpoints every 100 steps.
+-Both seeds memorise early and grok at essentially the same step.
+-
+-| event | seed 0 | seed 1 | seed 2 |
+-|---|---|---|---|
+-| test accuracy crosses 0.9 | 23600 | 23700 | **13500** |
+-| `gamma_hat` peaks | 0.1753 at 22700 | 0.1801 at 22700 | 0.0691 at 12100 |
+-| **sharpest fall in `gamma_hat`** | **22800** | **22800** | **12600** |
+-| excluded loss half-transition | 22800 | 22900 | 12700 |
+-| test accuracy half-transition | 23200 | 23300 | 13200 |
+-| restricted loss half-transition | 23700 | 23800 | 13600 |
+-| `gamma_hat` after the transition | 0.0388 | 0.0457 | 0.0362 |
+-| lead over the generalization jump | 800 | 900 | 900 |
+-
+-The ordering replicates on all three, including seed 2, whose transition happens ten thousand
+-steps earlier than the other two. `gamma_hat` turns **first**, within one checkpoint of the
+-excluded loss, and leads the generalization jump by 800-900 steps every time.
+-
+-The *size* of the transient does not replicate: seed 2 peaks at 0.069 against 0.175 and 0.180.
+-So the timing of the signal is robust and its amplitude is not, which matters for anyone hoping
+-to read circuit formation off a single threshold on `gamma_hat`.
+-
+-That is more specific than P4 as stated. The paper asks for the drop to coincide "with the
+-mechanistic progress measures of Nanda et al. **and** the generalization jump"; those are ~900
+-steps apart here, and the order parameter goes with circuit formation, not with the downstream
+-accuracy that follows it.
+-
+-Two things not predicted by P4 at all, both present on both seeds:
+-
+-1. **`gamma_hat` rises before it falls** -- from a plateau at 0.041 to a peak of 0.175-0.180 over
+-   the two thousand steps preceding the transition. This is consistent with the mechanism rather
+-   than against it: while the representation is being reorganised the increments are transiently
+-   large and heavy-tailed, and only once the circuit is in place does the update become the
+-   constrained map `H_alg` describes. But it means `gamma_hat` is not monotone in training, and a
+-   measurement taken at a single checkpoint near the transition could report either sign.
+-2. **The signature is a peak, not a level shift.** `gamma_hat` returns to roughly where it
+-   started (0.030 -> 0.039 over the whole run). What identifies the transition is the transient,
+-   not the endpoints -- which is why the two progress measures are located here by a crossing
+-   time and `gamma_hat` by its sharpest fall.
+-
+-### Three things the measurements say that the paper does not
+-
+-1. **P3 as written does not measure the Pareto index when steps cluster.** At `p = 0.05`, where
+-   `gamma = 0.357` exactly, the 99.9% threshold gives shape **+0.454** for the unconditional
+-   overshoot of Proposition 1 and **+0.478** for the trace maximum, but only **+0.127** for the
+-   first exceedance `Z_{t*}`, which is what P3 specifies. Figure 1(d)'s caption attributes the
+-   gap to pre-asymptotics; raising the threshold across two decades leaves it at 0.06-0.13, so it
+-   is not that. The extremal index at those thresholds is `theta = 0.41` and `0.13`: exceedances
+-   arrive in clusters, and conditioning on the *first* one selects smaller overshoots.
+-   Theorem 4(ii) derives its limit under extremal independence, which Theorem 5's own model
+-   violates. At `p = 0`, where `theta = 1.000`, all three variants agree to within 0.05.
+-
+-2. **P5's `(theta, tau)` is not identified.** The likelihood depends on them only through
+-   `c = theta * Fbar(tau)`, so the fit is one-parameter: a free search returned
+-   `theta = 0.178, tau = 4.385` where the labelling threshold was `7.871`. The likelihood-ratio
+-   test therefore has `n_lengths - 1` degrees of freedom, not `n_lengths - 2`. Fixed by fitting
+-   `c` and pinning `theta` from the extremal index.
+-
+-3. **Under the coupling hypothesis, P1 is partly true by selection.** A "verified" trace is
+-   *defined* as one whose maximum stayed below `tau`, so its deviations are truncated above and
+-   its tail is light for reasons unrelated to the mechanism. This affects the surrogate, not the
+-   Lean experiments, where "verified" means the kernel accepted the proof.
+-
+-### Bugs found by running against real systems, not by reading
+-
+-| Where | What |
+-|---|---|
+-| Lean REPL | A tactic failing on a type mismatch returns a top-level `{"message": ...}` with **no** `proofState`, not a `messages` array. Reading only `messages` marked the step valid and replayed the rest against a stale state, turning refuted proofs into verified ones. |
+-| GPT-2 whitening | 12 increments in 768 dimensions gave whitened deviations 3.249, 3.249, 3.267, 3.269 -- a statistic with no variance left to have a tail. Now refused rather than silently flattening P1. |
+-| Shrinkage target | Shrinking towards `tr(S)/d * I` inflates low-variance coordinates under the massive-activation anisotropy whitening exists to remove: at 2500:1, an optimal intensity of 0.0011 left the whitened covariance at 0.81 instead of 1. Target is now `diag(S)`. |
+-| GPD profile fit | The search bracket scaled by the mean collapses as the mean diverges at `gamma -> 1`; it returned 0.74 for a true 0.90. Now bracketed in units of the median, where the optimum sits at `2^gamma - 1`. |
+-| P1 bootstrap | Resampling prompts collapses the interval to a point when there is one prompt, reading as impossible precision. Falls back to traces below 20 prompts. |
+-| `write_json` | `numpy.float64` subclasses `float`, so `json.dumps` wrote bare `NaN` tokens past the default hook, producing files no strict JSON reader accepts. |
+-
+-## Deviations from the paper's protocol
+-
+-1. `tau` in the simulation is per setting, not shared. A single `tau` cannot produce the caption's
+-   own counts (185 refuted at `p = 0` against 114 at `p = 0.05`); a per-setting `tau` does, and
+-   the ratio is the extremal index.
+-2. `vllm` and `flash-attn` are not installed: both are Linux + CUDA only.
+-3. The Lean REPL environment snapshot (`pickleTo`) was implemented, measured at 126.7s to restore
+-   against 129.0s to import, and removed. Timeouts now resynchronise by waiting for the late
+-   reply instead of restarting.
+-4. In P4, `gamma_hat` is a fixed-fraction point estimate (`k` = 5% of `n`) at every one of the 401
+-   checkpoints, with the full Section 4 protocol and intervals every 20th. Running the double
+-   bootstrap and the trace bootstrap 401 times is not affordable, and re-selecting `k` at every
+-   checkpoint would mix movement of the estimate with movement of the threshold. Recorded in the
+-   run manifest.
++| Statistical core | Hill, signed moment, GPD, threshold selection, trace/prompt bootstrap, extremal index; numerical and regression tests | Full stability bands and secondary threshold selection in the production analysis; calibrated inference under dependence |
++| Figure 1 / Kesten | Simulation, closed-form checks, fresh diagnostic threshold sweep | An immutable publication run with reconciled protocol choices and verified artifact digests |
++| Lean labels | Native local Lean/Mathlib/REPL integration; absorbing labels; sampled-goal guard | Install and validate Mathlib/REPL on Zhores; broader syntax and timeout/recovery coverage |
++| Model sampling | Hugging Face and vLLM adapters; seed/revision forwarding; saved expected statement and generation IDs | Regenerate legacy samples lacking original IDs/context; validate actual prover template and pinned weights |
++| Activation extraction | Exact saved IDs/context where alignment is verifiable; whitening; problem-disjoint calibration; shard reading | A real prover end-to-end pilot and complete activation dataset; coverage checks for non-roundtripping tokenizers |
++| P1–P3 | Analysis modules and surrogate/integration tests; fixes for ties, missing evidence and resampling metadata | Measurements on kernel-labelled model trajectories, stratified by model, temperature and task family |
++| P4 | Archived modular-addition and shuffled-label training; corrected Fourier projection and excluded training loss | Rerun corrected mechanistic measurements, freeze frequencies from final weights, test a prespecified transition criterion |
++| P5 | Identified exponential rate fit and independent extremal-index input | Controlled deduction lengths, uncertainty calibration and a guard for incompatible recovered tolerance |
++| Other draft experiments | No complete implementation found | Synthetic deduction and code tasks; two-hop composition; recurrent-depth experiment; Tracr/ngram controls; supervised hidden-state baseline |
++| Reporting/provenance | Manifests, source digests, generated tables/figures; P4 report corrected | Enforce digest verification before publication; unique run directories; submission-side provenance where GPU nodes lack git |
++
++## Interpretation of existing results
++
++The archived P4 models learn modular addition, but a transient in Hill alone is not a transition
++in the paper's `xi`. Reanalysis of signed moment estimates and the shuffled-label control does
++not establish the claimed mechanistic signal. The archived Fourier losses used an incorrect
++projection/evaluation split and must be rerun from weights or training; scalar logs cannot repair
++them. Negative finite-sample estimates alone do not prove bounded support or algorithmic computation.
++
++The Kesten diagnostic preserves disagreement between estimators and across thresholds. Its
++verified/refuted labels are defined by the deviation threshold, so it cannot independently
++validate the latent-to-kernel coupling that the real Lean experiments are meant to test.
++
++Historical P3 clustering observations and the P5 identifiability correction predate this
++revision. They motivate protocol checks; they do not fill the missing model experiments.
++
++## Current execution environment
++
++The authoritative working tree is on Zhores. Per user instruction, all further edits and tests run on the server; the last local repeat was stopped and is not counted as a successful run.
++
++Both checkouts started at `a3988f76ca27ff5ecc476a192b9d61797e861b65`. Zhores is reachable with the
++existing `zhores` SSH alias; SSH/VPN configuration was not changed. The audit runs used an uncommitted
++working tree and their diagnostic manifests correctly report that historical dirty state.
++
++Cluster validation uses Slurm and the existing container environment. Local live Lean tests do
++not establish that the remote Lean installation is ready. Exact test results and job evidence
++are recorded in [VALIDATION.md](audit/revision_2026_09_08/VALIDATION.md).
++
++Before a paper run: settle the protocol, freeze this reviewed source/config/model revision,
++validate a small real-prover pilot, then run into a new output directory with complete manifests.
+diff --git a/docs/data_schema.md b/docs/data_schema.md
+index 95bea13..6e7cc5a 100644
+--- a/docs/data_schema.md
++++ b/docs/data_schema.md
+@@ -105,7 +105,30 @@ the whitening is determined at all. Below roughly two increments per dimension i
+ 
+ ## Run manifests
+ 
+-Every run writes `<out_dir>/manifest.json`: the resolved config, the seed, the git commit and
++Every run writes `<out_dir>/manifest-<run-name>.json`: the resolved config, the seed, the git commit and
+ whether the tree was dirty, package versions, hardware, wall time, a SHA-256 of every output, the
+ headline metrics, and any recorded deviation from the paper's protocol. See
+ [`reproducibility.md`](reproducibility.md).
++
++## Revision: exact generation context and validity
++
++New samples record `theorem_statement`, the requested theorem. A sampled header that differs
++from it is quarantined as `statement_mismatch`, including formatting-only mismatches; it is not
++counted as a proof of the requested problem. The legacy corpus lacks this field and exact token
++IDs and must be sampled again before the paper pipeline is used.
++
++`ProofTrace.meta.generation` preserves the original prompt, raw completion, exact prompt and
++completion token IDs, the sampled proof and source metadata. Extraction uses these exact IDs,
++keeps the informal preamble in context and reads X0 at the actual prompt boundary. If offsets
++cannot be proven to match the saved token sequence, the trace is counted as unalignable. The
++text-only path is reserved for handwritten fixtures.
++
++Every labelled trajectory must have exactly L steps, indexed 0 through L-1, finite nonnegative
++z, a constant outcome and t_star, and labels consistent with t_star. Lean tables additionally
++carry `status`; every step strictly after the first failure must be `unreached`. Truncating a
++trajectory to the shorter of the labels and activations is forbidden.
++
++Lean array jobs write `traces.shardNN.jsonl`, `summary.shardNN.json`, and a manifest per shard.
++Extraction can read a shard directory, or discover shards when `traces.jsonl` is absent. Duplicate
++trace IDs across shards are rejected. `step_timeout` counts tactic timeouts separately from the
++statement-level `timeout` count; tactic timeouts remain refutations in the analysis.
+diff --git a/docs/running_on_a_gpu_server.md b/docs/running_on_a_gpu_server.md
+index d83036a..33d14b7 100644
+--- a/docs/running_on_a_gpu_server.md
++++ b/docs/running_on_a_gpu_server.md
+@@ -173,9 +173,10 @@ with the raw statistic, and both the log and the manifest say so -- it does not
+ statistic with no spread left. If `whitened` and `innovation` are missing from your table, that
+ is why.
+ 
+-**A prover that proves nothing gives you no calibration.** The split prefers problems with at
+-least one verified trace, but if the model verifies nothing there is nothing to fit on. Check the
+-verified count from stage 2 before running stage 3.
++**A prover that proves nothing gives you no calibration.** Problem membership is chosen using
++the seed independently of observed success. Only verified traces inside that split calibrate the
++statistics. An insufficient calibration is reported; do not move successful evaluation problems
++into the calibration split after seeing outcomes.
+ 
+ ## Memory
+ 
+@@ -191,3 +192,19 @@ token positions rather than whole `(batch, seq, d)` tensors.
+ Run from a **clean** working tree. Every run records the commit and whether the tree was dirty,
+ and a figure produced from a dirty tree cannot be regenerated from any commit; the report marks
+ those. See [`reproducibility.md`](reproducibility.md).
++
++## Revision prerequisites
++
++Read `audit/revision_2026_09_08/REPORT.md` before launching the paper campaign. In particular,
++archived samples without exact token IDs cannot be used to recover the generation states.
++New generation manifests record the seed and requested model revision; set a fixed revision for
++both sampling and extraction. YAML calibration parameters now reach the actual fit.
++
++The Lean array writes separate shard files and manifests. Extraction discovers those shards
++when the configured `traces.jsonl` is absent. Do not leave an obsolete merged file beside newer
++shards: an explicitly present file takes precedence. Automatic analysis artifacts from extraction
++are written under its own `analysis/` directory, including tables, metrics and figures.
++
++On Zhores, `.venvc/bin/python` points inside the container and cannot be run directly on the
++host. The Lean verification launcher therefore uses `obj` from `common.sh`. Mathlib and REPL
++still have to be built and tested separately; the launcher change does not install them.
+diff --git a/scripts/slurm/common.sh b/scripts/slurm/common.sh
+index 8f5b6de..293e949 100644
+--- a/scripts/slurm/common.sh
++++ b/scripts/slurm/common.sh
+@@ -47,6 +47,7 @@ export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
+ # 2.43 recorded it correctly. That is how a whole set of cluster results came to have no
+ # provenance while the launcher appeared to be working. A subshell `cd` works on both.
+ if (cd "$REPO" && git rev-parse HEAD) >/dev/null 2>&1; then
++    export ONEBIGJUMP_GIT_ROOT="$REPO"
+     export ONEBIGJUMP_GIT_COMMIT="$(cd "$REPO" && git rev-parse HEAD)"
+     export ONEBIGJUMP_GIT_BRANCH="$(cd "$REPO" && git rev-parse --abbrev-ref HEAD)"
+     export ONEBIGJUMP_GIT_DESCRIBE="$(cd "$REPO" && git describe --always --dirty 2>/dev/null || true)"
+diff --git a/scripts/slurm/lean_verify.sbatch b/scripts/slurm/lean_verify.sbatch
+index c9b89c6..fee98b2 100755
+--- a/scripts/slurm/lean_verify.sbatch
++++ b/scripts/slurm/lean_verify.sbatch
+@@ -8,14 +8,15 @@
+ #SBATCH --output=%x-%A_%a.out
+ #
+ # Stage 2: exact per-step labels from the Lean 4 kernel. CPU-bound and usually the slowest stage,
+-# so it runs as an array over disjoint shards. Lean runs on the host, not in the container.
++# so it runs as an array over disjoint shards. The Python environment needs the container;
++# the installed Lean binaries and workspace remain available through the home bind.
+ source "$HOME/onebigjump/scripts/slurm/common.sh"
+ cd "$REPO"
+ 
+ SAMPLES="${SAMPLES:-data/raw/prover-sampling/samples.jsonl}"
+ OUT="${OUT:-results/full/lean}"
+ 
+-"$REPO/.venvc/bin/onebigjump" lean-verify "$SAMPLES" \
++obj lean-verify "$SAMPLES" \
+     --out-dir "$OUT" \
+     --shard "${SLURM_ARRAY_TASK_ID:-0}" \
+     --n-shards "${SLURM_ARRAY_TASK_COUNT:-1}"
+diff --git a/src/onebigjump/cli.py b/src/onebigjump/cli.py
+index f74b411..2254cc3 100644
+--- a/src/onebigjump/cli.py
++++ b/src/onebigjump/cli.py
+@@ -188,6 +188,8 @@ def _run_generate(cfg: RunConfig, out_dir: Path | None) -> None:
+         trust_remote_code=section.trust_remote_code,
+         batch_size=section.batch_size,
+         name=cfg.name,
++        seed=section.seed,
++        revision=section.revision,
+     )
+     console.print(f"{out['n_samples']} samples over {out['n_problems']} problems -> {out['path']}")
+ 
+@@ -212,6 +214,10 @@ def _run_activations(cfg: RunConfig, out_dir: Path | None) -> None:
+         max_tokens=section.max_tokens,
+         seed=cfg.seed,
+         name=cfg.name,
++        trust_remote_code=False,
++        revision=section.revision,
++        shrinkage=section.shrinkage,
++        ridge_alpha=section.ridge_alpha,
+     )
+     summary = payload["extraction"]
+     console.print(
+diff --git a/src/onebigjump/config.py b/src/onebigjump/config.py
+index ee7ae5f..8a0153c 100644
+--- a/src/onebigjump/config.py
++++ b/src/onebigjump/config.py
+@@ -84,6 +84,7 @@ class ActivationConfig(Strict):
+     """Read-out settings for Appendix B.1."""
+ 
+     model_id: str = "gpt2"
++    revision: str | None = None
+     traces: Path | None = Field(None, description="JSONL written by `onebigjump lean-verify`")
+     device: Literal["auto", "cpu", "mps", "cuda"] = "auto"
+     dtype: Literal["float32", "float16", "bfloat16", "auto"] = "bfloat16"
+@@ -92,7 +93,7 @@ class ActivationConfig(Strict):
+     statistics: list[Literal["raw", "whitened", "innovation"]] = ["raw", "whitened", "innovation"]
+     shrinkage: float = Field(0.1, ge=0.0, le=1.0, description="Ledoit-Wolf-style ridge on Sigma")
+     ridge_alpha: float = Field(1.0, gt=0, description="ridge for the innovation regression")
+-    calibration_split: Literal["verified_disjoint", "verified_all"] = "verified_disjoint"
++    calibration_split: Literal["verified_disjoint"] = "verified_disjoint"
+     calibration_frac: float = Field(0.5, gt=0, lt=1)
+     batch_size: int = Field(1, ge=1)
+     out_dir: Path = Path("data/processed/activations")
+@@ -120,7 +121,7 @@ class GrokkingConfig(Strict):
+     p: int = Field(113, ge=5)
+     d_model: int = Field(128, ge=8)
+     n_heads: int = Field(4, ge=1)
+-    n_layers: int = Field(1, ge=1)
++    n_layers: Literal[1] = 1
+     d_mlp: int | None = None
+     lr: float = 1e-3
+     weight_decay: float = 1.0
+diff --git a/src/onebigjump/experiments/dataset.py b/src/onebigjump/experiments/dataset.py
+index 363434d..60694d2 100644
+--- a/src/onebigjump/experiments/dataset.py
++++ b/src/onebigjump/experiments/dataset.py
+@@ -64,12 +64,20 @@ def validate_table(df: pd.DataFrame) -> pd.DataFrame:
+         raise ValueError(f"deviations table is missing columns: {missing}")
+     if df.empty:
+         raise ValueError("deviations table is empty")
+-    if (df["z"] < 0).any():
+-        raise ValueError("negative step deviations")
+-    if df["t"].lt(0).any():
+-        raise ValueError("negative step indices")
+-
+-    key = ["trace_id", "layer", "statistic"]
++    if not np.isfinite(df["z"].to_numpy(dtype=float)).all() or (df["z"] < 0).any():
++        raise ValueError("step deviations must be finite and nonnegative")
++    if not df["valid"].isin([True, False]).all():
++        raise ValueError("valid labels must be boolean or binary")
++    if df[["trace_id", "prompt_id", "model", "layer", "statistic", "outcome"]].isna().any().any():
++        raise ValueError("missing trace metadata")
++    for col in ("t", "L", "layer"):
++        values = df[col].to_numpy(dtype=float)
++        if not np.isfinite(values).all() or np.any(values != np.floor(values)):
++            raise ValueError(f"{col} must contain finite integer values")
++    if df["t"].lt(0).any() or df["L"].lt(1).any():
++        raise ValueError("step indices must be nonnegative and lengths positive")
++
++    key = ["model", "trace_id", "layer", "statistic"]
+     for keys, group in df.groupby(key, sort=False):
+         steps = group["t"].to_numpy()
+         if len(np.unique(steps)) != len(steps):
+@@ -78,6 +86,34 @@ def validate_table(df: pd.DataFrame) -> pd.DataFrame:
+         v = group.sort_values("t")["valid"].to_numpy()
+         if np.any(np.diff(v.astype(int)) > 0):
+             raise ValueError(f"non-absorbing labels in {dict(zip(key, keys, strict=True))}")
++        for col in ("prompt_id", "L", "outcome", "t_star"):
++            if group[col].nunique(dropna=False) != 1:
++                raise ValueError(f"inconsistent {col} within trace {keys}")
++        length = int(group["L"].iloc[0])
++        if len(steps) != length or not np.array_equal(np.sort(steps), np.arange(length)):
++            raise ValueError(f"steps must cover 0..L-1 without gaps in trace {keys}")
++        star = group["t_star"].iloc[0]
++        outcome = group["outcome"].iloc[0]
++        if outcome == "verified":
++            if not pd.isna(star) or not np.all(v):
++                raise ValueError(f"verified trace has a failure or t_star: {keys}")
++        elif outcome == "refuted":
++            if pd.isna(star) or star != int(star) or not 0 <= star < length:
++                raise ValueError(f"refuted trace has invalid t_star: {keys}")
++            if not np.array_equal(v.astype(bool), np.arange(length) < star):
++                raise ValueError(f"t_star disagrees with labels in trace {keys}")
++        else:
++            raise ValueError(f"unlabelled outcome {outcome!r} in deviations table")
++        if "status" in group:
++            statuses = group.sort_values("t")["status"].to_numpy()
++            expected_ok = statuses == "ok"
++            if not np.array_equal(expected_ok, v.astype(bool)):
++                raise ValueError(f"step status disagrees with valid labels in trace {keys}")
++            if outcome == "refuted" and (
++                statuses[int(star)] not in {"error", "timeout", "sorry", "unsolved_goals"}
++                or np.any(statuses[int(star) + 1 :] != "unreached")
++            ):
++                raise ValueError(f"steps after t_star must be unreached in trace {keys}")
+     return df
+ 
+ 
+@@ -106,7 +142,9 @@ def from_traces(
+         for layer, traj in per_layer.items():
+             cal = (calibrations or {}).get(layer)
+             devs = deviations(traj, cal)
+-            n = min(trace.n_steps, traj.n_steps)
++            if trace.n_steps != traj.n_steps:
++                raise ValueError(f"trajectory/label length mismatch for {trace.trace_id}")
++            n = trace.n_steps
+             for name, values in devs.items():
+                 if name not in statistics:
+                     continue
+@@ -125,6 +163,7 @@ def from_traces(
+                             "valid": bool(step.valid),
+                             "t_star": trace.t_star,
+                             "outcome": trace.outcome.value,
++                            "status": step.status.value,
+                             "surprisal": float(traj.surprisal[t])
+                             if t < traj.surprisal.size
+                             else np.nan,
+@@ -132,7 +171,7 @@ def from_traces(
+                     )
+     if not rows:
+         raise ValueError("no labelled traces with trajectories")
+-    return validate_table(pd.DataFrame(rows, columns=list(COLUMNS)))
++    return validate_table(pd.DataFrame(rows, columns=[*COLUMNS, "status"]))
+ 
+ 
+ def from_kesten(
+diff --git a/src/onebigjump/experiments/p1_tail_separation.py b/src/onebigjump/experiments/p1_tail_separation.py
+index c8aa7e1..eac27b0 100644
+--- a/src/onebigjump/experiments/p1_tail_separation.py
++++ b/src/onebigjump/experiments/p1_tail_separation.py
+@@ -24,8 +24,9 @@ proof and no threshold is involved. The consequence is that the simulation can c
+ from __future__ import annotations
+ 
+ from dataclasses import dataclass, field
+-from typing import Any, cast
++from typing import Any, Literal, cast
+ 
++import numpy as np
+ import pandas as pd
+ 
+ from ..config import TailEstimationConfig
+@@ -130,8 +131,14 @@ def tail_separation(estimates: dict[str, dict[str, Any]]) -> dict[str, Any]:
+     ) -> bool | None:
+         if a is None or b is None or a[1] is None or b[2] is None:
+             return None
++        if not np.isfinite(a[1]) or not np.isfinite(b[2]):
++            return None
+         return bool(a[1] > b[2])
+ 
++    complete = all(
++        c is not None and all(v is not None and np.isfinite(v) for v in c) for c in (ver, pre, post)
++    )
++
+     return {
+         "gamma_verified": None if ver is None else ver[0],
+         "gamma_refuted": None if ref is None else ref[0],
+@@ -143,7 +150,9 @@ def tail_separation(estimates: dict[str, dict[str, Any]]) -> dict[str, Any]:
+         "pre_above_verified": strictly_above(pre, ver),
+         "post_above_pre": strictly_above(post, pre),
+         "expected_pattern_holds": (
+-            strictly_above(post, ver) is True and strictly_above(pre, ver) is not True
++            None
++            if not complete
++            else strictly_above(post, ver) is True and strictly_above(pre, ver) is False
+         ),
+     }
+ 
+@@ -181,7 +190,7 @@ def run_p1(
+             est = estimate_tail(
+                 part["z"].to_numpy(),
+                 groups.to_numpy(),
+-                cfg,
++                cfg.model_copy(update={"bootstrap_unit": unit}),
+                 seed=seed,
+                 with_hill_plot=with_hill_plot,
+                 meta={
+@@ -193,6 +202,9 @@ def run_p1(
+                 },
+             )
+             res.estimates[name] = est.as_dict() | est.row()
++            res.estimates[name]["m_traces"] = int(part["trace_id"].nunique())
++        if not res.estimates:
++            continue
+         res.separation = tail_separation(res.estimates)
+         results.append(res)
+         log.info(
+@@ -207,7 +219,9 @@ def run_p1(
+     return results
+ 
+ 
+-def _bootstrap_unit(part: pd.DataFrame, min_groups: int = 20) -> tuple[pd.Series, str]:
++def _bootstrap_unit(
++    part: pd.DataFrame, min_groups: int = 20
++) -> tuple[pd.Series, Literal["trace", "prompt"]]:
+     """Pick the resampling unit, and say which one was picked.
+ 
+     Section 4 resamples prompts when several traces share a prompt, because such traces are not
+diff --git a/src/onebigjump/experiments/p2_localization.py b/src/onebigjump/experiments/p2_localization.py
+index d589883..7c23d30 100644
+--- a/src/onebigjump/experiments/p2_localization.py
++++ b/src/onebigjump/experiments/p2_localization.py
+@@ -56,6 +56,7 @@ class P2Result:
+     roc: dict[str, Any] = field(default_factory=dict)
+     roc_surprisal: dict[str, Any] = field(default_factory=dict)
+     by_length: list[dict[str, Any]] = field(default_factory=list)
++    baseline_comparison: dict[str, Any] = field(default_factory=dict)
+ 
+     @property
+     def lift(self) -> float:
+@@ -88,6 +89,7 @@ class P2Result:
+             "roc": self.roc,
+             "roc_surprisal": self.roc_surprisal,
+             "by_length": self.by_length,
++            "baseline_comparison": self.baseline_comparison,
+         }
+ 
+ 
+@@ -116,8 +118,8 @@ def _per_trace(cell: pd.DataFrame) -> list[dict[str, Any]]:
+ 
+ 
+ def _rank_of(values: np.ndarray, index: int) -> int:
+-    """Rank of `values[index]` among `values`, 1 = largest. Ties count against the target."""
+-    return int(1 + np.sum(values > values[index]))
++    """Descending rank, breaking ties by the earliest step (Theorem 4's argmax)."""
++    return int(1 + np.sum(values > values[index]) + np.sum(values[:index] == values[index]))
+ 
+ 
+ def localization_rates(traces: list[dict[str, Any]], key: str = "z") -> dict[str, float]:
+@@ -206,13 +208,15 @@ def _roc(traces: list[dict[str, Any]], key: str = "z") -> dict[str, Any]:
+     fp = np.cumsum(1 - y[order])
+     tpr = tp / max(n_pos, 1)
+     fpr = fp / max(n_neg, 1)
+-    keep = np.unique(np.linspace(0, tpr.size - 1, min(tpr.size, 400)).astype(int))
++    # A threshold includes every observation with the same score. Splitting tied scores
++    # produced curves whose area disagreed with the tie-correct AUC above.
++    ends = np.r_[np.flatnonzero(np.diff(s[order]) != 0), s.size - 1]
+     return {
+         "auc": float(auc),
+         "n_positive": n_pos,
+         "n_negative": n_neg,
+         "n": int(y.size),
+-        "curve": {"fpr": fpr[keep].tolist(), "tpr": tpr[keep].tolist()},
++        "curve": {"fpr": [0.0, *fpr[ends].tolist()], "tpr": [0.0, *tpr[ends].tolist()]},
+     }
+ 
+ 
+@@ -287,6 +291,17 @@ def run_p2(
+                 else {}
+             ),
+             by_length=_by_length(traces),
++            baseline_comparison=(
++                {
++                    "n_paired": len(usable),
++                    "jump_top1": localization_rates(usable)["top1"],
++                    "surprisal_top1": surprisal_rates["top1"],
++                    "jump_beats_surprisal": localization_rates(usable)["top1"]
++                    > surprisal_rates["top1"],
++                }
++                if surprisal_rates is not None
++                else {"n_paired": 0, "jump_beats_surprisal": None}
++            ),
+         )
+         results.append(res)
+         log.info(
+diff --git a/src/onebigjump/experiments/p3_overshoot.py b/src/onebigjump/experiments/p3_overshoot.py
+index c6218c2..23f2e88 100644
+--- a/src/onebigjump/experiments/p3_overshoot.py
++++ b/src/onebigjump/experiments/p3_overshoot.py
+@@ -46,6 +46,7 @@ import pandas as pd
+ from ..logging import get_logger
+ from ..stats import gpd_fit, group_bootstrap
+ from .dataset import subset, validate_table
++from .p1_tail_separation import _bootstrap_unit
+ 
+ __all__ = ["P3Result", "run_p3"]
+ 
+@@ -78,6 +79,7 @@ class P3Result:
+     frac_above: dict[str, float] = field(default_factory=dict)
+     survival: dict[str, list[float]] = field(default_factory=dict)
+     comparison: dict[str, Any] = field(default_factory=dict)
++    bootstrap_unit: str = "trace"
+ 
+     def row(self) -> dict[str, Any]:
+         return {
+@@ -88,6 +90,8 @@ class P3Result:
+             "tau": self.tau,
+             "n_refuted": self.n_refuted,
+             "n_over_tau": self.n_over_tau,
++            "fraction_over_tau": self.n_over_tau / self.n_refuted if self.n_refuted else None,
++            "bootstrap_unit": self.bootstrap_unit,
+             "gpd_shape": self.gpd_shape,
+             "shape_lo": self.shape_ci[0],
+             "shape_hi": self.shape_ci[1],
+@@ -229,17 +233,21 @@ def run_p3(
+ 
+             excess = z_star - tau
+             fit = gpd_fit(excess, threshold=tau)
++            at_star = cell[(cell["t"] == cell["t_star"]) & cell["trace_id"].isin(trace_ids)]
++            at_star = at_star.set_index("trace_id").loc[trace_ids].reset_index()
++            groups, unit = _bootstrap_unit(at_star)
+             # The GPD here is fitted to *all* the excesses, not to an upper order statistic, so
+             # there is no tail fraction to hold fixed; `k = n - 1` keeps `group_bootstrap`'s
+             # `k < n` guard satisfied while the estimator ignores `k` entirely.
+             boot = group_bootstrap(
+                 excess,
+-                trace_ids,
++                groups.to_numpy(),
+                 lambda y, _k: float(gpd_fit(y).gamma),
+                 k=max(excess.size - 1, 2),
+                 resamples=bootstrap_resamples,
+                 level=ci_level,
+                 seed=seed,
++                unit=unit,
+             )
+ 
+             variants, theta = _overshoot_variants(cell, tau)
+@@ -273,8 +281,9 @@ def run_p3(
+                     "2": float(np.mean(u > 2.0)),
+                     "5": float(np.mean(u > 5.0)),
+                 },
+-                survival={"u": u.tolist(), "s": surv.tolist()},
++                survival={"u": [float(v) for v in u], "s": [float(v) for v in surv]},
+                 comparison=comparison,
++                bootstrap_unit=unit,
+             )
+             results.append(res)
+             log.info(
+diff --git a/src/onebigjump/experiments/p4_grokking.py b/src/onebigjump/experiments/p4_grokking.py
+index 17a7d0d..f05cec5 100644
+--- a/src/onebigjump/experiments/p4_grokking.py
++++ b/src/onebigjump/experiments/p4_grokking.py
+@@ -192,6 +192,7 @@ def train_grokking(
+         "wall_time_s": round(time.time() - t0, 1),
+         "full_every": full_every,
+         "tail_k_frac": tail_k_frac,
++        "progress_measure_protocol": "same-frequency Fourier terms; excluded loss on train; adaptive frequencies",
+     }
+     return checkpoints, meta
+ 
+diff --git a/src/onebigjump/experiments/pipeline.py b/src/onebigjump/experiments/pipeline.py
+index a96edec..3c0c1e1 100644
+--- a/src/onebigjump/experiments/pipeline.py
++++ b/src/onebigjump/experiments/pipeline.py
+@@ -12,7 +12,7 @@ from typing import Any
+ from ..lean.problems import Problem, load_problems
+ from ..logging import get_logger
+ from ..manifests import run_manifest
+-from ..reproducibility import write_json
++from ..reproducibility import file_digest, seed_everything, write_json
+ 
+ __all__ = ["run_extraction", "run_generation"]
+ 
+@@ -35,6 +35,8 @@ def run_generation(
+     trust_remote_code: bool = False,
+     batch_size: int = 1,
+     name: str = "generate",
++    seed: int = 1234,
++    revision: str | None = None,
+     # True, not False. The completion carries the model's informal reasoning before the Lean
+     # block, and `extract_lean_block` throws it away; once a run finishes, nothing short of
+     # regenerating gets it back. It is the one field here that cannot be recomputed, and a
+@@ -59,8 +61,14 @@ def run_generation(
+         "n_problems": len(problems),
+         "split": split,
+         "dtype": dtype,
++        "seed": seed,
++        "revision": revision,
++        "device": device,
++        "batch_size": batch_size,
++        "problems_digest": file_digest(Path(problems_source)),
+     }
+-    with run_manifest(name, "generate", out, config=config) as man:
++    with run_manifest(name, "generate", out, config=config, seed=seed) as man:
++        seed_everything(seed)
+         # Every backend option is passed; `make_backend` keeps what its chosen backend accepts.
+         engine = make_backend(
+             model_id,
+@@ -69,6 +77,8 @@ def run_generation(
+             device=device,
+             dtype=dtype,
+             batch_size=batch_size,
++            seed=seed,
++            revision=revision,
+         )
+ 
+         samples = generate(
+@@ -105,6 +115,9 @@ def run_extraction(
+     device: str = "auto",
+     dtype: str = "bfloat16",
+     trust_remote_code: bool = False,
++    revision: str | None = None,
++    shrinkage: float | None = None,
++    ridge_alpha: float = 1.0,
+     max_tokens: int | None = 4096,
+     seed: int = 0,
+     name: str = "activations",
+@@ -132,10 +145,18 @@ def run_extraction(
+         "dtype": dtype,
+         "max_tokens": max_tokens,
+         "seed": seed,
++        "revision": revision,
++        "shrinkage": shrinkage,
++        "ridge_alpha": ridge_alpha,
++        "traces_digest": file_digest(Path(traces_path)),
+     }
+     with run_manifest(name, "activations", out, config=config, seed=seed) as man:
+         model, tokenizer, resolved = load_extraction_model(
+-            model_id, device=device, dtype=dtype, trust_remote_code=trust_remote_code
++            model_id,
++            device=device,
++            dtype=dtype,
++            trust_remote_code=trust_remote_code,
++            revision=revision,
+         )
+         man.add_metric("device", resolved)
+ 
+@@ -149,6 +170,8 @@ def run_extraction(
+             statistics=statistics,
+             max_tokens=max_tokens,
+             model_name=model_id,
++            shrinkage=shrinkage,
++            ridge_alpha=ridge_alpha,
+         )
+ 
+         table_path = out / "deviations.parquet"
+@@ -187,6 +210,11 @@ def run_extraction(
+             from .analysis import run_analysis
+ 
+             payload["analysis"] = run_analysis(
+-                result.table, out_dir=out / "analysis", name=f"{name}-analysis"
++                result.table,
++                out_dir=out / "analysis",
++                name=f"{name}-analysis",
++                tables_dir=out / "analysis" / "tables",
++                metrics_dir=out / "analysis" / "metrics",
++                figures_dir=out / "analysis" / "figures",
+             )
+         return payload
+diff --git a/src/onebigjump/lean/batch.py b/src/onebigjump/lean/batch.py
+index 8e6582a..5dcfd8a 100644
+--- a/src/onebigjump/lean/batch.py
++++ b/src/onebigjump/lean/batch.py
+@@ -19,7 +19,8 @@ from ..logging import get_logger
+ from ..manifests import run_manifest
+ from ..reproducibility import write_json
+ from .environment import discover
+-from .schemas import ProofTrace, StepStatus, VerificationSummary
++from .schemas import ProofTrace, StepStatus, TraceOutcome, VerificationSummary
++from .segmentation import split_header_and_proof
+ from .verifier import LeanREPL, verify_trace
+ 
+ __all__ = ["ProofRequest", "read_requests", "verify_batch"]
+@@ -93,6 +94,8 @@ def verify_batch(
+     losing the work is not a small thing.
+     """
+     out = Path(out_dir)
++    if n_shards < 1 or not 0 <= shard < n_shards:
++        raise ValueError("shard must lie in [0, n_shards) and n_shards must be positive")
+     env = discover(workspace)
+     items = [ProofRequest(r) for r in requests]
+     if n_shards > 1:
+@@ -115,7 +118,7 @@ def verify_batch(
+         log.info("resuming: %d already verified, %d to go", len(done), len(items))
+ 
+     with run_manifest(
+-        name,
++        name if n_shards == 1 else f"{name}-shard{shard:02d}",
+         "lean",
+         out,
+         config={
+@@ -135,17 +138,47 @@ def verify_batch(
+         with LeanREPL(env) as repl:
+             with trace_path.open("a" if done else "w", encoding="utf-8") as fh:
+                 for i, req in enumerate(items):
+-                    tr = verify_trace(
+-                        repl,
+-                        req.source,
+-                        trace_id=req.trace_id,
+-                        problem_id=req.problem_id,
+-                        model_id=str(req.get("model_id", "")),
+-                        temperature=req.get("temperature"),
+-                        sample_index=int(req.get("sample_index", 0)),
+-                        per_step_timeout_s=per_step_timeout_s,
+-                        whole_proof_timeout_s=whole_proof_timeout_s,
+-                    )
++                    expected_statement = req.get("theorem_statement")
++                    sampled_header, _ = split_header_and_proof(req.proof)
++                    if expected_statement and sampled_header.strip() != expected_statement.strip():
++                        # Exact equality is conservative: even a formatting-only change is
++                        # quarantined until the canonical goal can be checked for equivalence.
++                        tr = ProofTrace(
++                            trace_id=req.trace_id,
++                            problem_id=req.problem_id,
++                            model_id=str(req.get("model_id", "")),
++                            temperature=req.get("temperature"),
++                            sample_index=int(req.get("sample_index", 0)),
++                            theorem_statement=expected_statement,
++                            proof_text=req.source,
++                            outcome=TraceOutcome.STATEMENT_MISMATCH,
++                            error="sampled theorem header differs from the requested statement",
++                        )
++                    else:
++                        tr = verify_trace(
++                            repl,
++                            req.source,
++                            trace_id=req.trace_id,
++                            problem_id=req.problem_id,
++                            model_id=str(req.get("model_id", "")),
++                            temperature=req.get("temperature"),
++                            sample_index=int(req.get("sample_index", 0)),
++                            per_step_timeout_s=per_step_timeout_s,
++                            whole_proof_timeout_s=whole_proof_timeout_s,
++                        )
++                    # Keep the actual generation context; kernel-only directives are not model input.
++                    if req.get("prompt") or req.get("prompt_token_ids"):
++                        tr.meta["generation"] = {
++                            key: req.get(key)
++                            for key in (
++                                "prompt",
++                                "completion",
++                                "prompt_token_ids",
++                                "completion_token_ids",
++                                "proof",
++                                "meta",
++                            )
++                        }
+                     if not tr.check_absorbing():  # pragma: no cover - guarded by construction
+                         raise AssertionError(f"non-absorbing labels on trace {tr.trace_id}")
+                     traces.append(tr)
+@@ -167,7 +200,8 @@ def verify_batch(
+             traces = read_traces(trace_path)
+         summary = VerificationSummary.from_traces(traces)
+         man.add_output(trace_path, "traces")
+-        man.add_output(write_json(out / "summary.json", summary.model_dump()), "summary")
++        summary_name = "summary.json" if n_shards == 1 else f"summary.shard{shard:02d}.json"
++        man.add_output(write_json(out / summary_name, summary.model_dump()), "summary")
+         for key, value in summary.model_dump().items():
+             man.add_metric(key, value)
+ 
+diff --git a/src/onebigjump/lean/schemas.py b/src/onebigjump/lean/schemas.py
+index fcd5ff4..63deaca 100644
+--- a/src/onebigjump/lean/schemas.py
++++ b/src/onebigjump/lean/schemas.py
+@@ -39,6 +39,7 @@ class TraceOutcome(StrEnum):
+     PARSE_ERROR = "parse_error"  # discarded: no step structure
+     TIMEOUT = "timeout"
+     REPL_FAILURE = "repl_failure"  # infrastructure, not a property of the proof
++    STATEMENT_MISMATCH = "statement_mismatch"  # the model changed the requested theorem
+ 
+ 
+ class Record(BaseModel):
+@@ -122,7 +123,9 @@ class VerificationSummary(Record):
+     refuted: int = 0
+     parse_error_discarded: int = 0
+     timeout: int = 0
++    step_timeout: int = 0
+     repl_failure: int = 0
++    statement_mismatch: int = 0
+     n_steps_total: int = 0
+     mean_trace_length: float = 0.0
+     mean_t_star: float | None = None
+@@ -141,7 +144,9 @@ class VerificationSummary(Record):
+             refuted=by[TraceOutcome.REFUTED],
+             parse_error_discarded=by[TraceOutcome.PARSE_ERROR],
+             timeout=by[TraceOutcome.TIMEOUT],
++            step_timeout=sum(any(s.status == StepStatus.TIMEOUT for s in t.steps) for t in traces),
+             repl_failure=by[TraceOutcome.REPL_FAILURE],
++            statement_mismatch=by[TraceOutcome.STATEMENT_MISMATCH],
+             n_steps_total=sum(t.n_steps for t in traces),
+             mean_trace_length=(
+                 sum(t.n_steps for t in labelled) / len(labelled) if labelled else 0.0
+diff --git a/src/onebigjump/manifests.py b/src/onebigjump/manifests.py
+index e60694a..a03cef8 100644
+--- a/src/onebigjump/manifests.py
++++ b/src/onebigjump/manifests.py
+@@ -102,7 +102,8 @@ class RunManifest:
+         the cluster runs were made. That is not a clean checkout, it is an unknown one, and the
+         figure it produced cannot be traced back to a commit either way.
+         """
+-        return self.environment.get("git", {}).get("dirty", True) is False
++        git = self.environment.get("git", {})
++        return bool(git.get("commit")) and git.get("dirty") is False
+ 
+     def as_dict(self) -> dict[str, Any]:
+         return {
+@@ -156,6 +157,11 @@ def run_manifest(
+             "packages": package_versions(),
+             "hardware": hardware_info(),
+             "python_build": platform.python_build(),
++            "source_files": {
++                str(p.relative_to(Path(__file__).resolve().parent)): file_digest(p)
++                for p in sorted(Path(__file__).resolve().parent.rglob("*.py"))
++            },
++            "source_root": str(Path(__file__).resolve().parent),
+         },
+     )
+     try:
+diff --git a/src/onebigjump/models/activations.py b/src/onebigjump/models/activations.py
+index c8fcc3e..3330698 100644
+--- a/src/onebigjump/models/activations.py
++++ b/src/onebigjump/models/activations.py
+@@ -315,11 +315,16 @@ def extract_trajectory(
+     import torch
+ 
+     n_layers = len(list(_blocks(model)))
++    if not alignment.complete:
++        raise ValueError("incomplete step alignment cannot be extracted")
+     chosen = layers if layers is not None else layer_indices(n_layers, layer_fractions)
+     positions = alignment.readout_positions
+ 
+-    enc = tokenizer(text, return_tensors="pt", add_special_tokens=True)
+-    input_ids = enc["input_ids"]
++    if alignment.input_ids is None:
++        enc = tokenizer(text, return_tensors="pt", add_special_tokens=True)
++        input_ids = enc["input_ids"]
++    else:
++        input_ids = torch.tensor([alignment.input_ids], dtype=torch.long)
+     if input_ids.shape[1] != alignment.n_tokens:
+         raise ValueError(
+             f"tokenisation changed between alignment ({alignment.n_tokens} tokens) and "
+@@ -328,8 +333,9 @@ def extract_trajectory(
+     dev = device or str(next(model.parameters()).device)
+     input_ids = input_ids.to(dev)
+ 
++    model.eval()
+     with torch.no_grad(), record_residuals(model, chosen, positions) as rec:
+-        out = model(input_ids=input_ids)
++        out = model(input_ids=input_ids, use_cache=False)
+         logits = out.logits[0].to(torch.float32)
+ 
+     # Token log-probability of each *realised* token, shifted by one as usual.
+diff --git a/src/onebigjump/models/extraction.py b/src/onebigjump/models/extraction.py
+index 6a324ee..7f89768 100644
+--- a/src/onebigjump/models/extraction.py
++++ b/src/onebigjump/models/extraction.py
+@@ -27,6 +27,7 @@ import pandas as pd
+ 
+ from ..experiments.dataset import from_traces
+ from ..lean.schemas import ProofTrace
++from ..lean.segmentation import split_header_and_proof
+ from ..logging import get_logger
+ from .activations import Calibration, Trajectory, extract_trajectory, fit_calibration
+ from .hooks import block_modules, layer_indices
+@@ -66,7 +67,12 @@ class ExtractionResult:
+ 
+ 
+ def load_extraction_model(
+-    model_id: str, *, device: str = "auto", dtype: str = "bfloat16", trust_remote_code: bool = False
++    model_id: str,
++    *,
++    device: str = "auto",
++    dtype: str = "bfloat16",
++    trust_remote_code: bool = False,
++    revision: str | None = None,
+ ) -> tuple[Any, Any, str]:
+     """Load the model used for *activations*, which Appendix B.3 keeps separate from sampling.
+ 
+@@ -93,9 +99,11 @@ def load_extraction_model(
+     }[dtype]
+ 
+     log.info("loading %s for extraction onto %s in %s", model_id, device, torch_dtype)
+-    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=trust_remote_code)
++    tokenizer = AutoTokenizer.from_pretrained(
++        model_id, trust_remote_code=trust_remote_code, revision=revision
++    )
+     model = AutoModelForCausalLM.from_pretrained(
+-        model_id, dtype=torch_dtype, trust_remote_code=trust_remote_code
++        model_id, torch_dtype=torch_dtype, trust_remote_code=trust_remote_code, revision=revision
+     )
+     # The transformers stubs reject a device string here; see the same cast in generation.py.
+     model = cast(Any, model).to(device)
+@@ -117,33 +125,60 @@ def trace_alignment(
+     # The body is rebuilt from the original source, not from the segments' `tactic` text: that
+     # text has been dedented and re-joined, so its character offsets no longer match the line
+     # spans the segmenter recorded, and the readouts would land on the wrong tokens.
+-    lines = trace.proof_text.split("\n")
+-    first = min(s.line_start for s in trace.steps)
+-    last = max(s.line_end for s in trace.steps)
+-    header_lines = trace.header.count("\n") + 1
+-    body_lines = lines[header_lines:]
+-    if not body_lines:
++    _, body = split_header_and_proof(trace.proof_text)
++    body_lines = body.split("\n")
++    if not body.strip():
+         return None
+-    body = "\n".join(body_lines)
+ 
+     steps = [
+         {"index": s.index, "line_start": s.line_start, "line_end": s.line_end}
+         for s in trace.steps
+-        if 0 <= s.line_start < len(body_lines) and first <= s.line_end <= max(last, 0)
++        if 0 <= s.line_start <= s.line_end < len(body_lines)
+     ]
+-    if not steps:
++    if len(steps) != len(trace.steps):
+         return None
+ 
+-    head = (prompt or "") + trace.header + "\n"
+-    text = head + body
+-    spans = step_char_spans(body, steps, base_offset=len(head))
+-    if not spans:
++    generation = trace.meta.get("generation")
++    ids = None
++    if generation:
++        prompt_ids = generation.get("prompt_token_ids")
++        completion_ids = generation.get("completion_token_ids")
++        if not prompt_ids or not completion_ids:
++            return None
++        ids = list(prompt_ids) + list(completion_ids)
++        text = tokenizer.decode(ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)
++        head = tokenizer.decode(
++            prompt_ids, skip_special_tokens=False, clean_up_tokenization_spaces=False
++        )
++        # Only accept offsets when retokenisation proves identical to the saved sequence.
++        enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=False)
++        if list(enc["input_ids"]) != ids or not text.startswith(head):
++            return None
++        formal = generation.get("proof") or ""
++        formal_start = text.find(formal, len(head)) if formal else -1
++        search_start = formal_start if formal_start >= 0 else len(head)
++        body_start = text.find(body, search_start)
++        if body_start < 0 or (formal_start < 0 and text.find(body, body_start + 1) >= 0):
++            return None
++    else:
++        if trace.model_id not in {"", "handwritten"}:
++            return None  # legacy model samples have lost the original generation context
++        head = (prompt or "") + trace.header + "\n"
++        text = head + body
++        body_start = len(head)
++        enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=True)
++    spans = step_char_spans(body, steps, base_offset=body_start)
++    if len(spans) != len(trace.steps):
+         return None
+-    enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=True)
+     try:
+         alignment = align_steps(enc["offset_mapping"], spans, prompt_char_end=len(head))
+     except ValueError:
+         return None
++    if not alignment.complete or len(alignment.step_end_tokens) != trace.n_steps:
++        return None
++    if ids is not None:
++        alignment.input_ids = ids
++        alignment.prompt_end_token = len(prompt_ids) - 1
+     return text, alignment
+ 
+ 
+@@ -251,32 +286,43 @@ def extract_table(
+ 
+ 
+ def read_traces(path: Path | str) -> list[ProofTrace]:
+-    """Read the JSONL that `onebigjump lean-verify` wrote."""
++    """Read a trace file, or the disjoint shards written by a Lean Slurm array."""
+     import json
+ 
++    path = Path(path)
++    if path.is_file():
++        paths = [path]
++    elif path.is_dir():
++        paths = sorted(path.glob("traces.shard*.jsonl"))
++    elif path.name == "traces.jsonl":
++        paths = sorted(path.parent.glob("traces.shard*.jsonl"))
++    else:
++        paths = []
++    if not paths:
++        raise FileNotFoundError(f"no labelled traces or shards at {path}")
+     out = []
+-    with Path(path).open(encoding="utf-8") as fh:
+-        for line in fh:
+-            if line.strip():
+-                out.append(ProofTrace.model_validate(json.loads(line)))
++    seen: set[str] = set()
++    for source in paths:
++        with source.open(encoding="utf-8") as fh:
++            for line in fh:
++                if line.strip():
++                    trace = ProofTrace.model_validate(json.loads(line))
++                    if trace.trace_id in seen:
++                        raise ValueError(f"duplicate trace_id across input files: {trace.trace_id}")
++                    seen.add(trace.trace_id)
++                    out.append(trace)
+     return out
+ 
+ 
+ def stratified_calibration_split(
+     traces: Sequence[ProofTrace], frac: float = 0.5, seed: int = 0
+ ) -> list[str]:
+-    """Choose the held-out problems, preferring ones that actually have verified traces.
+-
+-    A calibration split made of problems the model never proved contributes nothing to the fit,
+-    so problems with at least one verified trace are drawn first.
+-    """
+-    verified_problems = sorted({t.problem_id for t in traces if t.verified})
+-    others = sorted({t.problem_id for t in traces} - set(verified_problems))
++    """Choose a disjoint problem split without conditioning membership on observed success."""
++    problems = sorted({t.problem_id for t in traces})
++    if not 0 < frac < 1:
++        raise ValueError("calibration fraction must be between 0 and 1")
++    if len(problems) < 2:
++        raise ValueError("calibration and analysis require at least two distinct problems")
+     rng = np.random.default_rng(seed)
+-    target = max(1, round(frac * len({t.problem_id for t in traces})))
+-
+-    chosen = [verified_problems[int(i)] for i in rng.permutation(len(verified_problems))]
+-    if len(chosen) < target:
+-        extra = [others[int(i)] for i in rng.permutation(len(others))]
+-        chosen += extra[: target - len(chosen)]
+-    return sorted(chosen[:target])
++    target = min(len(problems) - 1, max(1, round(frac * len(problems))))
++    return sorted(problems[int(i)] for i in rng.permutation(len(problems))[:target])
+diff --git a/src/onebigjump/models/generation.py b/src/onebigjump/models/generation.py
+index 361c324..aa03c58 100644
+--- a/src/onebigjump/models/generation.py
++++ b/src/onebigjump/models/generation.py
+@@ -49,6 +49,7 @@ class Sample:
+     temperature: float
+     sample_index: int
+     proof: str
++    theorem_statement: str = ""
+     directives: str = ""
+     prompt: str = ""
+     completion: str = ""
+@@ -121,6 +122,7 @@ class HFBackend:
+     dtype: str = "auto"
+     trust_remote_code: bool = False
+     batch_size: int = 1
++    revision: str | None = None
+     _model: Any = field(default=None, repr=False)
+     _tokenizer: Any = field(default=None, repr=False)
+ 
+@@ -145,14 +147,17 @@ class HFBackend:
+ 
+         log.info("loading %s onto %s in %s", self.model_id, self.device, torch_dtype)
+         self._tokenizer = AutoTokenizer.from_pretrained(
+-            self.model_id, trust_remote_code=self.trust_remote_code
++            self.model_id, trust_remote_code=self.trust_remote_code, revision=self.revision
+         )
+         if self._tokenizer.pad_token is None:
+             self._tokenizer.pad_token = self._tokenizer.eos_token
+         self._tokenizer.padding_side = "left"  # required for batched generation
+         assert_tokenizer_roundtrips(self._tokenizer, self.model_id)
+         model = AutoModelForCausalLM.from_pretrained(
+-            self.model_id, dtype=torch_dtype, trust_remote_code=self.trust_remote_code
++            self.model_id,
++            torch_dtype=torch_dtype,
++            trust_remote_code=self.trust_remote_code,
++            revision=self.revision,
+         )
+         # The transformers stubs type `PreTrainedModel.to` against the wrong overload of
+         # `nn.Module.to`, so a device string is rejected at type-check time but correct at run time.
+@@ -195,14 +200,17 @@ class HFBackend:
+                 # Padding is on the left for batched generation, so the prompt ids for this row
+                 # are the non-pad suffix of its input row.
+                 row = enc["input_ids"][i].tolist()
+-                prompt_ids = [t for t in row if t != pad] if pad is not None else row
++                mask = enc["attention_mask"][i].tolist()
++                prompt_ids = [t for t, keep in zip(row, mask, strict=True) if keep]
+                 per: list[tuple[str, list[int], list[int]]] = []
+                 for j in range(n):
+-                    ids = (
+-                        [t for t in tail[i * n + j].tolist() if t != pad]
+-                        if pad is not None
+-                        else tail[i * n + j].tolist()
++                    ids = tail[i * n + j].tolist()
++                    eos = self._model.generation_config.eos_token_id
++                    eos_ids = set(eos if isinstance(eos, list) else [eos])
++                    stop = next(
++                        (k + 1 for k, token in enumerate(ids) if token in eos_ids), len(ids)
+                     )
++                    ids = ids[:stop]
+                     per.append((completions[i * n + j], prompt_ids, ids))
+                 out.append(per)
+         return out
+@@ -228,6 +236,8 @@ class VLLMBackend:
+     gpu_memory_utilization: float = 0.90
+     max_model_len: int | None = None
+     trust_remote_code: bool = False
++    seed: int = 1234
++    revision: str | None = None
+     #: None means "decide by whether a compiler exists". True skips torch.compile and CUDA graphs.
+     enforce_eager: bool | None = None
+     _llm: Any = field(default=None, repr=False)
+@@ -245,7 +255,9 @@ class VLLMBackend:
+         from transformers import AutoTokenizer
+ 
+         assert_tokenizer_roundtrips(
+-            AutoTokenizer.from_pretrained(self.model_id, trust_remote_code=self.trust_remote_code),
++            AutoTokenizer.from_pretrained(
++                self.model_id, trust_remote_code=self.trust_remote_code, revision=self.revision
++            ),
+             self.model_id,
+         )
+         eager = self.enforce_eager
+@@ -261,6 +273,8 @@ class VLLMBackend:
+             max_model_len=self.max_model_len,
+             trust_remote_code=self.trust_remote_code,
+             enforce_eager=eager,
++            seed=self.seed,
++            revision=self.revision,
+         )
+ 
+     def sample(
+@@ -372,6 +386,7 @@ def generate(
+                     temperature=float(temperature),
+                     sample_index=index,
+                     proof=proof,
++                    theorem_statement=problem.statement,
+                     # The `open` lines travel with the sample. `extract_lean_block` cuts
+                     # everything before `theorem`, so without this they are gone by the time the
+                     # kernel sees the proof -- and dropping `open Real` turns a valid miniF2F
+diff --git a/src/onebigjump/models/grokking.py b/src/onebigjump/models/grokking.py
+index da94f94..1cdccb6 100644
+--- a/src/onebigjump/models/grokking.py
++++ b/src/onebigjump/models/grokking.py
+@@ -172,7 +172,7 @@ def key_frequencies(model: nn.Module, top_k: int = 6) -> list[int]:
+     spectrum = np.abs(np.fft.rfft(emb, axis=0))
+     power = (spectrum**2).sum(axis=1)
+     power[0] = 0.0  # the constant component is always present and carries no frequency
+-    return sorted(np.argsort(power)[::-1][:top_k].tolist())
++    return sorted(int(i) for i in (np.argsort(power[1:])[::-1][:top_k] + 1))
+ 
+ 
+ @dataclass
+@@ -199,8 +199,36 @@ def _loss_and_acc(logits: Tensor, targets: Tensor) -> tuple[float, float]:
+     return float(loss.item()), float(acc.item())
+ 
+ 
++def fourier_circuit_logits(
++    grid: np.ndarray, frequencies: list[int]
++) -> tuple[np.ndarray, np.ndarray]:
++    """Keep/remove same-frequency Fourier terms, retaining DC in both projections.
++
++    Nanda et al. (2023), Section 5.1. A whole row/column also contains mixed-frequency
++    and single-input terms, which must not count as the modular-addition circuit.
++    """
++    p = grid.shape[0]
++    spectrum = np.fft.fft2(grid, axes=(0, 1))
++    circuit = np.zeros((p, p), dtype=bool)
++    for f in frequencies:
++        if not 0 < f <= p // 2:
++            raise ValueError(f"invalid nonzero Fourier frequency {f} for p={p}")
++        signs = [f, (-f) % p]
++        circuit[np.ix_(signs, signs)] = True
++    restricted_mask = circuit.copy()
++    restricted_mask[0, 0] = True
++    restricted = np.real(np.fft.ifft2(spectrum * restricted_mask[:, :, None], axes=(0, 1)))
++    excluded = np.real(np.fft.ifft2(spectrum * (~circuit)[:, :, None], axes=(0, 1)))
++    return restricted, excluded
++
++
+ def progress_measures(
+-    model: nn.Module, data: ModularAdditionData, *, top_k: int = 6, device: str = "cpu"
++    model: nn.Module,
++    data: ModularAdditionData,
++    *,
++    top_k: int = 6,
++    device: str = "cpu",
++    frequencies: list[int] | None = None,
+ ) -> ProgressMeasures:
+     """Train/test loss and accuracy, plus the restricted and excluded losses.
+ 
+@@ -223,22 +251,17 @@ def progress_measures(
+     train_loss, train_acc = _loss_and_acc(logits[data.train_idx], targets[data.train_idx])
+     test_loss, test_acc = _loss_and_acc(logits[data.test_idx], targets[data.test_idx])
+ 
+-    freqs = key_frequencies(model, top_k=top_k)
++    # A fixed list from the final model reproduces the original protocol. The adaptive
++    # fallback remains a diagnostic and is identified in the run metadata.
++    freqs = key_frequencies(model, top_k=top_k) if frequencies is None else frequencies
+     grid = logits.reshape(p, p, p).numpy()
+-    spectrum = np.fft.fft2(grid, axes=(0, 1))
+-
+-    keep = np.zeros((p, p), dtype=bool)
+-    keep[0, 0] = True  # the constant term belongs to both models
+-    for f in freqs:
+-        for sign_a in (f, (p - f) % p):
+-            keep[sign_a, :] = True
+-            keep[:, sign_a] = True
+-
+-    restricted = np.real(np.fft.ifft2(spectrum * keep[:, :, None], axes=(0, 1)))
+-    excluded = np.real(np.fft.ifft2(spectrum * (~keep)[:, :, None], axes=(0, 1)))
++    restricted, excluded = fourier_circuit_logits(grid, freqs)
+ 
+     r_loss, _ = _loss_and_acc(torch.from_numpy(restricted.reshape(p * p, p)).float(), targets)
+-    e_loss, _ = _loss_and_acc(torch.from_numpy(excluded.reshape(p * p, p)).float(), targets)
++    e_loss, _ = _loss_and_acc(
++        torch.from_numpy(excluded.reshape(p * p, p)).float()[data.train_idx],
++        targets[data.train_idx],
++    )
+ 
+     return ProgressMeasures(
+         train_loss=train_loss,
+diff --git a/src/onebigjump/models/token_alignment.py b/src/onebigjump/models/token_alignment.py
+index c031fb2..7bede52 100644
+--- a/src/onebigjump/models/token_alignment.py
++++ b/src/onebigjump/models/token_alignment.py
+@@ -56,6 +56,7 @@ class TokenAlignment:
+     step_token_spans: list[tuple[int, int]]
+     n_tokens: int
+     unaligned: list[int]
++    input_ids: list[int] | None = None
+ 
+     @property
+     def readout_positions(self) -> list[int]:
+@@ -73,6 +74,7 @@ class TokenAlignment:
+             "step_token_spans": [list(s) for s in self.step_token_spans],
+             "n_tokens": self.n_tokens,
+             "unaligned": self.unaligned,
++            "exact_generation_tokens": self.input_ids is not None,
+         }
+ 
+ 
+diff --git a/src/onebigjump/reporting/report.py b/src/onebigjump/reporting/report.py
+index ba1f51b..473b27f 100644
+--- a/src/onebigjump/reporting/report.py
++++ b/src/onebigjump/reporting/report.py
+@@ -63,7 +63,12 @@ def _provenance(manifest: dict[str, Any] | None) -> str:
+     git = manifest.get("environment", {}).get("git", {})
+     commit = (git.get("commit") or "unknown")[:8]
+     dirty = git.get("dirty")
+-    state = "**dirty working tree -- not reproducible from any commit**" if dirty else "clean"
++    if dirty is True:
++        state = "**dirty working tree -- not reproducible from any commit**"
++    elif git.get("commit") and dirty is False:
++        state = "clean"
++    else:
++        state = "**unknown provenance -- reproducibility unverified**"
+     return (
+         f"Run `{manifest.get('name')}` at commit `{commit}` ({state}), "
+         f"{manifest.get('duration_s', 0):.0f}s, status `{manifest.get('status')}`."
+@@ -148,81 +153,62 @@ def _lean(results: Path) -> Section:
+ 
+ 
+ def _p4(results: Path) -> Section:
+-    files = sorted(results.glob("full/grokking/p4_grokking_seed*.json"))
++    files = sorted(results.glob("full/grokking*/p4_grokking*.json"))
+     if not files:
+         return _missing(
+             "P4 -- the order parameter across the grokking transition",
+-            "no `results/full/grokking/p4_grokking_seed*.json`; run `make p4`.",
++            "no P4 checkpoint metrics; run `make p4`.",
+         )
+     sec = Section("P4 -- the order parameter across the grokking transition")
+     sec.line(
+-        "| seed | grokking step | final test acc | `gamma` peak | `gamma` after | peak-to-trough |"
+-    ).line("|---|---|---|---|---|---|")
+-    analyses: list[dict[str, Any]] = []
++        "Signed gamma is the moment estimate; xi = max(gamma, 0). Hill is a diagnostic."
++    ).line()
++    sec.line(
++        "Archived gamma_* summaries may use Hill and are not used below. "
++        "The presence of training metrics does not establish P4 or certify their provenance."
++    ).line()
+     for path in files:
+         payload = _load(path)
+-        if payload is None:
++        if payload is None or not payload.get("checkpoints"):
+             continue
+         cps = payload["checkpoints"]
+-        a = payload.get("analysis", {})
+-        analyses.append(a)
+-        grok = a.get("grokking_step", payload.get("grokking_step"))
++        sec.line(f"### `{path.parent.name}/{path.name}`").line()
++        sec.line(
++            "| seed | grokking step | final test acc | moment first | moment last | Hill last |"
++        ).line("|---|---|---|---|---|---|")
++        grok = payload.get("grokking_step")
+         sec.line(
+             f"| {payload['seed']} | {grok if grok is not None else '**never**'} "
+             f"| {cps[-1]['test_acc']:.3f} "
+-            f"| {a.get('gamma_max', float('nan')):.4f} at step {a.get('gamma_argmax_step', '?')} "
+-            f"| {a.get('gamma_after_transition', float('nan')):.4f} "
+-            f"| {a.get('gamma_peak_to_trough', float('nan')):.4f} |"
+-        )
+-    sec.line()
+-
+-    if analyses and analyses[0]:
+-        a = analyses[0]
+-        seed0 = _load(files[0]) or {}
+-        sec.line(
+-            f"**Where the drop sits** (seed {seed0.get('seed', 0)}). P4 names two references and "
+-            "they are not the same step:"
+-        )
+-        sec.line()
+-        events: list[tuple[str, int]] = [
+-            (label, int(at))
+-            for label, at in (
+-                ("sharpest fall in `gamma_hat`", a.get("sharpest_drop_step")),
+-                ("excluded loss half-transition", a.get("excluded_turn_step")),
+-                ("test accuracy half-transition", a.get("test_acc_turn_step")),
+-                ("test accuracy crosses 0.9", a.get("grokking_step")),
+-                ("restricted loss half-transition", a.get("restricted_turn_step")),
+-            )
+-            if at is not None
+-        ]
+-        sec.line("| event | step |").line("|---|---|")
+-        for label, at in sorted(events, key=lambda e: e[1]):
+-            sec.line(f"| {label} | {at} |")
+-        sec.line()
+-        lead = a.get("drop_leads_generalization_by")
+-        if a.get("drop_coincides_with_progress_measures"):
+-            which = (
+-                "the excluded loss"
+-                if a.get("drop_coincides_with_excluded_loss")
+-                else "the restricted loss"
+-            )
+-            sec.line(
+-                f"The fall in `gamma_hat` lands on the **same checkpoint** as the turn in {which}"
+-                + (f", and leads the generalization jump by {lead} steps." if lead else ".")
+-            )
+-            sec.line()
++            f"| {cps[0].get('moment', float('nan')):+.4f} "
++            f"| {cps[-1].get('moment', float('nan')):+.4f} | {cps[-1]['hill']:.4f} |"
++        ).line()
++        if all(c.get("moment") is not None for c in cps):
++            xi = [max(float(c["moment"]), 0.0) for c in cps]
+             sec.line(
+-                "That ordering is the substantive part: the order parameter tracks circuit "
+-                "formation, which is what the progress measures detect, rather than the "
+-                "downstream accuracy that follows it."
+-            )
++                f"Maximum estimated xi: {max(xi):.4f}. "
++                f"Positive at {sum(x > 0 for x in xi)}/{len(xi)} checkpoints."
++            ).line()
+         else:
+             sec.line(
+-                "The fall in `gamma_hat` does **not** coincide with either progress measure. "
+-                "P4 is not supported by this run."
+-            )
+-        sec.line()
+-    sec.line(_provenance(_load_manifest(results / "full" / "grokking")))
++                "Signed moment estimates are missing; xi cannot be recovered from Hill."
++            ).line()
++        protocol = payload.get("meta", {}).get("progress_measure_protocol")
++        sec.line(
++            f"Progress-measure protocol: {protocol}."
++            if protocol
++            else "Legacy progress losses: require recomputation after the Fourier-mask correction."
++        ).line()
++        manifests = [_load(p) for p in find_manifests(path.parent)]
++        matched = next(
++            (
++                m
++                for m in manifests
++                if m and any(Path(o["path"]).name == path.name for o in m.get("outputs", []))
++            ),
++            None,
++        )
++        sec.line(_provenance(matched)).line()
+     return sec
+ 
+ 
+@@ -230,8 +216,8 @@ def _feasibility(root: Path, results: Path) -> Section:
+     """What this machine can run, derived from what is on disk rather than asserted."""
+     sec = Section("What could not be run here, and why")
+     sec.line(
+-        "The machine is an Apple M4 with 16 GB of unified memory: no CUDA, no Slurm. "
+-        "See `docs/system_report.md`, which is generated from the machine rather than written."
++        "Run availability below is inferred from saved artifacts. Hardware must be read from "
++        "each run manifest; a local machine report does not describe the cluster."
+     ).line()
+ 
+     def ran(pattern: str) -> str:
+@@ -239,17 +225,21 @@ def _feasibility(root: Path, results: Path) -> Section:
+ 
+     rows = [
+         ("Kesten simulation, Figure 1", ran("simulations/kesten/figure1_metrics.json")),
+-        ("Estimators, bootstrap, tests", "run" if (root / "tests").is_dir() else "**not run**"),
++        (
++            "Estimators, bootstrap, tests",
++            "test suite present; execution requires test logs"
++            if (root / "tests").is_dir()
++            else "**not run**",
++        ),
+         ("Lean 4 + Mathlib step replay", ran("pilot/*/summary.json")),
+-        ("Modular-addition grokking (P4)", ran("full/grokking/p4_grokking_seed*.json")),
++        ("Modular-addition grokking (P4)", ran("full/grokking*/p4_grokking*.json")),
+         (
+             "Prover traces from DeepSeek-Prover-V2-7B, Goedel-8B, Kimina-8B",
+-            "**not run**: an 8B model in bfloat16 is ~16 GB of weights alone, before "
+-            "activations and the KV cache",
++            ran("full/activations/deviations.parquet"),
+         ),
+         (
+             "Synthetic deduction on 7-8B general models",
+-            "**not run**: same constraint; `vllm` is Linux + CUDA only",
++            "**not run**: the synthetic deduction pipeline is not implemented",
+         ),
+     ]
+     sec.line("| Stage | Status |").line("|---|---|")
+diff --git a/src/onebigjump/reproducibility.py b/src/onebigjump/reproducibility.py
+index 1e9f8cd..480efac 100644
+--- a/src/onebigjump/reproducibility.py
++++ b/src/onebigjump/reproducibility.py
+@@ -80,7 +80,7 @@ GIT_ENV_VARS = {
+ }
+ 
+ 
+-def _git_from_environment() -> dict[str, Any] | None:
++def _git_from_environment(repo: Path | None = None) -> dict[str, Any] | None:
+     """Provenance handed in by the launcher, for runs inside a container without `git`.
+ 
+     The Singularity image the cluster runs has no `git` binary, so a run inside it cannot read its
+@@ -89,16 +89,20 @@ def _git_from_environment() -> dict[str, Any] | None:
+     say anything -- so it is labelled `source: environment` rather than passed off as the real
+     thing.
+     """
++    if repo is not None:
++        declared_root = os.environ.get("ONEBIGJUMP_GIT_ROOT")
++        if not declared_root or Path(declared_root).resolve() != repo.resolve():
++            return None
+     commit = os.environ.get(GIT_ENV_VARS["commit"], "").strip()
+     if not commit:
+         return None
+-    status = os.environ.get(GIT_ENV_VARS["status"], "")
++    status = os.environ.get(GIT_ENV_VARS["status"])
+     return {
+         "commit": commit,
+         "branch": os.environ.get(GIT_ENV_VARS["branch"]) or None,
+         "describe": os.environ.get(GIT_ENV_VARS["describe"]) or None,
+-        "dirty": bool(status.strip()),
+-        "status": status[:8000],
++        "dirty": bool(status.strip()) if status is not None else None,
++        "status": (status or "")[:8000],
+         "remote": os.environ.get(GIT_ENV_VARS["remote"]) or None,
+         "available": True,
+         "source": "environment",
+@@ -118,7 +122,7 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
+     # stamped `dirty: false`, i.e. reproducible. That is the one error worth being loud about: the
+     # cluster runs are made from an rsynced tree with no .git, and their manifests claimed a clean
+     # checkout. When there is no commit there is no answer, so `dirty` is None, not False.
+-    if commit is None and (from_env := _git_from_environment()) is not None:
++    if commit is None and (from_env := _git_from_environment(Path(cwd))) is not None:
+         return from_env
+     available = commit is not None
+     return {
+@@ -126,7 +130,7 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
+         "commit": commit,
+         "branch": g(["rev-parse", "--abbrev-ref", "HEAD"]),
+         "describe": g(["describe", "--always", "--dirty"]),
+-        "dirty": bool(status) if available else None,
++        "dirty": bool(status) if available and status is not None else None,
+         "status": (status or "")[:8000],
+         "remote": g(["config", "--get", "remote.origin.url"]),
+         "available": available,
+diff --git a/src/onebigjump/stats/diagnostics.py b/src/onebigjump/stats/diagnostics.py
+index 27fda27..bb6b6cc 100644
+--- a/src/onebigjump/stats/diagnostics.py
++++ b/src/onebigjump/stats/diagnostics.py
+@@ -199,7 +199,10 @@ def identified_tail(
+     vals = np.array(
+         [v for v in estimates.values() if v is not None and np.isfinite(v)], dtype=np.float64
+     )
+-    if vals.size < 2:
++    if not all(
++        name in estimates and estimates[name] is not None and np.isfinite(estimates[name])
++        for name in ("hill", "moment", "gpd")
++    ):
+         agreement, est_spread = False, float("nan")
+     else:
+         est_spread = float(vals.max() - vals.min())
+diff --git a/src/onebigjump/stats/estimators.py b/src/onebigjump/stats/estimators.py
+index 2f575c8..4d9fe76 100644
+--- a/src/onebigjump/stats/estimators.py
++++ b/src/onebigjump/stats/estimators.py
+@@ -201,8 +201,9 @@ def estimate_tail(
+     by the cluster factor and is only ever appropriate for genuinely independent observations.
+     """
+     cfg = cfg or TailEstimationConfig()
+-    x = np.asarray(z, dtype=np.float64).ravel()
++    x: np.ndarray = np.asarray(z, dtype=np.float64).ravel()
+     finite = np.isfinite(x) & (x > 0)
++    g: np.ndarray | None
+     if groups is not None:
+         g = np.asarray(groups).ravel()
+         if g.size != x.size:
+diff --git a/src/onebigjump/stats/gpd.py b/src/onebigjump/stats/gpd.py
+index 64cc3e5..3b63aa0 100644
+--- a/src/onebigjump/stats/gpd.py
++++ b/src/onebigjump/stats/gpd.py
+@@ -248,7 +248,7 @@ class FitComparison:
+         if self.gpd.gamma <= 0 and beats_exp:
+             return "light"
+         if not beats_exp:
+-            return "light-weak"
++            return "inconclusive"
+         return "inconclusive"
+ 
+     def as_dict(self) -> dict[str, Any]:
+diff --git a/src/onebigjump/stats/reliability.py b/src/onebigjump/stats/reliability.py
+index 9c2a7c0..e9fb1d5 100644
+--- a/src/onebigjump/stats/reliability.py
++++ b/src/onebigjump/stats/reliability.py
+@@ -137,8 +137,8 @@ def split_half_reliability(
+     the dependence between neighbouring steps rather than the stability of the estimate.
+     """
+     cfg = cfg or TailEstimationConfig()
+-    x = np.asarray(z, dtype=np.float64).ravel()
+-    g = np.asarray(groups).ravel()
++    x: np.ndarray = np.asarray(z, dtype=np.float64).ravel()
++    g: np.ndarray = np.asarray(groups).ravel()
+     if g.size != x.size:
+         raise ValueError(f"groups has length {g.size}, expected {x.size}")
+ 
+@@ -193,8 +193,8 @@ def split_half_reliability(
+             delta_median=float("nan"),
+             delta_iqr=(float("nan"), float("nan")),
+             delta_p90=float("nan"),
+-            xi_left=la.tolist(),
+-            xi_right=ra.tolist(),
++            xi_left=left,
++            xi_right=right,
+             note="no split produced an estimate on both halves; the sample is too small",
+         )
+ 
+@@ -209,8 +209,8 @@ def split_half_reliability(
+         delta_median=float(np.median(d)),
+         delta_iqr=(float(np.percentile(d, 25)), float(np.percentile(d, 75))),
+         delta_p90=float(np.percentile(d, 90)),
+-        xi_left=la.tolist(),
+-        xi_right=ra.tolist(),
++        xi_left=left,
++        xi_right=right,
+         note=""
+         if d.size == n_splits
+         else f"{n_splits - d.size} of {n_splits} splits were unusable",
+diff --git a/src/onebigjump/stats/thresholds.py b/src/onebigjump/stats/thresholds.py
+index 9aa5e6f..d093960 100644
+--- a/src/onebigjump/stats/thresholds.py
++++ b/src/onebigjump/stats/thresholds.py
+@@ -109,7 +109,8 @@ def double_bootstrap_k(
+ 
+     def _stage(sub_n: int) -> tuple[int, np.ndarray, np.ndarray]:
+         k_hi = max(int(k_max_frac * sub_n), 3)
+-        grid = _k_grid(sub_n, k_min, k_hi)
++        # The full-sample minimum can exceed the entire smaller bootstrap tail.
++        grid = _k_grid(sub_n, min(k_min, k_hi - 1), k_hi)
+         acc = np.zeros(grid.size, dtype=np.float64)
+         seen = np.zeros(grid.size, dtype=np.int64)
+         offset = int(grid[0]) - 1  # the control-variate curve is indexed from k = 1
+@@ -251,7 +252,7 @@ def select_k(
+     resamples: int = 200,
+     n1_exponent: float = 0.9,
+     seed: int = 0,
+-    max_pool: int | None = 200_000,
++    max_pool: int | None = None,
+ ) -> KSelection:
+     """Dispatch to one of the `k` rules, clipping the result into `[k_min, k_max_frac * n]`."""
+     x = sorted_positive_desc(z)
+diff --git a/tests/integration/test_analysis.py b/tests/integration/test_analysis.py
+index b8b5a12..827f11e 100644
+--- a/tests/integration/test_analysis.py
++++ b/tests/integration/test_analysis.py
+@@ -35,6 +35,7 @@ def result(table, tmp_path_factory):
+         name="unit",
+         tables_dir=out / "tables",
+         metrics_dir=out / "metrics",
++        figures_dir=out / "figures",
+         tau_override=table.attrs["tau"],
+     )
+     return payload, out
+@@ -55,7 +56,7 @@ class TestPredictions:
+ 
+     def test_the_manifest_records_why(self, result) -> None:
+         _, out = result
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         assert man["status"] == "ok"
+         assert any("P5" in note for note in man["notes"])
+ 
+@@ -101,7 +102,7 @@ class TestArtifacts:
+ 
+     def test_outputs_are_registered_with_digests(self, result) -> None:
+         _, out = result
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         roles = {o["role"] for o in man["outputs"]}
+         assert {"metrics", "table"} <= roles
+         assert all(o["digest"] for o in man["outputs"])
+@@ -138,6 +139,7 @@ class TestEmptyCases:
+             name="verified-only",
+             tables_dir=tmp_path / "t",
+             metrics_dir=tmp_path / "m",
++            figures_dir=tmp_path / "figures",
+         )
+         assert payload["P1"]
+         assert "P2" in payload["not_run"]
+diff --git a/tests/integration/test_figure_one.py b/tests/integration/test_figure_one.py
+index cd4f314..6b80104 100644
+--- a/tests/integration/test_figure_one.py
++++ b/tests/integration/test_figure_one.py
+@@ -73,7 +73,7 @@ class TestRun:
+         assert (figs / "figure1_kesten_dichotomy.pdf").is_file()
+         assert (figs / "figure1_kesten_dichotomy.png").is_file()
+ 
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         assert man["status"] == "ok"
+         assert man["kind"] == "kesten"
+         roles = {o["role"] for o in man["outputs"]}
+@@ -146,7 +146,7 @@ class TestHillPlotFigure:
+             metrics_dir=tmp_path / "metrics",
+             make_figure=True,
+         )
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         figures = [o["path"] for o in man["outputs"] if o["role"] == "figure"]
+         assert any("figure1_kesten_dichotomy" in f for f in figures)
+         assert any("hill_plots_kesten" in f for f in figures)
+diff --git a/tests/integration/test_pipeline.py b/tests/integration/test_pipeline.py
+index a2e168b..626672f 100644
+--- a/tests/integration/test_pipeline.py
++++ b/tests/integration/test_pipeline.py
+@@ -147,14 +147,14 @@ class TestRunExtraction:
+ 
+     def test_the_manifest_records_the_run(self, run) -> None:
+         _, out = run
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         assert man["status"] == "ok"
+         assert man["kind"] == "activations"
+         assert "table" in {o["role"] for o in man["outputs"]}
+ 
+     def test_missing_statistics_are_noted_not_hidden(self, run) -> None:
+         _, out = run
+-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
++        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
+         assert any("whitened" in note for note in man["notes"])
+ 
+     def test_the_analysis_runs_on_the_extracted_table(self, run) -> None:
+diff --git a/tests/unit/test_estimate_tail.py b/tests/unit/test_estimate_tail.py
+index c8c2ac5..619b253 100644
+--- a/tests/unit/test_estimate_tail.py
++++ b/tests/unit/test_estimate_tail.py
+@@ -68,8 +68,8 @@ class TestLightTail:
+     def test_hill_alone_would_have_been_misleading(self, est) -> None:
+         assert est.hill > est.moment + 0.1
+ 
+-    def test_the_comparison_calls_it_light(self, est) -> None:
+-        assert est.comparison["favours"].startswith("light")
++    def test_non_rejection_of_exponential_is_inconclusive(self, est) -> None:
++        assert est.comparison["favours"] == "inconclusive"
+ 
+     def test_it_is_not_identified_as_a_tail(self, est) -> None:
+         assert not est.identification["identified"]
+diff --git a/tests/unit/test_experiments.py b/tests/unit/test_experiments.py
+index ef8910c..38b87b2 100644
+--- a/tests/unit/test_experiments.py
++++ b/tests/unit/test_experiments.py
+@@ -140,8 +140,8 @@ class TestP2:
+ 
+     def test_a_constant_score_localises_at_chance(self) -> None:
+         traces = [{"z": np.ones(10), "t_star": 3, "L": 10, "surprisal": np.zeros(10)}]
+-        assert localization_rates(traces)["top1"] == 1.0  # rank 1 under ties by construction
+-        assert localization_rates(traces)["mean_rank"] == 1.0
++        assert localization_rates(traces)["top1"] == 0.0  # the earliest maximum is step 0
++        assert localization_rates(traces)["mean_rank"] == 4.0
+ 
+ 
+ class TestP3:
+diff --git a/tests/unit/test_gpd.py b/tests/unit/test_gpd.py
+index bb33c1b..01d0b85 100644
+--- a/tests/unit/test_gpd.py
++++ b/tests/unit/test_gpd.py
+@@ -93,7 +93,7 @@ class TestModelComparison:
+     ) -> None:
+         y = rng.exponential(1.0, 8_000)
+         cmp_ = compare_tail_models(y)
+-        assert cmp_.favours.startswith("light")
++        assert cmp_.favours == "inconclusive"  # non-rejection is not positive evidence
+         assert cmp_.p_gpd_vs_exponential > 0.01
+         assert abs(cmp_.gpd.gamma) < 0.05
+ 
+diff --git a/scripts/revision_diagnostics.py b/scripts/revision_diagnostics.py
+new file mode 100644
+index 0000000..a061586
+--- /dev/null
++++ b/scripts/revision_diagnostics.py
+@@ -0,0 +1,149 @@
++"""Recompute audit evidence without changing any archived experiment or paper artifact."""
++
++from __future__ import annotations
++
++import argparse
++import json
++from collections import Counter
++from pathlib import Path
++
++import numpy as np
++from scipy.stats import spearmanr
++
++from onebigjump.config import KestenConfig
++from onebigjump.manifests import run_manifest
++from onebigjump.reproducibility import file_digest, write_json
++from onebigjump.simulation.kesten import simulate
++from onebigjump.stats import hill, moment
++from onebigjump.stats.gpd import gpd_from_order_statistics
++from onebigjump.stats.thresholds import select_k
++
++
++def inventory(root: Path) -> dict:
++    records = []
++    manifests = []
++    for directory in ("results", "data", "paper_outputs"):
++        for path in sorted((root / directory).rglob("manifest*.json")):
++            manifest = json.loads(path.read_text())
++            manifests.append({
++                "path": str(path.relative_to(root)), "name": manifest.get("name"),
++                "git": manifest.get("environment", {}).get("git", {}),
++                "status": manifest.get("status"), "digest": file_digest(path),
++            })
++            for record in manifest.get("outputs", []):
++                stored = Path(record["path"])
++                # Historical manifests use both absolute local/cluster paths and relative paths.
++                if stored.is_absolute():
++                    parts = stored.parts
++                    starts = [i for i, x in enumerate(parts) if x in {"results", "data", "paper_outputs"}]
++                    local = root.joinpath(*parts[starts[0]:]) if starts else root / "__unresolved__"
++                else:
++                    local = root / stored
++                digest = file_digest(local)
++                status = "missing" if digest is None else "match" if digest == record.get("digest") else "changed"
++                records.append({
++                    "manifest": str(path.relative_to(root)), "path": str(stored),
++                    "expected": record.get("digest"), "actual": digest, "status": status,
++                })
++    samples_path = root / "data/raw/prover-sampling/samples.jsonl"
++    samples = [json.loads(line) for line in samples_path.read_text().splitlines()] if samples_path.exists() else []
++    return {
++        "manifests": manifests, "outputs": records,
++        "digest_counts": dict(Counter(r["status"] for r in records)),
++        "sampling": {
++            "n_samples": len(samples), "n_problems": len({s["problem_id"] for s in samples}),
++            "temperatures": sorted({s["temperature"] for s in samples}),
++            "with_exact_ids": sum(bool(s.get("prompt_token_ids") and s.get("completion_token_ids")) for s in samples),
++            "with_raw_completion": sum(bool(s.get("completion")) for s in samples),
++            "with_expected_statement": sum(bool(s.get("theorem_statement")) for s in samples),
++            "digest": file_digest(samples_path),
++        },
++        "activation_tables": [str(p.relative_to(root)) for p in (root / "results").rglob("deviations.parquet")],
++        "lean_trace_files": [str(p.relative_to(root)) for p in (root / "results").rglob("traces*.jsonl")],
++    }
++
++
++def p4_archive(root: Path) -> list[dict]:
++    rows = []
++    for path in sorted((root / "results/full").glob("grokking*/p4_grokking*.json")):
++        payload = json.loads(path.read_text())
++        cps = payload["checkpoints"]
++        gamma = np.array([c["moment"] for c in cps])
++        xi = np.maximum(gamma, 0)
++        h = np.array([c["hill"] for c in cps])
++        steps = np.array([c["step"] for c in cps])
++        test = np.array([c["test_acc"] for c in cps])
++        grok = np.flatnonzero(test >= .9)
++        i = int(grok[0]) if grok.size else None
++        rows.append({
++            "run": path.parent.name, "seed": payload["seed"],
++            "input": str(path.relative_to(root)), "input_digest": file_digest(path),
++            "n_checkpoints": len(cps), "grokking_step": int(steps[i]) if i is not None else None,
++            "final_test_accuracy": float(test[-1]),
++            "xi_positive_fraction": float(np.mean(xi > 0)), "xi_max": float(np.max(xi)),
++            "moment_first": float(gamma[0]), "moment_last": float(gamma[-1]),
++            "hill_first": float(h[0]), "hill_last": float(h[-1]),
++            "rho_step_hill": float(spearmanr(steps, h).statistic),
++            "rho_step_xi": float(spearmanr(steps, xi).statistic) if np.ptp(xi) > 0 else None,
++            "moment_before_transition": float(np.mean(gamma[max(i-3, 0):i])) if i else None,
++            "moment_after_transition": float(np.mean(gamma[i+1:i+4])) if i is not None and i+1<len(cps) else None,
++            "progress_losses": "legacy; cannot reconstruct corrected Fourier losses from scalar checkpoints",
++        })
++    return rows
++
++
++def kesten_diagnostics() -> list[dict]:
++    cfg = KestenConfig(p_values=[0., .02, .05, .1])
++    rows = []
++    for p in cfg.p_values:
++        tr = simulate(p, cfg)
++        z = tr.z.ravel()
++        selected = select_k(z, resamples=cfg.tail.double_bootstrap_resamples, seed=cfg.seed)
++        fractions = [.005, .01, .02, .05, .1]
++        grid = []
++        for k in sorted({selected.k, *(round(f * len(z)) for f in fractions)}):
++            grid.append({"k": k, "fraction": k / len(z), "hill": hill(z, k),
++                         "moment": moment(z, k), "gpd": gpd_from_order_statistics(z, k).gamma})
++        tau = tr.tolerance(cfg.tolerance_quantile)
++        stars = tr.first_exceedance(tau)
++        refuted = stars >= 0
++        rows.append({
++            "p": p, "alpha_theory": tr.alpha_theory, "xi_theory": tr.xi_theory,
++            "selected_k": selected.as_dict(), "grid": grid,
++            "n_refuted": int(refuted.sum()),
++            "top1": float(np.mean(tr.argmax_step()[refuted] == stars[refuted])),
++            "config": cfg.model_dump(mode="json"),
++        })
++    return rows
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--archive", type=Path, required=True)
++    parser.add_argument("--out", type=Path, required=True)
++    args = parser.parse_args()
++    with run_manifest("revision-diagnostics", "audit", args.out, seed=20270101,
++                      config={"archive": str(args.archive), "script_digest": file_digest(Path(__file__))}) as man:
++        man.note("Exploratory code audit, not a preregistered paper experiment. Archived files remain untouched.")
++        result = {"inventory": inventory(args.archive), "p4_recomputed": p4_archive(args.archive),
++                  "kesten": kesten_diagnostics()}
++        path = man.add_output(write_json(args.out / "diagnostics.json", result), "audit-metrics")
++        lines = ["# Измерения для ревизии", "", "Сгенерировано scripts/revision_diagnostics.py из архивных файлов и диагностического запуска.", "",
++                 "## Контрольные суммы", "", "```json", json.dumps(result["inventory"]["digest_counts"], indent=2), "```", "",
++                 "## Архив P4", "", "| Прогон | seed | Шаг grokking | Accuracy в конце | Доля xi > 0 | rho(step, Hill) |",
++                 "|---|---|---|---|---|---|"]
++        for row in result["p4_recomputed"]:
++            lines.append(f"| {row['run']} | {row['seed']} | {row['grokking_step']} | {row['final_test_accuracy']:.4f} | {row['xi_positive_fraction']:.4f} | {row['rho_step_hill']:.4f} |")
++        lines += ["", "## Kesten: выбор k и чувствительность", "",
++                  "| p | Теория xi | k | Hill | Moment | GPD |", "|---|---|---|---|---|---|"]
++        for row in result["kesten"]:
++            for point in row["grid"]:
++                lines.append(f"| {row['p']} | {row['xi_theory']:.4f} | {point['k']} | {point['hill']:.4f} | {point['moment']:.4f} | {point['gpd']:.4f} |")
++        summary = args.out / "MEASUREMENTS.md"
++        summary.write_text("\n".join(lines) + "\n")
++        man.add_output(summary, "audit-report")
++        print(path)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/tests/unit/test_revision_regressions.py b/tests/unit/test_revision_regressions.py
+new file mode 100644
+index 0000000..c33e3bd
+--- /dev/null
++++ b/tests/unit/test_revision_regressions.py
+@@ -0,0 +1,388 @@
++"""Scientific failure cases reproduced during the September code revision."""
++
++from __future__ import annotations
++
++import json
++from dataclasses import replace
++from types import SimpleNamespace
++
++import numpy as np
++import pandas as pd
++import pytest
++
++from onebigjump.experiments.dataset import from_traces, validate_table
++from onebigjump.experiments.p1_tail_separation import tail_separation
++from onebigjump.experiments.p2_localization import _roc, localization_rates
++from onebigjump.lean.schemas import (
++    ProofTrace,
++    StepLabel,
++    StepStatus,
++    TraceOutcome,
++    VerificationSummary,
++)
++from onebigjump.models.extraction import read_traces, stratified_calibration_split, trace_alignment
++from onebigjump.reproducibility import _git_from_environment, git_info
++from onebigjump.stats.thresholds import select_k
++
++
++def trace(trace_id="t", problem_id="p", *, inline=False):
++    header = "theorem demo : True := by"
++    body = "trivial" if inline else "  trivial"
++    return ProofTrace(
++        trace_id=trace_id,
++        problem_id=problem_id,
++        model_id="handwritten",
++        header=header,
++        proof_text=header + (" " if inline else "\n") + body,
++        outcome=TraceOutcome.VERIFIED,
++        steps=[
++            StepLabel(
++                index=0,
++                tactic="trivial",
++                status=StepStatus.OK,
++                valid=True,
++                line_start=0,
++                line_end=0,
++                n_lines=1,
++            )
++        ],
++    )
++
++
++class CharTokenizer:
++    """Lossless tokenizer; makes context and positional errors observable without downloads."""
++
++    def __call__(self, text, **kwargs):
++        ids = list(map(ord, text))
++        if kwargs.get("return_tensors"):
++            import torch
++
++            return {"input_ids": torch.tensor([ids])}
++        return {"input_ids": ids, "offset_mapping": [(i, i + 1) for i in range(len(text))]}
++
++    def decode(self, ids, **kwargs):
++        return "".join(map(chr, ids))
++
++
++def sampled_trace():
++    tr = trace()
++    tr.model_id = "prover"
++    prompt = "Solve this problem.\n"
++    completion = "Informal reasoning first.\n```lean\n" + tr.proof_text + "\n```"
++    tr.meta["generation"] = {
++        "prompt": prompt,
++        "completion": completion,
++        "proof": tr.proof_text,
++        "prompt_token_ids": list(map(ord, prompt)),
++        "completion_token_ids": list(map(ord, completion)),
++    }
++    return tr
++
++
++def table():
++    return pd.DataFrame(
++        {
++            "trace_id": ["t"] * 3,
++            "prompt_id": ["p"] * 3,
++            "model": ["m"] * 3,
++            "layer": [0] * 3,
++            "statistic": ["raw"] * 3,
++            "t": [0, 1, 2],
++            "L": [3] * 3,
++            "z": [1.0, 3.0, 2.0],
++            "valid": [True, False, False],
++            "t_star": [1] * 3,
++            "outcome": ["refuted"] * 3,
++            "surprisal": [1.0, 2.0, 3.0],
++            "status": ["ok", "error", "unreached"],
++        }
++    )
++
++
++@pytest.mark.parametrize("value", [np.nan, np.inf, -1.0])
++def test_nonfinite_or_negative_deviations_are_rejected(value):
++    df = table()
++    df.loc[0, "z"] = value
++    with pytest.raises(ValueError, match="finite and nonnegative"):
++        validate_table(df)
++
++
++@pytest.mark.parametrize("mutation", ["gap", "star", "outcome", "unreached", "length", "binary"])
++def test_corrupt_labels_and_step_structure_are_rejected(mutation):
++    df = table()
++    if mutation == "gap":
++        df = df.drop(index=0)
++    elif mutation == "star":
++        df["t_star"] = 2
++    elif mutation == "outcome":
++        df["outcome"] = "verified"
++    elif mutation == "unreached":
++        df.loc[2, "status"] = "error"
++    elif mutation == "length":
++        df.loc[0, "L"] = 4
++    else:
++        df["valid"] = df["valid"].astype(object)
++        df.loc[0, "valid"] = "false"
++    with pytest.raises(ValueError):
++        validate_table(df)
++
++
++def test_earliest_maximum_defines_top_one_and_top_three():
++    traces = [{"z": np.ones(5), "t_star": t} for t in range(5)]
++    rates = localization_rates(traces)
++    assert rates["top1"] == pytest.approx(1 / 5)
++    assert rates["top3"] == pytest.approx(3 / 5)
++
++
++def test_tied_roc_curve_agrees_with_auc():
++    result = _roc([{"z": np.ones(5), "t_star": 3}])
++    assert result["auc"] == 0.5
++    assert result["curve"] == {"fpr": [0.0, 1.0], "tpr": [0.0, 1.0]}
++
++
++@pytest.mark.parametrize("n", [50, 100, 200])
++def test_default_k_selection_handles_small_bootstrap_subsamples(n):
++    values = np.random.default_rng(7).pareto(2, size=n) + 1
++    result = select_k(values, resamples=20)
++    assert 2 <= result.k < n
++
++
++def test_missing_pre_rejection_subset_cannot_confirm_expected_pattern():
++    estimates = {
++        "verified": {"hill": 0.1, "bootstrap": {"hill": {"ci_low": 0.05, "ci_high": 0.15}}},
++        "refuted_post": {"hill": 0.5, "bootstrap": {"hill": {"ci_low": 0.4, "ci_high": 0.6}}},
++    }
++    assert tail_separation(estimates)["expected_pattern_holds"] is None
++
++
++def test_generation_context_and_exact_tokens_survive_alignment():
++    tr = sampled_trace()
++    prepared = trace_alignment(tr, CharTokenizer())
++    assert prepared is not None
++    text, alignment = prepared
++    generation = tr.meta["generation"]
++    assert text == generation["prompt"] + generation["completion"]
++    assert (
++        alignment.input_ids == generation["prompt_token_ids"] + generation["completion_token_ids"]
++    )
++    assert alignment.prompt_end_token == len(generation["prompt_token_ids"]) - 1
++    assert text[alignment.step_end_tokens[0]] == "l"
++    assert "Informal reasoning" in text[: alignment.step_end_tokens[0]]
++
++
++def test_inline_tactic_is_not_lost():
++    prepared = trace_alignment(trace(inline=True), CharTokenizer())
++    assert prepared is not None
++    assert len(prepared[1].step_end_tokens) == 1
++
++
++def test_model_trace_without_generation_context_is_refused():
++    tr = trace()
++    tr.model_id = "prover"
++    assert trace_alignment(tr, CharTokenizer()) is None
++
++
++def test_retokenized_ids_must_match_exactly():
++    class WrongTokenizer(CharTokenizer):
++        def __call__(self, text, **kwargs):
++            result = super().__call__(text, **kwargs)
++            result["input_ids"][0] += 1
++            return result
++
++    assert trace_alignment(sampled_trace(), WrongTokenizer()) is None
++
++
++def test_incomplete_alignment_is_refused():
++    class MissingTokenizer(CharTokenizer):
++        def __call__(self, text, **kwargs):
++            result = super().__call__(text, **kwargs)
++            result["offset_mapping"] = [(0, 1)] + [(0, 0)] * (len(text) - 1)
++            return result
++
++    assert trace_alignment(trace(), MissingTokenizer()) is None
++
++
++def test_trajectory_cannot_silently_truncate_labels():
++    from onebigjump.models.activations import Trajectory
++
++    tr = trace()
++    traj = Trajectory("t", 0, np.ones((1, 2)), np.array([]), 0, 2)
++    with pytest.raises(ValueError, match="length mismatch"):
++        from_traces([tr], {"t": {0: traj}}, statistics=["raw"])
++
++
++def test_calibration_membership_does_not_depend_on_success_labels():
++    traces = [trace(str(i), str(i)) for i in range(10)]
++    before = stratified_calibration_split(traces, seed=9)
++    for tr in traces[:5]:
++        tr.outcome = TraceOutcome.REFUTED
++    assert stratified_calibration_split(traces, seed=9) == before
++
++
++def test_read_shards_and_reject_duplicate_ids(tmp_path):
++    for i in range(2):
++        (tmp_path / f"traces.shard{i:02d}.jsonl").write_text(trace(str(i)).model_dump_json() + "\n")
++    assert len(read_traces(tmp_path / "traces.jsonl")) == 2
++    (tmp_path / "traces.shard02.jsonl").write_text(trace("0").model_dump_json() + "\n")
++    with pytest.raises(ValueError, match="duplicate trace_id"):
++        read_traces(tmp_path)
++
++
++def test_unknown_git_status_is_not_a_clean_checkout(monkeypatch, tmp_path):
++    from onebigjump import reproducibility
++
++    monkeypatch.setattr(reproducibility, "_run", lambda cmd: "a" * 40 if "HEAD" in cmd else None)
++    assert git_info(tmp_path)["dirty"] is None
++    monkeypatch.setenv("ONEBIGJUMP_GIT_COMMIT", "a" * 40)
++    monkeypatch.delenv("ONEBIGJUMP_GIT_STATUS", raising=False)
++    assert _git_from_environment()["dirty"] is None
++
++
++def test_launcher_provenance_is_scoped_to_its_repository(monkeypatch, tmp_path):
++    from onebigjump import reproducibility
++
++    monkeypatch.setattr(reproducibility, "_run", lambda cmd: None)
++    monkeypatch.setenv("ONEBIGJUMP_GIT_COMMIT", "a" * 40)
++    monkeypatch.setenv("ONEBIGJUMP_GIT_STATUS", "")
++    monkeypatch.delenv("ONEBIGJUMP_GIT_ROOT", raising=False)
++    assert git_info(tmp_path)["commit"] is None
++    monkeypatch.setenv("ONEBIGJUMP_GIT_ROOT", str(tmp_path))
++    assert git_info(tmp_path)["source"] == "environment"
++    assert git_info(tmp_path / "unrelated")["commit"] is None
++
++
++def test_step_timeout_count_is_separate_from_statement_timeout():
++    tr = trace()
++    tr.outcome = TraceOutcome.REFUTED
++    tr.t_star = 0
++    tr.steps[0].valid = False
++    tr.steps[0].status = StepStatus.TIMEOUT
++    summary = VerificationSummary.from_traces([tr])
++    assert summary.refuted == 1
++    assert summary.step_timeout == 1
++    assert summary.timeout == 0
++
++
++def test_fourier_circuit_excludes_mixed_frequencies_and_retains_dc():
++    from onebigjump.models.grokking import fourier_circuit_logits
++
++    p = 11
++    a, b = np.meshgrid(np.arange(p), np.arange(p), indexing="ij")
++    circuit = np.cos(2 * np.pi * (a + b) / p)
++    mixed = np.cos(2 * np.pi * (a + 2 * b) / p)
++    grid = (3 + circuit + mixed)[:, :, None]
++    restricted, excluded = fourier_circuit_logits(grid, [1])
++    np.testing.assert_allclose(restricted[:, :, 0], 3 + circuit, atol=1e-12)
++    np.testing.assert_allclose(excluded[:, :, 0], 3 + mixed, atol=1e-12)
++
++
++def test_batch_keeps_sampling_metadata_and_shard_artifacts(monkeypatch, tmp_path):
++    from onebigjump.lean import batch
++
++    class Repl:
++        restarts = recoveries = 0
++
++        def __init__(self, env):
++            pass
++
++        def __enter__(self):
++            return self
++
++        def __exit__(self, *args):
++            pass
++
++    monkeypatch.setattr(
++        batch, "discover", lambda _: SimpleNamespace(as_dict=lambda: {}, require=lambda: None)
++    )
++    monkeypatch.setattr(batch, "LeanREPL", Repl)
++    monkeypatch.setattr(batch, "verify_trace", lambda _, source, **kw: trace(kw["trace_id"]))
++    req = {
++        "trace_id": "t",
++        "problem_id": "p",
++        "proof": trace().proof_text,
++        "prompt": "request",
++        "completion": "proof",
++        "prompt_token_ids": [1, 2],
++        "completion_token_ids": [3, 4],
++    }
++    for shard in range(2):
++        batch.verify_batch([req], tmp_path, n_shards=2, shard=shard, resume=False)
++    assert len(list(tmp_path.glob("manifest-*.json"))) == 2
++    assert len(list(tmp_path.glob("summary.shard*.json"))) == 2
++    saved = read_traces(tmp_path)[0].meta["generation"]
++    assert saved["prompt_token_ids"] == [1, 2]
++    assert saved["completion"] == "proof"
++    # A valid proof of True must not count as a proof of the requested False.
++    req["theorem_statement"] = "theorem demo : False := by"
++    monkeypatch.setattr(
++        batch, "verify_trace", lambda *a, **kw: pytest.fail("changed goal reached kernel")
++    )
++    traces, summary = batch.verify_batch([req], tmp_path / "changed-goal", resume=False)
++    assert traces[0].outcome == TraceOutcome.STATEMENT_MISMATCH
++    assert not traces[0].labelled
++    assert summary.statement_mismatch == 1
++
++
++@pytest.mark.ml
++def test_exact_context_states_match_direct_transformer_forward():
++    torch = pytest.importorskip("torch")
++    transformers = pytest.importorskip("transformers")
++    from onebigjump.models.activations import extract_trajectory
++    from onebigjump.models.hooks import record_residuals
++
++    model = transformers.GPT2LMHeadModel(
++        transformers.GPT2Config(
++            vocab_size=256,
++            n_positions=256,
++            n_layer=2,
++            n_head=2,
++            n_embd=16,
++        )
++    ).eval()
++    text, alignment = trace_alignment(sampled_trace(), CharTokenizer())
++    actual = extract_trajectory(model, CharTokenizer(), text, alignment, trace_id="t", layers=[0])
++    with torch.no_grad(), record_residuals(model, [0], alignment.readout_positions) as rec:
++        model(input_ids=torch.tensor([alignment.input_ids]), use_cache=False)
++    np.testing.assert_array_equal(actual[0].states, rec.result()[0].states.numpy())
++    with pytest.raises(ValueError, match="incomplete"):
++        extract_trajectory(
++            model,
++            CharTokenizer(),
++            text,
++            replace(alignment, unaligned=[0]),
++            trace_id="t",
++            layers=[0],
++        )
++
++
++def test_generation_seed_and_revision_reach_backend(monkeypatch, tmp_path):
++    from onebigjump.experiments.pipeline import run_generation
++    from onebigjump.models import generation
++
++    calls = []
++
++    class Backend:
++        model_id = "fake"
++
++        def sample(self, prompts, **kwargs):
++            return [[f"trivial -- {np.random.random()}"] for _ in prompts]  # noqa: NPY002
++
++    def backend(*args, **kwargs):
++        calls.append(kwargs)
++        return Backend()
++
++    monkeypatch.setattr(generation, "make_backend", backend)
++    problems = tmp_path / "problems.jsonl"
++    problems.write_text(json.dumps({"id": "p", "statement": "theorem t : True := by"}) + "\n")
++    for name in ("a", "b"):
++        run_generation(
++            problems,
++            "fake",
++            tmp_path / name,
++            temperatures=(0.6,),
++            samples_per_problem=1,
++            seed=42,
++            revision="fixed-revision",
++        )
++    assert (tmp_path / "a/samples.jsonl").read_text() == (tmp_path / "b/samples.jsonl").read_text()
++    assert all(call["seed"] == 42 and call["revision"] == "fixed-revision" for call in calls)

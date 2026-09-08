@@ -56,6 +56,7 @@ class P2Result:
     roc: dict[str, Any] = field(default_factory=dict)
     roc_surprisal: dict[str, Any] = field(default_factory=dict)
     by_length: list[dict[str, Any]] = field(default_factory=list)
+    baseline_comparison: dict[str, Any] = field(default_factory=dict)
 
     @property
     def lift(self) -> float:
@@ -88,6 +89,7 @@ class P2Result:
             "roc": self.roc,
             "roc_surprisal": self.roc_surprisal,
             "by_length": self.by_length,
+            "baseline_comparison": self.baseline_comparison,
         }
 
 
@@ -116,8 +118,8 @@ def _per_trace(cell: pd.DataFrame) -> list[dict[str, Any]]:
 
 
 def _rank_of(values: np.ndarray, index: int) -> int:
-    """Rank of `values[index]` among `values`, 1 = largest. Ties count against the target."""
-    return int(1 + np.sum(values > values[index]))
+    """Descending rank, breaking ties by the earliest step (Theorem 4's argmax)."""
+    return int(1 + np.sum(values > values[index]) + np.sum(values[:index] == values[index]))
 
 
 def localization_rates(traces: list[dict[str, Any]], key: str = "z") -> dict[str, float]:
@@ -206,13 +208,15 @@ def _roc(traces: list[dict[str, Any]], key: str = "z") -> dict[str, Any]:
     fp = np.cumsum(1 - y[order])
     tpr = tp / max(n_pos, 1)
     fpr = fp / max(n_neg, 1)
-    keep = np.unique(np.linspace(0, tpr.size - 1, min(tpr.size, 400)).astype(int))
+    # A threshold includes every observation with the same score. Splitting tied scores
+    # produced curves whose area disagreed with the tie-correct AUC above.
+    ends = np.r_[np.flatnonzero(np.diff(s[order]) != 0), s.size - 1]
     return {
         "auc": float(auc),
         "n_positive": n_pos,
         "n_negative": n_neg,
         "n": int(y.size),
-        "curve": {"fpr": fpr[keep].tolist(), "tpr": tpr[keep].tolist()},
+        "curve": {"fpr": [0.0, *fpr[ends].tolist()], "tpr": [0.0, *tpr[ends].tolist()]},
     }
 
 
@@ -287,6 +291,17 @@ def run_p2(
                 else {}
             ),
             by_length=_by_length(traces),
+            baseline_comparison=(
+                {
+                    "n_paired": len(usable),
+                    "jump_top1": localization_rates(usable)["top1"],
+                    "surprisal_top1": surprisal_rates["top1"],
+                    "jump_beats_surprisal": localization_rates(usable)["top1"]
+                    > surprisal_rates["top1"],
+                }
+                if surprisal_rates is not None
+                else {"n_paired": 0, "jump_beats_surprisal": None}
+            ),
         )
         results.append(res)
         log.info(

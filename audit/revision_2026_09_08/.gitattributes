@@ -1,0 +1,3 @@
+# Preserve raw test logs and patch context exactly, including their intentional whitespace.
+*.log -whitespace
+*.patch -whitespace

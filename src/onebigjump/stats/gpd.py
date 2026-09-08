@@ -248,7 +248,7 @@ class FitComparison:
         if self.gpd.gamma <= 0 and beats_exp:
             return "light"
         if not beats_exp:
-            return "light-weak"
+            return "inconclusive"
         return "inconclusive"
 
     def as_dict(self) -> dict[str, Any]:

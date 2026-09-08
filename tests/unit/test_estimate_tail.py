@@ -68,8 +68,8 @@ class TestLightTail:
     def test_hill_alone_would_have_been_misleading(self, est) -> None:
         assert est.hill > est.moment + 0.1
 
-    def test_the_comparison_calls_it_light(self, est) -> None:
-        assert est.comparison["favours"].startswith("light")
+    def test_non_rejection_of_exponential_is_inconclusive(self, est) -> None:
+        assert est.comparison["favours"] == "inconclusive"
 
     def test_it_is_not_identified_as_a_tail(self, est) -> None:
         assert not est.identification["identified"]

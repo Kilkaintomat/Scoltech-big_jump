@@ -84,6 +84,7 @@ class ActivationConfig(Strict):
     """Read-out settings for Appendix B.1."""
 
     model_id: str = "gpt2"
+    revision: str | None = None
     traces: Path | None = Field(None, description="JSONL written by `onebigjump lean-verify`")
     device: Literal["auto", "cpu", "mps", "cuda"] = "auto"
     dtype: Literal["float32", "float16", "bfloat16", "auto"] = "bfloat16"
@@ -92,7 +93,7 @@ class ActivationConfig(Strict):
     statistics: list[Literal["raw", "whitened", "innovation"]] = ["raw", "whitened", "innovation"]
     shrinkage: float = Field(0.1, ge=0.0, le=1.0, description="Ledoit-Wolf-style ridge on Sigma")
     ridge_alpha: float = Field(1.0, gt=0, description="ridge for the innovation regression")
-    calibration_split: Literal["verified_disjoint", "verified_all"] = "verified_disjoint"
+    calibration_split: Literal["verified_disjoint"] = "verified_disjoint"
     calibration_frac: float = Field(0.5, gt=0, lt=1)
     batch_size: int = Field(1, ge=1)
     out_dir: Path = Path("data/processed/activations")
@@ -120,7 +121,7 @@ class GrokkingConfig(Strict):
     p: int = Field(113, ge=5)
     d_model: int = Field(128, ge=8)
     n_heads: int = Field(4, ge=1)
-    n_layers: int = Field(1, ge=1)
+    n_layers: Literal[1] = 1
     d_mlp: int | None = None
     lr: float = 1e-3
     weight_decay: float = 1.0

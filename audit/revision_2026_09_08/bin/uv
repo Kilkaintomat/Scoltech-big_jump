@@ -1,0 +1,9 @@
+#!/bin/bash
+# The Makefile only needs these uv-run commands. Use the existing container environment.
+set -euo pipefail
+case "${1:-}:${2:-}" in
+    run:ruff|run:mypy|run:pytest) tool="$2"; shift 2 ;;
+    *) echo 'Audit wrapper supports only uv run ruff/mypy/pytest' >&2; exit 2 ;;
+esac
+source scripts/slurm/common.sh
+py -m "$tool" "$@"

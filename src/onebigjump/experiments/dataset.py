@@ -64,12 +64,20 @@ def validate_table(df: pd.DataFrame) -> pd.DataFrame:
         raise ValueError(f"deviations table is missing columns: {missing}")
     if df.empty:
         raise ValueError("deviations table is empty")
-    if (df["z"] < 0).any():
-        raise ValueError("negative step deviations")
-    if df["t"].lt(0).any():
-        raise ValueError("negative step indices")
+    if not np.isfinite(df["z"].to_numpy(dtype=float)).all() or (df["z"] < 0).any():
+        raise ValueError("step deviations must be finite and nonnegative")
+    if not df["valid"].isin([True, False]).all():
+        raise ValueError("valid labels must be boolean or binary")
+    if df[["trace_id", "prompt_id", "model", "layer", "statistic", "outcome"]].isna().any().any():
+        raise ValueError("missing trace metadata")
+    for col in ("t", "L", "layer"):
+        values = df[col].to_numpy(dtype=float)
+        if not np.isfinite(values).all() or np.any(values != np.floor(values)):
+            raise ValueError(f"{col} must contain finite integer values")
+    if df["t"].lt(0).any() or df["L"].lt(1).any():
+        raise ValueError("step indices must be nonnegative and lengths positive")
 
-    key = ["trace_id", "layer", "statistic"]
+    key = ["model", "trace_id", "layer", "statistic"]
     for keys, group in df.groupby(key, sort=False):
         steps = group["t"].to_numpy()
         if len(np.unique(steps)) != len(steps):
@@ -78,6 +86,34 @@ def validate_table(df: pd.DataFrame) -> pd.DataFrame:
         v = group.sort_values("t")["valid"].to_numpy()
         if np.any(np.diff(v.astype(int)) > 0):
             raise ValueError(f"non-absorbing labels in {dict(zip(key, keys, strict=True))}")
+        for col in ("prompt_id", "L", "outcome", "t_star"):
+            if group[col].nunique(dropna=False) != 1:
+                raise ValueError(f"inconsistent {col} within trace {keys}")
+        length = int(group["L"].iloc[0])
+        if len(steps) != length or not np.array_equal(np.sort(steps), np.arange(length)):
+            raise ValueError(f"steps must cover 0..L-1 without gaps in trace {keys}")
+        star = group["t_star"].iloc[0]
+        outcome = group["outcome"].iloc[0]
+        if outcome == "verified":
+            if not pd.isna(star) or not np.all(v):
+                raise ValueError(f"verified trace has a failure or t_star: {keys}")
+        elif outcome == "refuted":
+            if pd.isna(star) or star != int(star) or not 0 <= star < length:
+                raise ValueError(f"refuted trace has invalid t_star: {keys}")
+            if not np.array_equal(v.astype(bool), np.arange(length) < star):
+                raise ValueError(f"t_star disagrees with labels in trace {keys}")
+        else:
+            raise ValueError(f"unlabelled outcome {outcome!r} in deviations table")
+        if "status" in group:
+            statuses = group.sort_values("t")["status"].to_numpy()
+            expected_ok = statuses == "ok"
+            if not np.array_equal(expected_ok, v.astype(bool)):
+                raise ValueError(f"step status disagrees with valid labels in trace {keys}")
+            if outcome == "refuted" and (
+                statuses[int(star)] not in {"error", "timeout", "sorry", "unsolved_goals"}
+                or np.any(statuses[int(star) + 1 :] != "unreached")
+            ):
+                raise ValueError(f"steps after t_star must be unreached in trace {keys}")
     return df
 
 
@@ -106,7 +142,9 @@ def from_traces(
         for layer, traj in per_layer.items():
             cal = (calibrations or {}).get(layer)
             devs = deviations(traj, cal)
-            n = min(trace.n_steps, traj.n_steps)
+            if trace.n_steps != traj.n_steps:
+                raise ValueError(f"trajectory/label length mismatch for {trace.trace_id}")
+            n = trace.n_steps
             for name, values in devs.items():
                 if name not in statistics:
                     continue
@@ -125,6 +163,7 @@ def from_traces(
                             "valid": bool(step.valid),
                             "t_star": trace.t_star,
                             "outcome": trace.outcome.value,
+                            "status": step.status.value,
                             "surprisal": float(traj.surprisal[t])
                             if t < traj.surprisal.size
                             else np.nan,
@@ -132,7 +171,7 @@ def from_traces(
                     )
     if not rows:
         raise ValueError("no labelled traces with trajectories")
-    return validate_table(pd.DataFrame(rows, columns=list(COLUMNS)))
+    return validate_table(pd.DataFrame(rows, columns=[*COLUMNS, "status"]))
 
 
 def from_kesten(

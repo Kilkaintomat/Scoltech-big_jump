@@ -173,9 +173,10 @@ with the raw statistic, and both the log and the manifest say so -- it does not 
 statistic with no spread left. If `whitened` and `innovation` are missing from your table, that
 is why.
 
-**A prover that proves nothing gives you no calibration.** The split prefers problems with at
-least one verified trace, but if the model verifies nothing there is nothing to fit on. Check the
-verified count from stage 2 before running stage 3.
+**A prover that proves nothing gives you no calibration.** Problem membership is chosen using
+the seed independently of observed success. Only verified traces inside that split calibrate the
+statistics. An insufficient calibration is reported; do not move successful evaluation problems
+into the calibration split after seeing outcomes.
 
 ## Memory
 
@@ -191,3 +192,19 @@ token positions rather than whole `(batch, seq, d)` tensors.
 Run from a **clean** working tree. Every run records the commit and whether the tree was dirty,
 and a figure produced from a dirty tree cannot be regenerated from any commit; the report marks
 those. See [`reproducibility.md`](reproducibility.md).
+
+## Revision prerequisites
+
+Read `audit/revision_2026_09_08/REPORT.md` before launching the paper campaign. In particular,
+archived samples without exact token IDs cannot be used to recover the generation states.
+New generation manifests record the seed and requested model revision; set a fixed revision for
+both sampling and extraction. YAML calibration parameters now reach the actual fit.
+
+The Lean array writes separate shard files and manifests. Extraction discovers those shards
+when the configured `traces.jsonl` is absent. Do not leave an obsolete merged file beside newer
+shards: an explicitly present file takes precedence. Automatic analysis artifacts from extraction
+are written under its own `analysis/` directory, including tables, metrics and figures.
+
+On Zhores, `.venvc/bin/python` points inside the container and cannot be run directly on the
+host. The Lean verification launcher therefore uses `obj` from `common.sh`. Mathlib and REPL
+still have to be built and tested separately; the launcher change does not install them.

@@ -80,7 +80,7 @@ GIT_ENV_VARS = {
 }
 
 
-def _git_from_environment() -> dict[str, Any] | None:
+def _git_from_environment(repo: Path | None = None) -> dict[str, Any] | None:
     """Provenance handed in by the launcher, for runs inside a container without `git`.
 
     The Singularity image the cluster runs has no `git` binary, so a run inside it cannot read its
@@ -89,16 +89,20 @@ def _git_from_environment() -> dict[str, Any] | None:
     say anything -- so it is labelled `source: environment` rather than passed off as the real
     thing.
     """
+    if repo is not None:
+        declared_root = os.environ.get("ONEBIGJUMP_GIT_ROOT")
+        if not declared_root or Path(declared_root).resolve() != repo.resolve():
+            return None
     commit = os.environ.get(GIT_ENV_VARS["commit"], "").strip()
     if not commit:
         return None
-    status = os.environ.get(GIT_ENV_VARS["status"], "")
+    status = os.environ.get(GIT_ENV_VARS["status"])
     return {
         "commit": commit,
         "branch": os.environ.get(GIT_ENV_VARS["branch"]) or None,
         "describe": os.environ.get(GIT_ENV_VARS["describe"]) or None,
-        "dirty": bool(status.strip()),
-        "status": status[:8000],
+        "dirty": bool(status.strip()) if status is not None else None,
+        "status": (status or "")[:8000],
         "remote": os.environ.get(GIT_ENV_VARS["remote"]) or None,
         "available": True,
         "source": "environment",
@@ -118,7 +122,7 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
     # stamped `dirty: false`, i.e. reproducible. That is the one error worth being loud about: the
     # cluster runs are made from an rsynced tree with no .git, and their manifests claimed a clean
     # checkout. When there is no commit there is no answer, so `dirty` is None, not False.
-    if commit is None and (from_env := _git_from_environment()) is not None:
+    if commit is None and (from_env := _git_from_environment(Path(cwd))) is not None:
         return from_env
     available = commit is not None
     return {
@@ -126,7 +130,7 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
         "commit": commit,
         "branch": g(["rev-parse", "--abbrev-ref", "HEAD"]),
         "describe": g(["describe", "--always", "--dirty"]),
-        "dirty": bool(status) if available else None,
+        "dirty": bool(status) if available and status is not None else None,
         "status": (status or "")[:8000],
         "remote": g(["config", "--get", "remote.origin.url"]),
         "available": available,

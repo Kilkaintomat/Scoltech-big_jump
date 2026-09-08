@@ -188,6 +188,8 @@ def _run_generate(cfg: RunConfig, out_dir: Path | None) -> None:
         trust_remote_code=section.trust_remote_code,
         batch_size=section.batch_size,
         name=cfg.name,
+        seed=section.seed,
+        revision=section.revision,
     )
     console.print(f"{out['n_samples']} samples over {out['n_problems']} problems -> {out['path']}")
 
@@ -212,6 +214,10 @@ def _run_activations(cfg: RunConfig, out_dir: Path | None) -> None:
         max_tokens=section.max_tokens,
         seed=cfg.seed,
         name=cfg.name,
+        trust_remote_code=False,
+        revision=section.revision,
+        shrinkage=section.shrinkage,
+        ridge_alpha=section.ridge_alpha,
     )
     summary = payload["extraction"]
     console.print(

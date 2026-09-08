@@ -46,6 +46,7 @@ import pandas as pd
 from ..logging import get_logger
 from ..stats import gpd_fit, group_bootstrap
 from .dataset import subset, validate_table
+from .p1_tail_separation import _bootstrap_unit
 
 __all__ = ["P3Result", "run_p3"]
 
@@ -78,6 +79,7 @@ class P3Result:
     frac_above: dict[str, float] = field(default_factory=dict)
     survival: dict[str, list[float]] = field(default_factory=dict)
     comparison: dict[str, Any] = field(default_factory=dict)
+    bootstrap_unit: str = "trace"
 
     def row(self) -> dict[str, Any]:
         return {
@@ -88,6 +90,8 @@ class P3Result:
             "tau": self.tau,
             "n_refuted": self.n_refuted,
             "n_over_tau": self.n_over_tau,
+            "fraction_over_tau": self.n_over_tau / self.n_refuted if self.n_refuted else None,
+            "bootstrap_unit": self.bootstrap_unit,
             "gpd_shape": self.gpd_shape,
             "shape_lo": self.shape_ci[0],
             "shape_hi": self.shape_ci[1],
@@ -229,17 +233,21 @@ def run_p3(
 
             excess = z_star - tau
             fit = gpd_fit(excess, threshold=tau)
+            at_star = cell[(cell["t"] == cell["t_star"]) & cell["trace_id"].isin(trace_ids)]
+            at_star = at_star.set_index("trace_id").loc[trace_ids].reset_index()
+            groups, unit = _bootstrap_unit(at_star)
             # The GPD here is fitted to *all* the excesses, not to an upper order statistic, so
             # there is no tail fraction to hold fixed; `k = n - 1` keeps `group_bootstrap`'s
             # `k < n` guard satisfied while the estimator ignores `k` entirely.
             boot = group_bootstrap(
                 excess,
-                trace_ids,
+                groups.to_numpy(),
                 lambda y, _k: float(gpd_fit(y).gamma),
                 k=max(excess.size - 1, 2),
                 resamples=bootstrap_resamples,
                 level=ci_level,
                 seed=seed,
+                unit=unit,
             )
 
             variants, theta = _overshoot_variants(cell, tau)
@@ -273,8 +281,9 @@ def run_p3(
                     "2": float(np.mean(u > 2.0)),
                     "5": float(np.mean(u > 5.0)),
                 },
-                survival={"u": u.tolist(), "s": surv.tolist()},
+                survival={"u": [float(v) for v in u], "s": [float(v) for v in surv]},
                 comparison=comparison,
+                bootstrap_unit=unit,
             )
             results.append(res)
             log.info(

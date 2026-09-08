@@ -19,7 +19,8 @@ from ..logging import get_logger
 from ..manifests import run_manifest
 from ..reproducibility import write_json
 from .environment import discover
-from .schemas import ProofTrace, StepStatus, VerificationSummary
+from .schemas import ProofTrace, StepStatus, TraceOutcome, VerificationSummary
+from .segmentation import split_header_and_proof
 from .verifier import LeanREPL, verify_trace
 
 __all__ = ["ProofRequest", "read_requests", "verify_batch"]
@@ -93,6 +94,8 @@ def verify_batch(
     losing the work is not a small thing.
     """
     out = Path(out_dir)
+    if n_shards < 1 or not 0 <= shard < n_shards:
+        raise ValueError("shard must lie in [0, n_shards) and n_shards must be positive")
     env = discover(workspace)
     items = [ProofRequest(r) for r in requests]
     if n_shards > 1:
@@ -115,7 +118,7 @@ def verify_batch(
         log.info("resuming: %d already verified, %d to go", len(done), len(items))
 
     with run_manifest(
-        name,
+        name if n_shards == 1 else f"{name}-shard{shard:02d}",
         "lean",
         out,
         config={
@@ -135,17 +138,47 @@ def verify_batch(
         with LeanREPL(env) as repl:
             with trace_path.open("a" if done else "w", encoding="utf-8") as fh:
                 for i, req in enumerate(items):
-                    tr = verify_trace(
-                        repl,
-                        req.source,
-                        trace_id=req.trace_id,
-                        problem_id=req.problem_id,
-                        model_id=str(req.get("model_id", "")),
-                        temperature=req.get("temperature"),
-                        sample_index=int(req.get("sample_index", 0)),
-                        per_step_timeout_s=per_step_timeout_s,
-                        whole_proof_timeout_s=whole_proof_timeout_s,
-                    )
+                    expected_statement = req.get("theorem_statement")
+                    sampled_header, _ = split_header_and_proof(req.proof)
+                    if expected_statement and sampled_header.strip() != expected_statement.strip():
+                        # Exact equality is conservative: even a formatting-only change is
+                        # quarantined until the canonical goal can be checked for equivalence.
+                        tr = ProofTrace(
+                            trace_id=req.trace_id,
+                            problem_id=req.problem_id,
+                            model_id=str(req.get("model_id", "")),
+                            temperature=req.get("temperature"),
+                            sample_index=int(req.get("sample_index", 0)),
+                            theorem_statement=expected_statement,
+                            proof_text=req.source,
+                            outcome=TraceOutcome.STATEMENT_MISMATCH,
+                            error="sampled theorem header differs from the requested statement",
+                        )
+                    else:
+                        tr = verify_trace(
+                            repl,
+                            req.source,
+                            trace_id=req.trace_id,
+                            problem_id=req.problem_id,
+                            model_id=str(req.get("model_id", "")),
+                            temperature=req.get("temperature"),
+                            sample_index=int(req.get("sample_index", 0)),
+                            per_step_timeout_s=per_step_timeout_s,
+                            whole_proof_timeout_s=whole_proof_timeout_s,
+                        )
+                    # Keep the actual generation context; kernel-only directives are not model input.
+                    if req.get("prompt") or req.get("prompt_token_ids"):
+                        tr.meta["generation"] = {
+                            key: req.get(key)
+                            for key in (
+                                "prompt",
+                                "completion",
+                                "prompt_token_ids",
+                                "completion_token_ids",
+                                "proof",
+                                "meta",
+                            )
+                        }
                     if not tr.check_absorbing():  # pragma: no cover - guarded by construction
                         raise AssertionError(f"non-absorbing labels on trace {tr.trace_id}")
                     traces.append(tr)
@@ -167,7 +200,8 @@ def verify_batch(
             traces = read_traces(trace_path)
         summary = VerificationSummary.from_traces(traces)
         man.add_output(trace_path, "traces")
-        man.add_output(write_json(out / "summary.json", summary.model_dump()), "summary")
+        summary_name = "summary.json" if n_shards == 1 else f"summary.shard{shard:02d}.json"
+        man.add_output(write_json(out / summary_name, summary.model_dump()), "summary")
         for key, value in summary.model_dump().items():
             man.add_metric(key, value)
 

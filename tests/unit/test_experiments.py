@@ -140,8 +140,8 @@ class TestP2:
 
     def test_a_constant_score_localises_at_chance(self) -> None:
         traces = [{"z": np.ones(10), "t_star": 3, "L": 10, "surprisal": np.zeros(10)}]
-        assert localization_rates(traces)["top1"] == 1.0  # rank 1 under ties by construction
-        assert localization_rates(traces)["mean_rank"] == 1.0
+        assert localization_rates(traces)["top1"] == 0.0  # the earliest maximum is step 0
+        assert localization_rates(traces)["mean_rank"] == 4.0
 
 
 class TestP3:

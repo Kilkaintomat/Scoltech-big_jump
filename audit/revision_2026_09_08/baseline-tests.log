@@ -1,0 +1,169 @@
+uv run ruff check src/ tests/ scripts/
+All checks passed!
+uv run ruff format --check src/ tests/
+76 files already formatted
+uv run mypy src/
+Success: no issues found in 47 source files
+uv run pytest tests/ -m "not lean and not ml" -q
+..F......F........F....F................................................ [ 16%]
+........................................................................ [ 32%]
+........................................................................ [ 49%]
+........................................................................ [ 65%]
+........................................................................ [ 81%]
+........................................................................ [ 98%]
+........                                                                 [100%]
+=================================== FAILURES ===================================
+________________ TestPredictions.test_the_manifest_records_why _________________
+
+self = <tests.integration.test_analysis.TestPredictions object at 0x11e7a3e10>
+result = ({'n_rows': 76800, 'n_traces': 1200, 'cells': [('kesten', 0, 'raw')], 'P1': [{'model': 'kesten', 'layer': 0, 'statisti..., ...}], ...}, PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0'))
+
+    def test_the_manifest_records_why(self, result) -> None:
+        _, out = result
+>       man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/integration/test_analysis.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0/manifest.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0/manifest.json'
+
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: FileNotFoundError
+____________ TestArtifacts.test_outputs_are_registered_with_digests ____________
+
+self = <tests.integration.test_analysis.TestArtifacts object at 0x11e7c1f10>
+result = ({'n_rows': 76800, 'n_traces': 1200, 'cells': [('kesten', 0, 'raw')], 'P1': [{'model': 'kesten', 'layer': 0, 'statisti..., ...}], ...}, PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0'))
+
+    def test_outputs_are_registered_with_digests(self, result) -> None:
+        _, out = result
+>       man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/integration/test_analysis.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0/manifest.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/analysis0/manifest.json'
+
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: FileNotFoundError
+________________ TestRun.test_outputs_and_manifest_are_written _________________
+
+self = <tests.integration.test_figure_one.TestRun object at 0x11e84f110>
+run = ({'caption_setting': {'rho': 0.7, 'kappa': 2.5, 'd': 8, 'n_traces': 400, ...}, 'closed_form': {'0.00': {'alpha': inf, ...test-54/kesten0'), PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/figs0'))
+
+    def test_outputs_and_manifest_are_written(self, run) -> None:
+        _, out, figs = run
+        assert (out / "figure1_metrics.json").is_file()
+        assert (out / "figure1_summary.csv").is_file()
+        assert (figs / "figure1_kesten_dichotomy.pdf").is_file()
+        assert (figs / "figure1_kesten_dichotomy.png").is_file()
+    
+>       man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/integration/test_figure_one.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/kesten0/manifest.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/kesten0/manifest.json'
+
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: FileNotFoundError
+_________ TestHillPlotFigure.test_the_manifest_registers_both_figures __________
+
+self = <tests.integration.test_figure_one.TestHillPlotFigure object at 0x11e85da90>
+tmp_path = PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/test_the_manifest_registers_bo0')
+
+    def test_the_manifest_registers_both_figures(self, tmp_path) -> None:
+        import json
+    
+        from onebigjump.simulation.figure1 import run_figure_one
+    
+        out = tmp_path / "run"
+        run_figure_one(
+            SMALL,
+            out_dir=out,
+            figure_dir=tmp_path / "figs",
+            metrics_dir=tmp_path / "metrics",
+            make_figure=True,
+        )
+>       man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/integration/test_figure_one.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/test_the_manifest_registers_bo0/run/manifest.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/47/pny2r25s07g9yw0p1mwmsbbc0000gn/T/pytest-of-den/pytest-54/test_the_manifest_registers_bo0/run/manifest.json'
+
+../../.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py:1044: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/integration/test_analysis.py::TestPredictions::test_the_manifest_records_why
+FAILED tests/integration/test_analysis.py::TestArtifacts::test_outputs_are_registered_with_digests
+FAILED tests/integration/test_figure_one.py::TestRun::test_outputs_and_manifest_are_written
+FAILED tests/integration/test_figure_one.py::TestHillPlotFigure::test_the_manifest_registers_both_figures
+make: *** [test] Error 1

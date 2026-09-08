@@ -102,7 +102,8 @@ class RunManifest:
         the cluster runs were made. That is not a clean checkout, it is an unknown one, and the
         figure it produced cannot be traced back to a commit either way.
         """
-        return self.environment.get("git", {}).get("dirty", True) is False
+        git = self.environment.get("git", {})
+        return bool(git.get("commit")) and git.get("dirty") is False
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -156,6 +157,11 @@ def run_manifest(
             "packages": package_versions(),
             "hardware": hardware_info(),
             "python_build": platform.python_build(),
+            "source_files": {
+                str(p.relative_to(Path(__file__).resolve().parent)): file_digest(p)
+                for p in sorted(Path(__file__).resolve().parent.rglob("*.py"))
+            },
+            "source_root": str(Path(__file__).resolve().parent),
         },
     )
     try:

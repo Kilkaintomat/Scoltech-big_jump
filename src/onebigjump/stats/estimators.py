@@ -201,8 +201,9 @@ def estimate_tail(
     by the cluster factor and is only ever appropriate for genuinely independent observations.
     """
     cfg = cfg or TailEstimationConfig()
-    x = np.asarray(z, dtype=np.float64).ravel()
+    x: np.ndarray = np.asarray(z, dtype=np.float64).ravel()
     finite = np.isfinite(x) & (x > 0)
+    g: np.ndarray | None
     if groups is not None:
         g = np.asarray(groups).ravel()
         if g.size != x.size:

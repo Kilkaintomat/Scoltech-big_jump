@@ -315,11 +315,16 @@ def extract_trajectory(
     import torch
 
     n_layers = len(list(_blocks(model)))
+    if not alignment.complete:
+        raise ValueError("incomplete step alignment cannot be extracted")
     chosen = layers if layers is not None else layer_indices(n_layers, layer_fractions)
     positions = alignment.readout_positions
 
-    enc = tokenizer(text, return_tensors="pt", add_special_tokens=True)
-    input_ids = enc["input_ids"]
+    if alignment.input_ids is None:
+        enc = tokenizer(text, return_tensors="pt", add_special_tokens=True)
+        input_ids = enc["input_ids"]
+    else:
+        input_ids = torch.tensor([alignment.input_ids], dtype=torch.long)
     if input_ids.shape[1] != alignment.n_tokens:
         raise ValueError(
             f"tokenisation changed between alignment ({alignment.n_tokens} tokens) and "
@@ -328,8 +333,9 @@ def extract_trajectory(
     dev = device or str(next(model.parameters()).device)
     input_ids = input_ids.to(dev)
 
+    model.eval()
     with torch.no_grad(), record_residuals(model, chosen, positions) as rec:
-        out = model(input_ids=input_ids)
+        out = model(input_ids=input_ids, use_cache=False)
         logits = out.logits[0].to(torch.float32)
 
     # Token log-probability of each *realised* token, shifted by one as usual.

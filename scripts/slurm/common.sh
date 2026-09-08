@@ -47,6 +47,7 @@ export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
 # 2.43 recorded it correctly. That is how a whole set of cluster results came to have no
 # provenance while the launcher appeared to be working. A subshell `cd` works on both.
 if (cd "$REPO" && git rev-parse HEAD) >/dev/null 2>&1; then
+    export ONEBIGJUMP_GIT_ROOT="$REPO"
     export ONEBIGJUMP_GIT_COMMIT="$(cd "$REPO" && git rev-parse HEAD)"
     export ONEBIGJUMP_GIT_BRANCH="$(cd "$REPO" && git rev-parse --abbrev-ref HEAD)"
     export ONEBIGJUMP_GIT_DESCRIBE="$(cd "$REPO" && git describe --always --dirty 2>/dev/null || true)"

@@ -12,7 +12,7 @@ from typing import Any
 from ..lean.problems import Problem, load_problems
 from ..logging import get_logger
 from ..manifests import run_manifest
-from ..reproducibility import write_json
+from ..reproducibility import file_digest, seed_everything, write_json
 
 __all__ = ["run_extraction", "run_generation"]
 
@@ -35,6 +35,8 @@ def run_generation(
     trust_remote_code: bool = False,
     batch_size: int = 1,
     name: str = "generate",
+    seed: int = 1234,
+    revision: str | None = None,
     # True, not False. The completion carries the model's informal reasoning before the Lean
     # block, and `extract_lean_block` throws it away; once a run finishes, nothing short of
     # regenerating gets it back. It is the one field here that cannot be recomputed, and a
@@ -59,8 +61,14 @@ def run_generation(
         "n_problems": len(problems),
         "split": split,
         "dtype": dtype,
+        "seed": seed,
+        "revision": revision,
+        "device": device,
+        "batch_size": batch_size,
+        "problems_digest": file_digest(Path(problems_source)),
     }
-    with run_manifest(name, "generate", out, config=config) as man:
+    with run_manifest(name, "generate", out, config=config, seed=seed) as man:
+        seed_everything(seed)
         # Every backend option is passed; `make_backend` keeps what its chosen backend accepts.
         engine = make_backend(
             model_id,
@@ -69,6 +77,8 @@ def run_generation(
             device=device,
             dtype=dtype,
             batch_size=batch_size,
+            seed=seed,
+            revision=revision,
         )
 
         samples = generate(
@@ -105,6 +115,9 @@ def run_extraction(
     device: str = "auto",
     dtype: str = "bfloat16",
     trust_remote_code: bool = False,
+    revision: str | None = None,
+    shrinkage: float | None = None,
+    ridge_alpha: float = 1.0,
     max_tokens: int | None = 4096,
     seed: int = 0,
     name: str = "activations",
@@ -132,10 +145,18 @@ def run_extraction(
         "dtype": dtype,
         "max_tokens": max_tokens,
         "seed": seed,
+        "revision": revision,
+        "shrinkage": shrinkage,
+        "ridge_alpha": ridge_alpha,
+        "traces_digest": file_digest(Path(traces_path)),
     }
     with run_manifest(name, "activations", out, config=config, seed=seed) as man:
         model, tokenizer, resolved = load_extraction_model(
-            model_id, device=device, dtype=dtype, trust_remote_code=trust_remote_code
+            model_id,
+            device=device,
+            dtype=dtype,
+            trust_remote_code=trust_remote_code,
+            revision=revision,
         )
         man.add_metric("device", resolved)
 
@@ -149,6 +170,8 @@ def run_extraction(
             statistics=statistics,
             max_tokens=max_tokens,
             model_name=model_id,
+            shrinkage=shrinkage,
+            ridge_alpha=ridge_alpha,
         )
 
         table_path = out / "deviations.parquet"
@@ -187,6 +210,11 @@ def run_extraction(
             from .analysis import run_analysis
 
             payload["analysis"] = run_analysis(
-                result.table, out_dir=out / "analysis", name=f"{name}-analysis"
+                result.table,
+                out_dir=out / "analysis",
+                name=f"{name}-analysis",
+                tables_dir=out / "analysis" / "tables",
+                metrics_dir=out / "analysis" / "metrics",
+                figures_dir=out / "analysis" / "figures",
             )
         return payload

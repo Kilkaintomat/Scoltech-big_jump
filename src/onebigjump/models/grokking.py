@@ -172,7 +172,7 @@ def key_frequencies(model: nn.Module, top_k: int = 6) -> list[int]:
     spectrum = np.abs(np.fft.rfft(emb, axis=0))
     power = (spectrum**2).sum(axis=1)
     power[0] = 0.0  # the constant component is always present and carries no frequency
-    return sorted(np.argsort(power)[::-1][:top_k].tolist())
+    return sorted(int(i) for i in (np.argsort(power[1:])[::-1][:top_k] + 1))
 
 
 @dataclass
@@ -199,8 +199,36 @@ def _loss_and_acc(logits: Tensor, targets: Tensor) -> tuple[float, float]:
     return float(loss.item()), float(acc.item())
 
 
+def fourier_circuit_logits(
+    grid: np.ndarray, frequencies: list[int]
+) -> tuple[np.ndarray, np.ndarray]:
+    """Keep/remove same-frequency Fourier terms, retaining DC in both projections.
+
+    Nanda et al. (2023), Section 5.1. A whole row/column also contains mixed-frequency
+    and single-input terms, which must not count as the modular-addition circuit.
+    """
+    p = grid.shape[0]
+    spectrum = np.fft.fft2(grid, axes=(0, 1))
+    circuit = np.zeros((p, p), dtype=bool)
+    for f in frequencies:
+        if not 0 < f <= p // 2:
+            raise ValueError(f"invalid nonzero Fourier frequency {f} for p={p}")
+        signs = [f, (-f) % p]
+        circuit[np.ix_(signs, signs)] = True
+    restricted_mask = circuit.copy()
+    restricted_mask[0, 0] = True
+    restricted = np.real(np.fft.ifft2(spectrum * restricted_mask[:, :, None], axes=(0, 1)))
+    excluded = np.real(np.fft.ifft2(spectrum * (~circuit)[:, :, None], axes=(0, 1)))
+    return restricted, excluded
+
+
 def progress_measures(
-    model: nn.Module, data: ModularAdditionData, *, top_k: int = 6, device: str = "cpu"
+    model: nn.Module,
+    data: ModularAdditionData,
+    *,
+    top_k: int = 6,
+    device: str = "cpu",
+    frequencies: list[int] | None = None,
 ) -> ProgressMeasures:
     """Train/test loss and accuracy, plus the restricted and excluded losses.
 
@@ -223,22 +251,17 @@ def progress_measures(
     train_loss, train_acc = _loss_and_acc(logits[data.train_idx], targets[data.train_idx])
     test_loss, test_acc = _loss_and_acc(logits[data.test_idx], targets[data.test_idx])
 
-    freqs = key_frequencies(model, top_k=top_k)
+    # A fixed list from the final model reproduces the original protocol. The adaptive
+    # fallback remains a diagnostic and is identified in the run metadata.
+    freqs = key_frequencies(model, top_k=top_k) if frequencies is None else frequencies
     grid = logits.reshape(p, p, p).numpy()
-    spectrum = np.fft.fft2(grid, axes=(0, 1))
-
-    keep = np.zeros((p, p), dtype=bool)
-    keep[0, 0] = True  # the constant term belongs to both models
-    for f in freqs:
-        for sign_a in (f, (p - f) % p):
-            keep[sign_a, :] = True
-            keep[:, sign_a] = True
-
-    restricted = np.real(np.fft.ifft2(spectrum * keep[:, :, None], axes=(0, 1)))
-    excluded = np.real(np.fft.ifft2(spectrum * (~keep)[:, :, None], axes=(0, 1)))
+    restricted, excluded = fourier_circuit_logits(grid, freqs)
 
     r_loss, _ = _loss_and_acc(torch.from_numpy(restricted.reshape(p * p, p)).float(), targets)
-    e_loss, _ = _loss_and_acc(torch.from_numpy(excluded.reshape(p * p, p)).float(), targets)
+    e_loss, _ = _loss_and_acc(
+        torch.from_numpy(excluded.reshape(p * p, p)).float()[data.train_idx],
+        targets[data.train_idx],
+    )
 
     return ProgressMeasures(
         train_loss=train_loss,

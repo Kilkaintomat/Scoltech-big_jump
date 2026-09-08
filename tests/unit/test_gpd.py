@@ -93,7 +93,7 @@ class TestModelComparison:
     ) -> None:
         y = rng.exponential(1.0, 8_000)
         cmp_ = compare_tail_models(y)
-        assert cmp_.favours.startswith("light")
+        assert cmp_.favours == "inconclusive"  # non-rejection is not positive evidence
         assert cmp_.p_gpd_vs_exponential > 0.01
         assert abs(cmp_.gpd.gamma) < 0.05
 

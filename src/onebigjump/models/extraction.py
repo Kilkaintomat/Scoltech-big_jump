@@ -27,6 +27,7 @@ import pandas as pd
 
 from ..experiments.dataset import from_traces
 from ..lean.schemas import ProofTrace
+from ..lean.segmentation import split_header_and_proof
 from ..logging import get_logger
 from .activations import Calibration, Trajectory, extract_trajectory, fit_calibration
 from .hooks import block_modules, layer_indices
@@ -66,7 +67,12 @@ class ExtractionResult:
 
 
 def load_extraction_model(
-    model_id: str, *, device: str = "auto", dtype: str = "bfloat16", trust_remote_code: bool = False
+    model_id: str,
+    *,
+    device: str = "auto",
+    dtype: str = "bfloat16",
+    trust_remote_code: bool = False,
+    revision: str | None = None,
 ) -> tuple[Any, Any, str]:
     """Load the model used for *activations*, which Appendix B.3 keeps separate from sampling.
 
@@ -93,9 +99,11 @@ def load_extraction_model(
     }[dtype]
 
     log.info("loading %s for extraction onto %s in %s", model_id, device, torch_dtype)
-    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=trust_remote_code)
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_id, trust_remote_code=trust_remote_code, revision=revision
+    )
     model = AutoModelForCausalLM.from_pretrained(
-        model_id, dtype=torch_dtype, trust_remote_code=trust_remote_code
+        model_id, torch_dtype=torch_dtype, trust_remote_code=trust_remote_code, revision=revision
     )
     # The transformers stubs reject a device string here; see the same cast in generation.py.
     model = cast(Any, model).to(device)
@@ -117,33 +125,60 @@ def trace_alignment(
     # The body is rebuilt from the original source, not from the segments' `tactic` text: that
     # text has been dedented and re-joined, so its character offsets no longer match the line
     # spans the segmenter recorded, and the readouts would land on the wrong tokens.
-    lines = trace.proof_text.split("\n")
-    first = min(s.line_start for s in trace.steps)
-    last = max(s.line_end for s in trace.steps)
-    header_lines = trace.header.count("\n") + 1
-    body_lines = lines[header_lines:]
-    if not body_lines:
+    _, body = split_header_and_proof(trace.proof_text)
+    body_lines = body.split("\n")
+    if not body.strip():
         return None
-    body = "\n".join(body_lines)
 
     steps = [
         {"index": s.index, "line_start": s.line_start, "line_end": s.line_end}
         for s in trace.steps
-        if 0 <= s.line_start < len(body_lines) and first <= s.line_end <= max(last, 0)
+        if 0 <= s.line_start <= s.line_end < len(body_lines)
     ]
-    if not steps:
+    if len(steps) != len(trace.steps):
         return None
 
-    head = (prompt or "") + trace.header + "\n"
-    text = head + body
-    spans = step_char_spans(body, steps, base_offset=len(head))
-    if not spans:
+    generation = trace.meta.get("generation")
+    ids = None
+    if generation:
+        prompt_ids = generation.get("prompt_token_ids")
+        completion_ids = generation.get("completion_token_ids")
+        if not prompt_ids or not completion_ids:
+            return None
+        ids = list(prompt_ids) + list(completion_ids)
+        text = tokenizer.decode(ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)
+        head = tokenizer.decode(
+            prompt_ids, skip_special_tokens=False, clean_up_tokenization_spaces=False
+        )
+        # Only accept offsets when retokenisation proves identical to the saved sequence.
+        enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=False)
+        if list(enc["input_ids"]) != ids or not text.startswith(head):
+            return None
+        formal = generation.get("proof") or ""
+        formal_start = text.find(formal, len(head)) if formal else -1
+        search_start = formal_start if formal_start >= 0 else len(head)
+        body_start = text.find(body, search_start)
+        if body_start < 0 or (formal_start < 0 and text.find(body, body_start + 1) >= 0):
+            return None
+    else:
+        if trace.model_id not in {"", "handwritten"}:
+            return None  # legacy model samples have lost the original generation context
+        head = (prompt or "") + trace.header + "\n"
+        text = head + body
+        body_start = len(head)
+        enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=True)
+    spans = step_char_spans(body, steps, base_offset=body_start)
+    if len(spans) != len(trace.steps):
         return None
-    enc = tokenizer(text, return_offsets_mapping=True, add_special_tokens=True)
     try:
         alignment = align_steps(enc["offset_mapping"], spans, prompt_char_end=len(head))
     except ValueError:
         return None
+    if not alignment.complete or len(alignment.step_end_tokens) != trace.n_steps:
+        return None
+    if ids is not None:
+        alignment.input_ids = ids
+        alignment.prompt_end_token = len(prompt_ids) - 1
     return text, alignment
 
 
@@ -251,32 +286,43 @@ def extract_table(
 
 
 def read_traces(path: Path | str) -> list[ProofTrace]:
-    """Read the JSONL that `onebigjump lean-verify` wrote."""
+    """Read a trace file, or the disjoint shards written by a Lean Slurm array."""
     import json
 
+    path = Path(path)
+    if path.is_file():
+        paths = [path]
+    elif path.is_dir():
+        paths = sorted(path.glob("traces.shard*.jsonl"))
+    elif path.name == "traces.jsonl":
+        paths = sorted(path.parent.glob("traces.shard*.jsonl"))
+    else:
+        paths = []
+    if not paths:
+        raise FileNotFoundError(f"no labelled traces or shards at {path}")
     out = []
-    with Path(path).open(encoding="utf-8") as fh:
-        for line in fh:
-            if line.strip():
-                out.append(ProofTrace.model_validate(json.loads(line)))
+    seen: set[str] = set()
+    for source in paths:
+        with source.open(encoding="utf-8") as fh:
+            for line in fh:
+                if line.strip():
+                    trace = ProofTrace.model_validate(json.loads(line))
+                    if trace.trace_id in seen:
+                        raise ValueError(f"duplicate trace_id across input files: {trace.trace_id}")
+                    seen.add(trace.trace_id)
+                    out.append(trace)
     return out
 
 
 def stratified_calibration_split(
     traces: Sequence[ProofTrace], frac: float = 0.5, seed: int = 0
 ) -> list[str]:
-    """Choose the held-out problems, preferring ones that actually have verified traces.
-
-    A calibration split made of problems the model never proved contributes nothing to the fit,
-    so problems with at least one verified trace are drawn first.
-    """
-    verified_problems = sorted({t.problem_id for t in traces if t.verified})
-    others = sorted({t.problem_id for t in traces} - set(verified_problems))
+    """Choose a disjoint problem split without conditioning membership on observed success."""
+    problems = sorted({t.problem_id for t in traces})
+    if not 0 < frac < 1:
+        raise ValueError("calibration fraction must be between 0 and 1")
+    if len(problems) < 2:
+        raise ValueError("calibration and analysis require at least two distinct problems")
     rng = np.random.default_rng(seed)
-    target = max(1, round(frac * len({t.problem_id for t in traces})))
-
-    chosen = [verified_problems[int(i)] for i in rng.permutation(len(verified_problems))]
-    if len(chosen) < target:
-        extra = [others[int(i)] for i in rng.permutation(len(others))]
-        chosen += extra[: target - len(chosen)]
-    return sorted(chosen[:target])
+    target = min(len(problems) - 1, max(1, round(frac * len(problems))))
+    return sorted(problems[int(i)] for i in rng.permutation(len(problems))[:target])

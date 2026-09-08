@@ -109,7 +109,8 @@ def double_bootstrap_k(
 
     def _stage(sub_n: int) -> tuple[int, np.ndarray, np.ndarray]:
         k_hi = max(int(k_max_frac * sub_n), 3)
-        grid = _k_grid(sub_n, k_min, k_hi)
+        # The full-sample minimum can exceed the entire smaller bootstrap tail.
+        grid = _k_grid(sub_n, min(k_min, k_hi - 1), k_hi)
         acc = np.zeros(grid.size, dtype=np.float64)
         seen = np.zeros(grid.size, dtype=np.int64)
         offset = int(grid[0]) - 1  # the control-variate curve is indexed from k = 1
@@ -251,7 +252,7 @@ def select_k(
     resamples: int = 200,
     n1_exponent: float = 0.9,
     seed: int = 0,
-    max_pool: int | None = 200_000,
+    max_pool: int | None = None,
 ) -> KSelection:
     """Dispatch to one of the `k` rules, clipping the result into `[k_min, k_max_frac * n]`."""
     x = sorted_positive_desc(z)

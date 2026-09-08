@@ -24,8 +24,9 @@ proof and no threshold is involved. The consequence is that the simulation can c
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, cast
+from typing import Any, Literal, cast
 
+import numpy as np
 import pandas as pd
 
 from ..config import TailEstimationConfig
@@ -130,7 +131,13 @@ def tail_separation(estimates: dict[str, dict[str, Any]]) -> dict[str, Any]:
     ) -> bool | None:
         if a is None or b is None or a[1] is None or b[2] is None:
             return None
+        if not np.isfinite(a[1]) or not np.isfinite(b[2]):
+            return None
         return bool(a[1] > b[2])
+
+    complete = all(
+        c is not None and all(v is not None and np.isfinite(v) for v in c) for c in (ver, pre, post)
+    )
 
     return {
         "gamma_verified": None if ver is None else ver[0],
@@ -143,7 +150,9 @@ def tail_separation(estimates: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "pre_above_verified": strictly_above(pre, ver),
         "post_above_pre": strictly_above(post, pre),
         "expected_pattern_holds": (
-            strictly_above(post, ver) is True and strictly_above(pre, ver) is not True
+            None
+            if not complete
+            else strictly_above(post, ver) is True and strictly_above(pre, ver) is False
         ),
     }
 
@@ -181,7 +190,7 @@ def run_p1(
             est = estimate_tail(
                 part["z"].to_numpy(),
                 groups.to_numpy(),
-                cfg,
+                cfg.model_copy(update={"bootstrap_unit": unit}),
                 seed=seed,
                 with_hill_plot=with_hill_plot,
                 meta={
@@ -193,6 +202,9 @@ def run_p1(
                 },
             )
             res.estimates[name] = est.as_dict() | est.row()
+            res.estimates[name]["m_traces"] = int(part["trace_id"].nunique())
+        if not res.estimates:
+            continue
         res.separation = tail_separation(res.estimates)
         results.append(res)
         log.info(
@@ -207,7 +219,9 @@ def run_p1(
     return results
 
 
-def _bootstrap_unit(part: pd.DataFrame, min_groups: int = 20) -> tuple[pd.Series, str]:
+def _bootstrap_unit(
+    part: pd.DataFrame, min_groups: int = 20
+) -> tuple[pd.Series, Literal["trace", "prompt"]]:
     """Pick the resampling unit, and say which one was picked.
 
     Section 4 resamples prompts when several traces share a prompt, because such traces are not

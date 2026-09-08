@@ -1,0 +1,32 @@
+./scripts/run_tests.sh
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+== ruff ==
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: a3988f76ca27ff5ecc476a192b9d61797e861b65 on main (git 2.43.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+All checks passed!
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: a3988f76ca27ff5ecc476a192b9d61797e861b65 on main (git 2.43.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+77 files already formatted
+== mypy ==
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: a3988f76ca27ff5ecc476a192b9d61797e861b65 on main (git 2.43.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+Success: no issues found in 47 source files
+== pytest ==
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: a3988f76ca27ff5ecc476a192b9d61797e861b65 on main (git 2.43.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+bringing up nodes...
+bringing up nodes...
+
+...........................................................s..ss.s.s.s.s [ 12%]
+.sssss.................................................................. [ 25%]
+........................................................................ [ 38%]
+........................................................................ [ 51%]
+..sssss................................................................. [ 64%]
+........................................................................ [ 77%]
+........................................................................ [ 90%]
+.................................s................                       [100%]
+536 passed, 18 skipped in 186.28s (0:03:06)

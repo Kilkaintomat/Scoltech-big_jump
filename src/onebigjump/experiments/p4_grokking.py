@@ -192,6 +192,7 @@ def train_grokking(
         "wall_time_s": round(time.time() - t0, 1),
         "full_every": full_every,
         "tail_k_frac": tail_k_frac,
+        "progress_measure_protocol": "same-frequency Fourier terms; excluded loss on train; adaptive frequencies",
     }
     return checkpoints, meta
 

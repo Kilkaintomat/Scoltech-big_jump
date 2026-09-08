@@ -56,3 +56,10 @@ the kernel labels must not look like a run that checked them.
 * `vllm` and `flash-attn`: Linux + CUDA only.
 * Sampling from a prover model: the smallest in the paper is 7B and does not fit in 16 GB. See
   `docs/system_report.md` for what this machine can and cannot run.
+
+## Working environment (user instruction, 2026-09-08)
+
+The working repository is on Zhores at `/beegfs/home/denis.rakhmankin/onebigjump`.
+Perform all further edits and tests on the server. Do not run local experiments or tests.
+Use the existing `zhores` SSH alias without changing SSH/VPN settings.
+Submit tests and computation through Slurm; keep login-node work to file and job management.

@@ -199,7 +199,10 @@ def identified_tail(
     vals = np.array(
         [v for v in estimates.values() if v is not None and np.isfinite(v)], dtype=np.float64
     )
-    if vals.size < 2:
+    if not all(
+        name in estimates and estimates[name] is not None and np.isfinite(estimates[name])
+        for name in ("hill", "moment", "gpd")
+    ):
         agreement, est_spread = False, float("nan")
     else:
         est_spread = float(vals.max() - vals.min())

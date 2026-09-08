@@ -105,7 +105,30 @@ the whitening is determined at all. Below roughly two increments per dimension i
 
 ## Run manifests
 
-Every run writes `<out_dir>/manifest.json`: the resolved config, the seed, the git commit and
+Every run writes `<out_dir>/manifest-<run-name>.json`: the resolved config, the seed, the git commit and
 whether the tree was dirty, package versions, hardware, wall time, a SHA-256 of every output, the
 headline metrics, and any recorded deviation from the paper's protocol. See
 [`reproducibility.md`](reproducibility.md).
+
+## Revision: exact generation context and validity
+
+New samples record `theorem_statement`, the requested theorem. A sampled header that differs
+from it is quarantined as `statement_mismatch`, including formatting-only mismatches; it is not
+counted as a proof of the requested problem. The legacy corpus lacks this field and exact token
+IDs and must be sampled again before the paper pipeline is used.
+
+`ProofTrace.meta.generation` preserves the original prompt, raw completion, exact prompt and
+completion token IDs, the sampled proof and source metadata. Extraction uses these exact IDs,
+keeps the informal preamble in context and reads X0 at the actual prompt boundary. If offsets
+cannot be proven to match the saved token sequence, the trace is counted as unalignable. The
+text-only path is reserved for handwritten fixtures.
+
+Every labelled trajectory must have exactly L steps, indexed 0 through L-1, finite nonnegative
+z, a constant outcome and t_star, and labels consistent with t_star. Lean tables additionally
+carry `status`; every step strictly after the first failure must be `unreached`. Truncating a
+trajectory to the shorter of the labels and activations is forbidden.
+
+Lean array jobs write `traces.shardNN.jsonl`, `summary.shardNN.json`, and a manifest per shard.
+Extraction can read a shard directory, or discover shards when `traces.jsonl` is absent. Duplicate
+trace IDs across shards are rejected. `step_timeout` counts tactic timeouts separately from the
+statement-level `timeout` count; tactic timeouts remain refutations in the analysis.

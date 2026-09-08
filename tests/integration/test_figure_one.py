@@ -73,7 +73,7 @@ class TestRun:
         assert (figs / "figure1_kesten_dichotomy.pdf").is_file()
         assert (figs / "figure1_kesten_dichotomy.png").is_file()
 
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         assert man["status"] == "ok"
         assert man["kind"] == "kesten"
         roles = {o["role"] for o in man["outputs"]}
@@ -146,7 +146,7 @@ class TestHillPlotFigure:
             metrics_dir=tmp_path / "metrics",
             make_figure=True,
         )
-        man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+        man = json.loads(next(out.glob("manifest-*.json")).read_text(encoding="utf-8"))
         figures = [o["path"] for o in man["outputs"] if o["role"] == "figure"]
         assert any("figure1_kesten_dichotomy" in f for f in figures)
         assert any("hill_plots_kesten" in f for f in figures)

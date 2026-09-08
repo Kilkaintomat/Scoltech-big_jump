@@ -39,6 +39,7 @@ class TraceOutcome(StrEnum):
     PARSE_ERROR = "parse_error"  # discarded: no step structure
     TIMEOUT = "timeout"
     REPL_FAILURE = "repl_failure"  # infrastructure, not a property of the proof
+    STATEMENT_MISMATCH = "statement_mismatch"  # the model changed the requested theorem
 
 
 class Record(BaseModel):
@@ -122,7 +123,9 @@ class VerificationSummary(Record):
     refuted: int = 0
     parse_error_discarded: int = 0
     timeout: int = 0
+    step_timeout: int = 0
     repl_failure: int = 0
+    statement_mismatch: int = 0
     n_steps_total: int = 0
     mean_trace_length: float = 0.0
     mean_t_star: float | None = None
@@ -141,7 +144,9 @@ class VerificationSummary(Record):
             refuted=by[TraceOutcome.REFUTED],
             parse_error_discarded=by[TraceOutcome.PARSE_ERROR],
             timeout=by[TraceOutcome.TIMEOUT],
+            step_timeout=sum(any(s.status == StepStatus.TIMEOUT for s in t.steps) for t in traces),
             repl_failure=by[TraceOutcome.REPL_FAILURE],
+            statement_mismatch=by[TraceOutcome.STATEMENT_MISMATCH],
             n_steps_total=sum(t.n_steps for t in traces),
             mean_trace_length=(
                 sum(t.n_steps for t in labelled) / len(labelled) if labelled else 0.0

@@ -56,6 +56,7 @@ class TokenAlignment:
     step_token_spans: list[tuple[int, int]]
     n_tokens: int
     unaligned: list[int]
+    input_ids: list[int] | None = None
 
     @property
     def readout_positions(self) -> list[int]:
@@ -73,6 +74,7 @@ class TokenAlignment:
             "step_token_spans": [list(s) for s in self.step_token_spans],
             "n_tokens": self.n_tokens,
             "unaligned": self.unaligned,
+            "exact_generation_tokens": self.input_ids is not None,
         }
 
 

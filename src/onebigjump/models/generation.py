@@ -49,6 +49,7 @@ class Sample:
     temperature: float
     sample_index: int
     proof: str
+    theorem_statement: str = ""
     directives: str = ""
     prompt: str = ""
     completion: str = ""
@@ -121,6 +122,7 @@ class HFBackend:
     dtype: str = "auto"
     trust_remote_code: bool = False
     batch_size: int = 1
+    revision: str | None = None
     _model: Any = field(default=None, repr=False)
     _tokenizer: Any = field(default=None, repr=False)
 
@@ -145,14 +147,17 @@ class HFBackend:
 
         log.info("loading %s onto %s in %s", self.model_id, self.device, torch_dtype)
         self._tokenizer = AutoTokenizer.from_pretrained(
-            self.model_id, trust_remote_code=self.trust_remote_code
+            self.model_id, trust_remote_code=self.trust_remote_code, revision=self.revision
         )
         if self._tokenizer.pad_token is None:
             self._tokenizer.pad_token = self._tokenizer.eos_token
         self._tokenizer.padding_side = "left"  # required for batched generation
         assert_tokenizer_roundtrips(self._tokenizer, self.model_id)
         model = AutoModelForCausalLM.from_pretrained(
-            self.model_id, dtype=torch_dtype, trust_remote_code=self.trust_remote_code
+            self.model_id,
+            torch_dtype=torch_dtype,
+            trust_remote_code=self.trust_remote_code,
+            revision=self.revision,
         )
         # The transformers stubs type `PreTrainedModel.to` against the wrong overload of
         # `nn.Module.to`, so a device string is rejected at type-check time but correct at run time.
@@ -195,14 +200,17 @@ class HFBackend:
                 # Padding is on the left for batched generation, so the prompt ids for this row
                 # are the non-pad suffix of its input row.
                 row = enc["input_ids"][i].tolist()
-                prompt_ids = [t for t in row if t != pad] if pad is not None else row
+                mask = enc["attention_mask"][i].tolist()
+                prompt_ids = [t for t, keep in zip(row, mask, strict=True) if keep]
                 per: list[tuple[str, list[int], list[int]]] = []
                 for j in range(n):
-                    ids = (
-                        [t for t in tail[i * n + j].tolist() if t != pad]
-                        if pad is not None
-                        else tail[i * n + j].tolist()
+                    ids = tail[i * n + j].tolist()
+                    eos = self._model.generation_config.eos_token_id
+                    eos_ids = set(eos if isinstance(eos, list) else [eos])
+                    stop = next(
+                        (k + 1 for k, token in enumerate(ids) if token in eos_ids), len(ids)
                     )
+                    ids = ids[:stop]
                     per.append((completions[i * n + j], prompt_ids, ids))
                 out.append(per)
         return out
@@ -228,6 +236,8 @@ class VLLMBackend:
     gpu_memory_utilization: float = 0.90
     max_model_len: int | None = None
     trust_remote_code: bool = False
+    seed: int = 1234
+    revision: str | None = None
     #: None means "decide by whether a compiler exists". True skips torch.compile and CUDA graphs.
     enforce_eager: bool | None = None
     _llm: Any = field(default=None, repr=False)
@@ -245,7 +255,9 @@ class VLLMBackend:
         from transformers import AutoTokenizer
 
         assert_tokenizer_roundtrips(
-            AutoTokenizer.from_pretrained(self.model_id, trust_remote_code=self.trust_remote_code),
+            AutoTokenizer.from_pretrained(
+                self.model_id, trust_remote_code=self.trust_remote_code, revision=self.revision
+            ),
             self.model_id,
         )
         eager = self.enforce_eager
@@ -261,6 +273,8 @@ class VLLMBackend:
             max_model_len=self.max_model_len,
             trust_remote_code=self.trust_remote_code,
             enforce_eager=eager,
+            seed=self.seed,
+            revision=self.revision,
         )
 
     def sample(
@@ -372,6 +386,7 @@ def generate(
                     temperature=float(temperature),
                     sample_index=index,
                     proof=proof,
+                    theorem_statement=problem.statement,
                     # The `open` lines travel with the sample. `extract_lean_block` cuts
                     # everything before `theorem`, so without this they are gone by the time the
                     # kernel sees the proof -- and dropping `open Real` turns a valid miniF2F
