@@ -28,6 +28,12 @@ export TRITON_CACHE_DIR="${TRITON_CACHE_DIR:-$XDG_CACHE_HOME/triton}"
 export TORCHINDUCTOR_CACHE_DIR="${TORCHINDUCTOR_CACHE_DIR:-$XDG_CACHE_HOME/inductor}"
 mkdir -p "$XDG_CACHE_HOME" "$VLLM_CACHE_ROOT" "$TRITON_CACHE_DIR" "$TORCHINDUCTOR_CACHE_DIR" 2>/dev/null || true
 
+# vLLM's telemetry thread writes to ~/.config and throws a traceback into the log when it cannot.
+# Harmless -- it runs in a background thread -- but it looks exactly like a real failure in a job
+# log someone is scanning for one.
+export VLLM_NO_USAGE_STATS="${VLLM_NO_USAGE_STATS:-1}"
+export DO_NOT_TRACK="${DO_NOT_TRACK:-1}"
+
 export ELAN_HOME="${ELAN_HOME:-$HOME/.elan}"
 export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
 
