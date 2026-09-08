@@ -18,6 +18,16 @@ export HF_HOME="${HF_HOME:-/gpfs/gpfs0/$USER/hf_cache}"
 # font cache in the default place and falls back to /tmp on every import.
 export MPLCONFIGDIR="${MPLCONFIGDIR:-/gpfs/gpfs0/$USER/mplconfig}"
 mkdir -p "$MPLCONFIGDIR" "$HF_HOME" 2>/dev/null || true
+# Compute nodes mount home read-only, and every layer of the torch stack wants to write a cache
+# into it: torch.compile, inductor, triton, and vLLM's own compiled-graph store. vLLM dies
+# outright on this -- `OSError: [Errno 30] Read-only file system: ~/.cache` inside dynamo, which
+# surfaces as "Engine core initialization failed" with the real cause buried in the traceback.
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-/gpfs/gpfs0/$USER/cache}"
+export VLLM_CACHE_ROOT="${VLLM_CACHE_ROOT:-$XDG_CACHE_HOME/vllm}"
+export TRITON_CACHE_DIR="${TRITON_CACHE_DIR:-$XDG_CACHE_HOME/triton}"
+export TORCHINDUCTOR_CACHE_DIR="${TORCHINDUCTOR_CACHE_DIR:-$XDG_CACHE_HOME/inductor}"
+mkdir -p "$XDG_CACHE_HOME" "$VLLM_CACHE_ROOT" "$TRITON_CACHE_DIR" "$TORCHINDUCTOR_CACHE_DIR" 2>/dev/null || true
+
 export ELAN_HOME="${ELAN_HOME:-$HOME/.elan}"
 export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
 
