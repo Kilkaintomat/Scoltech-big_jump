@@ -53,6 +53,15 @@ lean_workspace/.lake/
 lean_workspace/build/
 lean_workspace/**/*.olean
 
+# --- cluster: container venvs and Slurm job logs ---
+# These live inside the checkout because Singularity binds the repo, not because they belong to
+# it. Left untracked-and-unignored they make `git status` non-empty, which the manifest correctly
+# reports as a dirty tree -- so every cluster result would be stamped unreproducible by its own
+# build environment.
+.venvc*/
+obj-*.out
+slurm-*.out
+
 # --- caches ---
 .hf_cache/
 .cache/
