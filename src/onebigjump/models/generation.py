@@ -16,6 +16,7 @@ Two properties of the protocol are enforced here rather than left to the caller:
 
 from __future__ import annotations
 
+import shutil
 import time
 from collections.abc import Iterator, Sequence
 from dataclasses import asdict, dataclass, field, fields
@@ -174,6 +175,17 @@ class HFBackend:
         return out
 
 
+def _has_c_compiler() -> bool:
+    """Can torch.compile actually build anything here?
+
+    vLLM's default compilation level runs inductor, which shells out to a C compiler. The
+    Singularity image on the cluster ships CUDA and torch but no toolchain, so the engine dies
+    during startup with `Failed to find C compiler` wrapped in `Engine core initialization
+    failed` -- three frames away from anything that names the cause.
+    """
+    return any(shutil.which(cc) for cc in ("gcc", "cc", "clang"))
+
+
 @dataclass
 class VLLMBackend:
     """vLLM. Linux and CUDA only, which is why it sits behind an optional extra."""
@@ -183,6 +195,8 @@ class VLLMBackend:
     gpu_memory_utilization: float = 0.90
     max_model_len: int | None = None
     trust_remote_code: bool = False
+    #: None means "decide by whether a compiler exists". True skips torch.compile and CUDA graphs.
+    enforce_eager: bool | None = None
     _llm: Any = field(default=None, repr=False)
 
     def __post_init__(self) -> None:
@@ -201,6 +215,11 @@ class VLLMBackend:
             AutoTokenizer.from_pretrained(self.model_id, trust_remote_code=self.trust_remote_code),
             self.model_id,
         )
+        eager = self.enforce_eager
+        if eager is None:
+            eager = not _has_c_compiler()
+            if eager:
+                log.info("no C compiler found; running vLLM eagerly (no torch.compile)")
         log.info("loading %s into vLLM", self.model_id)
         self._llm = LLM(
             model=self.model_id,
@@ -208,6 +227,7 @@ class VLLMBackend:
             gpu_memory_utilization=self.gpu_memory_utilization,
             max_model_len=self.max_model_len,
             trust_remote_code=self.trust_remote_code,
+            enforce_eager=eager,
         )
 
     def sample(
