@@ -34,6 +34,15 @@ fi
 cd "$WS/mathlib_project"
 echo "== toolchain: $(cat lean-toolchain) =="
 
+# elan resolves toolchain *names* through https://release.lean-lang.org, which some networks
+# cannot reach -- on Zhores it times out from every node while github.com answers instantly, and
+# elan then hangs on a lock file with no error at all. Pre-installing the toolchain from its
+# GitHub release makes the name resolvable locally, so elan never has to ask.
+if ! elan run "$(cat lean-toolchain)" lean --version >/dev/null 2>&1; then
+  echo "== elan cannot resolve the toolchain; installing it from GitHub =="
+  bash "$REPO/scripts/install_lean_toolchain.sh" "$(cat lean-toolchain)"
+fi
+
 # `lake update` is deliberately NOT run when a manifest is already committed. The manifest pins
 # Mathlib at the exact revision the step labels were produced against, but several of its
 # dependencies are pinned to `main`; re-resolving would silently move them and verify future

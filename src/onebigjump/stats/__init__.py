@@ -22,6 +22,11 @@ from .gpd import (
 )
 from .hill import hill, hill_curve, log_moments, sorted_positive_desc
 from .moment import moment, moment_curve
+from .reliability import (
+    SplitHalfResult,
+    split_half_reliability,
+    split_half_table,
+)
 from .thresholds import KSelection, double_bootstrap_k, ks_distance_k, plateau_k, select_k
 
 __all__ = [
@@ -31,6 +36,7 @@ __all__ = [
     "GPDFit",
     "IdentifiedTail",
     "KSelection",
+    "SplitHalfResult",
     "TailEstimate",
     "cluster_variance",
     "compare_tail_models",
@@ -55,6 +61,8 @@ __all__ = [
     "plateau_k",
     "select_k",
     "sorted_positive_desc",
+    "split_half_reliability",
+    "split_half_table",
     "survival",
     "traces_from_groups",
     "weibull_fit",
