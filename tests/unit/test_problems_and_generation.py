@@ -7,6 +7,8 @@ feedback, one record per sample -- is what matters here, and it does not need a 
 from __future__ import annotations
 
 import json
+import re
+from collections.abc import Callable
 from pathlib import Path
 
 import pytest
@@ -19,7 +21,12 @@ from onebigjump.lean.problems import (
     load_problems,
     split_problems,
 )
-from onebigjump.models.generation import Sample, generate, write_samples
+from onebigjump.models.generation import (
+    Sample,
+    assert_tokenizer_roundtrips,
+    generate,
+    write_samples,
+)
 
 ROWS = [
     {"problem_id": "p1", "formal_statement": "theorem a : 1 = 1 := by", "header": "import Mathlib"},
@@ -279,3 +286,53 @@ class TestShardingAndResume:
             return hashlib.sha1(trace_id.encode()).digest()[0] % n
 
         assert shard_of("abc", 4) == shard_of("abc", 4)
+
+
+class TestTokenizerRoundTrip:
+    """The guard that would have saved a GPU-day.
+
+    A sampling run against transformers 5.16.1 produced 3616 completions in which every space,
+    newline and non-ASCII character had been deleted by the tokenizer's own decoder. Nothing
+    downstream noticed -- the completions were still strings, still said `theorem` -- and the loss
+    only became visible when the Lean kernel called all of them parse errors.
+    """
+
+    class _Tokenizer:
+        """A tokenizer stub whose decoder mangles the text in a chosen way."""
+
+        def __init__(self, mangle: Callable[[str], str]) -> None:
+            self._mangle = mangle
+            self._text = ""
+
+        def __call__(self, text: str) -> dict[str, list[int]]:
+            self._text = text
+            return {"input_ids": [0]}
+
+        def decode(self, _ids: list[int], **_kw: object) -> str:
+            return self._mangle(self._text)
+
+    def test_a_faithful_tokenizer_passes(self) -> None:
+        assert_tokenizer_roundtrips(self._Tokenizer(lambda s: s), "good/model")
+
+    def test_leading_and_trailing_whitespace_is_not_a_failure(self) -> None:
+        """Templates add a BOS marker and strip the final newline; neither loses information."""
+        assert_tokenizer_roundtrips(self._Tokenizer(lambda s: f"<s> {s.strip()}"), "good/model")
+
+    def test_dropped_whitespace_is_rejected(self) -> None:
+        """The observed transformers 5.16.1 behaviour, verbatim."""
+        with pytest.raises(RuntimeError, match="does not round-trip"):
+            assert_tokenizer_roundtrips(
+                self._Tokenizer(lambda s: re.sub(r"\s+", "", s)), "transformers5/model"
+            )
+
+    def test_dropped_unicode_is_rejected(self) -> None:
+        """Lean is written in Unicode; a decoder that drops it silently breaks every statement."""
+        with pytest.raises(RuntimeError, match="does not round-trip"):
+            assert_tokenizer_roundtrips(
+                self._Tokenizer(lambda s: s.encode("ascii", "ignore").decode()), "ascii/model"
+            )
+
+    def test_the_message_names_the_cause_and_the_fix(self) -> None:
+        with pytest.raises(RuntimeError) as exc:
+            assert_tokenizer_roundtrips(self._Tokenizer(lambda s: ""), "m")
+        assert "transformers" in str(exc.value) and "4.51.3" in str(exc.value)

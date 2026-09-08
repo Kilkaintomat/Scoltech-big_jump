@@ -38,6 +38,7 @@ def run_analysis(
     name: str = "analysis",
     tables_dir: Path | str = "paper_outputs/tables",
     metrics_dir: Path | str = "paper_outputs/metrics",
+    figures_dir: Path | str = "paper_outputs/figures",
     tau_override: float | None = None,
     with_hill_plot: bool = False,
 ) -> dict[str, Any]:
@@ -99,7 +100,10 @@ def run_analysis(
                 + ", ".join(payload["not_run"])
             )
 
+        from ..reporting.plots import figure_length_law, figure_overshoot, figure_roc
         from ..reporting.tables import render_table1, render_table2, write_table
+
+        figures = Path(figures_dir)
 
         if p1:
             headers, rows = render_table1(p1)
@@ -124,6 +128,19 @@ def run_analysis(
                 group_column=0,
             ):
                 man.add_output(path, "table")
+
+        # Every figure the predictions produce, drawn from the results just computed.
+        if p3:
+            for path in figure_overshoot(
+                [r.as_dict() for r in p3], figures, f"p3_overshoot_{name}"
+            ):
+                man.add_output(path, "figure")
+        if p5:
+            for path in figure_length_law(p5[0].as_dict(), figures, f"p5_length_law_{name}"):
+                man.add_output(path, "figure")
+        if p2:
+            for path in figure_roc([r.as_dict() for r in p2], figures, f"p2_roc_{name}"):
+                man.add_output(path, "figure")
 
         for r1 in p1:
             man.add_metric(f"P1_{r1.model}_L{r1.layer}_{r1.statistic}", r1.separation)

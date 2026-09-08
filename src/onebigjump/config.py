@@ -77,6 +77,7 @@ class ModelConfig(Strict):
     )
     problem_split: str | None = None
     max_problems: int | None = None
+    batch_size: int = Field(1, ge=1, description="prompts per generate call")
 
 
 class ActivationConfig(Strict):

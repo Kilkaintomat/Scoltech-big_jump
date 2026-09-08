@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from onebigjump.manifests import RunManifest
 from onebigjump.reproducibility import (
     atomic_path,
     file_digest,
@@ -44,13 +45,35 @@ class TestEnvironmentCapture:
         assert "numpy" in package_versions()
 
     def test_git_info_finds_this_repository(self) -> None:
-        info = git_info(Path(__file__).resolve().parents[2])
+        """Where a repository exists. A deployed copy has none, and that is not a failure --
+        the manifest then records `commit: null`, which is exactly what it should say."""
+        root = Path(__file__).resolve().parents[2]
+        info = git_info(root)
+        if not (root / ".git").exists():
+            assert info["commit"] is None
+            return
         assert info["commit"] and len(info["commit"]) == 40
         assert isinstance(info["dirty"], bool)
 
     def test_git_info_on_a_non_repository_is_all_none(self, tmp_path: Path) -> None:
         info = git_info(tmp_path / "nowhere")
         assert info["commit"] is None
+
+    def test_no_repository_is_unknown_provenance_not_a_clean_tree(self, tmp_path: Path) -> None:
+        """The failure this guards against actually happened.
+
+        The cluster tree is an rsynced copy with no `.git`, and `git status` there returns None,
+        which `bool()` turned into False -- so every manifest written on the cluster claimed
+        `dirty: false`, a clean checkout, when in truth nothing was known about the source at all.
+        """
+        info = git_info(tmp_path / "nowhere")
+        assert info["dirty"] is None
+        assert info["available"] is False
+
+    def test_a_manifest_with_no_commit_is_not_reproducible(self, tmp_path: Path) -> None:
+        man = RunManifest(name="x", kind="test", out_dir=tmp_path, seed=0)
+        man.environment["git"] = git_info(tmp_path / "nowhere")
+        assert man.reproducible is False
 
 
 class TestAtomicWrites:

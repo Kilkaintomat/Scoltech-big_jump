@@ -33,6 +33,7 @@ def run_generation(
     device: str = "auto",
     dtype: str = "auto",
     trust_remote_code: bool = False,
+    batch_size: int = 1,
     name: str = "generate",
     keep_completion: bool = False,
 ) -> dict[str, Any]:
@@ -56,10 +57,15 @@ def run_generation(
         "dtype": dtype,
     }
     with run_manifest(name, "generate", out, config=config) as man:
-        kwargs: dict[str, Any] = {"trust_remote_code": trust_remote_code}
-        if backend != "vllm":
-            kwargs |= {"device": device, "dtype": dtype}
-        engine = make_backend(model_id, backend, **kwargs)
+        # Every backend option is passed; `make_backend` keeps what its chosen backend accepts.
+        engine = make_backend(
+            model_id,
+            backend,
+            trust_remote_code=trust_remote_code,
+            device=device,
+            dtype=dtype,
+            batch_size=batch_size,
+        )
 
         samples = generate(
             problems,

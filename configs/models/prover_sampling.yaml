@@ -18,14 +18,21 @@ seed: 1234
 
 model:
   model_id: deepseek-ai/DeepSeek-Prover-V2-7B
-  # One of the files scripts/fetch_problems.py wrote. Start with max_problems set: confirm the
-  # output looks like Lean before committing a GPU-day to it.
+  # One of the files scripts/fetch_problems.py wrote. `max_problems: null` takes the whole
+  # split; set a number for a cheap first look at whether the output resembles Lean.
   problems: data/raw/minif2f_test.jsonl
   problem_split: null
-  max_problems: 20
-  backend: auto        # vllm where available, transformers otherwise
+  max_problems: null   # 226 problems in miniF2F-test after the placeholder rows are dropped
+  # `hf`, not `auto`. vLLM 0.8.5 is the only build pinned to torch 2.6.0 -- which the driver
+  # forces -- and it predates transformers 5, failing with
+  # `LlamaTokenizer has no attribute all_special_tokens_extended`. There is no vLLM that takes
+  # both torch 2.6 and transformers 5, so sampling goes through `generate` with a batch instead.
+  backend: hf
+  batch_size: 4        # 4 prompts x 8 samples x ~1500 tokens of KV fits an A100-80GB
   dtype: bfloat16
   device: auto
+  # The paper leaves N a placeholder (`N = [x.xx]`); 8 is the usual pass@8 budget in this
+  # literature. 226 problems x 8 samples x 2 temperatures = 3616 traces.
   samples_per_problem: 8
   temperatures: [0.6, 1.0]
   max_new_tokens: 1024

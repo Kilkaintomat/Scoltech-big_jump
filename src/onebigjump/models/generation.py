@@ -18,14 +18,22 @@ from __future__ import annotations
 
 import time
 from collections.abc import Iterator, Sequence
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any, Protocol, cast
 
 from ..lean.problems import Problem, build_prompt, extract_lean_block, header_directives
 from ..logging import get_logger
 
-__all__ = ["Backend", "HFBackend", "Sample", "VLLMBackend", "generate", "make_backend"]
+__all__ = [
+    "Backend",
+    "HFBackend",
+    "Sample",
+    "VLLMBackend",
+    "assert_tokenizer_roundtrips",
+    "generate",
+    "make_backend",
+]
 
 log = get_logger(__name__)
 
@@ -66,6 +74,32 @@ class Backend(Protocol):
         ...
 
 
+#: A probe with the three things a Lean proof cannot survive losing: indentation, newlines, and
+#: the Unicode Mathlib is written in.
+_ROUNDTRIP_PROBE = "theorem foo (x : \u211d) : 1 = 1 := by\n  norm_num\n"
+
+
+def assert_tokenizer_roundtrips(tokenizer: Any, model_id: str) -> None:
+    """Refuse to sample with a tokenizer that cannot decode what it encodes.
+
+    `transformers` 5.16.1 loads the DeepSeek-Prover tokenizer without a byte-level decoder, so
+    `decode(encode(x))` silently returns `x` with every space, newline and non-ASCII character
+    deleted: `theorem foo (x : \u211d) : 1 = 1 := by\n  norm_num` comes back as
+    `theoremfoo(x:)... :=bynorm_num`. Nothing downstream can notice -- the text is still a string,
+    still contains `theorem`, and only the Lean kernel eventually calls it a parse error, by which
+    point a GPU-day has been spent. So the round trip is checked once, before the weights load.
+    """
+    decoded = tokenizer.decode(tokenizer(_ROUNDTRIP_PROBE)["input_ids"], skip_special_tokens=True)
+    if _ROUNDTRIP_PROBE.strip() not in decoded:
+        raise RuntimeError(
+            f"the tokenizer for {model_id} does not round-trip: "
+            f"{_ROUNDTRIP_PROBE.strip()!r} decodes to {decoded.strip()!r}. "
+            "Whitespace and Unicode are being dropped, so every sampled proof would be "
+            "unparseable. Known cause: transformers >= 5 with a byte-level BPE tokenizer; "
+            "pin transformers < 5 (4.51.3 is verified) and re-run."
+        )
+
+
 @dataclass
 class HFBackend:
     """`transformers.generate`. Works anywhere torch does, including CPU and MPS."""
@@ -104,6 +138,7 @@ class HFBackend:
         if self._tokenizer.pad_token is None:
             self._tokenizer.pad_token = self._tokenizer.eos_token
         self._tokenizer.padding_side = "left"  # required for batched generation
+        assert_tokenizer_roundtrips(self._tokenizer, self.model_id)
         model = AutoModelForCausalLM.from_pretrained(
             self.model_id, dtype=torch_dtype, trust_remote_code=self.trust_remote_code
         )
@@ -158,6 +193,14 @@ class VLLMBackend:
                 "vLLM is not installed. It is Linux + CUDA only: "
                 "uv sync --extra ml --extra inference"
             ) from exc
+        # vLLM decodes with the same `transformers` tokenizer, so it has the same failure mode.
+        # Checking before `LLM(...)` keeps the message cheap: loading weights takes minutes.
+        from transformers import AutoTokenizer
+
+        assert_tokenizer_roundtrips(
+            AutoTokenizer.from_pretrained(self.model_id, trust_remote_code=self.trust_remote_code),
+            self.model_id,
+        )
         log.info("loading %s into vLLM", self.model_id)
         self._llm = LLM(
             model=self.model_id,
@@ -178,19 +221,35 @@ class VLLMBackend:
 
 
 def make_backend(model_id: str, backend: str = "auto", **kwargs: Any) -> Backend:
-    """Pick a backend. `auto` prefers vLLM where it is importable and falls back to HuggingFace."""
-    if backend == "vllm":
-        return VLLMBackend(model_id=model_id, **kwargs)
-    if backend == "hf":
-        return HFBackend(model_id=model_id, **kwargs)
-    if backend != "auto":
+    """Pick a backend. `auto` prefers vLLM where it is importable and falls back to HuggingFace.
+
+    Keyword arguments are filtered to what the chosen backend actually accepts. The two do not
+    take the same ones -- vLLM places the model itself and has no `device` -- and with
+    `backend="auto"` the caller cannot know in advance which it is configuring, so passing a
+    `device` used to fail at construction after the config had already been validated.
+    """
+    if backend not in {"auto", "vllm", "hf"}:
         raise ValueError(f"unknown backend: {backend!r}")
-    try:
-        import vllm  # noqa: F401
-    except ImportError:
-        log.info("vLLM is not available; sampling with transformers")
-        return HFBackend(model_id=model_id, **kwargs)
-    return VLLMBackend(model_id=model_id, **kwargs)
+
+    chosen: type[HFBackend] | type[VLLMBackend]
+    if backend == "hf":
+        chosen = HFBackend
+    elif backend == "vllm":
+        chosen = VLLMBackend
+    else:
+        try:
+            import vllm  # noqa: F401
+
+            chosen = VLLMBackend
+        except ImportError:
+            log.info("vLLM is not available; sampling with transformers")
+            chosen = HFBackend
+
+    accepted = {f.name for f in fields(chosen) if not f.name.startswith("_")}
+    dropped = sorted(set(kwargs) - accepted)
+    if dropped:
+        log.info("%s does not take %s; ignored", chosen.__name__, ", ".join(dropped))
+    return chosen(model_id=model_id, **{k: v for k, v in kwargs.items() if k in accepted})
 
 
 def generate(

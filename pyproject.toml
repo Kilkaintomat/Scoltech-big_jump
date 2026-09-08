@@ -35,7 +35,11 @@ viz = [
 ]
 ml = [
     "torch>=2.2",
-    "transformers>=4.40",
+    # <5 is a correctness pin, not caution. transformers 5.16.1 loads DeepSeek-Prover's
+    # byte-level BPE tokenizer without a byte decoder, so decode(encode(x)) drops every space,
+    # newline and non-ASCII character -- which turns every sampled Lean proof into a parse error
+    # with no error anywhere. Verified good: 4.51.3. See assert_tokenizer_roundtrips.
+    "transformers>=4.40,<5",
     "accelerate>=0.29",
     "datasets>=2.19",
     "tokenizers>=0.19",

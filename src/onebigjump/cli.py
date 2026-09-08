@@ -85,6 +85,13 @@ def doctor(
     if git["commit"]:
         state = "[yellow]dirty[/yellow]" if git["dirty"] else "[green]clean[/green]"
         console.print(f"repository {git['commit'][:8]} on {git['branch']}, working tree {state}")
+    else:
+        # Saying nothing here reads as "fine". It is not: every manifest written from this tree
+        # will carry a null commit, and no figure made here can be traced back to a version.
+        console.print(
+            "[yellow]no git checkout here -- manifests will carry no commit. "
+            "Clone the repository instead of copying it.[/yellow]"
+        )
     console.print(f"tracked packages: {len(package_versions())}")
 
     if write_report:
@@ -179,6 +186,7 @@ def _run_generate(cfg: RunConfig, out_dir: Path | None) -> None:
         device=section.device,
         dtype=section.dtype,
         trust_remote_code=section.trust_remote_code,
+        batch_size=section.batch_size,
         name=cfg.name,
     )
     console.print(f"{out['n_samples']} samples over {out['n_problems']} problems -> {out['path']}")

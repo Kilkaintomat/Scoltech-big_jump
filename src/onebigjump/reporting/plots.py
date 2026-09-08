@@ -9,7 +9,15 @@ import numpy as np
 
 from .style import DASHES, ESTIMATOR, GRID, INK, MUTED, apply_style, p_colour
 
-__all__ = ["figure_grokking", "figure_hill_plots", "figure_one", "hill_plot_figure"]
+__all__ = [
+    "figure_grokking",
+    "figure_hill_plots",
+    "figure_length_law",
+    "figure_one",
+    "figure_overshoot",
+    "figure_roc",
+    "hill_plot_figure",
+]
 
 
 def _save(fig: Any, out_dir: Path, stem: str) -> list[Path]:
@@ -446,5 +454,216 @@ def figure_hill_plots(payload: dict[str, Any], out_dir: Path | str) -> list[Path
     ax_h.legend(loc="upper left", ncol=3, fontsize=6.5, columnspacing=1.0, handlelength=1.4)
 
     paths = _save(fig, Path(out_dir), "hill_plots_kesten")
+    plt.close(fig)
+    return paths
+
+
+def figure_overshoot(
+    results: list[dict[str, Any]], out_dir: Path | str, stem: str = "p3_overshoot"
+) -> list[Path]:
+    """P3: the survival of `Z_{t*}/tau` on log-log axes, one panel per tolerance.
+
+    Three curves per panel, not one, because they disagree and the disagreement is the finding:
+    the unconditional overshoot is what Proposition 1 states, the trace maximum is what a
+    cluster's largest step does, and the first exceedance is what P3 as written measures. Under
+    clustering the last is attenuated, so the extremal index is printed next to them -- a small
+    fitted shape is not evidence against `Hheur` unless `theta` is near 1.
+    """
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    apply_style()
+    results = [r for r in results if r.get("survival", {}).get("u")]
+    if not results:
+        return []
+
+    fig, axes = plt.subplots(1, len(results), figsize=(3.6 * len(results), 3.2), squeeze=False)
+    for ax, res in zip(axes[0], results, strict=True):
+        u = np.asarray(res["survival"]["u"], dtype=float)
+        sv = np.asarray(res["survival"]["s"], dtype=float)
+        ax.plot(
+            u,
+            sv,
+            color=ESTIMATOR["hill"],
+            lw=1.6,
+            label=rf"first exceedance $Z_{{t^*}}$  $\hat\gamma$={res.get('gpd_shape', float('nan')):+.3f}",
+        )
+
+        shape = res.get("gpd_shape")
+        if shape is not None and np.isfinite(shape) and shape > 0:
+            uu = np.geomspace(1.0, max(float(u.max()), 2.0), 60)
+            ax.plot(
+                uu,
+                uu ** (-1.0 / shape),
+                color=INK,
+                dashes=DASHES["asymptote"],
+                lw=0.9,
+                label=rf"Pareto $u^{{-1/\hat\gamma}}$, $\hat\gamma={shape:.3f}$",
+            )
+
+        # All three survival curves, so the attenuation of the first-exceedance variant under
+        # clustering is visible rather than asserted.
+        for name, colour, dash in (
+            ("unconditional", ESTIMATOR["gpd"], (4, 1.5)),
+            ("trace_max", ESTIMATOR["moment"], (2, 1.5)),
+        ):
+            v = res.get("variants", {}).get(name) or {}
+            curve = v.get("survival") or {}
+            if not curve.get("u"):
+                continue
+            ax.plot(
+                curve["u"],
+                curve["s"],
+                color=colour,
+                lw=1.2,
+                dashes=dash,
+                label=f"{v['label'].split('(')[0].strip()}  $\\hat\\gamma$={v['shape']:+.3f}",
+            )
+
+        theta = res.get("theta")
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ax.set_xlabel(r"overshoot $u = Z_{t^*}/\tau$")
+        ax.set_ylabel(r"$\mathbb{P}(Z_{t^*}/\tau > u)$")
+        ax.set_title(
+            f"$q={res['q']:.0e}$, $n={res['n_over_tau']}$"
+            + (f", $\\theta={theta:.2f}$" if theta is not None and np.isfinite(theta) else ""),
+            loc="left",
+        )
+        ax.legend(loc="lower left", fontsize=6)
+
+    paths = _save(fig, Path(out_dir), stem)
+    plt.close(fig)
+    return paths
+
+
+def figure_length_law(
+    result: dict[str, Any], out_dir: Path | str, stem: str = "p5_length_law"
+) -> list[Path]:
+    """P5: chain accuracy against length, with the fitted law and its residuals.
+
+    Corollary 3's point is not that accuracy decays exponentially -- it does so under both
+    hypotheses -- so the panel that matters is the residual one: whether the *shape* of the decay
+    is the one the law predicts, or whether a free per-length model would do better.
+    """
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    apply_style()
+    observed = result.get("observed") or []
+    if len(observed) < 3:
+        return []
+    lengths = np.array([o["L"] for o in observed], dtype=float)
+    acc = np.array([o["accuracy"] for o in observed], dtype=float)
+    n = np.array([o["n"] for o in observed], dtype=float)
+    rate = float(result.get("rate_per_step", result.get("fit", {}).get("rate_per_step", 0.0)))
+    predicted = np.exp(-rate * lengths)
+    # Binomial standard error, so a residual can be read against what the counts can resolve.
+    se = np.sqrt(np.clip(acc * (1 - acc), 0, None) / np.maximum(n, 1))
+
+    fig, (ax, ax_r) = plt.subplots(
+        2, 1, figsize=(4.4, 4.2), sharex=True, gridspec_kw={"height_ratios": [2.2, 1]}
+    )
+    ax.errorbar(
+        lengths,
+        acc,
+        yerr=se,
+        fmt="o",
+        ms=4,
+        color=ESTIMATOR["hill"],
+        lw=1,
+        capsize=2,
+        label="observed",
+    )
+    grid = np.linspace(lengths.min(), lengths.max(), 100)
+    ax.plot(
+        grid,
+        np.exp(-rate * grid),
+        color=INK,
+        dashes=DASHES["theory"],
+        lw=1.2,
+        label=rf"$\exp(-\theta L \bar F(\tau))$, $c={rate:.4f}$",
+    )
+    ax.set_ylabel(r"$\mathbb{P}(V_L = 1)$")
+    ax.set_title("(a) chain accuracy against length", loc="left")
+    ax.legend(loc="lower left")
+
+    ax_r.axhline(0.0, color=GRID, lw=0.8)
+    ax_r.errorbar(
+        lengths, acc - predicted, yerr=se, fmt="o", ms=4, color=ESTIMATOR["moment"], lw=1, capsize=2
+    )
+    ax_r.set_xlabel("chain length $L$")
+    ax_r.set_ylabel("observed - fitted")
+    p = result.get("p_value", result.get("fit", {}).get("p_value"))
+    df = result.get("df", result.get("fit", {}).get("df"))
+    ax_r.set_title(
+        "(b) residuals"
+        + (
+            f"; LR test against a free per-length model: $p={p:.3f}$ ($df={df}$)"
+            if p is not None
+            else ""
+        ),
+        loc="left",
+    )
+
+    paths = _save(fig, Path(out_dir), stem)
+    plt.close(fig)
+    return paths
+
+
+def figure_roc(results: list[Any], out_dir: Path | str, stem: str = "p2_roc") -> list[Path]:
+    """P2: the jump statistic as a per-step detector of the first rejection.
+
+    The surprisal baseline is on the same axes because that is the comparison that decides
+    whether the residual stream says anything the output distribution did not already say.
+    """
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    apply_style()
+    rows = [r if isinstance(r, dict) else r.as_dict() for r in results]
+    rows = [r for r in rows if (r.get("roc") or {}).get("curve")]
+    if not rows:
+        return []
+
+    fig, ax = plt.subplots(figsize=(3.8, 3.6))
+    palette = [*ESTIMATOR.values(), INK, MUTED]
+    for i, row in enumerate(rows):
+        colour = palette[i % len(palette)]
+        curve = row["roc"]["curve"]
+        label = f"{row['model']} $Z^{{{row['statistic']}}}$, $\\ell={row['layer']}$"
+        ax.plot(
+            curve["fpr"],
+            curve["tpr"],
+            color=colour,
+            lw=1.4,
+            label=f"{label}  AUC {row['roc']['auc']:.3f}",
+        )
+        base = (row.get("roc_surprisal") or {}).get("curve")
+        if base:
+            ax.plot(
+                base["fpr"],
+                base["tpr"],
+                color=colour,
+                lw=1.0,
+                dashes=(3, 1.5),
+                label=f"    surprisal  AUC {row['roc_surprisal']['auc']:.3f}",
+            )
+
+    ax.plot([0, 1], [0, 1], color=GRID, lw=0.9, zorder=0, label="chance")
+    ax.set_xlabel("false positive rate")
+    ax.set_ylabel("true positive rate")
+    ax.set_title("(a) jump size as a per-step detector of $t^*$", loc="left")
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1.02)
+    ax.legend(loc="lower right", fontsize=6)
+
+    paths = _save(fig, Path(out_dir), stem)
     plt.close(fig)
     return paths

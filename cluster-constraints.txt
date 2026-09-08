@@ -1,0 +1,15 @@
+# Pins for a cluster whose OS is older than the wheels. Pass with `pip install -c`.
+#
+# Zhores: NVIDIA driver 550 caps CUDA at 12.4, so torch is pinned to the version the container
+# ships. The container supplies glibc 2.35, which is what makes the rest of the stack installable
+# at all -- natively, on CentOS 7 glibc 2.17, pyarrow and contourpy have no wheels and fail to build.
+torch==2.6.0
+
+# A correctness pin, not caution. transformers 5.16.1 loads DeepSeek-Prover's byte-level BPE
+# tokenizer with no byte decoder, so decode(encode(x)) returns the text with every space, newline
+# and non-ASCII character deleted -- `theorem foo (x : R) : 1 = 1 := by\n  norm_num` comes back as
+# `theoremfoo(x:):1=1:=bynorm_num`. Nothing downstream can see it: the output is still a string
+# and still says `theorem`, and only the Lean kernel objects, a GPU-day later. 4.51.3 round-trips
+# and is also the version vLLM 0.8.5.post1 wants, so pinning it fixes the fast backend too.
+transformers==4.51.3
+tokenizers<0.22

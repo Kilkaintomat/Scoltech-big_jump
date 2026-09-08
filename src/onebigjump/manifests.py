@@ -71,8 +71,13 @@ class RunManifest:
 
     @property
     def reproducible(self) -> bool:
-        """False when the run was made from a dirty working tree."""
-        return not self.environment.get("git", {}).get("dirty", True)
+        """False when the run was made from a dirty working tree, or from no checkout at all.
+
+        `dirty` is None when git could not be asked -- an rsynced tree with no `.git`, which is how
+        the cluster runs were made. That is not a clean checkout, it is an unknown one, and the
+        figure it produced cannot be traced back to a commit either way.
+        """
+        return self.environment.get("git", {}).get("dirty", True) is False
 
     def as_dict(self) -> dict[str, Any]:
         return {

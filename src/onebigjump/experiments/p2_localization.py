@@ -54,6 +54,7 @@ class P2Result:
     surprisal_top3: float | None
     permutation: dict[str, Any] = field(default_factory=dict)
     roc: dict[str, Any] = field(default_factory=dict)
+    roc_surprisal: dict[str, Any] = field(default_factory=dict)
     by_length: list[dict[str, Any]] = field(default_factory=list)
 
     @property
@@ -85,6 +86,7 @@ class P2Result:
             "surprisal_top3": self.surprisal_top3,
             "permutation": self.permutation,
             "roc": self.roc,
+            "roc_surprisal": self.roc_surprisal,
             "by_length": self.by_length,
         }
 
@@ -182,6 +184,7 @@ def _roc(traces: list[dict[str, Any]], key: str = "z") -> dict[str, Any]:
 
     s = np.asarray(scores)
     y = np.asarray(labels)
+
     order = np.argsort(s, kind="mergesort")
     ranks = np.empty_like(order, dtype=float)
     ranks[order] = np.arange(1, s.size + 1)
@@ -194,7 +197,23 @@ def _roc(traces: list[dict[str, Any]], key: str = "z") -> dict[str, Any]:
     n_pos = int(y.sum())
     n_neg = int(y.size - n_pos)
     auc = (ranks[y == 1].sum() - n_pos * (n_pos + 1) / 2) / (n_pos * n_neg)
-    return {"auc": float(auc), "n_positive": n_pos, "n_negative": n_neg, "n": int(y.size)}
+
+    # The curve itself, not only its area: the paper asks for the ROC of the jump statistic as a
+    # per-step detector, and a single number cannot show where a detector is useful. Thresholds
+    # are the distinct scores, thinned so the stored curve stays small.
+    order = np.argsort(-s, kind="mergesort")
+    tp = np.cumsum(y[order])
+    fp = np.cumsum(1 - y[order])
+    tpr = tp / max(n_pos, 1)
+    fpr = fp / max(n_neg, 1)
+    keep = np.unique(np.linspace(0, tpr.size - 1, min(tpr.size, 400)).astype(int))
+    return {
+        "auc": float(auc),
+        "n_positive": n_pos,
+        "n_negative": n_neg,
+        "n": int(y.size),
+        "curve": {"fpr": fpr[keep].tolist(), "tpr": tpr[keep].tolist()},
+    }
 
 
 def _by_length(traces: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -262,6 +281,11 @@ def run_p2(
             surprisal_top3=None if surprisal_rates is None else surprisal_rates["top3"],
             permutation=_permutation_null(traces, permutation_resamples, seed),
             roc=_roc(traces),
+            roc_surprisal=(
+                _roc([t for t in traces if np.all(np.isfinite(t["surprisal"]))], key="surprisal")
+                if has_surprisal
+                else {}
+            ),
             by_length=_by_length(traces),
         )
         results.append(res)

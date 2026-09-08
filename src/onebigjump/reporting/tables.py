@@ -13,8 +13,10 @@ from typing import Any
 
 __all__ = [
     "PLACEHOLDER",
+    "collect_b3",
     "render_table1",
     "render_table2",
+    "render_table_b3",
     "to_latex",
     "to_markdown",
     "write_table",
@@ -190,3 +192,74 @@ def write_table(
         encoding="utf-8",
     )
     return [md, tex]
+
+
+def render_table_b3(runs: Iterable[dict[str, Any]]) -> tuple[list[str], list[list[str]]]:
+    """Table B.3: what was sampled, from what, and what came back.
+
+    Appendix B.3 asks for "model, parameter count, number of blocks Lambda, d, benchmark, number
+    of problems, samples per problem, temperature, maximum tokens, number of verified/refuted
+    traces, mean trace length". Without it the tail indices in Table 1 cannot be read: a
+    `gamma_hat` from forty refuted traces and one from four thousand are not the same claim.
+    """
+    headers = [
+        "Model",
+        r"$\Lambda$",
+        "$d$",
+        "Benchmark",
+        "problems",
+        "$N$",
+        "$T$",
+        "max tok.",
+        "verified",
+        "refuted",
+        r"mean $L$",
+    ]
+    rows: list[list[str]] = []
+    for run in runs:
+        temps = run.get("temperatures") or []
+        rows.append(
+            [
+                str(run.get("model_id", PLACEHOLDER)),
+                str(run.get("n_layers", PLACEHOLDER)),
+                str(run.get("d_model", PLACEHOLDER)),
+                str(run.get("benchmark", PLACEHOLDER)),
+                str(run.get("n_problems", PLACEHOLDER)),
+                str(run.get("samples_per_problem", PLACEHOLDER)),
+                ", ".join(f"{t:g}" for t in temps) if temps else PLACEHOLDER,
+                str(run.get("max_new_tokens", PLACEHOLDER)),
+                str(run.get("verified", PLACEHOLDER)),
+                str(run.get("refuted", PLACEHOLDER)),
+                _num(run.get("mean_trace_length"), 1),
+            ]
+        )
+    return headers, rows
+
+
+def collect_b3(
+    generation_manifest: dict[str, Any] | None,
+    verification_summary: dict[str, Any] | None,
+    model_config: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Assemble one Table B.3 row from the manifests the stages already write.
+
+    Nothing here is re-derived: the sampling settings come from the generation manifest and the
+    outcome counts from the verification summary, so the row cannot drift from the run.
+    """
+    gen = (generation_manifest or {}).get("config", {})
+    ver = verification_summary or {}
+    cfg = model_config or {}
+    benchmark = str(gen.get("problems_source") or cfg.get("problems") or "")
+    return {
+        "model_id": gen.get("model_id") or cfg.get("model_id"),
+        "benchmark": Path(benchmark).stem if benchmark else None,
+        "n_problems": gen.get("n_problems"),
+        "samples_per_problem": gen.get("samples_per_problem") or cfg.get("samples_per_problem"),
+        "temperatures": gen.get("temperatures") or cfg.get("temperatures"),
+        "max_new_tokens": gen.get("max_new_tokens") or cfg.get("max_new_tokens"),
+        "verified": ver.get("verified"),
+        "refuted": ver.get("refuted"),
+        "mean_trace_length": ver.get("mean_trace_length"),
+        "n_layers": cfg.get("n_layers"),
+        "d_model": cfg.get("d_model"),
+    }

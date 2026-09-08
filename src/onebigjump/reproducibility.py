@@ -76,14 +76,22 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
     def g(args: list[str]) -> str | None:
         return _run(["git", "-C", cwd, *args])
 
+    commit = g(["rev-parse", "HEAD"])
     status = g(["status", "--porcelain"])
+    # `status` is None both for a clean tree that git could not be asked about and for no repo at
+    # all, and `bool(None)` is False -- so a run whose provenance is entirely unknown used to be
+    # stamped `dirty: false`, i.e. reproducible. That is the one error worth being loud about: the
+    # cluster runs are made from an rsynced tree with no .git, and their manifests claimed a clean
+    # checkout. When there is no commit there is no answer, so `dirty` is None, not False.
+    available = commit is not None
     return {
-        "commit": g(["rev-parse", "HEAD"]),
+        "commit": commit,
         "branch": g(["rev-parse", "--abbrev-ref", "HEAD"]),
         "describe": g(["describe", "--always", "--dirty"]),
-        "dirty": bool(status),
+        "dirty": bool(status) if available else None,
         "status": (status or "")[:8000],
         "remote": g(["config", "--get", "remote.origin.url"]),
+        "available": available,
     }
 
 
