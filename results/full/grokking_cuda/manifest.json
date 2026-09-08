@@ -1,0 +1,155 @@
+{
+  "name": "p4-grokking-seed2",
+  "kind": "grokking",
+  "out_dir": "results/full/grokking",
+  "seed": 2,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-07T22:32:21Z",
+  "finished_at": "2026-09-07T22:40:53Z",
+  "duration_s": 512.188,
+  "reproducible": true,
+  "config": {
+    "p": 113,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 1,
+    "d_mlp": null,
+    "lr": 0.001,
+    "weight_decay": 1.0,
+    "betas": [
+      0.9,
+      0.98
+    ],
+    "train_frac": 0.3,
+    "steps": 40000,
+    "checkpoint_every": 100,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "device": "cuda",
+    "tail": {
+      "k_min": 20,
+      "k_max_frac": 0.25,
+      "k_selector": "double_bootstrap",
+      "k_fixed_frac": 0.05,
+      "double_bootstrap_resamples": 200,
+      "double_bootstrap_n1_exponent": 0.9,
+      "bootstrap_resamples": 500,
+      "bootstrap_unit": "trace",
+      "ci_level": 0.95,
+      "estimators": [
+        "hill",
+        "moment",
+        "gpd"
+      ]
+    },
+    "out_dir": "results/full/grokking"
+  },
+  "metrics": {
+    "grokking_step": 15100,
+    "memorisation_step": 400,
+    "final_test_acc": 1.0,
+    "analysis_grokking_step": 15100,
+    "analysis_memorisation_step": 400,
+    "analysis_gamma_first": 0.026141563266861137,
+    "analysis_gamma_last": 0.031020366570909313,
+    "analysis_gamma_max": 0.07329699009584989,
+    "analysis_gamma_argmax_step": 4100,
+    "analysis_sharpest_drop_step": 31900,
+    "analysis_test_acc_turn_step": 14800,
+    "analysis_restricted_turn_step": 15100,
+    "analysis_excluded_turn_step": 5000,
+    "analysis_drop_coincides_with_excluded_loss": false,
+    "analysis_drop_coincides_with_restricted_loss": false,
+    "analysis_drop_coincides_with_progress_measures": false,
+    "analysis_drop_coincides_with_generalization": false,
+    "analysis_drop_leads_generalization_by": -16800,
+    "analysis_gamma_before_transition": 0.0422960448412003,
+    "analysis_gamma_after_transition": 0.03730764084114175,
+    "analysis_drop_at_transition": 0.004988404000058552,
+    "analysis_drops_at_transition": true,
+    "analysis_gamma_peak_to_trough": 0.010835628323080493
+  },
+  "notes": [
+    "gamma_hat is a fixed-fraction point estimate (k = 5% of n) at every checkpoint; the full Section 4 protocol with intervals runs every 20 checkpoints."
+  ],
+  "outputs": [
+    {
+      "path": "results/full/grokking/p4_grokking_seed2.json",
+      "role": "metrics",
+      "bytes": 319565,
+      "digest": "sha256:6b4b081858ccd36e34aac9e151236b0b3935e5d3478ff2543bd8a29e81d558c6"
+    },
+    {
+      "path": "results/full/grokking/p4_grokking_seed2.csv",
+      "role": "table",
+      "bytes": 40717,
+      "digest": "sha256:3b68035b5cd3b320396ec5c6f99af1d954b267a1a3d28feb18de82cbd98ea0ec"
+    },
+    {
+      "path": "paper_outputs/metrics/p4_grokking_seed2.json",
+      "role": "metrics",
+      "bytes": 319565,
+      "digest": "sha256:6b4b081858ccd36e34aac9e151236b0b3935e5d3478ff2543bd8a29e81d558c6"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed2.pdf",
+      "role": "figure",
+      "bytes": 34850,
+      "digest": "sha256:7ea9d5c85ebf973461a91ca2ff97d7f532751f17cba9ef08d0d23ab5d129fd97"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed2.png",
+      "role": "figure",
+      "bytes": 309231,
+      "digest": "sha256:a9e126e097c64d1df5d81152a1280382b3c1c733c0ca31543244a489227e5d45"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": null,
+      "branch": null,
+      "describe": null,
+      "dirty": false,
+      "status": "",
+      "remote": null
+    },
+    "packages": {
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.6.0+cu124",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "python": "3.11.11",
+      "cpu_count": 4,
+      "ram_gb": 67.44,
+      "torch": "2.6.0+cu124",
+      "cuda_available": true,
+      "cuda_version": "12.4",
+      "mps_available": false,
+      "gpus": [
+        "NVIDIA GeForce RTX 2080 Ti"
+      ]
+    },
+    "python_build": [
+      "main",
+      "Dec  5 2024 14:17:24"
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "name": "prover-sampling",
+  "kind": "generate",
+  "out_dir": "data/raw/prover-sampling",
+  "seed": null,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-07T22:57:38Z",
+  "finished_at": "2026-09-08T00:31:25Z",
+  "duration_s": 5626.935,
+  "reproducible": true,
+  "config": {
+    "problems_source": "data/raw/minif2f_test.jsonl",
+    "model_id": "deepseek-ai/DeepSeek-Prover-V2-7B",
+    "backend": "hf",
+    "samples_per_problem": 8,
+    "temperatures": [
+      0.6,
+      1.0
+    ],
+    "max_new_tokens": 1024,
+    "n_problems": 226,
+    "split": null,
+    "dtype": "bfloat16"
+  },
+  "metrics": {
+    "n_problems": 226,
+    "n_samples": 3616,
+    "backend": "HFBackend"
+  },
+  "notes": [],
+  "outputs": [
+    {
+      "path": "data/raw/prover-sampling/samples.jsonl",
+      "role": "samples",
+      "bytes": 4560553,
+      "digest": "sha256:04b99ebf6188a416456cbf5dc59c69af66a24e93aa6518051c7332999a02c608"
+    },
+    {
+      "path": "data/raw/prover-sampling/problems.json",
+      "role": "problems",
+      "bytes": 371601,
+      "digest": "sha256:710f1faf79d829d5107c298dc61486f30ede0e1d5bc9329daa1d14d2682e41fd"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": null,
+      "branch": null,
+      "describe": null,
+      "dirty": false,
+      "status": "",
+      "remote": null
+    },
+    "packages": {
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.6.0+cu124",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "Linux-5.4.270-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "python": "3.11.11",
+      "cpu_count": 128,
+      "ram_gb": 1081.84,
+      "torch": "2.6.0+cu124",
+      "cuda_available": true,
+      "cuda_version": "12.4",
+      "mps_available": false,
+      "gpus": [
+        "NVIDIA A100-SXM4-80GB"
+      ]
+    },
+    "python_build": [
+      "main",
+      "Dec  5 2024 14:17:24"
+    ]
+  }
+}

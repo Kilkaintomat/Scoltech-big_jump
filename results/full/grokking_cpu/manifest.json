@@ -1,0 +1,153 @@
+{
+  "name": "p4-grokking-seed0",
+  "kind": "grokking",
+  "out_dir": "results/full/grokking_cpu",
+  "seed": 0,
+  "status": "ok",
+  "error": null,
+  "started_at": "2026-09-07T22:56:32Z",
+  "finished_at": "2026-09-07T23:24:21Z",
+  "duration_s": 1669.014,
+  "reproducible": true,
+  "config": {
+    "p": 113,
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 1,
+    "d_mlp": null,
+    "lr": 0.001,
+    "weight_decay": 1.0,
+    "betas": [
+      0.9,
+      0.98
+    ],
+    "train_frac": 0.3,
+    "steps": 40000,
+    "checkpoint_every": 100,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "device": "cpu",
+    "tail": {
+      "k_min": 20,
+      "k_max_frac": 0.25,
+      "k_selector": "double_bootstrap",
+      "k_fixed_frac": 0.05,
+      "double_bootstrap_resamples": 200,
+      "double_bootstrap_n1_exponent": 0.9,
+      "bootstrap_resamples": 500,
+      "bootstrap_unit": "trace",
+      "ci_level": 0.95,
+      "estimators": [
+        "hill",
+        "moment",
+        "gpd"
+      ]
+    },
+    "out_dir": "results/full/grokking_cpu"
+  },
+  "metrics": {
+    "grokking_step": 18800,
+    "memorisation_step": 400,
+    "final_test_acc": 1.0,
+    "analysis_grokking_step": 18800,
+    "analysis_memorisation_step": 400,
+    "analysis_gamma_first": 0.029773832750723067,
+    "analysis_gamma_last": 0.03175632505484827,
+    "analysis_gamma_max": 0.06790734336794235,
+    "analysis_gamma_argmax_step": 100,
+    "analysis_sharpest_drop_step": 23400,
+    "analysis_test_acc_turn_step": 18400,
+    "analysis_restricted_turn_step": 18700,
+    "analysis_excluded_turn_step": 2300,
+    "analysis_drop_coincides_with_excluded_loss": false,
+    "analysis_drop_coincides_with_restricted_loss": false,
+    "analysis_drop_coincides_with_progress_measures": false,
+    "analysis_drop_coincides_with_generalization": false,
+    "analysis_drop_leads_generalization_by": -4600,
+    "analysis_gamma_before_transition": 0.047101640625368056,
+    "analysis_gamma_after_transition": 0.04224767152801514,
+    "analysis_drop_at_transition": 0.004853969097352917,
+    "analysis_drops_at_transition": true,
+    "analysis_gamma_peak_to_trough": 0.007719703648040421
+  },
+  "notes": [
+    "gamma_hat is a fixed-fraction point estimate (k = 5% of n) at every checkpoint; the full Section 4 protocol with intervals runs every 0 checkpoints."
+  ],
+  "outputs": [
+    {
+      "path": "results/full/grokking_cpu/p4_grokking_seed0.json",
+      "role": "metrics",
+      "bytes": 231697,
+      "digest": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03"
+    },
+    {
+      "path": "results/full/grokking_cpu/p4_grokking_seed0.csv",
+      "role": "table",
+      "bytes": 40554,
+      "digest": "sha256:395c8c9dd886d5abf9728c9d6422b7f9570b9ee5c0e7ecaf9b1f28d08aca6dd1"
+    },
+    {
+      "path": "paper_outputs/metrics/p4_grokking_seed0.json",
+      "role": "metrics",
+      "bytes": 231697,
+      "digest": "sha256:f8ec8715cbbeae71e102a7a3a86335f79e747f129f626e3afd5124c5e9258b03"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed0.pdf",
+      "role": "figure",
+      "bytes": 33480,
+      "digest": "sha256:7dc742a7832e7561ff830143e5602df14c0857f0dc398e60fa5285b9d8c1f00c"
+    },
+    {
+      "path": "paper_outputs/figures/p4_grokking_seed0.png",
+      "role": "figure",
+      "bytes": 315361,
+      "digest": "sha256:96a8d914d2184a7fb8c7ab291f5b2c5a70b51eb19d795e68a1c439fe18b315be"
+    }
+  ],
+  "environment": {
+    "git": {
+      "commit": null,
+      "branch": null,
+      "describe": null,
+      "dirty": false,
+      "status": "",
+      "remote": null
+    },
+    "packages": {
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "scikit-learn": "1.9.0",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.1",
+      "torch": "2.6.0+cu124",
+      "transformers": "5.16.1",
+      "tokenizers": "0.23.2",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.1"
+    },
+    "hardware": {
+      "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "python": "3.11.11",
+      "cpu_count": 64,
+      "ram_gb": 1081.85,
+      "torch": "2.6.0+cu124",
+      "cuda_available": false,
+      "cuda_version": "12.4",
+      "mps_available": false,
+      "gpus": []
+    },
+    "python_build": [
+      "main",
+      "Dec  5 2024 14:17:24"
+    ]
+  }
+}
