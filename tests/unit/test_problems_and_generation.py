@@ -380,3 +380,84 @@ class TestFenceHandling:
             "theorem foo : 1 = 1 := by\n  norm_num\n```\nI hope this helps!", self._problem()
         )
         assert "helps" not in out
+
+
+class TestSampleProvenance:
+    """What a sample must carry for a later stage to work from it rather than guess.
+
+    A completed sampling run wrote 3616 proofs with `n_prompt_tokens = 0`, no token ids, and no
+    raw completion. Extraction then has to re-tokenise decoded text, which byte-level BPE does not
+    guarantee to reproduce, and the model's informal reasoning is gone for good.
+    """
+
+    class _Detailed:
+        model_id = "deepseek-prover-test"
+
+        def sample_detailed(self, prompts, *, n, temperature, max_new_tokens):
+            body = "reasoning first\n```lean4\ntheorem t : 1 = 1 := by\n  rfl\n```"
+            return [[(body, [1, 2, 3], [9, 8, 7, 6]) for _ in range(n)] for _ in prompts]
+
+    class _Plain:
+        model_id = "plain-test"
+
+        def sample(self, prompts, *, n, temperature, max_new_tokens):
+            return [["theorem t : 1 = 1 := by\n  rfl" for _ in range(n)] for _ in prompts]
+
+    @staticmethod
+    def _one(backend):
+        from onebigjump.lean.problems import Problem
+        from onebigjump.models.generation import generate
+
+        problems = [Problem(problem_id="t1", statement="theorem t : 1 = 1 :=")]
+        return next(iter(generate(problems, backend, samples_per_problem=1, temperatures=[0.6])))
+
+    def test_token_ids_are_recorded_when_the_backend_reports_them(self) -> None:
+        s = self._one(self._Detailed())
+        assert s.prompt_token_ids == [1, 2, 3]
+        assert s.completion_token_ids == [9, 8, 7, 6]
+        assert s.n_prompt_tokens == 3
+        assert s.n_completion_tokens == 4
+
+    def test_the_raw_completion_survives(self) -> None:
+        """It cannot be recomputed; `extract_lean_block` discards the informal part."""
+        s = self._one(self._Detailed())
+        assert "reasoning first" in s.completion
+        assert "reasoning first" not in s.proof
+
+    def test_a_backend_without_ids_still_works_and_says_so(self) -> None:
+        """Empty lists, not fabricated counts: a later stage can tell the difference."""
+        s = self._one(self._Plain())
+        assert s.prompt_token_ids == []
+        assert s.completion_token_ids == []
+        assert s.n_completion_tokens == 0
+        assert s.proof.strip().startswith("theorem")
+
+
+class TestHoleDetection:
+    """`sorry` is not the only way a proof can be empty."""
+
+    @staticmethod
+    def _check(reply, tactic):
+        from onebigjump.lean.verifier import _is_sorry
+
+        return _is_sorry(reply, tactic)
+
+    def test_a_real_proof_is_not_a_hole(self) -> None:
+        assert not self._check({"proofStatus": "Completed"}, "exact h")
+
+    def test_literal_sorry(self) -> None:
+        assert self._check({"proofStatus": "Incomplete: contains sorry"}, "sorry")
+
+    def test_admit_is_a_hole_too(self) -> None:
+        assert self._check({"proofStatus": "Completed"}, "admit")
+
+    def test_sorry_ax_arriving_through_a_lemma(self) -> None:
+        """The word never appears in the tactic; only the kernel's message mentions it."""
+        reply = {"proofStatus": "Completed", "messages": [{"data": "declaration uses 'sorryAx'"}]}
+        assert self._check(reply, "exact my_lemma")
+
+    def test_a_non_empty_sorries_list_is_the_repl_saying_so(self) -> None:
+        assert self._check({"proofStatus": "Completed", "sorries": [{"proofState": 3}]}, "exact h")
+
+    def test_an_empty_sorries_list_is_not(self) -> None:
+        assert not self._check({"proofStatus": "Completed", "sorries": []}, "exact h")

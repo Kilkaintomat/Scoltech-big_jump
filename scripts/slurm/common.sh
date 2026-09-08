@@ -41,17 +41,26 @@ export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
 # checkout outside is -- and until this existed every cluster manifest recorded a null commit.
 # Read it on the host and hand it in; `git_info` labels this `source: environment`, because an
 # exported variable is weaker evidence than asking git directly and should not pretend otherwise.
-if git -C "$REPO" rev-parse HEAD >/dev/null 2>&1; then
-    export ONEBIGJUMP_GIT_COMMIT="$(git -C "$REPO" rev-parse HEAD)"
-    export ONEBIGJUMP_GIT_BRANCH="$(git -C "$REPO" rev-parse --abbrev-ref HEAD)"
-    export ONEBIGJUMP_GIT_DESCRIBE="$(git -C "$REPO" describe --always --dirty)"
-    export ONEBIGJUMP_GIT_STATUS="$(git -C "$REPO" status --porcelain)"
-    export ONEBIGJUMP_GIT_REMOTE="$(git -C "$REPO" config --get remote.origin.url || true)"
+# `git -C` is deliberately not used. The GPU nodes run git 1.8.3.1 (CentOS 7 stock), which
+# predates `-C` (added in 1.8.5) and answers `Unknown option: -C` -- so every GPU run silently
+# took the else branch and recorded `commit: null`, while the same code on a CPU node with git
+# 2.43 recorded it correctly. That is how a whole set of cluster results came to have no
+# provenance while the launcher appeared to be working. A subshell `cd` works on both.
+if (cd "$REPO" && git rev-parse HEAD) >/dev/null 2>&1; then
+    export ONEBIGJUMP_GIT_COMMIT="$(cd "$REPO" && git rev-parse HEAD)"
+    export ONEBIGJUMP_GIT_BRANCH="$(cd "$REPO" && git rev-parse --abbrev-ref HEAD)"
+    export ONEBIGJUMP_GIT_DESCRIBE="$(cd "$REPO" && git describe --always --dirty 2>/dev/null || true)"
+    export ONEBIGJUMP_GIT_STATUS="$(cd "$REPO" && git status --porcelain)"
+    export ONEBIGJUMP_GIT_REMOTE="$(cd "$REPO" && git config --get remote.origin.url || true)"
+    echo "provenance: $ONEBIGJUMP_GIT_COMMIT on $ONEBIGJUMP_GIT_BRANCH (git $(git --version | awk '{print $3}'))" >&2
     if [ -n "$ONEBIGJUMP_GIT_STATUS" ]; then
         echo "WARNING: $REPO is dirty; results will be recorded as unreproducible." >&2
     fi
 else
-    echo "WARNING: $REPO is not a git checkout. Manifests will carry no commit." >&2
+    # Say what is actually wrong. The previous message claimed "not a git checkout", which sent
+    # the investigation after a missing .git that was there all along.
+    echo "WARNING: cannot read the commit of $REPO with $(command -v git || echo 'no git')" >&2
+    echo "         ($(git --version 2>&1 | head -1)). Manifests will carry no commit." >&2
 fi
 
 # `--bind /gpfs` because home is small and the caches, containers and results live on GPFS.

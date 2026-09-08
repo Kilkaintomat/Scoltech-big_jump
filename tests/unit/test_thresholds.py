@@ -98,3 +98,55 @@ class TestSelectK:
         d = select_k(pareto, "ks").as_dict()
         assert set(d) == {"k", "method", "n", "objective", "diagnostics"}
         json.loads(json.dumps(d))
+
+
+class TestKStability:
+    """A point estimate at one k says nothing about whether that k was a fortunate choice.
+
+    On the Kesten surrogate at p = 0.02 the double bootstrap chose k/n = 1.99%, where the moment
+    estimator reads 0.15 against a true 0.25, while every neighbouring cut reads 0.23-0.33.
+    Nothing in the recorded output showed it.
+    """
+
+    @staticmethod
+    def _pareto(n: int, alpha: float, seed: int = 0):
+        import numpy as np
+
+        return np.random.default_rng(seed).pareto(alpha, size=n) + 1.0
+
+    def test_a_well_behaved_sample_is_not_flagged(self) -> None:
+        from onebigjump.stats.estimators import k_stability
+
+        x = self._pareto(40000, 2.0, seed=1)
+        out = k_stability(x, k_selected=2000, estimators=["hill"])
+        assert out["hill"]["relative_spread"] < 0.5
+        assert out["unstable"] is False
+
+    def test_the_grid_and_the_selected_k_are_both_recorded(self) -> None:
+        from onebigjump.stats.estimators import k_stability
+
+        x = self._pareto(20000, 2.0, seed=2)
+        out = k_stability(x, k_selected=1000, estimators=["hill", "moment"])
+        assert out["k_selected"] == 1000
+        assert len(out["k_grid"]) >= 8
+        assert len(out["curves"]["hill"]) == len(out["k_grid"])
+
+    def test_a_sample_too_small_for_a_grid_says_so(self) -> None:
+        from onebigjump.stats.estimators import k_stability
+
+        out = k_stability(self._pareto(30, 2.0), k_selected=20, estimators=["hill"])
+        assert out["grid"] == [] and "too small" in out["note"]
+
+    def test_the_flag_fires_where_the_estimate_is_driven_by_k(self) -> None:
+        """A mixture whose tail index depends on how deep you cut is the case to catch."""
+        import numpy as np
+
+        from onebigjump.stats.estimators import k_stability
+
+        rng = np.random.default_rng(3)
+        # A light body with a small heavy contamination: shallow cuts see one law, deep cuts the
+        # other, so the answer is a function of k rather than of the data.
+        x = np.concatenate([rng.pareto(6.0, 30000) + 1.0, rng.pareto(0.7, 400) + 1.0])
+        out = k_stability(x, k_selected=500, estimators=["hill"])
+        assert out["hill"]["relative_spread"] > 0.5
+        assert out["unstable"] is True

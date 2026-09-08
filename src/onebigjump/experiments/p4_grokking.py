@@ -56,8 +56,29 @@ class Checkpoint:
     key_frequencies: list[int] = field(default_factory=list)
     full: dict[str, Any] | None = None
 
+    @property
+    def gamma(self) -> float:
+        """The signed EVT shape, which is what `gamma` means in the paper.
+
+        Taken from the moment estimator, the same choice the Kesten analysis makes: Hill is a mean
+        of log-ratios of upper order statistics and is non-negative by construction, so it cannot
+        represent a light tail at all. Reading Hill as `gamma` -- which this module used to do --
+        turns "the tail is light and stays light" into "the tail index is falling".
+        """
+        return self.moment
+
+    @property
+    def xi(self) -> float:
+        """The order parameter, `xi = max(gamma, 0)`. Zero means no heavy tail."""
+        return max(self.moment, 0.0)
+
     def row(self) -> dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items() if k not in {"full", "key_frequencies"}}
+        row = {k: v for k, v in self.__dict__.items() if k not in {"full", "key_frequencies"}}
+        # Written out rather than derived by the reader, so a CSV cannot be misread the way the
+        # JSON was: `gamma` is signed, `xi` is clipped, `hill` is neither.
+        row["gamma"] = self.gamma
+        row["xi"] = self.xi
+        return row
 
 
 def _device(name: str) -> str:
@@ -330,7 +351,13 @@ def analyse_p4(
     formation rather than downstream accuracy.
     """
     steps = np.array([c.step for c in checkpoints], dtype=float)
+    # `gamma` is the signed shape and `xi = max(gamma, 0)` is the order parameter. Hill is kept
+    # only as a diagnostic: this analysis used to compute every field named `gamma_*` from Hill,
+    # which is non-negative by construction, and so reported a falling "tail index" on runs whose
+    # order parameter was identically zero throughout.
     hill = np.array([c.hill for c in checkpoints], dtype=float)
+    gamma = np.array([c.gamma for c in checkpoints], dtype=float)
+    xi = np.array([c.xi for c in checkpoints], dtype=float)
     train_acc = np.array([c.train_acc for c in checkpoints], dtype=float)
     grok = grokking_step(checkpoints)
 
@@ -338,7 +365,7 @@ def analyse_p4(
     memorised = steps[train_acc >= 0.99]
     after = float(memorised[0]) if memorised.size else -1.0
 
-    drop_step = _turning_point(steps, hill, rising=False, after_step=after)
+    drop_step = _turning_point(steps, gamma, rising=False, after_step=after)
     # The reference curves make level shifts, so they are located by a crossing time. gamma_hat
     # does not: it rises to a transient peak and comes back to roughly where it started, so its
     # signature is the fall itself and it is located by the sharpest single-interval drop. Using
@@ -353,13 +380,34 @@ def analyse_p4(
         steps, np.array([c.test_acc for c in checkpoints]), after_step=after
     )
 
+    finite_xi = xi[np.isfinite(xi)]
+    # Whether xi "moves" has to be judged against the estimator's own noise, not against zero.
+    # The moment estimator on k upper order statistics has a standard error of order 1/sqrt(k),
+    # so a gamma_hat within that of zero is indistinguishable from a light tail. Counting bare
+    # sign changes instead would call a run with 1% of checkpoints at xi = 0.0006 "moving".
+    k_arr = np.array([max(int(c.k), 1) for c in checkpoints], dtype=float)
+    se = 1.0 / np.sqrt(k_arr)
+    ok_xi = np.isfinite(xi)
     out: dict[str, Any] = {
         "grokking_step": grok,
         "memorisation_step": int(after) if after >= 0 else None,
-        "gamma_first": float(hill[0]),
-        "gamma_last": float(hill[-1]),
-        "gamma_max": float(np.nanmax(hill)),
-        "gamma_argmax_step": int(steps[int(np.nanargmax(hill))]),
+        "gamma_first": float(gamma[0]),
+        "gamma_last": float(gamma[-1]),
+        "gamma_max": float(np.nanmax(gamma)),
+        "gamma_argmax_step": int(steps[int(np.nanargmax(gamma))]),
+        # The order parameter itself. `xi_positive_fraction` is the field to read first: if the
+        # tail is light at almost every checkpoint then xi is pinned at zero, nothing about it can
+        # move, and any curve that appears to move is a different statistic.
+        "xi_mean": float(np.mean(finite_xi)) if finite_xi.size else float("nan"),
+        "xi_max": float(np.nanmax(xi)),
+        "xi_positive_fraction": float(np.mean(finite_xi > 0)) if finite_xi.size else float("nan"),
+        "xi_exceeds_noise_fraction": float(np.mean(xi[ok_xi] > se[ok_xi])) if ok_xi.any() else 0.0,
+        "xi_moves": bool(ok_xi.any() and float(np.mean(xi[ok_xi] > se[ok_xi])) >= 0.10),
+        # Hill, labelled as Hill, so the diagnostic stays available without being mistaken for
+        # the order parameter.
+        "hill_first": float(hill[0]),
+        "hill_last": float(hill[-1]),
+        "hill_max": float(np.nanmax(hill)),
         "sharpest_drop_step": drop_step,
         "test_acc_turn_step": acc_turn,
         "restricted_turn_step": restricted_turn,
@@ -385,9 +433,9 @@ def analyse_p4(
     if grok is not None:
         i = int(np.argmin(np.abs(steps - grok)))
         lo = slice(max(i - window, 0), i)
-        hi = slice(i + 1, min(i + 1 + window, hill.size))
-        before = float(np.nanmean(hill[lo])) if hill[lo].size else float("nan")
-        after_g = float(np.nanmean(hill[hi])) if hill[hi].size else float("nan")
+        hi = slice(i + 1, min(i + 1 + window, gamma.size))
+        before = float(np.nanmean(gamma[lo])) if gamma[lo].size else float("nan")
+        after_g = float(np.nanmean(gamma[hi])) if gamma[hi].size else float("nan")
         out |= {
             "gamma_before_transition": before,
             "gamma_after_transition": after_g,
@@ -399,11 +447,30 @@ def analyse_p4(
     if drop_step is not None:
         j = int(np.argmin(np.abs(steps - drop_step)))
         pre = slice(max(j - window, 0), j)
-        post = slice(j, min(j + window, hill.size))
+        post = slice(j, min(j + window, gamma.size))
         out["gamma_peak_to_trough"] = (
-            float(np.nanmax(hill[pre])) - float(np.nanmin(hill[post]))
-            if hill[pre].size and hill[post].size
+            float(np.nanmax(gamma[pre])) - float(np.nanmin(gamma[post]))
+            if gamma[pre].size and gamma[post].size
             else float("nan")
+        )
+
+    # The verdict, spelled out, because every number above can be computed on a run where the
+    # order parameter never leaves zero -- and on this experiment it does not. A P4 result
+    # requires xi itself to move; a moving Hill on a light tail is not evidence for the paper's
+    # hypothesis, it is the absence of one.
+    if not out["xi_moves"]:
+        out["verdict"] = (
+            f"xi exceeds the estimator's own noise at only "
+            f"{out['xi_exceeds_noise_fraction']:.1%} of checkpoints (positive at all at "
+            f"{out['xi_positive_fraction']:.1%}), so the order parameter is pinned at zero and P4 "
+            "is untested on this run -- neither confirmed nor refuted. Any trend reported here is "
+            "a trend in Hill, which is non-negative by construction and cannot represent a light "
+            "tail. Read hill_* as a diagnostic only."
+        )
+    else:
+        out["verdict"] = (
+            f"xi exceeds the estimator's noise at {out['xi_exceeds_noise_fraction']:.1%} of "
+            "checkpoints, so the location statistics above are interpretable."
         )
     return out
 
@@ -417,13 +484,29 @@ def run_p4(
     make_figure: bool = True,
     figure_dir: Path | str = "paper_outputs/figures",
     metrics_dir: Path | str = "paper_outputs/metrics",
+    run_name: str | None = None,
 ) -> dict[str, Any]:
-    """Train, measure, and write the P4 record and figure."""
+    """Train, measure, and write the P4 record and figure.
+
+    `run_name` distinguishes runs that differ in something other than the seed -- a device, a
+    control condition -- and it reaches the *published* filenames, not only the manifest. Keying
+    `paper_outputs/` on the seed alone meant every P4 run overwrote every other one at the same
+    seed: the shuffled-label null ended up occupying the published metrics and figures of the real
+    experiment, under the real experiment's name.
+    """
     cfg = cfg or GrokkingConfig()
     out = Path(out_dir or cfg.out_dir)
+    # Default to the output directory's own name, which is what already distinguishes
+    # results/full/grokking from grokking_cuda, grokking_cpu and grokking_null.
+    tag = run_name or out.name
+    stem = (
+        f"p4_grokking_{tag}_seed{seed}"
+        if tag not in {"", "grokking"}
+        else (f"p4_grokking_seed{seed}")
+    )
 
     with run_manifest(
-        f"p4-grokking-seed{seed}",
+        f"p4-grokking-{tag}-seed{seed}" if tag != "grokking" else f"p4-grokking-seed{seed}",
         "grokking",
         out,
         config=cfg.model_dump(mode="json"),
@@ -448,20 +531,20 @@ def run_p4(
             "analysis": analysis,
             "checkpoints": [c.__dict__ for c in checkpoints],
         }
-        man.add_output(write_json(out / f"p4_grokking_seed{seed}.json", payload), "metrics")
+        man.add_output(write_json(out / f"{stem}.json", payload), "metrics")
 
         header = ",".join(checkpoints[0].row().keys())
         body = "\n".join(
             ",".join(f"{v:.6g}" if isinstance(v, float) else str(v) for v in c.row().values())
             for c in checkpoints
         )
-        csv_path = out / f"p4_grokking_seed{seed}.csv"
+        csv_path = out / f"{stem}.csv"
         csv_path.write_text(header + "\n" + body + "\n", encoding="utf-8")
         man.add_output(csv_path, "table")
 
         pm = Path(metrics_dir)
         pm.mkdir(parents=True, exist_ok=True)
-        man.add_output(write_json(pm / f"p4_grokking_seed{seed}.json", payload), "metrics")
+        man.add_output(write_json(pm / f"{stem}.json", payload), "metrics")
 
         man.add_metric("grokking_step", grok_at)
         man.add_metric("memorisation_step", memorised_at)
@@ -477,7 +560,7 @@ def run_p4(
         if make_figure:
             from ..reporting.plots import figure_grokking
 
-            for path in figure_grokking(payload, Path(figure_dir), seed=seed):
+            for path in figure_grokking(payload, Path(figure_dir), seed=seed, stem=stem):
                 man.add_output(path, "figure")
 
         log.info(

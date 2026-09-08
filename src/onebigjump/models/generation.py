@@ -54,6 +54,12 @@ class Sample:
     completion: str = ""
     n_prompt_tokens: int = 0
     n_completion_tokens: int = 0
+    # The token ids the model actually saw and produced. Extraction has to align residual-stream
+    # positions to proof steps, and re-tokenising decoded text is not guaranteed to reproduce the
+    # sequence that generated it -- byte-level BPE in particular can retokenise a decoded string
+    # differently. Storing the ids removes the guess. Empty when the backend cannot supply them.
+    prompt_token_ids: list[int] = field(default_factory=list)
+    completion_token_ids: list[int] = field(default_factory=list)
     meta: dict[str, Any] = field(default_factory=dict)
 
     def as_record(self, keep_completion: bool = True) -> dict[str, Any]:
@@ -73,6 +79,11 @@ class Backend(Protocol):
     ) -> list[list[str]]:
         """Return `n` completions for each prompt, in prompt order."""
         ...
+
+
+#: What a backend returns when it can also report tokens: per prompt, per sample, a
+#: `(text, prompt_ids, completion_ids)` triple.
+Detailed = list[list[tuple[str, list[int], list[int]]]]
 
 
 #: A probe with the three things a Lean proof cannot survive losing: indentation, newlines, and
@@ -151,9 +162,20 @@ class HFBackend:
     def sample(
         self, prompts: Sequence[str], *, n: int, temperature: float, max_new_tokens: int
     ) -> list[list[str]]:
+        return [
+            [t for t, _, _ in per]
+            for per in self.sample_detailed(
+                prompts, n=n, temperature=temperature, max_new_tokens=max_new_tokens
+            )
+        ]
+
+    def sample_detailed(
+        self, prompts: Sequence[str], *, n: int, temperature: float, max_new_tokens: int
+    ) -> Detailed:
         import torch
 
-        out: list[list[str]] = []
+        pad = self._tokenizer.pad_token_id
+        out: Detailed = []
         for start in range(0, len(prompts), self.batch_size):
             chunk = list(prompts[start : start + self.batch_size])
             enc = self._tokenizer(chunk, return_tensors="pt", padding=True).to(self.device)
@@ -164,14 +186,25 @@ class HFBackend:
                     temperature=temperature if temperature > 0 else None,
                     num_return_sequences=n,
                     max_new_tokens=max_new_tokens,
-                    pad_token_id=self._tokenizer.pad_token_id,
+                    pad_token_id=pad,
                 )
             width = enc["input_ids"].shape[1]
-            completions = self._tokenizer.batch_decode(
-                generated[:, width:], skip_special_tokens=True
-            )
+            tail = generated[:, width:]
+            completions = self._tokenizer.batch_decode(tail, skip_special_tokens=True)
             for i in range(len(chunk)):
-                out.append(completions[i * n : (i + 1) * n])
+                # Padding is on the left for batched generation, so the prompt ids for this row
+                # are the non-pad suffix of its input row.
+                row = enc["input_ids"][i].tolist()
+                prompt_ids = [t for t in row if t != pad] if pad is not None else row
+                per: list[tuple[str, list[int], list[int]]] = []
+                for j in range(n):
+                    ids = (
+                        [t for t in tail[i * n + j].tolist() if t != pad]
+                        if pad is not None
+                        else tail[i * n + j].tolist()
+                    )
+                    per.append((completions[i * n + j], prompt_ids, ids))
+                out.append(per)
         return out
 
 
@@ -233,11 +266,24 @@ class VLLMBackend:
     def sample(
         self, prompts: Sequence[str], *, n: int, temperature: float, max_new_tokens: int
     ) -> list[list[str]]:
+        return [
+            [t for t, _, _ in per]
+            for per in self.sample_detailed(
+                prompts, n=n, temperature=temperature, max_new_tokens=max_new_tokens
+            )
+        ]
+
+    def sample_detailed(
+        self, prompts: Sequence[str], *, n: int, temperature: float, max_new_tokens: int
+    ) -> Detailed:
         from vllm import SamplingParams
 
         params = SamplingParams(n=n, temperature=temperature, max_tokens=max_new_tokens)
         results = self._llm.generate(list(prompts), params)
-        return [[o.text for o in r.outputs] for r in results]
+        return [
+            [(o.text, list(r.prompt_token_ids or []), list(o.token_ids or [])) for o in r.outputs]
+            for r in results
+        ]
 
 
 def make_backend(model_id: str, backend: str = "auto", **kwargs: Any) -> Backend:
@@ -290,12 +336,25 @@ def generate(
 
     for temperature in temperatures:
         t0 = time.time()
-        completions = backend.sample(
-            prompts,
-            n=samples_per_problem,
-            temperature=float(temperature),
-            max_new_tokens=max_new_tokens,
-        )
+        # Prefer the variant that reports tokens. A backend that cannot is still usable; its
+        # samples simply carry empty id lists, which extraction can detect rather than guess at.
+        if hasattr(backend, "sample_detailed"):
+            detailed = backend.sample_detailed(
+                prompts,
+                n=samples_per_problem,
+                temperature=float(temperature),
+                max_new_tokens=max_new_tokens,
+            )
+        else:
+            detailed = [
+                [(text, [], []) for text in per]
+                for per in backend.sample(
+                    prompts,
+                    n=samples_per_problem,
+                    temperature=float(temperature),
+                    max_new_tokens=max_new_tokens,
+                )
+            ]
         log.info(
             "sampled %d problems x %d at T=%.2f in %.0fs",
             len(problems),
@@ -303,8 +362,8 @@ def generate(
             temperature,
             time.time() - t0,
         )
-        for problem, per_problem in zip(problems, completions, strict=True):
-            for index, completion in enumerate(per_problem):
+        for problem, per_problem in zip(problems, detailed, strict=True):
+            for index, (completion, prompt_ids, completion_ids) in enumerate(per_problem):
                 proof = extract_lean_block(completion, problem)
                 yield Sample(
                     trace_id=f"{problem.problem_id}-T{temperature:g}-{index:03d}",
@@ -322,6 +381,10 @@ def generate(
                     ),
                     prompt=build_prompt(problem, model_id),
                     completion=completion if keep_completion else "",
+                    n_prompt_tokens=len(prompt_ids),
+                    n_completion_tokens=len(completion_ids),
+                    prompt_token_ids=list(prompt_ids),
+                    completion_token_ids=list(completion_ids),
                     meta={"split": problem.split, "source": problem.source},
                 )
 

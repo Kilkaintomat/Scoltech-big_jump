@@ -22,7 +22,7 @@ from .hill import hill, sorted_positive_desc
 from .moment import moment
 from .thresholds import select_k
 
-__all__ = ["TailEstimate", "estimate_tail", "xi_from_gamma"]
+__all__ = ["TailEstimate", "estimate_tail", "k_stability", "xi_from_gamma"]
 
 
 def xi_from_gamma(gamma: float) -> float:
@@ -109,6 +109,78 @@ def _gpd_at(z: np.ndarray, k: int) -> float:
     return float(gpd_from_order_statistics(z, k).gamma)
 
 
+def k_stability(
+    x: np.ndarray,
+    k_selected: int,
+    estimators: Sequence[str],
+    *,
+    k_min: int = 20,
+    k_max_frac: float = 0.25,
+    n_points: int = 12,
+) -> dict[str, Any]:
+    """How much the answer depends on where the tail is cut.
+
+    A point estimate at one `k` says nothing about whether that `k` was a fortunate choice. On the
+    Kesten surrogate at `p = 0.02` the double bootstrap selected `k/n = 1.99%`, where the moment
+    estimator reads 0.15 against a true 0.25, while every neighbouring cut from 0.2% to 20% reads
+    0.23-0.33 -- the selector had landed on the single worst point available, and nothing in the
+    recorded output showed it.
+
+    What is reported is the curve, the estimate at the selected `k`, and the spread across the
+    grid *relative to the estimate's own size*. `unstable` is that ratio exceeding 0.5: the answer
+    moves by more than half its own magnitude depending on where the tail is cut, so it is
+    determined by `k` rather than by the data. Calling the selected point an "outlier" would need
+    the true value, which no real application has -- this reports how much room there is to be
+    wrong, not which way.
+    """
+    xs = sorted_positive_desc(x)
+    n = xs.size
+    lo, hi = max(int(k_min), 20), max(int(k_max_frac * n), int(k_min) + 1)
+    if hi <= lo or n < 50:
+        return {"grid": [], "note": "sample too small for a k grid"}
+
+    grid = np.unique(np.geomspace(lo, hi, n_points).astype(int))
+    fns = {"hill": hill, "moment": moment, "gpd": _gpd_at}
+    curves: dict[str, list[float]] = {}
+    out: dict[str, Any] = {"k_grid": [int(v) for v in grid], "k_selected": int(k_selected)}
+    for name in estimators:
+        fn = fns.get(name)
+        if fn is None:
+            continue
+        vals = []
+        for kk in grid:
+            try:
+                vals.append(float(fn(xs, int(kk))))
+            except (ValueError, FloatingPointError):
+                vals.append(float("nan"))
+        curves[name] = vals
+        arr = np.asarray(vals, dtype=float)
+        good = arr[np.isfinite(arr)]
+        if good.size < 4:
+            continue
+        q1, q3 = np.percentile(good, [25, 75])
+        med = float(np.median(good))
+        try:
+            at_selected = float(fn(xs, int(np.clip(k_selected, 20, n - 2))))
+        except (ValueError, FloatingPointError):
+            at_selected = float("nan")
+        iqr = float(q3 - q1)
+        scale = max(abs(med), 1e-6)
+        out[name] = {
+            "spread_iqr": iqr,
+            "median_over_grid": med,
+            "at_selected_k": at_selected,
+            "relative_spread": iqr / scale,
+            "deviation_from_grid_median": (
+                float(at_selected - med) if np.isfinite(at_selected) else float("nan")
+            ),
+            "unstable": bool(iqr / scale > 0.5),
+        }
+    out["curves"] = curves
+    out["unstable"] = bool(any(isinstance(v, dict) and v.get("unstable") for v in out.values()))
+    return out
+
+
 def estimate_tail(
     z: np.ndarray,
     groups: Sequence[Any] | np.ndarray | None = None,
@@ -117,6 +189,9 @@ def estimate_tail(
     seed: int = 0,
     with_hill_plot: bool = True,
     hill_plot_resamples: int = 0,
+    # The k grid costs a dozen extra fits. Worth it for a headline estimate, wasteful inside a
+    # resampling loop that calls this hundreds of times -- split-half does exactly that.
+    with_k_stability: bool = True,
     meta: dict[str, Any] | None = None,
 ) -> TailEstimate:
     """Run the full Section 4 estimation protocol on one pooled sample.
@@ -196,12 +271,18 @@ def estimate_tail(
             seed=seed + 2,
         )
 
+    stability = (
+        k_stability(x, k, list(point), k_min=cfg.k_min, k_max_frac=cfg.k_max_frac)
+        if with_k_stability
+        else {}
+    )
+
     gamma_headline = point.get("hill", float("nan"))
     return TailEstimate(
         n=int(n),
         n_traces=int(np.unique(g).size) if g is not None else int(n),
         k=int(k),
-        k_selection=sel.as_dict(),
+        k_selection={**sel.as_dict(), "stability": stability},
         hill=float(point.get("hill", float("nan"))),
         moment=float(point.get("moment", float("nan"))),
         gpd=float(point.get("gpd", float("nan"))),

@@ -35,7 +35,11 @@ def run_generation(
     trust_remote_code: bool = False,
     batch_size: int = 1,
     name: str = "generate",
-    keep_completion: bool = False,
+    # True, not False. The completion carries the model's informal reasoning before the Lean
+    # block, and `extract_lean_block` throws it away; once a run finishes, nothing short of
+    # regenerating gets it back. It is the one field here that cannot be recomputed, and a
+    # reviewer asking what the model was thinking has no other source.
+    keep_completion: bool = True,
 ) -> dict[str, Any]:
     """Sample whole proofs and write the JSONL that `lean-verify` reads."""
     from ..models.generation import generate, make_backend, write_samples

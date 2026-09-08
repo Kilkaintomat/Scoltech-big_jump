@@ -109,7 +109,16 @@ def _xi_on(
     uninformative, and dropping those is honest as long as the count is reported.
     """
     try:
-        return float(estimate_tail(x[keep], g[keep], cfg, seed=seed, with_hill_plot=False).xi)
+        return float(
+            estimate_tail(
+                x[keep],
+                g[keep],
+                cfg,
+                seed=seed,
+                with_hill_plot=False,
+                with_k_stability=False,
+            ).xi
+        )
     except (ValueError, FloatingPointError):
         return float("nan")
 
@@ -154,7 +163,9 @@ def split_half_reliability(
         )
 
     try:
-        xi_full = float(estimate_tail(x, g, cfg, seed=seed, with_hill_plot=False).xi)
+        xi_full = float(
+            estimate_tail(x, g, cfg, seed=seed, with_hill_plot=False, with_k_stability=False).xi
+        )
     except (ValueError, FloatingPointError):
         xi_full = float("nan")
 

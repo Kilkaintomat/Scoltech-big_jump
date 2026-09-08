@@ -238,7 +238,9 @@ def hill_plot_figure(
     return paths
 
 
-def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int = 0) -> list[Path]:
+def figure_grokking(
+    payload: dict[str, Any], out_dir: Path | str, *, seed: int = 0, stem: str | None = None
+) -> list[Path]:
     """P4: the order parameter against training, next to accuracy and the progress measures.
 
     Three stacked panels sharing a log-scaled step axis, because everything interesting about
@@ -392,7 +394,7 @@ def figure_grokking(payload: dict[str, Any], out_dir: Path | str, *, seed: int =
     else:  # pragma: no cover - only for runs too short to have a transition
         ax_zoom.set_axis_off()
 
-    paths = _save(fig, Path(out_dir), f"p4_grokking_seed{seed}")
+    paths = _save(fig, Path(out_dir), stem or f"p4_grokking_seed{seed}")
     plt.close(fig)
     return paths
 

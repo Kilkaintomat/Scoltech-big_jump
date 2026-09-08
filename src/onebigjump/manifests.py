@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import contextlib
 import platform
+import re
 import time
 from collections.abc import Iterator
 from dataclasses import dataclass, field
@@ -25,9 +26,33 @@ from .reproducibility import (
     write_json,
 )
 
-__all__ = ["RunManifest", "run_manifest"]
+__all__ = ["RunManifest", "find_manifests", "manifest_name", "run_manifest"]
 
 MANIFEST_NAME = "manifest.json"
+
+
+def manifest_name(run_name: str) -> str:
+    """The manifest filename for one run.
+
+    One manifest per *run*, not per directory. Several runs legitimately share an output
+    directory -- three seeds of P4 write into `results/full/grokking/` -- and a single
+    `manifest.json` meant the last one silently replaced the rest, leaving seeds 0 and 1 of a
+    published result with no provenance at all. The run name is already unique per run, so it
+    goes in the filename.
+    """
+    slug = re.sub(r"[^A-Za-z0-9._-]+", "-", run_name).strip("-") or "run"
+    return f"manifest-{slug}.json"
+
+
+def find_manifests(out_dir: Path | str) -> list[Path]:
+    """Every manifest in a directory, newest last. Includes the legacy bare `manifest.json`."""
+    d = Path(out_dir)
+    if not d.is_dir():
+        return []
+    found = sorted(d.glob("manifest-*.json")) + (
+        [d / MANIFEST_NAME] if (d / MANIFEST_NAME).is_file() else []
+    )
+    return sorted(found, key=lambda q: q.stat().st_mtime)
 
 
 @dataclass
@@ -99,7 +124,7 @@ class RunManifest:
         }
 
     def write(self) -> Path:
-        return write_json(self.out_dir / MANIFEST_NAME, self.as_dict())
+        return write_json(self.out_dir / manifest_name(self.name), self.as_dict())
 
 
 @contextlib.contextmanager

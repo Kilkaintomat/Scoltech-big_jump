@@ -1,0 +1,11 @@
+node: cn68.zhores
+git binary: /usr/bin/git
+git version: git version 2.43.0
+--- /beegfs/home/denis.rakhmankin/onebigjump
+    exists: yes
+    .git  : yes
+    rev   : 0c2093bb7ba743cfc1422fed8544e8622feeb503
+--- /trinity/home/denis.rakhmankin/onebigjump
+    exists: yes
+    .git  : yes
+    rev   : 0c2093bb7ba743cfc1422fed8544e8622feeb503

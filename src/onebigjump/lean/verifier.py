@@ -260,6 +260,35 @@ def _looks_like_parse_error(messages: list[str]) -> bool:
     return any(hint in lowered for hint in _PARSE_HINTS)
 
 
+#: Ways a tactic can leave the goal unproved while looking like it closed it. `sorry` and `admit`
+#: are the surface syntax; `sorryAx` is the axiom they elaborate to, and it is what actually
+#: appears when the hole arrives through a lemma or a macro rather than being typed at this step.
+_SORRY_TOKENS = ("sorry", "admit", "sorryax")
+
+
+def _is_sorry(reply: dict[str, Any], tactic_text: str) -> bool:
+    """Did this step close the goal with a hole rather than a proof?
+
+    Checking only for the literal string `sorry` in the tactic text -- which is what this used to
+    do -- misses `admit`, misses a `sorryAx` introduced through a lemma the step applied, and
+    misses any hole the REPL reports without the word appearing in the tactic. Every channel the
+    REPL offers is inspected, and the tactic text is only one of them: a proof accepted here is
+    later counted as evidence that the model proved the theorem.
+    """
+    # A non-empty `sorries` list is the REPL saying so directly, whatever the entries look like:
+    # they are goal records, and the word `sorry` need not appear anywhere inside them.
+    if reply.get("sorries"):
+        return True
+    blob = " ".join(
+        [
+            str(reply.get("proofStatus", "")),
+            json.dumps(reply.get("messages", "")),
+            tactic_text,
+        ]
+    ).lower()
+    return any(tok in blob for tok in _SORRY_TOKENS)
+
+
 def verify_trace(
     repl: LeanREPL,
     proof_text: str,
@@ -398,9 +427,9 @@ def verify_trace(
                 # never reached, so this is a rejection, not a step to be skipped.
                 status = StepStatus.ERROR
                 message = f"the REPL returned no proof state: {json.dumps(reply)[:300]}"
-            elif "sorry" in str(reply.get("proofStatus", "")).lower() and "sorry" in seg.text:
+            elif _is_sorry(reply, seg.text):
                 status = StepStatus.SORRY
-                message = "the step closes the goal with `sorry`"
+                message = "the step leaves a hole (`sorry`, `admit` or `sorryAx`)"
             else:
                 state = int(reply["proofState"])
                 goals_after = len(reply.get("goals") or [])

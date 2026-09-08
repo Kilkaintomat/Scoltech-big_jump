@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -73,7 +74,31 @@ BENCHMARKS: dict[str, Benchmark] = {
 }
 
 
-def fetch(bench: Benchmark, split: str, limit: int | None = None) -> list[dict[str, Any]]:
+def _lean_toolchain() -> str | None:
+    """Which Lean the statements were checked against, if the workspace is present."""
+    f = REPO / "lean_workspace" / "mathlib_project" / "lean-toolchain"
+    return f.read_text(encoding="utf-8").strip() if f.is_file() else None
+
+
+def dataset_revision(dataset: str) -> str | None:
+    """The exact commit of a Hugging Face dataset repository.
+
+    Without this the snapshot is not pinned: `load_dataset` serves whatever the hub holds today,
+    so a benchmark can change under a published result with nothing in the artefacts to show it.
+    Returns None when the hub cannot be reached, because a recorded `null` is honest and a missing
+    field is not.
+    """
+    try:
+        from huggingface_hub import HfApi
+
+        return str(HfApi().dataset_info(dataset).sha)
+    except Exception:  # pragma: no cover - depends on network and on the optional extra
+        return None
+
+
+def fetch(
+    bench: Benchmark, split: str, limit: int | None = None, revision: str | None = None
+) -> list[dict[str, Any]]:
     """Download one split and normalise it into the schema `load_problems` reads."""
     from datasets import load_dataset
 
@@ -85,7 +110,8 @@ def fetch(bench: Benchmark, split: str, limit: int | None = None) -> list[dict[s
         open_for_tactics,
     )
 
-    rows = load_dataset(bench.dataset, split=split)
+    # Pinned when a revision is known, so the same call fetches the same statements later.
+    rows = load_dataset(bench.dataset, split=split, revision=revision)
     out: list[dict[str, Any]] = []
     skipped: list[str] = []
     for i, row in enumerate(rows):
@@ -143,10 +169,13 @@ def main() -> int:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     summary: list[dict[str, Any]] = []
     for bench in chosen:
+        revision = dataset_revision(bench.dataset)
+        if revision is None:
+            print(f"  {bench.key}: could not read the dataset revision; the snapshot is unpinned")
         splits = (args.split,) if args.split else bench.splits
         for split in splits:
             try:
-                records = fetch(bench, split, limit=args.limit)
+                records = fetch(bench, split, limit=args.limit, revision=revision)
             except Exception as exc:
                 print(f"  {bench.key}/{split}: FAILED ({type(exc).__name__}: {exc})")
                 continue
@@ -160,8 +189,16 @@ def main() -> int:
                 {
                     "benchmark": bench.key,
                     "split": split,
+                    # Everything needed to fetch exactly these statements again. Recording only
+                    # the count and the byte size, as this used to, leaves a reviewer unable to
+                    # tell whether the benchmark moved under the result.
+                    "dataset": bench.dataset,
+                    "revision": revision,
+                    "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    "lean_toolchain": _lean_toolchain(),
                     "problems": len(records),
                     "requires_solution_term": flagged,
+                    "usable_without_solution_term": len(records) - flagged,
                     "bytes": path.stat().st_size,
                     "path": str(path.relative_to(REPO)),
                 }
@@ -178,7 +215,14 @@ def main() -> int:
             encoding="utf-8",
         )
         total = sum(s["bytes"] for s in summary)
-        print(f"\ntotal {sum(s['problems'] for s in summary)} problems, {total / 1e6:.2f} MB")
+        usable = sum(s["usable_without_solution_term"] for s in summary)
+        n = sum(s["problems"] for s in summary)
+        print(f"\ntotal {n} problems, {total / 1e6:.2f} MB")
+        if usable != n:
+            # PutnamBench opens many statements with `abbrev ..._solution := sorry`, which the
+            # model must also fill; those cannot be verified by the current protocol. Quoting the
+            # unqualified total overstates what the benchmark actually supplies.
+            print(f"of which {usable} are usable without also supplying a solution term")
     return 0 if summary else 1
 
 

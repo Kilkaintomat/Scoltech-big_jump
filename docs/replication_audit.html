@@ -403,6 +403,18 @@ footer {
   </div>
 </header>
 
+<div style="border:2px solid var(--bad);background:var(--bad-soft);border-radius:4px;padding:16px 18px;margin:24px 0;">
+<p style="margin:0 0 10px;font-family:var(--sans);font-weight:600;font-size:15px;color:var(--bad);">Superseded &mdash; see the re-audit</p>
+<p style="margin:0 0 8px;">An independent re-audit refuted several claims on this page. They are left in place rather than quietly rewritten, but they are not current.</p>
+<ul style="margin:0;padding-left:20px;">
+<li><strong>P4's &ldquo;declining &xi;&rdquo; was Hill, not &xi;.</strong> Every field named <code>gamma_*</code> was computed from the Hill estimator, which is non-negative by construction. The order parameter <code>&xi; = max(&gamma;, 0)</code> is zero at 92.5&ndash;99.8% of checkpoints; <code>&rho;(step, &xi;) &asymp; &minus;0.07</code>. Both P4 claims are withdrawn.</li>
+<li><strong>A shuffled-label null reproduces the decline</strong> (&rho; = &minus;0.754 against &minus;0.827), so it is not evidence of circuit formation.</li>
+<li><strong>&ldquo;At p = 0 the estimators correctly go negative, i.e. bounded tail&rdquo; is wrong.</strong> Z is chi-distributed: unbounded, Gumbel domain, true &gamma; = 0. The negative estimates are bias.</li>
+<li><strong>&ldquo;The p = 0.02 undershoot is caused by short traces&rdquo; is wrong.</strong> Lengths 16/64/256/1024 at equal total steps agree; the cause is the <code>k</code> selector.</li>
+<li><strong>&ldquo;All numbers are reproducible from 28b5f7c&rdquo; is false.</strong> 13 of 29 digests no longer match, and every GPU run carried a null commit &mdash; the GPU nodes run git 1.8.3.1, which has no <code>-C</code>.</li>
+</ul>
+</div>
+
 <div class="body-grid">
 
 <nav class="toc" aria-label="Contents">

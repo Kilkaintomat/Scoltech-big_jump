@@ -1,0 +1,25 @@
+prediction,experiment,paper_requirement_UNVERIFIED,implementation,data,completed_runs,run_ids,metrics_artefact,status,blocker
+P1,Kesten simulation,tail separation verified vs refuted,experiments/p1_tail_separation.py,simulated Kesten traces,1,figure1-kesten / kesten-p0.05,paper_outputs/tables/table1_kesten-p0.05.md,checked on artificial data only,labels come from a threshold on Z so this tests formula self-consistency
+P1,Lean proofs,tail separation on a real prover,experiments/p1_tail_separation.py,none,0,-,-,absent,no verified traces; Mathlib not built on the cluster
+P1,synthetic deduction,tail separation on PrOntoQA-style,absent,none,0,-,-,absent,no generator implemented
+P2,Kesten simulation,top-1/top-3 vs E[1/L] and a surprisal baseline,experiments/p2_localization.py,simulated Kesten traces,1,kesten-p0.05,paper_outputs/tables/table2_kesten-p0.05.md,checked on artificial data only,surprisal baseline is a placeholder [x.xx]
+P2,Lean proofs,localisation at the failing tactic,experiments/p2_localization.py,none,0,-,-,absent,no activations; pilot proofs have L<=3 so top-1/top-3 are near-trivial
+P3,Kesten simulation,GPD shape of overshoots plus the share of failures above tau,experiments/p3_overshoot.py,simulated Kesten traces,1,kesten-p0.05,paper_outputs/metrics/kesten-p0.05.json,checked on artificial data only,n_over_tau/n_refuted = 130/130 is an artefact of how t* is defined in the simulation
+P3,Lean proofs,overshoot on real failures,experiments/p3_overshoot.py,none,0,-,-,absent,no verified traces
+P4,modular addition (MPS),order parameter turns with circuit formation,experiments/p4_grokking.py,modular addition p=113,3,p4-grokking-seed0/1/2,results/full/grokking/,result invalid,tracks Hill not xi; no manifest for seeds 0 and 1
+P4,modular addition (CUDA),same,experiments/p4_grokking.py,modular addition p=113,3,unnamed (commit None),results/full/grokking_cuda/,result invalid,tracks Hill not xi; provenance unconfirmed
+P4,modular addition (CPU fp32),reference arithmetic control,experiments/p4_grokking.py,modular addition p=113,1,unnamed (commit None),results/full/grokking_cpu/,result invalid,tracks Hill not xi; provenance unconfirmed
+P4,shuffled-label null,control with nothing to generalise,experiments/p4_grokking.py,modular addition p=113 permuted labels,3,8462001,results/full/grokking_null/,provenance unconfirmed,commit None; valid as a control and it reproduces the effect
+P4,single-checkpoint device comparison,same weights same inputs across devices,absent,none,0,-,-,absent,never implemented; the MPS-artefact conclusion rests on independent training instead
+P5,length law,controlled deduction-depth experiment,experiments/p5_length_law.py,none,0,-,-,implemented but never run,no LLM generations and no synthetic depth generator
+two-hop composition,-,-,absent,none,0,-,-,absent,no code and no config
+recurrent-depth,-,-,absent,none,0,-,-,absent,no code and no config
+Tracr control,-,-,absent,none,0,-,-,absent,no code and no config
+lookup control,-,-,absent,none,0,-,-,absent,no code and no config
+ablation: layer,-,-,absent,none,0,-,-,absent,no code and no config
+ablation: statistic,-,-,absent,none,0,-,-,absent,no code and no config
+ablation: temperature,-,-,absent,none,0,-,-,absent,no code and no config
+ablation: k,-,-,partially in stats/thresholds.py,none,0,-,-,absent,selector exists but no ablation run; audit/kesten_k_selector.py is the only k sweep
+split-half reliability,-,-,not on the cluster,none,0,-,-,absent,module written locally in a previous turn and never committed here
+label-noise degradation,-,-,absent,none,0,-,-,absent,no code and no config
+spectral measure of jumps,-,-,absent,none,0,-,-,absent,no code and no config

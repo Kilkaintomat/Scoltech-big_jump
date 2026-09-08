@@ -129,3 +129,41 @@ class TestDigest:
 
     def test_missing_file_gives_none(self, tmp_path: Path) -> None:
         assert file_digest(tmp_path / "absent") is None
+
+
+class TestOneManifestPerRun:
+    """Several runs share an output directory; a single manifest.json lost all but the last.
+
+    Three seeds of P4 write into results/full/grokking/. With one manifest per directory, seeds 0
+    and 1 of a published result had no provenance at all, and a later run into the same directory
+    silently replaced the record of the earlier one.
+    """
+
+    def test_the_filename_carries_the_run_name(self) -> None:
+        from onebigjump.manifests import manifest_name
+
+        assert manifest_name("p4-grokking-seed0") == "manifest-p4-grokking-seed0.json"
+        assert manifest_name("p4-grokking-seed1") != manifest_name("p4-grokking-seed0")
+
+    def test_awkward_names_still_give_a_usable_filename(self) -> None:
+        from onebigjump.manifests import manifest_name
+
+        name = manifest_name("weird name/with:punctuation")
+        assert "/" not in name and name.startswith("manifest-") and name.endswith(".json")
+
+    def test_two_runs_into_one_directory_keep_both_records(self, tmp_path: Path) -> None:
+        from onebigjump.manifests import find_manifests, run_manifest
+
+        for seed in (0, 1):
+            with run_manifest(f"p4-grokking-seed{seed}", "grokking", tmp_path, seed=seed):
+                pass
+        found = find_manifests(tmp_path)
+        assert len(found) == 2, "a second run overwrote the first run's manifest"
+        names = {json.loads(f.read_text())["name"] for f in found}
+        assert names == {"p4-grokking-seed0", "p4-grokking-seed1"}
+
+    def test_find_manifests_on_an_empty_directory(self, tmp_path: Path) -> None:
+        from onebigjump.manifests import find_manifests
+
+        assert find_manifests(tmp_path) == []
+        assert find_manifests(tmp_path / "nowhere") == []

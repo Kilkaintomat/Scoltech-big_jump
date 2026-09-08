@@ -18,6 +18,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from ..manifests import find_manifests
+
 __all__ = ["Section", "build_report", "write_report"]
 
 
@@ -42,6 +44,17 @@ def _load(path: Path) -> dict[str, Any] | None:
         return dict(json.loads(path.read_text(encoding="utf-8")))
     except (OSError, json.JSONDecodeError):
         return None
+
+
+def _load_manifest(directory: Path) -> dict[str, Any]:
+    """The newest manifest in a directory.
+
+    Manifests are per run, not per directory -- several seeds legitimately share an output
+    directory -- so there is no single `manifest.json` to open. The newest is the right default
+    for a provenance line; a reader wanting all of them has `find_manifests`.
+    """
+    found = find_manifests(directory)
+    return _load(found[-1]) or {} if found else {}
 
 
 def _provenance(manifest: dict[str, Any] | None) -> str:
@@ -92,7 +105,7 @@ def _figure_one(results: Path) -> Section:
             f"| {s['n_refuted']} | {s['top1']:.3f} | {s['chance']:.4f} |"
         )
     sec.line()
-    sec.line(_provenance(_load(results / "simulations" / "kesten" / "manifest.json")))
+    sec.line(_provenance(_load_manifest(results / "simulations" / "kesten")))
     return sec
 
 
@@ -106,7 +119,7 @@ def _lean(results: Path) -> Section:
     sec = Section("Lean 4 verification -- exact step labels")
     for path in candidates:
         summary = _load(path)
-        manifest = _load(path.parent / "manifest.json")
+        manifest = _load_manifest(path.parent)
         if summary is None:
             continue
         env = (manifest or {}).get("metrics", {}).get("lean_environment", {})
@@ -209,7 +222,7 @@ def _p4(results: Path) -> Section:
                 "P4 is not supported by this run."
             )
         sec.line()
-    sec.line(_provenance(_load(results / "full" / "grokking" / "manifest.json")))
+    sec.line(_provenance(_load_manifest(results / "full" / "grokking")))
     return sec
 
 

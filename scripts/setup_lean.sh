@@ -38,10 +38,18 @@ echo "== toolchain: $(cat lean-toolchain) =="
 # cannot reach -- on Zhores it times out from every node while github.com answers instantly, and
 # elan then hangs on a lock file with no error at all. Pre-installing the toolchain from its
 # GitHub release makes the name resolvable locally, so elan never has to ask.
-if ! elan run "$(cat lean-toolchain)" lean --version >/dev/null 2>&1; then
-  echo "== elan cannot resolve the toolchain; installing it from GitHub =="
-  bash "$REPO/scripts/install_lean_toolchain.sh" "$(cat lean-toolchain)"
+# The check must not go through elan: asking it anything about an unresolved toolchain is what
+# hangs, so `elan run ... --version` as a probe blocks exactly where the probe was meant to help.
+# Look on disk instead.
+TC="$(cat lean-toolchain)"
+TC_DIR="$ELAN_HOME/toolchains/$(echo "$TC" | sed 's|/|--|g; s|:|---|g')"
+if [ ! -x "$TC_DIR/bin/lean" ]; then
+  echo "== toolchain not on disk; installing it from GitHub =="
+  bash "$REPO/scripts/install_lean_toolchain.sh" "$TC"
 fi
+# Point lake and lean at it directly, so no command has to resolve the name over the network.
+export PATH="$TC_DIR/bin:$PATH"
+export ELAN_TOOLCHAIN="$TC"
 
 # `lake update` is deliberately NOT run when a manifest is already committed. The manifest pins
 # Mathlib at the exact revision the step labels were produced against, but several of its

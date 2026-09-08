@@ -1,3 +1,25 @@
+> **SUPERSEDED — see `audit/REVIEW.md`.**
+>
+> An independent re-audit refuted several claims below. They are left in place because a report
+> that quietly rewrites itself is worse than one that is wrong in public, but do not read them as
+> current:
+>
+> * **P4's "declining ξ̂" was Hill, not ξ.** `analyse_p4` computed every field named `gamma_*`
+>   from the Hill estimator, which is non-negative by construction. The paper's order parameter
+>   `ξ = max(γ, 0)` is zero at 92.5–99.8 % of checkpoints on every run; `ρ(step, ξ) ≈ −0.07`, not
+>   −0.83. Both P4 claims — the transient peak and the monotone decline — are withdrawn.
+> * **A shuffled-label null reproduces the decline** (mean `ρ = −0.754` against −0.827 for real
+>   grokking), so it is not evidence of circuit formation.
+> * **"At p = 0 the estimators correctly go negative, i.e. bounded tail" is wrong.** `Z_t` is
+>   chi-distributed there: unbounded support, Gumbel domain, true `γ = 0`. The negative estimates
+>   are finite-sample bias.
+> * **"The p = 0.02 undershoot is caused by short traces" is wrong.** Trace lengths of 16, 64,
+>   256 and 1024 at equal total steps give the same answer. The cause is the `k` selector landing
+>   on a pathological point (1.99 % → 0.153 against a true 0.2517).
+> * **"All numbers here are reproducible from 28b5f7c" is false.** 13 of 29 recorded digests no
+>   longer match, and every GPU run carried `commit: null` because the GPU nodes run git 1.8.3.1,
+>   which has no `-C` option.
+
 # One Big Jump: what the pipeline has actually established
 
 An account of the experimental code written for the ICLR 2027 submission, the results it has

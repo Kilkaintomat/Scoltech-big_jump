@@ -186,12 +186,18 @@ class TestAnalysis:
     @staticmethod
     def _cp(
         step: int,
-        hill: float,
+        gamma: float,
         test_acc: float,
         restricted: float = 1.0,
         excluded: float = 1.0,
         train_acc: float = 1.0,
     ):
+        """`gamma` is the signed shape, which is what the analysis reads.
+
+        It used to be passed as `hill`, and the analysis used to read Hill -- which is how a
+        module whose whole subject is a tail index came to report a statistic that cannot be
+        negative. The fixture now puts the signal where the analysis actually looks.
+        """
         from onebigjump.experiments.p4_grokking import Checkpoint
 
         return Checkpoint(
@@ -202,9 +208,11 @@ class TestAnalysis:
             test_acc=test_acc,
             restricted_loss=restricted,
             excluded_loss=excluded,
-            hill=hill,
-            moment=0.0,
-            gpd=0.0,
+            # Hill carries the same shape here only so the diagnostic fields stay populated;
+            # nothing in the analysis reads it any more.
+            hill=abs(gamma),
+            moment=gamma,
+            gpd=gamma,
             k=100,
             n=1000,
             median_deviation=1.0,
@@ -372,3 +380,83 @@ class TestShuffledLabelNull:
         assert GrokkingConfig().shuffle_labels is False
         source = inspect.getsource(p4_grokking.train_grokking)
         assert "shuffle_labels=cfg.shuffle_labels" in source
+
+
+class TestTheOrderParameterIsNotHill:
+    """P4 reported a falling tail index on runs whose order parameter never left zero.
+
+    `analyse_p4` computed every field named `gamma_*` from Hill. Hill is a mean of log-ratios of
+    upper order statistics and is non-negative by construction, so it cannot represent a light
+    tail; the paper's order parameter is `xi = max(gamma, 0)` with `gamma` the signed shape. On
+    the real grokking runs `gamma` is negative at 99% of checkpoints, so `xi` is pinned at zero
+    and nothing about it can move -- while Hill fell steadily, and was reported as the result.
+    """
+
+    @staticmethod
+    def _cp(step: int, hill: float, moment: float, k: int = 640):
+        from onebigjump.experiments.p4_grokking import Checkpoint
+
+        return Checkpoint(
+            step=step,
+            train_loss=0.0,
+            test_loss=0.0,
+            train_acc=1.0,
+            test_acc=1.0,
+            restricted_loss=1.0,
+            excluded_loss=1.0,
+            hill=hill,
+            moment=moment,
+            gpd=moment,
+            k=k,
+            n=12769,
+            median_deviation=3.0,
+        )
+
+    def test_gamma_is_signed_and_xi_is_clipped(self) -> None:
+        c = self._cp(0, hill=0.05, moment=-0.12)
+        assert c.gamma == -0.12, "gamma must be the signed shape, not Hill"
+        assert c.xi == 0.0, "xi must clip a light tail to zero"
+
+    def test_the_row_writes_both_out(self) -> None:
+        """A CSV reader must not have to know which column means what."""
+        row = self._cp(0, hill=0.05, moment=-0.12).row()
+        assert row["hill"] == 0.05
+        assert row["gamma"] == -0.12
+        assert row["xi"] == 0.0
+
+    def test_a_light_tail_throughout_is_reported_as_untested(self) -> None:
+        """Hill falling steeply while gamma stays negative is exactly the observed failure."""
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        series = [
+            self._cp(s, hill=0.06 - 3e-6 * s, moment=-0.05 - 1e-6 * s) for s in range(0, 8000, 100)
+        ]
+        out = analyse_p4(series)
+        assert out["xi_positive_fraction"] == 0.0
+        assert out["xi_moves"] is False
+        assert "untested" in out["verdict"]
+        assert "Hill" in out["verdict"]
+
+    def test_a_genuinely_heavy_tail_is_reported_as_interpretable(self) -> None:
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        series = [self._cp(s, hill=0.5, moment=0.4) for s in range(0, 8000, 100)]
+        out = analyse_p4(series)
+        assert out["xi_positive_fraction"] == 1.0
+        assert out["xi_moves"] is True
+        assert "interpretable" in out["verdict"]
+
+    def test_xi_barely_crossing_zero_does_not_count_as_movement(self) -> None:
+        """1% of checkpoints at xi = 0.0006 is noise crossing zero, not an order parameter."""
+        import numpy as np
+
+        from onebigjump.experiments.p4_grokking import analyse_p4
+
+        rng = np.random.default_rng(0)
+        series = [
+            self._cp(s, hill=0.04, moment=float(rng.normal(-0.05, 0.02)))
+            for s in range(0, 8000, 100)
+        ]
+        out = analyse_p4(series)
+        assert out["xi_positive_fraction"] < 0.10
+        assert out["xi_moves"] is False

@@ -99,7 +99,13 @@ class ActivationConfig(Strict):
 
 
 class SyntheticConfig(Strict):
-    """PrOntoQA-style first-order deduction."""
+    """PrOntoQA-style first-order deduction. **Declared, not implemented.**
+
+    No module reads this and no config file sets it. It is kept because P5 needs a controlled
+    deduction-depth experiment and this records the intended shape of one -- but a reader should
+    not take its presence as evidence that the experiment exists. `RunConfig.kind` accepts
+    `"synthetic"` and nothing handles it; see `audit/next_experiments.md` stage 4.
+    """
 
     chain_lengths: list[int] = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     n_problems_per_length: int = Field(40, ge=1)
