@@ -70,6 +70,41 @@ def _run(cmd: list[str]) -> str | None:
         return None
 
 
+#: Environment variables a launcher can set when the run happens somewhere `git` does not exist.
+GIT_ENV_VARS = {
+    "commit": "ONEBIGJUMP_GIT_COMMIT",
+    "branch": "ONEBIGJUMP_GIT_BRANCH",
+    "describe": "ONEBIGJUMP_GIT_DESCRIBE",
+    "status": "ONEBIGJUMP_GIT_STATUS",
+    "remote": "ONEBIGJUMP_GIT_REMOTE",
+}
+
+
+def _git_from_environment() -> dict[str, Any] | None:
+    """Provenance handed in by the launcher, for runs inside a container without `git`.
+
+    The Singularity image the cluster runs has no `git` binary, so a run inside it cannot read its
+    own commit however good the checkout outside is. `scripts/slurm/common.sh` reads it on the host
+    and exports it. This is weaker evidence than asking git directly -- an environment variable can
+    say anything -- so it is labelled `source: environment` rather than passed off as the real
+    thing.
+    """
+    commit = os.environ.get(GIT_ENV_VARS["commit"], "").strip()
+    if not commit:
+        return None
+    status = os.environ.get(GIT_ENV_VARS["status"], "")
+    return {
+        "commit": commit,
+        "branch": os.environ.get(GIT_ENV_VARS["branch"]) or None,
+        "describe": os.environ.get(GIT_ENV_VARS["describe"]) or None,
+        "dirty": bool(status.strip()),
+        "status": status[:8000],
+        "remote": os.environ.get(GIT_ENV_VARS["remote"]) or None,
+        "available": True,
+        "source": "environment",
+    }
+
+
 def git_info(repo: Path | None = None) -> dict[str, Any]:
     cwd = str(repo or Path.cwd())
 
@@ -83,8 +118,11 @@ def git_info(repo: Path | None = None) -> dict[str, Any]:
     # stamped `dirty: false`, i.e. reproducible. That is the one error worth being loud about: the
     # cluster runs are made from an rsynced tree with no .git, and their manifests claimed a clean
     # checkout. When there is no commit there is no answer, so `dirty` is None, not False.
+    if commit is None and (from_env := _git_from_environment()) is not None:
+        return from_env
     available = commit is not None
     return {
+        "source": "git" if available else "unavailable",
         "commit": commit,
         "branch": g(["rev-parse", "--abbrev-ref", "HEAD"]),
         "describe": g(["describe", "--always", "--dirty"]),

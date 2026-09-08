@@ -21,6 +21,23 @@ mkdir -p "$MPLCONFIGDIR" "$HF_HOME" 2>/dev/null || true
 export ELAN_HOME="${ELAN_HOME:-$HOME/.elan}"
 export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
 
+# The container has no `git`, so a run inside it cannot read its own commit however clean the
+# checkout outside is -- and until this existed every cluster manifest recorded a null commit.
+# Read it on the host and hand it in; `git_info` labels this `source: environment`, because an
+# exported variable is weaker evidence than asking git directly and should not pretend otherwise.
+if git -C "$REPO" rev-parse HEAD >/dev/null 2>&1; then
+    export ONEBIGJUMP_GIT_COMMIT="$(git -C "$REPO" rev-parse HEAD)"
+    export ONEBIGJUMP_GIT_BRANCH="$(git -C "$REPO" rev-parse --abbrev-ref HEAD)"
+    export ONEBIGJUMP_GIT_DESCRIBE="$(git -C "$REPO" describe --always --dirty)"
+    export ONEBIGJUMP_GIT_STATUS="$(git -C "$REPO" status --porcelain)"
+    export ONEBIGJUMP_GIT_REMOTE="$(git -C "$REPO" config --get remote.origin.url || true)"
+    if [ -n "$ONEBIGJUMP_GIT_STATUS" ]; then
+        echo "WARNING: $REPO is dirty; results will be recorded as unreproducible." >&2
+    fi
+else
+    echo "WARNING: $REPO is not a git checkout. Manifests will carry no commit." >&2
+fi
+
 # `--bind /gpfs` because home is small and the caches, containers and results live on GPFS.
 run_in_container() {
     singularity exec --nv \
