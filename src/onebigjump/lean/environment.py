@@ -78,7 +78,7 @@ def _which(name: str) -> str | None:
     found = shutil.which(name)
     if found:
         return found
-    candidate = Path.home() / ".elan" / "bin" / name
+    candidate = Path(os.environ.get("ELAN_HOME", str(Path.home() / ".elan"))) / "bin" / name
     return str(candidate) if candidate.is_file() else None
 
 

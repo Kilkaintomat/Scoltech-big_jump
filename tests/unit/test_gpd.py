@@ -119,3 +119,22 @@ class TestInputHandling:
         z = np.arange(1.0, 20.0)
         with pytest.raises(ValueError, match="k must be in"):
             gpd_from_order_statistics(z, 100)
+
+
+class TestEndpointFailure:
+    @pytest.mark.parametrize("size", [6, 20, 60])
+    def test_narrow_excesses_preserve_failure_diagnostics_but_not_an_estimate(self, size):
+        fit = gpd_fit(np.linspace(10.0, 11.0, size))
+        assert fit.gamma < -1
+        assert not fit.converged
+        assert "nonregular" in fit.message
+        assert np.isnan(fit.shape_estimate)
+        assert np.isnan(fit.alpha)
+        assert fit.as_dict()["gamma"] == fit.gamma
+
+    def test_endpoint_singularity_cannot_be_evidence_for_algorithmicity(self):
+        comparison = compare_tail_models(np.linspace(10.0, 11.0, 20))
+        assert not comparison.gpd.converged
+        assert comparison.favours == "inconclusive"
+        assert np.isnan(comparison.p_gpd_vs_exponential)
+        assert np.isnan(comparison.p_gpd_vs_weibull)

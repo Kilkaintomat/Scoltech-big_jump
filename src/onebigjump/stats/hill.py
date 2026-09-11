@@ -51,7 +51,12 @@ def log_moments(
     if hi < 1:
         raise ValueError("k_max must leave at least one order statistic below the threshold")
 
-    lx = np.log(x)
+    # Center before forming squared prefix sums. Otherwise a harmless unit change
+    # (e.g. deviations near 1e150) causes cancellation in M2 and changes signed moment.
+    with np.errstate(divide="ignore"):
+        lx = np.log(x / x[0])
+    underflow = ~np.isfinite(lx)
+    lx[underflow] = np.log(x[underflow]) - np.log(x[0])
     c1 = np.cumsum(lx)
     c2 = np.cumsum(lx * lx)
     k = np.arange(1, hi + 1, dtype=np.float64)

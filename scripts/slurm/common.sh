@@ -34,8 +34,10 @@ mkdir -p "$XDG_CACHE_HOME" "$VLLM_CACHE_ROOT" "$TRITON_CACHE_DIR" "$TORCHINDUCTO
 export VLLM_NO_USAGE_STATS="${VLLM_NO_USAGE_STATS:-1}"
 export DO_NOT_TRACK="${DO_NOT_TRACK:-1}"
 
-export ELAN_HOME="${ELAN_HOME:-$HOME/.elan}"
+export ELAN_HOME="${ELAN_HOME:-$(dirname "$REPO")/.elan}"
 export PATH="$ELAN_HOME/bin:$HOME/.local/bin:$PATH"
+# Singularity rebuilds PATH; host-only exports do not make Lean visible inside it.
+export SINGULARITYENV_PREPEND_PATH="$ELAN_HOME/bin${SINGULARITYENV_PREPEND_PATH:+:$SINGULARITYENV_PREPEND_PATH}"
 
 # The container has no `git`, so a run inside it cannot read its own commit however clean the
 # checkout outside is -- and until this existed every cluster manifest recorded a null commit.
@@ -51,10 +53,15 @@ if (cd "$REPO" && git rev-parse HEAD) >/dev/null 2>&1; then
     export ONEBIGJUMP_GIT_COMMIT="$(cd "$REPO" && git rev-parse HEAD)"
     export ONEBIGJUMP_GIT_BRANCH="$(cd "$REPO" && git rev-parse --abbrev-ref HEAD)"
     export ONEBIGJUMP_GIT_DESCRIBE="$(cd "$REPO" && git describe --always --dirty 2>/dev/null || true)"
-    export ONEBIGJUMP_GIT_STATUS="$(cd "$REPO" && git status --porcelain)"
+    if obj_git_status=$(cd "$REPO" && git status --porcelain); then
+        export ONEBIGJUMP_GIT_STATUS="$obj_git_status"
+    else
+        unset ONEBIGJUMP_GIT_STATUS
+        echo "WARNING: git status failed; tree cleanliness is unknown." >&2
+    fi
     export ONEBIGJUMP_GIT_REMOTE="$(cd "$REPO" && git config --get remote.origin.url || true)"
     echo "provenance: $ONEBIGJUMP_GIT_COMMIT on $ONEBIGJUMP_GIT_BRANCH (git $(git --version | awk '{print $3}'))" >&2
-    if [ -n "$ONEBIGJUMP_GIT_STATUS" ]; then
+    if [ -n "${ONEBIGJUMP_GIT_STATUS:-}" ]; then
         echo "WARNING: $REPO is dirty; results will be recorded as unreproducible." >&2
     fi
 else
@@ -66,12 +73,13 @@ fi
 
 # `--bind /gpfs` because home is small and the caches, containers and results live on GPFS.
 run_in_container() {
-    singularity exec --nv \
-        --bind /gpfs --bind /trinity --bind "$REPO" --bind "$HF_HOME" \
-        "$SIF" "$@"
+    local binds=(--bind /gpfs --bind /trinity --bind "$ELAN_HOME" --bind "$REPO" --bind "$HF_HOME")
+    if [ -n "${E1_LOCAL_LEAN:-}" ]; then
+        binds+=(--bind "$E1_LOCAL_LEAN:$REPO/lean_workspace")
+    fi
+    singularity exec --nv "${binds[@]}" "$SIF" "$@"
 }
 
-# The Lean kernel runs on the host, not in the container: elan is installed in user space and the
-# REPL is a native binary built against the host toolchain.
+# Python and the Lean subprocess share the container and the same staged toolchain paths.
 py() { run_in_container "$REPO/.venvc/bin/python" "$@"; }
 obj() { run_in_container "$REPO/.venvc/bin/onebigjump" "$@"; }

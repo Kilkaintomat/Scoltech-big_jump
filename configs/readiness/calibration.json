@@ -1,0 +1,27 @@
+{
+  "seed": 20260911,
+  "datasets_per_shard": 10,
+  "shards_per_scenario": 20,
+  "tasks": 48,
+  "attempts": 6,
+  "length": 8,
+  "permutations": 999,
+  "statistics": {
+    "bootstrap": 500,
+    "family_size": 9,
+    "inner_bootstrap": 200,
+    "min_k": 20,
+    "min_steps": 200,
+    "min_tail_tasks": 20,
+    "min_tasks": 20,
+    "permutations": 2000,
+    "q": 0.01,
+    "valid_fraction": 0.9
+  },
+  "scenarios": [
+    "heavy_null",
+    "position_null",
+    "tail_alternative",
+    "coupled_overshoot"
+  ]
+}

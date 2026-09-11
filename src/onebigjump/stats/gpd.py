@@ -52,13 +52,21 @@ class GPDFit:
     message: str = ""
 
     @property
+    def shape_estimate(self) -> float:
+        """Usable point estimate; keep a failed fit's raw gamma in diagnostic output only."""
+        return self.gamma if self.converged else float("nan")
+
+    @property
     def alpha(self) -> float:
         """Tail index `alpha = 1/gamma`; infinite in the light-tailed case `gamma <= 0`."""
+        if not self.converged:
+            return float("nan")
         return float("inf") if self.gamma <= 0 else 1.0 / self.gamma
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "gamma": self.gamma,
+            "shape_estimate": self.shape_estimate,
             "sigma": self.sigma,
             "threshold": self.threshold,
             "n_excesses": self.n_excesses,
@@ -165,13 +173,25 @@ def gpd_fit(excesses: np.ndarray, threshold: float = 0.0) -> GPDFit:
 
     sigma *= scale_unit  # back to the original units; gamma is unchanged
     y = y_raw
+    loglik = -gpd_nll(gamma, sigma, y)
+    if not all(math.isfinite(v) for v in (gamma, sigma, loglik)):
+        converged = False
+        message = "non-finite GPD parameters or likelihood"
+    elif gamma <= -1.0:
+        # The unrestricted likelihood can diverge as its finite endpoint reaches max(y).
+        # Preserve that diagnostic solution, but never call it a regular MLE or use it in CIs.
+        converged = False
+        message = "nonregular endpoint solution: gamma <= -1; no usable GPD estimate"
+    elif best in {0, grid.size - 1}:
+        converged = False
+        message = "profile optimum touches search boundary; no usable GPD estimate"
 
     return GPDFit(
         gamma=gamma,
         sigma=sigma,
         threshold=float(threshold),
         n_excesses=int(y.size),
-        loglik=-gpd_nll(gamma, sigma, y),
+        loglik=loglik,
         converged=converged,
         message=message,
     )
@@ -237,6 +257,8 @@ class FitComparison:
         Weibull comparison did not. A Weibull win is read as evidence for `H_alg`: a Weibull
         with any shape is rapidly varying, hence `xi = 0`.
         """
+        if not self.gpd.converged:
+            return "inconclusive"
         beats_exp = self.p_gpd_vs_exponential < 0.05
         weibull_wins = self.vuong_gpd_vs_weibull < 0 and self.p_gpd_vs_weibull < 0.05
         gpd_wins_weibull = self.vuong_gpd_vs_weibull > 0 and self.p_gpd_vs_weibull < 0.05
@@ -284,6 +306,22 @@ def compare_tail_models(excesses: np.ndarray, threshold: float = 0.0) -> FitComp
     g = gpd_fit(y, threshold=threshold)
     e = exponential_fit(y)
     w = weibull_fit(y)
+
+    if not g.converged:
+        return FitComparison(
+            gpd=g,
+            exponential=e,
+            weibull=w,
+            lr_gpd_vs_exponential=math.nan,
+            p_gpd_vs_exponential=math.nan,
+            vuong_gpd_vs_weibull=math.nan,
+            p_gpd_vs_weibull=math.nan,
+            aic={
+                "gpd": math.nan,
+                "exponential": 2 - 2 * e["loglik"],
+                "weibull": 4 - 2 * w["loglik"],
+            },
+        )
 
     lr = 2.0 * (g.loglik - e["loglik"])
     # Nested, interior null in the two-sided sense: gamma may be negative, so the usual chi2_1

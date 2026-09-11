@@ -257,6 +257,10 @@ def select_k(
     """Dispatch to one of the `k` rules, clipping the result into `[k_min, k_max_frac * n]`."""
     x = sorted_positive_desc(z)
     n = x.size
+    if n < max(k_min + 2, 4):
+        raise ValueError(f"too few positive observations for k_min={k_min}: n={n}")
+    if not 0 < k_max_frac < 1 or resamples < 1 or not 0.5 < n1_exponent < 1:
+        raise ValueError("invalid threshold selection parameters")
     k_hi = max(int(k_max_frac * n), k_min + 1)
 
     if method == "double_bootstrap":

@@ -283,14 +283,14 @@ def deviations(
     `raw` is always available. `whitened` and `innovation` need a calibration fitted elsewhere;
     without one they are omitted rather than silently computed from the trace itself.
     """
-    xi = trajectory.increments()
-    out = {"raw": np.linalg.norm(xi, axis=1)}
+    increment = trajectory.increments()
+    out = {"raw": np.linalg.norm(increment, axis=1)}
     if calibration is not None:
         if calibration.layer != trajectory.layer:
             raise ValueError(
                 f"calibration is for layer {calibration.layer}, trajectory for {trajectory.layer}"
             )
-        out["whitened"] = np.linalg.norm(calibration.whiten(xi), axis=1)
+        out["whitened"] = np.linalg.norm(calibration.whiten(increment), axis=1)
         out["innovation"] = np.linalg.norm(calibration.innovate(trajectory.states), axis=1)
     return out
 

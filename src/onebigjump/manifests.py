@@ -77,6 +77,8 @@ class RunManifest:
     def add_output(self, path: Path | str, role: str = "") -> Path:
         """Register a produced file, with its size and digest."""
         p = Path(path)
+        if not p.is_file():
+            raise FileNotFoundError(f"cannot register missing output: {p}")
         self.outputs.append(
             {
                 "path": str(p),

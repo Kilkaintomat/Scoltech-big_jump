@@ -106,7 +106,7 @@ class TailEstimate:
 
 
 def _gpd_at(z: np.ndarray, k: int) -> float:
-    return float(gpd_from_order_statistics(z, k).gamma)
+    return float(gpd_from_order_statistics(z, k).shape_estimate)
 
 
 def k_stability(

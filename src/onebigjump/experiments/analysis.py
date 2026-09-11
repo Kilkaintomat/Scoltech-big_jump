@@ -40,7 +40,7 @@ def run_analysis(
     metrics_dir: Path | str = "paper_outputs/metrics",
     figures_dir: Path | str = "paper_outputs/figures",
     tau_override: float | None = None,
-    with_hill_plot: bool = False,
+    with_hill_plot: bool = True,
 ) -> dict[str, Any]:
     """Run every prediction the table can support, and say which ones it could not."""
     cfg = cfg or AnalysisConfig()

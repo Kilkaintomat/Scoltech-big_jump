@@ -1,0 +1,41 @@
+{
+  "version": "controlled-modus-ponens-v1",
+  "seed": 20260911,
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "model_root": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/models/qwen25",
+  "temperatures": [
+    0.6,
+    1.0
+  ],
+  "attempts_per_temperature": 2,
+  "calibration_per_length": 40,
+  "evaluation_per_length": 100,
+  "max_new_tokens": 1024,
+  "statistics": {
+    "bootstrap": 500,
+    "family_size": 9,
+    "inner_bootstrap": 200,
+    "min_k": 20,
+    "min_steps": 200,
+    "min_tail_tasks": 20,
+    "min_tasks": 20,
+    "permutations": 2000,
+    "q": 0.01,
+    "valid_fraction": 0.9
+  },
+  "format_gate": 0.9,
+  "primary_temperature": 0.6,
+  "primary_statistic": "whitened",
+  "lengths": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ]
+}

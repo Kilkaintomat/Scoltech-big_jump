@@ -97,6 +97,8 @@ class ResidualRecorder:
             # A decoder block returns either the hidden states or a tuple starting with them.
             hidden = output[0] if isinstance(output, tuple) else output
             if hidden.dim() == 3:
+                if hidden.shape[0] != 1:
+                    raise ValueError("ResidualRecorder requires exactly one sequence")
                 hidden = hidden[0]  # single sequence per forward pass
             index = torch.tensor(pos, device=hidden.device)
             self.captures[layer] = hidden.index_select(0, index).detach().to(torch.float32).cpu()
@@ -104,6 +106,10 @@ class ResidualRecorder:
         return hook
 
     def attach(self, blocks: Sequence[Any]) -> ResidualRecorder:
+        if any(layer < 0 or layer >= len(blocks) for layer in self.layers):
+            raise ValueError("readout layer outside decoder block range")
+        if not self.positions or any(pos < 0 for pos in self.positions):
+            raise ValueError("readout positions must be nonnegative and nonempty")
         for layer in self.layers:
             self._handles.append(blocks[layer].register_forward_hook(self._make_hook(layer)))
         return self
@@ -127,8 +133,8 @@ def record_residuals(
     long extraction run means silently capturing the wrong positions.
     """
     recorder = ResidualRecorder(layers=list(layers), positions=list(positions))
-    recorder.attach(block_modules(model))
     try:
+        recorder.attach(block_modules(model))
         yield recorder
     finally:
         recorder.detach()

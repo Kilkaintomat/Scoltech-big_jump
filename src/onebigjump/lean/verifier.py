@@ -24,10 +24,14 @@ reply rather than by restarting.
 from __future__ import annotations
 
 import json
+import os
 import queue
+import re
+import signal
 import subprocess
 import threading
 import time
+from collections import deque
 from pathlib import Path
 from types import TracebackType
 from typing import Any
@@ -86,11 +90,16 @@ class LeanREPL:
         self.drain_timeout_s = drain_timeout_s
         self.restarts = 0
         self.recoveries = 0
+        self._stderr: deque[str] = deque(maxlen=80)
 
     # -- process lifecycle ---------------------------------------------------------------
 
     def __enter__(self) -> LeanREPL:
-        self.start()
+        try:
+            self.start()
+        except BaseException:
+            self.close()
+            raise
         return self
 
     def __exit__(
@@ -112,21 +121,35 @@ class LeanREPL:
             cwd=str(self.env.project),
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             bufsize=1,
+            start_new_session=(os.name == "posix"),
             env=self.env.env_vars(),
         )
         self._out = queue.Queue()
-        self._reader = threading.Thread(target=self._pump, daemon=True)
+        self._reader = threading.Thread(
+            target=self._pump, args=(self._proc, self._out), daemon=True
+        )
         self._reader.start()
+        self._stderr = deque(maxlen=80)
+        threading.Thread(
+            target=self._pump_stderr, args=(self._proc, self._stderr), daemon=True
+        ).start()
 
         self._desynced = False
         t0 = time.time()
         reply = self._exchange({"cmd": self.imports, "env": None}, timeout_s=self.startup_timeout_s)
         self._base_env = reply.get("env")
-        if self._base_env is None:
+        if self._base_env is None or _errors(reply):
             raise ReplError(f"the REPL did not return an environment for {self.imports!r}: {reply}")
+        # Some REPL/frontend versions lose header diagnostics while returning an empty env.
+        # A successful kernel elaboration is required before any benchmark can be labelled.
+        probe = self.command("example : True := by trivial", timeout_s=self.startup_timeout_s)
+        if _errors(probe):
+            raise ReplError(f"imported environment failed its proof check: {probe}")
         log.info("imported %r in %.1fs (env=%d)", self.imports, time.time() - t0, self._base_env)
 
     def close(self) -> None:
@@ -135,11 +158,22 @@ class LeanREPL:
         try:
             if self._proc.stdin:
                 self._proc.stdin.close()
-            self._proc.terminate()
+            # lake may keep the REPL in a child process. Stop the owned process group.
+            try:
+                if os.name == "posix":
+                    os.killpg(self._proc.pid, signal.SIGTERM)
+                else:
+                    self._proc.terminate()
+            except ProcessLookupError:
+                pass
             try:
                 self._proc.wait(timeout=10)
             except subprocess.TimeoutExpired:
-                self._proc.kill()
+                if os.name == "posix":
+                    os.killpg(self._proc.pid, signal.SIGKILL)
+                else:
+                    self._proc.kill()
+                self._proc.wait(timeout=10)
         finally:
             self._proc = None
             self._base_env = None
@@ -152,21 +186,27 @@ class LeanREPL:
 
     # -- transport -----------------------------------------------------------------------
 
-    def _pump(self) -> None:
-        proc = self._proc
+    @staticmethod
+    def _pump(proc: subprocess.Popen[str] | None, output: queue.Queue[str | None]) -> None:
         if proc is None or proc.stdout is None:
             return
         buf: list[str] = []
         for line in proc.stdout:
             if line.strip() == "":
                 if buf:
-                    self._out.put("".join(buf))
+                    output.put("".join(buf))
                     buf = []
             else:
                 buf.append(line)
         if buf:
-            self._out.put("".join(buf))
-        self._out.put(None)  # process ended
+            output.put("".join(buf))
+        output.put(None)  # process ended
+
+    @staticmethod
+    def _pump_stderr(proc: subprocess.Popen[str], output: deque[str]) -> None:
+        if proc.stderr is not None:
+            for line in proc.stderr:
+                output.append(line.rstrip())
 
     def _recover(self) -> None:
         """Resynchronise after a timed-out call, restarting only if that fails.
@@ -208,7 +248,7 @@ class LeanREPL:
             self._desynced = True
             raise TimeoutError(f"the REPL did not reply within {deadline}s") from exc
         if raw is None:
-            raise ReplError("the REPL exited")
+            raise ReplError("the REPL exited: " + "\n".join(self._stderr))
         try:
             return dict(json.loads(raw))
         except json.JSONDecodeError as exc:
@@ -224,11 +264,25 @@ class LeanREPL:
 
     def command(self, source: str, timeout_s: float | None = None) -> dict[str, Any]:
         """Elaborate a whole command (a full theorem, proof included) in the base environment."""
+        # Recovery may create a new process/environment; construct the request afterwards.
+        if self._desynced:
+            self._recover()
         return self._exchange({"cmd": source, "env": self.base_env}, timeout_s=timeout_s)
 
     def tactic(self, tac: str, proof_state: int, timeout_s: float | None = None) -> dict[str, Any]:
         """Run one tactic against a proof state."""
-        return self._exchange({"tactic": tac, "proofState": proof_state}, timeout_s=timeout_s)
+        if self._desynced:
+            before = self.restarts
+            self._recover()
+            if self.restarts != before:
+                raise ReplError("proof state belongs to the process lost after a timeout")
+        # REPL parses one `tactic`, while a labelled segment may contain a tactic sequence.
+        # Lean's single-branch `first` directly evaluates that sequence without focusing,
+        # suppressing errors, requiring closure, or changing the set of visible goals.
+        transported = "first\n| " + tac.replace("\n", "\n  ")
+        return self._exchange(
+            {"tactic": transported, "proofState": proof_state}, timeout_s=timeout_s
+        )
 
 
 def _errors(reply: dict[str, Any]) -> list[str]:
@@ -279,14 +333,19 @@ def _is_sorry(reply: dict[str, Any], tactic_text: str) -> bool:
     # they are goal records, and the word `sorry` need not appear anywhere inside them.
     if reply.get("sorries"):
         return True
-    blob = " ".join(
-        [
-            str(reply.get("proofStatus", "")),
-            json.dumps(reply.get("messages", "")),
-            tactic_text,
-        ]
-    ).lower()
-    return any(tok in blob for tok in _SORRY_TOKENS)
+    from .segmentation import strip_comments
+
+    # Words inside comments/strings are data, not proof holes. Kernel diagnostics remain
+    # authoritative for holes introduced by macros or referenced lemmas.
+    live = re.sub(r'"(?:\\.|[^"\\])*"', "", strip_comments(tactic_text))
+    live = re.sub(r"«[^»]*»", "", live)
+    literal = bool(re.search(r"\b(?:sorry|admit|sorryAx)\b", live))
+    status = str(reply.get("proofStatus", "")).lower()
+    diagnostics = " ".join(str(m.get("data", "")) for m in reply.get("messages", []) or [])
+    kernel_hole = bool(
+        re.search(r"(?:uses|contains).*?['\"]?sorry(?:Ax)?", diagnostics, re.IGNORECASE)
+    )
+    return literal or "sorry" in status or "sorries" in status or kernel_hole
 
 
 def verify_trace(
@@ -328,7 +387,22 @@ def verify_trace(
             error="no `:= by` found; the trace has no tactic block",
         )
 
-    segments: list[Segment] = segment_proof(body)
+    try:
+        segments: list[Segment] = segment_proof(body)
+    except ValueError as exc:
+        return ProofTrace(
+            trace_id=trace_id,
+            problem_id=problem_id,
+            model_id=model_id,
+            temperature=temperature,
+            sample_index=sample_index,
+            header=header,
+            theorem_statement=header,
+            proof_text=proof_text,
+            outcome=TraceOutcome.PARSE_ERROR,
+            error=str(exc),
+            elapsed_s=time.time() - t0,
+        )
     trace = ProofTrace(
         trace_id=trace_id,
         problem_id=problem_id,
@@ -381,7 +455,7 @@ def verify_trace(
         return trace
 
     sorries = opened.get("sorries") or []
-    if not sorries:
+    if not sorries or _errors(opened):
         # The statement itself does not elaborate: no step structure to label.
         trace.outcome = TraceOutcome.PARSE_ERROR
         trace.error = "; ".join(_errors(opened))[:500] or "the theorem statement did not elaborate"

@@ -104,7 +104,7 @@ def _tail_fast(z: np.ndarray, k_frac: float = 0.05) -> tuple[float, float, float
     x = sorted_positive_desc(z)
     k = int(np.clip(round(k_frac * x.size), 20, x.size - 2))
     try:
-        g = float(gpd_from_order_statistics(x, k).gamma)
+        g = float(gpd_from_order_statistics(x, k).shape_estimate)
     except (ValueError, FloatingPointError):  # pragma: no cover
         g = float("nan")
     return hill(x, k), moment(x, k), g, k

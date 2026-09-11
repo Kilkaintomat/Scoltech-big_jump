@@ -74,6 +74,7 @@ class LengthLawFit:
     gpd_scale: float
     gpd_threshold: float
     exceedance_rate: float
+    tolerance_status: str
 
     @property
     def fits(self) -> bool:
@@ -98,6 +99,8 @@ def _gpd_tail(z: np.ndarray, *, k: int | None = None) -> tuple[float, float, flo
     k = int(np.clip(k, 20, x.size - 2))
     u = float(x[k])
     fit = gpd_fit(x[:k] - u, threshold=u)
+    if not fit.converged:
+        raise ValueError("cannot extrapolate length law with failed GPD fit: " + fit.message)
     return float(fit.gamma), float(fit.sigma), u, float(k) / float(x.size)
 
 
@@ -135,8 +138,12 @@ def fit_length_law(
         raise ValueError(f"need at least 3 distinct lengths, got {lengths.size}")
     ok = np.array([counts[int(length)][0] for length in lengths], dtype=float)
     total = np.array([counts[int(length)][1] for length in lengths], dtype=float)
-    if np.any(total <= 0):
-        raise ValueError("a length has no traces")
+    if np.any(total <= 0) or np.any(lengths <= 0):
+        raise ValueError("lengths and total counts must be positive")
+    if np.any(ok < 0) or np.any(ok > total) or not np.all(np.isfinite(total + ok)):
+        raise ValueError("verified counts must lie between zero and total")
+    if theta is not None and not (np.isfinite(theta) and 0 < theta <= 1):
+        raise ValueError("theta must lie in (0, 1]")
 
     shape, scale, threshold, rate = _gpd_tail(verified_z, k=k)
     empirical = np.asarray(verified_z, dtype=float)
@@ -157,13 +164,18 @@ def fit_length_law(
     c = math.exp(float(res.x))
     loglik = -float(res.fun)
 
-    theta_hat = 1.0 if theta is None else float(np.clip(theta, 1e-6, 1.0))
+    theta_hat = 1.0 if theta is None else float(theta)
     theta_source = (
         "assumed 1 (no extremal-index estimate supplied)" if theta is None else "extremal index"
     )
-    fbar_target = min(c / theta_hat, 1.0 - 1e-12)
-    tau = _invert_survival(fbar_target, shape, scale, threshold, rate, empirical)
-    fbar = _survival(tau, shape, scale, threshold, rate, empirical)
+    fbar_target = c / theta_hat
+    if fbar_target > 1:
+        tau = fbar = float("nan")
+        tolerance_status = "incompatible_rate_exceeds_theta"
+    else:
+        tau = _invert_survival(fbar_target, shape, scale, threshold, rate, empirical)
+        fbar = _survival(tau, shape, scale, threshold, rate, empirical)
+        tolerance_status = "empirical_body_quantile" if fbar_target >= rate else "gpd_tail"
 
     # Saturated model: one free probability per length.
     p_hat = np.clip(ok / total, 1e-12, 1 - 1e-12)
@@ -188,6 +200,7 @@ def fit_length_law(
         gpd_scale=scale,
         gpd_threshold=threshold,
         exceedance_rate=rate,
+        tolerance_status=tolerance_status,
     )
 
 
@@ -227,6 +240,7 @@ class P5Result:
             "theta_source": self.fit.theta_source,
             "tau": self.fit.tau,
             "fbar_tau": self.fit.fbar_tau,
+            "tolerance_status": self.fit.tolerance_status,
             "rate_per_step": self.fit.rate_per_step,
             "gpd_shape": self.fit.gpd_shape,
             "lr": self.fit.lr_statistic,

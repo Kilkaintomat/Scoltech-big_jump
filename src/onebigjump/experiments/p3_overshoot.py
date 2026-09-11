@@ -138,7 +138,7 @@ def _variant(values: np.ndarray, tau: float, label: str) -> dict[str, Any]:
     return {
         "label": label,
         "n": int(values.size),
-        "shape": float(gpd_fit(values - tau, threshold=tau).gamma),
+        "shape": float(gpd_fit(values - tau, threshold=tau).shape_estimate),
         "median_u": float(np.median(values / tau)),
     }
 
@@ -242,7 +242,7 @@ def run_p3(
             boot = group_bootstrap(
                 excess,
                 groups.to_numpy(),
-                lambda y, _k: float(gpd_fit(y).gamma),
+                lambda y, _k: float(gpd_fit(y).shape_estimate),
                 k=max(excess.size - 1, 2),
                 resamples=bootstrap_resamples,
                 level=ci_level,
@@ -258,8 +258,8 @@ def run_p3(
             if pooled is not None:
                 comparison = {
                     "pooled_gamma": float(pooled),
-                    "difference": float(fit.gamma - pooled),
-                    "compatible": bool(boot.ci_low <= pooled <= boot.ci_high),
+                    "difference": float(fit.shape_estimate - pooled),
+                    "compatible": fit.converged and bool(boot.ci_low <= pooled <= boot.ci_high),
                 }
 
             res = P3Result(
@@ -270,7 +270,7 @@ def run_p3(
                 tau=tau,
                 n_refuted=n_refuted,
                 n_over_tau=int(z_star.size),
-                gpd_shape=float(fit.gamma),
+                gpd_shape=float(fit.shape_estimate),
                 gpd_scale=float(fit.sigma),
                 shape_ci=(float(boot.ci_low), float(boot.ci_high)),
                 median_overshoot=float(np.median(u)),

@@ -1,0 +1,23 @@
+{
+  "tasks": 175,
+  "stages": {
+    "external": 2,
+    "positional": 6,
+    "whitening": 36,
+    "deduction-population": 1,
+    "deduction-generate": 9,
+    "deduction-verify": 2,
+    "deduction-extract": 2,
+    "deduction-measure": 2,
+    "deduction-analyze": 2,
+    "deduction-gate": 1,
+    "p4-train": 10,
+    "p4-measure": 10,
+    "p4-tail": 10,
+    "p4-summary": 1,
+    "calibration": 80,
+    "calibration-summary": 1
+  },
+  "dependency_graph_valid": true,
+  "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z"
+}

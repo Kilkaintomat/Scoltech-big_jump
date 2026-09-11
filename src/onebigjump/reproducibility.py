@@ -179,7 +179,7 @@ def hardware_info() -> dict[str, Any]:
     return info
 
 
-def file_digest(path: Path, algo: str = "sha256", max_bytes: int = 1 << 30) -> str | None:
+def file_digest(path: Path, algo: str = "sha256", max_bytes: int | None = None) -> str | None:
     path = Path(path)
     if not path.is_file():
         return None
@@ -189,7 +189,7 @@ def file_digest(path: Path, algo: str = "sha256", max_bytes: int = 1 << 30) -> s
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
             read += len(chunk)
-            if read > max_bytes:
+            if max_bytes is not None and read > max_bytes:
                 return f"{algo}:partial:{h.hexdigest()}"
     return f"{algo}:{h.hexdigest()}"
 

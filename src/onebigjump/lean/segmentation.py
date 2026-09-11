@@ -26,6 +26,7 @@ _BY_TAIL = re.compile(r":=\s*by\b\s*$")
 _BY_INLINE = re.compile(r":=\s*by\b")
 # `<;>` first so it is reported as the combinator it is; a bare `;` also sequences.
 _COMBINATOR = re.compile(r"<;>|;")
+_COMBINATOR_START = re.compile(r"^\s*(?:<;>|;)")
 _STRUCTURED = re.compile(
     r"^\s*(have|calc|cases|rcases|obtain|induction|match|conv|suffices|show|refine)\b"
 )
@@ -56,28 +57,9 @@ def strip_comments(text: str) -> str:
     original source, and a trace whose steps point at the wrong lines is unusable for the
     activation extraction of Appendix B.1, which reads at the token that ends each step.
     """
-    out: list[str] = []
-    depth = 0
-    for line in text.split("\n"):
-        buf: list[str] = []
-        i = 0
-        while i < len(line):
-            two = line[i : i + 2]
-            if depth == 0 and two == "--":
-                break
-            if two == "/-":
-                depth += 1
-                i += 2
-                continue
-            if two == "-/" and depth > 0:
-                depth -= 1
-                i += 2
-                continue
-            if depth == 0:
-                buf.append(line[i])
-            i += 1
-        out.append("".join(buf).rstrip())
-    return "\n".join(out)
+    from .lexical import mask_comments
+
+    return "\n".join(line.rstrip() for line in mask_comments(text).split("\n"))
 
 
 def split_header_and_proof(text: str) -> tuple[str, str]:
@@ -110,8 +92,11 @@ def segment_proof(proof: str, *, base_line: int = 0) -> list[Segment]:
     following line indented further. Bullet lines (`·`, `.`, `|`) belong to the structured
     tactic above them and never start a segment of their own.
     """
+    from .lexical import mask_comments
+
     cleaned = strip_comments(proof)
     lines = cleaned.split("\n")
+    live_lines = mask_comments(proof, mask_strings=True).split("\n")
 
     # The block's own indentation level: the smallest indent among its non-empty lines.
     indents = [len(ln) - len(ln.lstrip()) for ln in lines if ln.strip()]
@@ -121,6 +106,7 @@ def segment_proof(proof: str, *, base_line: int = 0) -> list[Segment]:
 
     segments: list[Segment] = []
     current: Segment | None = None
+    needs_operand = False
 
     for offset, raw in enumerate(lines):
         if not raw.strip():
@@ -128,7 +114,15 @@ def segment_proof(proof: str, *, base_line: int = 0) -> list[Segment]:
                 current.continuation_lines.append(raw)
             continue
         indent = len(raw) - len(raw.lstrip())
-        starts_segment = indent <= base_indent and not _BULLET.match(raw)
+        # Operators on either side of a newline continue the same tactic.
+        starts_segment = (
+            indent <= base_indent
+            and not _BULLET.match(raw)
+            and not _COMBINATOR_START.match(raw)
+            and not needs_operand
+        )
+        live = live_lines[offset].rstrip()
+        needs_operand = live.endswith(("<;>", ";"))
 
         if starts_segment:
             if current is not None:
