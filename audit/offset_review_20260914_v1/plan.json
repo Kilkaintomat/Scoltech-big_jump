@@ -1,0 +1,60 @@
+{
+  "version": "offset-review-v1",
+  "scope": "Exploratory audit requested after seeing primary P2 results; original primary analysis unchanged.",
+  "primary_cells": {
+    "deepseek": {
+      "temperature": 0.6,
+      "layer": 14,
+      "statistic": "whitened"
+    },
+    "goedel": {
+      "temperature": 0.6,
+      "layer": 17,
+      "statistic": "whitened"
+    },
+    "kimina": {
+      "temperature": 0.6,
+      "layer": 17,
+      "statistic": "whitened"
+    }
+  },
+  "offset_definition": "D = zero-based argmax position - zero-based first rejection; +1 means maximum on following step",
+  "fixed_offsets": [
+    -2,
+    -1,
+    0,
+    1,
+    2
+  ],
+  "neighborhood_radii": [
+    1
+  ],
+  "subsets": [
+    "all",
+    "failure_after_first",
+    "failure_after_first_drop_first"
+  ],
+  "length_groups": [
+    "L=1",
+    "L=2",
+    "L=3",
+    "L>=4",
+    "L>=6"
+  ],
+  "boundary_rule": "Out-of-range shifted predictions count as misses; no clipping or circular wrapping.",
+  "nulls": [
+    "Uniform independent candidate selection: exact finite-length expectation for each trace.",
+    "Between-task label permutation within identical task family and exact length, retaining score positions: first lexicographic eligible trace per task, singleton strata omitted."
+  ],
+  "permutations": 4000,
+  "bootstrap": 2000,
+  "seed": 2026091401,
+  "inference": "Task bootstrap descriptive only; no intervals below 20 tasks. Simultaneous permutation max-absolute-null-deviation adjustment across offset/neighbor/minimum statistics within each model and subset. Three-model Bonferroni also shown. Not a new confirmatory test.",
+  "index_audit": "First 3 eligible traces per model, deterministic trace ID order: verify state digest, alignment positions, raw and whitened differences independently, row-to-label indices, and stored surprisal.",
+  "limitations": [
+    "Same saved data were previously inspected.",
+    "No new generation or model forward pass.",
+    "Numerical index audit is sampled, not full semantic re-verification of tactic segmentation.",
+    "Post-failure steps are generated but unreached by verifier; keep absorbing labels."
+  ]
+}

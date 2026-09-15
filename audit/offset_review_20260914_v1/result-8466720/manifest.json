@@ -1,0 +1,174 @@
+{
+  "stage": "exploratory-offset-audit",
+  "created_utc": "2026-09-14T10:51:40.605316+00:00",
+  "job": "8466720",
+  "config": {
+    "version": "offset-review-v1",
+    "scope": "Exploratory audit requested after seeing primary P2 results; original primary analysis unchanged.",
+    "primary_cells": {
+      "deepseek": {
+        "temperature": 0.6,
+        "layer": 14,
+        "statistic": "whitened"
+      },
+      "goedel": {
+        "temperature": 0.6,
+        "layer": 17,
+        "statistic": "whitened"
+      },
+      "kimina": {
+        "temperature": 0.6,
+        "layer": 17,
+        "statistic": "whitened"
+      }
+    },
+    "offset_definition": "D = zero-based argmax position - zero-based first rejection; +1 means maximum on following step",
+    "fixed_offsets": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "neighborhood_radii": [
+      1
+    ],
+    "subsets": [
+      "all",
+      "failure_after_first",
+      "failure_after_first_drop_first"
+    ],
+    "length_groups": [
+      "L=1",
+      "L=2",
+      "L=3",
+      "L>=4",
+      "L>=6"
+    ],
+    "boundary_rule": "Out-of-range shifted predictions count as misses; no clipping or circular wrapping.",
+    "nulls": [
+      "Uniform independent candidate selection: exact finite-length expectation for each trace.",
+      "Between-task label permutation within identical task family and exact length, retaining score positions: first lexicographic eligible trace per task, singleton strata omitted."
+    ],
+    "permutations": 4000,
+    "bootstrap": 2000,
+    "seed": 2026091401,
+    "inference": "Task bootstrap descriptive only; no intervals below 20 tasks. Simultaneous permutation max-absolute-null-deviation adjustment across offset/neighbor/minimum statistics within each model and subset. Three-model Bonferroni also shown. Not a new confirmatory test.",
+    "index_audit": "First 3 eligible traces per model, deterministic trace ID order: verify state digest, alignment positions, raw and whitened differences independently, row-to-label indices, and stored surprisal.",
+    "limitations": [
+      "Same saved data were previously inspected.",
+      "No new generation or model forward pass.",
+      "Numerical index audit is sampled, not full semantic re-verification of tactic segmentation.",
+      "Post-failure steps are generated but unreached by verifier; keep absorbing labels."
+    ]
+  },
+  "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "git_dirty": true,
+  "source_tracking": "Auditor and directly inspected upstream source files hashed; upstream manifests retained; not a full recursive audit.",
+  "environment": {
+    "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+    "packages": {
+      "numpy": "2.2.2",
+      "pandas": "3.0.5",
+      "scipy": "1.17.1",
+      "pyarrow": "25.0.1",
+      "matplotlib": "3.11.1",
+      "markdown": "3.10.3",
+      "reportlab": null,
+      "python-docx": null
+    },
+    "hostname": "cn55.zhores",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "cpu_count": 64,
+    "allocated_cpus": "2",
+    "hardware": "x86_64"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/protocol.json": "6f24ae4b8eccaa032feed8fb9883c4c2e01ab62a4f763e24a39c7edb3e32ee82",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/measurement/manifest.json": "df5b258c9ccef51df4d8d628e13505e6cb538951ca23730f70c9336864b16213",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/measurement/deviations.parquet": "f9a609e698ad39be0eff08a1d18af38c44bed53a88a270d6b36cf93bb0ccff87",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/analysis/manifest.json": "efaab29058fdf65ef496277e9669ea03d248d8ad58f763e2e8fd84f3cac1cf7b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/analysis/cell-T0.6-layer14-whitened.json": "3956cb8ea66f7c8b3af39c2e1a7f9b7e859106fce012d823f72545f476e2e50b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/metrics.json": "7928994000f6a82b7ef04638c3697f2736e3aed13bad45088cffa2f0bfb63153",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/positional/manifest.json": "f3d7ac0a9acb7657ec41106ba639255b6c7c012f22e701cf8fef90c6ce16e1ac",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/positional/metrics.json": "b0aa209dd224ca00fe729dd144c81709ace56f0670c55aff603be45bb56b760a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-01/manifest.json": "a4c751f503dcc5931b8037cc069c1942bc26c0251c5d74f5be20f3ea468e5774",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-01/metrics.json": "da3afc7cd3a3b114e7fcd4d713482df7d61a42ef2d653f3311ac9848b7a6d301",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-04/manifest.json": "a1cdcd2c5f432ba864c6f9c0ad442ff630e0b080a6af486ebbc605387825cf4d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-04/metrics.json": "80e32091ed1905c967cdfcbeb2028334965e4dab87def030d1cbe54cf1a1d53a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-10/manifest.json": "783d5fd170b6e8212c3ff4a23f6f34947913a8f4afed088ceea537342922f2ef",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/deepseek/whitening-10/metrics.json": "0a56f371e7144e65b75884b542dacdaca637740e7c874bcf79fa876499854b41",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/extraction/trajectories.jsonl": "88fefd4e5bc4a0d9b3a797442abadde20eaf221d75d2343d081478e94b887264",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/labels.jsonl": "96f6709a2f2a5eb9711b5a2cc7c056bd77603d32328bd30262005b3c4d610f31",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/measurement/calibration-T0.6-layer14.npz": "79331eb2460111aa0964d1dd4dac74c12b2dc7df09d69f7d3596c9892c48c3f7",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/extraction/shard-002-of-008/states/d751a8b2a76a91fdae3f62685bec5faa66dd3fb060c45a919b93c13438d07d46.npz": "8d7c5aaf8407e677e33d910a352f95428a242108addd406de6f24054c20cc342",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/extraction/shard-002-of-008/states/d6d593f2de9f6da9c40ae785dc6f4dabf450e4a4d38f1e0597d78b0bc3801032.npz": "cf814957016f2628ea729b94f18b948492b82a671594db819c45329e867fde2e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/extraction/shard-002-of-008/states/7e50dfd90eebdaa015402293b3c9c0eab410ffdb62788c63188053133801822b.npz": "c1aea2ff80df7181c7d1a1e62b855d6ed628396582738d9cbaca542d726b5281",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/protocol.json": "04b447db2f86a4265e94c0756362d59ef6508501923f52fc05b4f53b24a82964",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/measurement/manifest.json": "166862e1f31edeb26e4fd8baa35b52c8074764030b84d03877c1478dc132ae5d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/measurement/deviations.parquet": "633eec2cc7bdfda50ae8cb149e491443b4c920e2a0bf4786ba018d8e591ed97b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/analysis/manifest.json": "860fa90fb950590862be86b97867841b0e42264781075ff94f0328024384ad3c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/analysis/cell-T0.6-layer17-whitened.json": "b09f781a333d72547c432966effc50c54e9103beb0441f46f460261e67ab53b7",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/metrics.json": "69024a39a73498535069f235952bae59012e4db4e13eb358825957c04aeb0aa1",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/positional/manifest.json": "5837ee633fbebf6da2b06f4b0a2ea8bb9c45fb431fa5999f164c7acdc5e513dd",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/positional/metrics.json": "001f779abfd1c6c157d1d255fa85d8bd322dba81b3d1a0437a1c7caa81ffd6ae",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-01/manifest.json": "de1fce88c4e984d0af14a8132414bdc64a13818400fe0aaf330d17024717fc36",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-01/metrics.json": "c9bf18c662f2f6aa80810d05defafe55e07769eb4ece49ade4ab26134f40e40c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-04/manifest.json": "1e1de4fd057064ad76a29186750d36bcff4189a83f98de1693960a6ad93ad7b4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-04/metrics.json": "21ccfb74100ce61274065bfb5f459d6d07b191a49b444ceb9a3d683231b05343",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-10/manifest.json": "c6097f8af4084b3ac932ee72bb1c6965e7a7d24de02f8c42e9372f76e32c6ce4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/goedel/whitening-10/metrics.json": "e0c69d753c5cc9b3e3118a1367b7b780475ab738643537181a3c042b3eceea1f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/extraction/trajectories.jsonl": "cda64ee6935c8175e416f30b0c7e949f781558748f8b6005c838fac36b988f84",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/labels.jsonl": "ba19fcce93e1744c07498ce9999f6028cba95bf91c38cc32f89515dd99a7cb0d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/measurement/calibration-T0.6-layer17.npz": "5b36a3944bde404cfecf83ff7635df92135ba81d2f29d393d74f0a2335783a4d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/extraction/shard-002-of-008/states/765dcb9d97547348c604e5e64e0d8938276aff74468752959e8c4704f8c042a6.npz": "dce48ecdb12b60ec1338877703a0e3ff86e2d389f73caa37cc481402baa42f31",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/extraction/shard-002-of-008/states/e0d64300b53a19627facc1bc92be5ee631890eaaa0063f5f70d233566becbdc6.npz": "05acfc714fd02ad19a666bdadfdf53fea4a870ad0bf5cfca3ecaa33a3a1ab100",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/extraction/shard-001-of-008/states/6b53c103098b13f1d5432178e9f3a4e6ba9b386cf3d9bf207f4034610b363a55.npz": "22c394068491f78f8786d0fb95c874976b9f00946b36604b81a01197c83ef155",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/protocol.json": "13ad40113f2ffae10e26de4948aa8db7447f6a32c53f177b2bce8045a22b0aca",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/measurement/manifest.json": "f8c3cc37550a4105678950fecb34455c387a35b6e9389483acdd9f885cfd29c0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/measurement/deviations.parquet": "9b3c577d86b1e42abc7b6fe50a5c2124664e6f6d392dd457d00176158b8ac8bc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/analysis/manifest.json": "67843af46a20555cff425b4be45dc5ea02207e7f2969aa7e4d3dac5d533f2e81",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/analysis/cell-T0.6-layer17-whitened.json": "6e813db4eb8700a78a9de35b750483044e924ba6e2e1803c275c070474d98d8d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/metrics.json": "bf2f73b4d85384978ba201bd52e59bae48c7785dca44251c3cdb6ad060d813ac",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/positional/manifest.json": "078e7742466d3d488aacee3b37dbedaba3fc5164c4a9817d6bf55b12095dd1f4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/positional/metrics.json": "0b1b7fae90a092ae64a52af68d7fbb65c6ba3e9d77d070b67c827d53cebdd6a9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-01/manifest.json": "f58257d8f82ce7fe73df071f3c3993b0a1c867fc75decb78f2a429e099992d7e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-01/metrics.json": "310fe1dd09b9d33b70d4fee6c3ae08d4635ee293d450cca47a8bd8ecce096d1a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-04/manifest.json": "dc34dfbb0cfa3aa61ad48100f80c64bcb2ef3789f273f5cffc8145b8cd88004a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-04/metrics.json": "c145f756c4559085e7cd47d44f77bedb32cea0a80ad1cfd38e66c0bfe5018635",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-10/manifest.json": "2f752e33489aeb9cbbaae0a4aeec638dccdd12e1955739fd9ddcb38755949aef",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/main/kimina/whitening-10/metrics.json": "493a310e06d26f5cf8d873d3a3e95ac4bdaaeb51be840866dd81ffbf12ea1c7f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/extraction/trajectories.jsonl": "59d07531573e519ad11378c4ebbd3a91443605e80c4fa0fdc405b087f10479c0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/labels.jsonl": "bb982d10c573ba143e9bca5432716b192dc0d503f2291bf9980ecaf2b84bb2e0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/measurement/calibration-T0.6-layer17.npz": "3ce2f166423bab67f8be7c8563ea7a2ee942afd97b1837f1e6cfe7596abd1737",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/extraction/shard-002-of-008/states/d751a8b2a76a91fdae3f62685bec5faa66dd3fb060c45a919b93c13438d07d46.npz": "c383d09c8bcbc43f0622024f81112dfc8f6bebceb69adbb4c49379ee0bec0369",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/extraction/shard-002-of-008/states/d6d593f2de9f6da9c40ae785dc6f4dabf450e4a4d38f1e0597d78b0bc3801032.npz": "c3b371edaa68197cdc884c5a11e172f0f54dff35345b0af2ac43e1fd470f24a0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/extraction/shard-002-of-008/states/7e50dfd90eebdaa015402293b3c9c0eab410ffdb62788c63188053133801822b.npz": "1a0780eb3ee9a8260071422ded10079e806ee027a3d68c9dfbdfd925a0b0f0d9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/summary-audit.json": "377c403e9e270a77f5d0faefb481707fa295b0c9d86dc1a99ab6e949d0d5d432",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/p5_repair_20260914_v2/review-8466522/metrics.json": "57cf9e16a93f5c537a5f591e33f04ae1953280f79f12722ac8a063ae22eaac8f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/p5_repair_20260914_v2/CURRENT.json": "7024361c6629c05d0a4dc2db7407770295c6c5eed9041ae898861b73ff8d4390",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/onebigjumpdraft.pdf": "c8477f7cad4e48a407b0e2751d0a348af6b5f6515ac8e4368ae86bcdba3d1d4b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/src/onebigjump/e1/measurement.py": "43782ce0644dd0267be0f24f8eeec6e9d3364e6cb6c978d59e392b3fcff54c56",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/src/onebigjump/e1/extraction.py": "3eca8bf31484a86f6478e0de3a8caa8d812470dc27cecbbbe9b3bb9c13efe0ea",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/src/onebigjump/e1/spans.py": "001161b6707f0b8c392a3d7992a98394c93689f8d1fcc310329926722a64ab9f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/src/onebigjump/e1/main_analysis.py": "794a8e8980b6f360d56fe742145b4f6e096fe601de0509e70bd7f389664223f9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/src/onebigjump/models/token_alignment.py": "2281fe4d38e46213a2aaa2d8154e6c8258926217aa5ee9df31e4627896ce73fc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/plan.json": "efcaa19497964fb5d85a9729a0e4b8a08a71097425cd1da57ba221237505e312",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/audit.py": "9b8b33a33593391eee221658af18c18be45834eee4d1b6657b965cd91dddded7",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/audit.sbatch": "c0b8784a290d1f61aa78976d78657a9a9a8d4d3bea8bcd3bcfb849058127ac1e"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/deepseek-traces.csv": "a54ae68be49777baa4d085bbc31418be47037d691ae6932fc4cf1c2059c9b925",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/goedel-traces.csv": "ac6392e15ca4662206dc238c45bd892c94382bb70250a838b97acaf78a122e86",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/checks.json": "fb038eaffdb3115faad910e055210b7e4b0326c0cc9b2aa0d13f22bf556d1d02",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/kimina-traces.csv": "74ab916b9422ea14b10d2f85500ded6b540f98a98c4f0ccddd515c0665842672",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/metrics.json": "dda00e3b99470f2e025214934e15a063d82755a99dadcc2e61d0df17333dfbe5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/partial-metrics.json": "345ec07472a95865acd50bed17ac6af6b364404c46fc7b09396ec2cc446127f1"
+  },
+  "limitations": [
+    "Same saved data were previously inspected.",
+    "No new generation or model forward pass.",
+    "Numerical index audit is sampled, not full semantic re-verification of tactic segmentation.",
+    "Post-failure steps are generated but unreached by verifier; keep absorbing labels."
+  ]
+}

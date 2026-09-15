@@ -1,0 +1,15 @@
+{
+  "job_id": "8466302",
+  "created_utc": "2026-09-13T21:09:14.890327+00:00",
+  "passed": 6,
+  "total": 6,
+  "source_sha256": "603d662959782f7b888d4dfb3604632e85e840649b9cbc2863c793901e56ea21",
+  "cases": [
+    "real nested arithmetic error envelope",
+    "real incomplete snapshot kernel rejection",
+    "caught backtracking is not a proof failure",
+    "invalid environment",
+    "resource limit",
+    "empty malformed reply"
+  ]
+}

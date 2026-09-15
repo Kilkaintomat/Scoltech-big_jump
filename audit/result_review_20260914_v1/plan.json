@@ -1,0 +1,46 @@
+{
+  "scope": "Post-result audit and explicitly exploratory diagnostics; original results immutable",
+  "primary": {
+    "temperature": 0.6,
+    "statistic": "whitened",
+    "layers": {
+      "deepseek": 14,
+      "goedel": 17,
+      "kimina": 17
+    }
+  },
+  "paired_bootstrap": {
+    "replicates": 50000,
+    "seed": 2026091501,
+    "family_size": 9,
+    "unit": "problem",
+    "estimands": [
+      "trace-weighted paired top1 difference",
+      "equal-problem-weighted paired top1 difference"
+    ]
+  },
+  "paired_segmentation": "intersect eligible trace IDs within model; preserve each segmentation's labels and candidate steps",
+  "whitening": {
+    "covariance": "same isotropic shrinkage formula",
+    "shrinkage": [
+      0.1,
+      0.5,
+      1
+    ],
+    "folds": 2,
+    "fold_rule": "sort verified calibration problem IDs by SHA256 and alternate; fit one fold, threshold other; swap",
+    "q": 0.01,
+    "minimum_tasks_per_fold": 20,
+    "scope": "diagnostic sensitivity only; no selection of best shrinkage or fold; raw baseline included"
+  },
+  "sources": [
+    {
+      "title": "ASA statement on p-values",
+      "url": "https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf"
+    },
+    {
+      "title": "Clauset, Shalizi, Newman: Power-law distributions in empirical data",
+      "url": "https://arxiv.org/abs/0706.1062"
+    }
+  ]
+}

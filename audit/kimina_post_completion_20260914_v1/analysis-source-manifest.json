@@ -1,0 +1,16 @@
+{
+  "frozen_utc": "2026-09-14T17:53:20.876482Z",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/recompute.py": "b290e1617d733492a05bf113c4cda5425c79a5a3655e04a362054447c2041142",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/compare.py": "261ef27dc5f415cb38dfbb00aea9e5e56c9ae503e20794426fea8016da4d6ee0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/test_analysis.py": "ce418edc3a5abf6a1ff0f034d393e2f90d05b5c2f3a496d047e693ae60ff1d3f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/test_runner.py": "c1b926b9a810ef52aeeb96f76f7c4ecf4fa71e6314fd505eaffe50f0cf2bc329",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/analysis-tests.sbatch": "407395288f8820f90ad88c9f1f0ba13c1097300b031e4ac4c93ee3186e831e88",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/recompute.sbatch": "9be5da571c8eb3c0e1e32853be649cac337f02a52fba90c9aa28f122fc50d34b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/compare.sbatch": "cc5506ad203c1126dbcfc1ae090ccacdd7853754f666ea47ed2be729546666fd",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/core-source-manifest.json": "e339f3f03aaf93188b6c8aa279e2ec700228c173770202bfbfaca3cc0c9e338c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/kimina_post_completion_20260914_v1/plan.json": "a9a1a5848019b19562eff49bb20543d9b7baa6978dcaa742ac98c2ef99b5d41c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_controls_20260914_v1/source-manifest.json": "3d2bd1b415e1b4f285863ab834d528be7d221342f1c6842bd62c25aeeef15927",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_quality_20260914_v1/plan.json": "d2c7762fa014f78ba962c283a618195215a820ee7d24c90ba9ce6148db42b471"
+  }
+}

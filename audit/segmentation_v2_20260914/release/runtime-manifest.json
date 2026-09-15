@@ -1,0 +1,20 @@
+{
+  "job": "8466508",
+  "base": "runs/repl_runtime_20260913_sealed",
+  "purpose": "isolated observer and root-propagation repair; not production verifier",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/JSON.lean": "f4f37d31381cff6ac626c414187f610fee59a50e8a4f778f167e3c9cf432d6d6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Snapshots.lean": "14bff85f2d4e71019042ca57214225a36254fa47eeee485f4db88f49562c4e99",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Frontend.lean": "483d6cd5f5121605153a84ad724568a4fd2137a3bcd9d527f0dfb5545aed9b04",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Main.lean": "9c48b9bd6069b6a1849ff2ff4f0bfda4f86706230bf8b0be09463de415390343",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Util/Path.lean": "4ef291a8c1b763e1ee5750d46dcd6bc6f9be5a89c6a9f7b577814ad61193b161",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Util/Pickle.lean": "7d4ba5908d5ee3a17aa9d6bb7a6063529b7c6c179a5aa90743ba06e7d4eef955",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Lean/InfoTree.lean": "7d5a548f120871e7673ffcf550be455c2eb11a944793fe897f2ba84b28e08c7b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Lean/Replay.lean": "b5127e93848f95231ff1ea1541166136f4c95a7303463c610b4fe5005240d339",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Lean/ContextInfo.lean": "8ebd5796e09ec1b4434640a211450bd4bd6d60c8670614c34b615c109ac3221e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Lean/Environment.lean": "da91570c1672569ccd3fff49b3b44db858f1ca0a58b9e5556ede56760d0493db",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl/REPL/Lean/InfoTree/ToJson.lean": "e0dc8312ca78b42157232d4a8bd2a55ba245906779c112bf8e074e4697f3ad74",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/repl-observer": "4ea82434809e3ccb8f5f556aa420b2ef0865cfe8651df2f31b50b32b92a7a7de",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/release/build_observer.py": "86d99d250d1e713631720e1d1653d16c9b90309dbb62826da2f80719cb81d55b"
+  }
+}

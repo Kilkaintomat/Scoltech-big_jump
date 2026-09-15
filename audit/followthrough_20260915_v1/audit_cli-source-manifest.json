@@ -1,0 +1,13 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/audit_cli.py": "a169922ff94db802b3d2e4cf11d6eb2c289d2eb30bc75904a0266189f2ae51d6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/audit_cli.sbatch": "c27efc36744a3ab91e324886ac6935d1c21e8156aa0579164bba5e21083bd9e0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/audit_cli-plan.json": "e18460f5508d22ca89f52dc3b29c296fa55ce11a714388e91d6f346298de204f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/artifact_bridge.py": "0d3a7d3b25a8df338caac8bd0e86f317ea57711db8f24a97eb1660af9e7315bb"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

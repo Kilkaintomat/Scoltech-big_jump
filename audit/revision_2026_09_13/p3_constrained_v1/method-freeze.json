@@ -1,0 +1,15 @@
+{
+  "created_utc": "2026-09-13T16:38:53.462442+00:00",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/code/candidate.py": "dbb96eba6b5a5b20540144b064c2b9c90948aae9908adaf27e94bd2a1e546bcc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/code/preflight.py": "bf6abf5087279dd5913979d0df20abe2ff843f092e3c463d06aa15fdf6d6032a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/code/validate.py": "f5e8a12e479e75a682386dbdff5c5e4ff883187e202040795eedc505e84cddf1",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/preflight.sbatch": "10cbdc44d7cd42a5fa3033bebe7123f784cec22fff1ad355ceb0333fe2c39a4c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/protocol.json": "ef0c9646b96a2fb78f48ed1a14f8bfe74788295ec7a2ebbb8ac2641e629cd1f6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_constrained_v1/validation.sbatch": "1af3a257bc96de348ae4cff259afa7641f323a0c32a6788b54daa364bff1526a"
+  },
+  "independent_validation_started": false,
+  "preflight_job": "8466100",
+  "primary_changed": false,
+  "source_snapshot": "lean-local-toolchain-v7"
+}

@@ -1,0 +1,73 @@
+{
+  "created_utc": "2026-09-14T22:22:43.872791+00:00",
+  "config": {
+    "version": "prospective-P2-pipeline-20260915-v1",
+    "context_limit": 12288,
+    "reference_adapter": "new_reference_v2; exact JSON theorem certified with a fresh unique declaration",
+    "representative_selection": "Choose lowest SHA256([seed,exercise_group,trace_id]) among all reliably localized evaluation failures before error-position filtering; a missing formal-entry boundary excludes that representative without substitution.",
+    "technical_pilot_gate": "Complete fixed attempts with exact saved original token reconstruction and finite aligned log probabilities; at least one extractable matching theorem declaration. No semantic correctness gate.",
+    "fixed_maxima": "All observed source positions including absorbing unreached suffix; exclude first increment only for the DeepSeek primary later-error positional test. D0 primary; other offsets descriptive.",
+    "analysis_unit": "Equal exercise groups: attempt average within problem, then problem average within group. DeepSeek uses one trace per group.",
+    "primary_family_size": 2,
+    "proof_files_in_prompts": false,
+    "first_increment_note": "Formal-entry X0 differs from original paper prompt X0; this is a prospectively declared measurement variant.",
+    "infrastructure_retry": "Only checkpoint continuation after TIMEOUT/NODE_FAIL/PREEMPTED, at most two retries; no silent retry of semantic or integrity failures."
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  },
+  "environment": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.51.3",
+      "tokenizers": "0.21.4",
+      "vllm": "0.8.5.post1",
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "python": "3.11.11",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "hostname": "cn70.zhores",
+    "gpu": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "slurm_job_id": "8467346",
+    "slurm_cpus": "4"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2_pipeline-source-manifest.json": "5a31275cbfe0e90a46cc4e270eef83d8f8e2ce2758bb0865ec55a36bb7bcb823",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2_pipeline-plan.json": "fbf04d17dcec0d9a3753c00da197b8f9d10fd0c8e47d3a519f15e1f1b1df0fa9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-0/manifest.json": "de5625f09f2059f62b012b102247a334f4ff3462ab72c1a85e32b17fc8452833",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-1/manifest.json": "cb15b9f54c650d94bdeced788d928c0d3a5b4d9f294d4146068a5411ab80ca63",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-2/manifest.json": "936e70ba77698ab1f8dd34aa7360de5ca8a1bbffcf911a4c07542ac08be7cad0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-3/manifest.json": "2858d9e91ca23aeea6b3dfc464679229a37a42e39ae0eff066777099eb9cae65",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/manifest.json": "0239135efe2348a9a59079515ca35b04f34d8d3965093caf468541d0f37ea8fb",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2-confirmatory-protocol.json": "f828673cc7ae8f8fc3eb7f0cce6592193cd879b5c2edfe5265befd97cc054a8f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/provenance_repair/p2-preflight-original.json": "533a14cff369500a65a3a840b762c8dc150d4e1e50c13035c542b28237c79f28"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/metrics.json": "20ac1055b8e39fc4e8c7e4ddc0f314aeebdb760727fbab872dacffb8165b909d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek-config.json": "cf34fce9dd172fc6976591dc8b95f35f8f17c3a32933144de191e8c61d14114a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek-requests.json": "519dd51f0153d94abd3143c1cd61eab935c17947781da55f13289fa82761bc7b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek-context-exclusions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel-config.json": "7a6c82f3fa7c68f8b6f845ab0c78c65c6a9571ff0a40590b1766207631175e02",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel-requests.json": "e97d021c175bf5b0cc83017df9681382820b63f6494f9b66c419ccfac1dd699e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel-context-exclusions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/task-population.json": "f04923d74b4088c7d7706e4e296dc5b97c64abd7512d203e3ef39fe8ba6bbc0a"
+  },
+  "provenance_path_repair": {
+    "original_manifest": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/provenance_repair/p2-preflight-original.json",
+    "affected_inputs": [
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/deepseek/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/goedel/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/kimina/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-0/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-1/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-2/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/new_tasks/reference-v2-shard-3/manifest.json"
+    ],
+    "scientific_outputs_unchanged": true,
+    "repair_slurm_job": "8467356"
+  }
+}

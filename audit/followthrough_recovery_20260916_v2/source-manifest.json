@@ -1,0 +1,28 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p2_generate_recovery.py": "45b8e382cb0efb37583053229984fff5fe3e7e0aa914951ac9a1ab16cde34090",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/flow_v3.py": "0737638bd7e762e712dedd479eace77c6d6c2fcd47a685dcac1e18d2d0e49803",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p5_resume.py": "c33a46931c5f4a0db64b9cfebf5d1d424d945f7100a984bc7059e4f6734b4896",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/preflight.sbatch": "eed5d226af5bfa3fd373b4fe5a0c75d8e24965b5e84883ef722ed89e59d073f0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/preflight.py": "16cfdbc946210144edcb61e47144ad47212c35b92ec736a76caa19528bb69577",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p5_evaluation.sbatch": "3ff24f5480d659b5eded177d8c93fb8f22edb70cc041e3ad266481ae55f1965d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/mask_check.py": "d96726df743db8862f56209a17ad2ca582cda59509611e04604d962e62ac1e40",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p2_extract.sbatch": "9389c01ae4282a5ad2507eb9443048fa67d789c006b582daa2dd276e835608d8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p2_generate.sbatch": "b826c8a0e08328a0ca847c47a316660979866bf8b27b666f21f3178da8503cb0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p2_extract_recovery.py": "15aac75e0052cc925c204c34e15b36eeacd1c6daa803755958f345c1f1b0db1d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p5_calibration.sbatch": "8e7a3e243d5b2c8c3df6e282a7709a1efe932670fe809260cd40fc84e2ffb195",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/entry.py": "d09204fa6ef2f494b190d01b75e3b39d462384f023bb2c8ae4fd6bcad939df4b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/AMENDMENT.md": "e51be7ba9dd49149df50b57bb890a7aa35b608fee1218ced0d491c69ff8548de",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/flow-plan-v3.json": "db7a7c07116c37829e881bad0a2f8e7bae885c82608e1646479efd1526d51466",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/repair_support.py": "89a0e9bc196473d95ae8ad9a0e0652b4cab5c54a51bb0a212598efb962daae19",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/extract.py": "b1735545ebb14a7456f552d3fdba61bec3918f8989323c25d316b194b6b3375f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/test_repair.py": "3e8bd6160e561123cd778d876bd4e9e4630a0fdd910996ec167ab781a1ccfedf",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/source-manifest.json": "dde6abd498bb558c77e5fbba93a5f75867a033a81437042c78186bdfa731f151",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/p5_repair_20260914_v2/runtime_cc/cc-wrapper.sh": "bcbbd8422272297d8eb43a40fe1bc411cf47fa747e5c9f7dfa5db0b9a7ecb45b"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true,
+    "runtime_recovery": "20260916-v2"
+  }
+}

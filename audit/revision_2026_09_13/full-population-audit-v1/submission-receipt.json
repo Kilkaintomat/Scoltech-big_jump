@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-09-13T21:00:06.145991Z",
+  "scope": "Read-only complete-population audit after successful final saved-repair pass. No generations, label edits, toolchain changes or changes to existing jobs.",
+  "dependency_job": "8466288",
+  "script_sha256": "ee962357ee396391e6e8e9c95719b554f457c38ab0133f396f2166dca7a0b332",
+  "parent_auditor_sha256": "9bf6e28c01c7c1feb73078d09c19cc0bc8ca9a3533ba0101525af8111ad0b9d7",
+  "job_id": "8466289"
+}

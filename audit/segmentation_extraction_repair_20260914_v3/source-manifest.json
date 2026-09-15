@@ -1,0 +1,21 @@
+{
+  "base_frozen_files_modified": false,
+  "base_source_manifest_sha256": "05f47fa73f7bba557abef326d9309fe6b6e99de427a98f4154613af47c4e9b99",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/config.json": "ae3d28a440fd1914e77a0f308af01454611ebf62a3880c37032e894e5ce50d44",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/extract.py": "b1735545ebb14a7456f552d3fdba61bec3918f8989323c25d316b194b6b3375f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/extract.sbatch": "8b7535d9ce7dd90826555a52b67684ca2d93b2d8af126823ed2191f83dbda7c4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/gpu_profile.py": "fec15a3a388c00408417751035eade1c1314139fb6cca4d92f1d1a021776f56c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/profile.sbatch": "0edd7d8dc0bc3de278a4de7ef23bd9e4b3861b4c78a64c354f6d4d956a209627",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/repair_support.py": "89a0e9bc196473d95ae8ad9a0e0652b4cab5c54a51bb0a212598efb962daae19",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/test.sbatch": "9434da50ff2de43038f0880e02a432d96a75a3c05a077b03e4ed03de2e5f68e1",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/test_repair.py": "3e8bd6160e561123cd778d876bd4e9e4630a0fdd910996ec167ab781a1ccfedf",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v3/validate.py": "601636a1ef63fe13e1dcfa8acaa6c699afa7c122da5a45dc34034ef6ac0c4680"
+  },
+  "parent_failed_attempt_manifest": "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_extraction_repair_20260914_v2/source-manifest.json",
+  "parent_failed_attempt_sha256": "ace695998fa007a0b1d8e255a9679beb04713432de1db1ad196603915c547a3b",
+  "source_control": {
+    "dirty": true,
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98"
+  }
+}

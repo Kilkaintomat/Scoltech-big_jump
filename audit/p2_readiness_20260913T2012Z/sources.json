@@ -1,0 +1,227 @@
+[
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-000-of-008/labels.jsonl",
+    "bytes": 23371528,
+    "sha256": "607bb8ecd96b26d7983e3c2b57b4cb4b560ea050b01a284919ea38bec2f860bb"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-001-of-008/labels.jsonl",
+    "bytes": 36308598,
+    "sha256": "cb45775e92da8cd60670d1c8812c3a73bdff048bb9feaabf5c0bed9365407993"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-002-of-008/labels.jsonl",
+    "bytes": 16703928,
+    "sha256": "af264a13bb9ebfca4aab9828d06fa93bf73584b1ab2a064f816a84ba09328924"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-003-of-008/labels.jsonl",
+    "bytes": 26399647,
+    "sha256": "1c59fa197349ea7f17133f679043870d60ed413c5446dec5d4cddd6d6c66ef2c"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-004-of-008/labels.jsonl",
+    "bytes": 15552621,
+    "sha256": "b4f9b1c09ff1d0d6107b493b0289fc4a90caa57b371a7ce6e85b6f96ea959cf7"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-005-of-008/labels.jsonl",
+    "bytes": 20513886,
+    "sha256": "248c01ca15d30718b1f6496a8bb04a0bbc0ca03ca89a56266e944e9d2154eaaf"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-006-of-008/labels.jsonl",
+    "bytes": 15940091,
+    "sha256": "4529ca675c5becbf8ca7f0c81595dff92f6a54d3b0b76fd66340298d3056e753"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-007-of-008/labels.jsonl",
+    "bytes": 10969707,
+    "sha256": "913708cdcd1116fcf3a355cc8af4bc98cec668e8f1838b150e45cc731fc943fd"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-000-of-008/labels.jsonl",
+    "bytes": 23698008,
+    "sha256": "58ce08c03adcad8212e945a0044946039fe975ef9b5bba5b3b6c3383b27fb6c1"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-001-of-008/labels.jsonl",
+    "bytes": 36598118,
+    "sha256": "8364067b60bc06f6f93b66277a36799dd21e181805efbe265fd53da892c33eef"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-002-of-008/labels.jsonl",
+    "bytes": 17055048,
+    "sha256": "102b1dba1ecf660c94508b23f87a7636e418a45bcde1b5365e164d37b0ae1bb8"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-003-of-008/labels.jsonl",
+    "bytes": 26746877,
+    "sha256": "daf707ced6fadc9a6ee6f0eb2288d85e2d015055fb8736c6f5171d05315e9827"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-004-of-008/labels.jsonl",
+    "bytes": 15854461,
+    "sha256": "3b99ef4c5389373ab1094937cc3324747b2061e19245a9deb5c62e64ba2ab200"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-005-of-008/labels.jsonl",
+    "bytes": 20815672,
+    "sha256": "722c0d9157653ec85fc36dcfe12ac35960da84a54b0963dde84a38d90a6983ef"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/deepseek/shard-006-of-008/labels.jsonl",
+    "bytes": 16204971,
+    "sha256": "9df48e57f51cf8cd3db11d6f9a74de2d352279b94f3f00b37767b2ff0e111f94"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-000-of-008/labels.jsonl",
+    "bytes": 19734983,
+    "sha256": "f6e0f125ae0f99fb6934dc27f5305b2da6ed21a49e558dd1e403f8facb83df23"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-001-of-008/labels.jsonl",
+    "bytes": 20553458,
+    "sha256": "590d82928ad3572659ac2c187ffb97924bb14a9a64e6acecbefe1e3f2a6950bf"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-002-of-008/labels.jsonl",
+    "bytes": 16770250,
+    "sha256": "90877be70f48de9efb4fb56f131ab9ddd97fbd1dca4d4cd621e7589d63b3dc80"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-003-of-008/labels.jsonl",
+    "bytes": 22514115,
+    "sha256": "d8f9168eb0e8c35811e0d461a41d7e1e700081eb8b3d7b1321ec235e6e0eccff"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-004-of-008/labels.jsonl",
+    "bytes": 13944775,
+    "sha256": "841bafdd753813138468f1ef37cd5838ae2a328d1053ece5aa46c96b35379b85"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-005-of-008/labels.jsonl",
+    "bytes": 20832965,
+    "sha256": "14a502d59d1a2d06f1d596398030d191c67f4a7aa255e911d7bebacd7c803b4e"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-006-of-008/labels.jsonl",
+    "bytes": 17748894,
+    "sha256": "f9fcbe1e60cc62539f437d70ec383509b98813afbd4d7bf4a4aa5907ed591525"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-007-of-008/labels.jsonl",
+    "bytes": 10863180,
+    "sha256": "eb2c35bf622acb70ac82942cfcc39319cb65e688241eb95aaeb9e3d2cc937681"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-000-of-008/labels.jsonl",
+    "bytes": 20059767,
+    "sha256": "34b6292f53656220c3cebbf8758698e41e0b31df36701fec2dfc8c2e87f56cf1"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-001-of-008/labels.jsonl",
+    "bytes": 20841474,
+    "sha256": "d963fe32c7ea623cd325e3a4bc45cda73d769b6b3692c472f16e2fd05d22cbef"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-002-of-008/labels.jsonl",
+    "bytes": 17119546,
+    "sha256": "ac13137da68385bb5b48e6b2538559c930ce3f548d5ba76ce2b31f7f11fc2a45"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-003-of-008/labels.jsonl",
+    "bytes": 22859007,
+    "sha256": "f27adfe522becfaa736f64057c88724e47e62b4035ede1eebd93dab922c5e911"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-004-of-008/labels.jsonl",
+    "bytes": 14245047,
+    "sha256": "e438115ecd1a41c7e85a716cedc3844f43a526acf2713639978ad600e9fcc05c"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-005-of-008/labels.jsonl",
+    "bytes": 21133181,
+    "sha256": "1a0eb5040c9d29e8d884bf008d48aebffcd683046163ceab03ceca5f3cfc16e4"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/goedel/shard-006-of-008/labels.jsonl",
+    "bytes": 18012398,
+    "sha256": "b2ce4b14318ab9b79122a5cf93cf396e9db9fd49132571a93d94169e8bf6d993"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-000-of-008/labels.jsonl",
+    "bytes": 12701238,
+    "sha256": "41cf03294494edce29f62951a2c2cf81e3fd6c8167797ff0afea0f6a1a28e747"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-001-of-008/labels.jsonl",
+    "bytes": 12334943,
+    "sha256": "bb6eab8fc5d5d77332986de3493a641e9f4994b471ecb515fc274d4ff44ce50b"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-002-of-008/labels.jsonl",
+    "bytes": 16148989,
+    "sha256": "a8aeba17af3d82b74f5b52483ad26b0057dd29ce5d859a5f53b06476c62bba9b"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-003-of-008/labels.jsonl",
+    "bytes": 12053209,
+    "sha256": "59ceb2e996d98fbf9e2ceb8b0e1b786fe609b4fc611b35f34c1e39d6cc2050cf"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-004-of-008/labels.jsonl",
+    "bytes": 10822859,
+    "sha256": "71a43b7d655b9e7f7cc2223cc152735cefefb04f8e432f3db90c07a888ca8f83"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-005-of-008/labels.jsonl",
+    "bytes": 12908578,
+    "sha256": "0660ab3126222fbb0167897fe22fdcfb5ff04e38140ddf4baeaf5e3e5af5bd67"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-006-of-008/labels.jsonl",
+    "bytes": 9153719,
+    "sha256": "20aeb85af0bb86c29e6b4a1270e6e86782270a9bffb6ba359845d7426367a0cd"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-007-of-008/labels.jsonl",
+    "bytes": 274608,
+    "sha256": "25e2cc468b092dc6e015bfe9a7420adcdeae0680ea380821213ca3d93b281f34"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-000-of-008/labels.jsonl",
+    "bytes": 13024485,
+    "sha256": "3070c99dd918e955034b3355dfe48d48570e9962c642b72c418e2c30587ec87d"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-001-of-008/labels.jsonl",
+    "bytes": 12621862,
+    "sha256": "f0d6c2241b222bc873c1adf434f82bcf82b32059f6ae536cc5b43c18081b7724"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-002-of-008/labels.jsonl",
+    "bytes": 16497099,
+    "sha256": "f97b1a752ceba54f3b3f20bbb6547cc25b690434d72174ddf13cde39f087382b"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-003-of-008/labels.jsonl",
+    "bytes": 12390555,
+    "sha256": "4606817afd99c9e06027d9e31096f341681f40bf229cbf313f30b90af5213b97"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-004-of-008/labels.jsonl",
+    "bytes": 11119354,
+    "sha256": "140bc2d770d95042a30e41faadef8f4376414d59662d96f1e33d6a6e6efa8ec6"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-005-of-008/labels.jsonl",
+    "bytes": 13182146,
+    "sha256": "5e476a3881c3b6c2c9acef23c11ea308a660b73c1a76e47af6fca8c32bbbe6fa"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repaired/kimina/shard-006-of-008/labels.jsonl",
+    "bytes": 9417223,
+    "sha256": "1479d6727373188f5a06fee2d93c6781cc62575867e1660012c84c27f9ba7d83"
+  }
+]

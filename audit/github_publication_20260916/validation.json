@@ -1,0 +1,37 @@
+{
+  "validated_utc": "2026-09-15T23:39:51.134834+00:00",
+  "base_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "slurm_validation_job": "8468381",
+  "test_suites": {
+    "fast": {
+      "tests": 635,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 482.808
+    },
+    "full": {
+      "tests": 734,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 319.481
+    }
+  },
+  "lint": {
+    "ruff": "passed",
+    "format_files": 123,
+    "mypy_source_files": 71
+  },
+  "source_files_verified_in_git_index": 6626,
+  "evidence_files_verified_in_git_index": 126,
+  "publication_documentation_exceptions": [
+    ".gitattributes",
+    "README.md",
+    "STATUS.md"
+  ],
+  "changed_files_scanned": 6482,
+  "credential_pattern_hits": 0,
+  "paper_outputs_unchanged": true,
+  "scope": "Current src/scripts/tests validated using pinned installed environment in isolated publication checkout. Historical snapshots retain original bytes and are not claimed to have been re-executed. Original REPO provides container and Lean assets; E1_SNAPSHOT/PYTHONPATH point to publication checkout. The environment's original dirty-tree provenance warning is retained, not retroactively relabeled."
+}

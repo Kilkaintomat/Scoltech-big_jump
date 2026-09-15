@@ -1,0 +1,55 @@
+{
+  "created_utc": "2026-09-15T23:00:36.395088+00:00",
+  "config": {
+    "version": "P5-expanded-calibration-evaluation-20260915-v1",
+    "temperatures": [
+      0.6,
+      1
+    ],
+    "layer": 13,
+    "shrinkage": 0.1,
+    "threshold_q": 0.01,
+    "bootstrap_replicates": 2000,
+    "seed": 2026091505,
+    "scope": "Calibration-fitted length-rate prediction versus calibration-fitted constant baseline; separate fit/threshold task sets for whitening; no tail mechanism inferred."
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  },
+  "environment": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.51.3",
+      "tokenizers": "0.21.4",
+      "vllm": "0.8.5.post1",
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "python": "3.11.11",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "hostname": "cn70.zhores",
+    "gpu": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "slurm_job_id": "8468372",
+    "slurm_cpus": "8"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_analysis-source-manifest.json": "0ff2940f43f2e42731d1bd74beca2a594103c5667a404a17240d524cd60cdd3c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_analysis-plan.json": "a35de9965f1c3518ddab0beed17c3c7166bfe0a3f247a0af5252ff517f9f3cff",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/calibration_gate/manifest.json": "93bea12f6bd9aaef4f76a911d058c64ed7c787771b4d83a36fe72bd0f6fd5b3c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/main/verification/manifest.json": "1b3a12612db2cd7796dda66cf1d0103747c6def1d5607ee97f506a6fb9df234a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/main/extraction/manifest.json": "0e528951c8b88830fc2e322c1285aa412ded9e37a66f5ac8331d594ea50c528f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/main/verification/manifest.json": "906a5a615375d9d215f2061d1f342942823731285f9a2cfd740ef8c1cf7b1967",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/main/extraction/manifest.json": "6d999837b14a47134923f6ab59237f2791a2096edf6673dcdd29edbbfd981d64"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/metrics.json": "7021786e0885c3dd07f5abe980165122bae8f3879ea6d5e954fc8a0003fbf88c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/transform-T0.6.npz": "8c7b6d8b4cfe2ea11efce35888e2c3854bd71a22d30678983f347aa5818b99c7",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/localization-T0.6.json": "b931c7413ff62e50e7098e1f5e9348aa328a4c979dc0aef7e8acf243f99a8c71",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/transform-T1.npz": "6860fd0a33e8cf26a2270b6430c2654f4730283dae785847c3afc0d8edff04e6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/localization-T1.json": "27281837ff1e85bf0416ba9b90d8f59345d1ea8e80150d8572a15972a0141989",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/assigned-attempts.json": "f3a36d92b495b631264cbc40e97f566ef21115faa770b8ec12a1429997e36f8a"
+  }
+}

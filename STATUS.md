@@ -1,3 +1,93 @@
+# Publication snapshot — 2026-09-16
+
+Current source and evidence: [experiment index](docs/revisions/2026-09-16-publication.md)
+and [compact evidence export](results/campaign_20260916/README.md).
+
+The main three-model miniF2F review and P4 audit are complete. P5 has passed its disjoint
+calibration gate and completed independent evaluation and analysis; final metrics are in
+`results/campaign_20260916/p5-final/metrics.json`. The earlier recovery note below predates
+this completion. Fresh prospective P2 on ProofNet is still acquiring answers at capture;
+its final confirmatory result is not yet available. Archived state files are dated snapshots.
+
+This publication was assembled and tested in a separate checkout. No active experiment was
+cancelled or modified to create it. Tests and export receipts are under
+`audit/github_publication_20260916/`.
+
+Historical status follows.
+
+# Followthrough runtime recovery — 2026-09-16
+
+The completed scientific review is `runs/result_review_20260914_v1/report_v3/REPORT_RU.md`.
+The dated new status report is `runs/followthrough_recovery_20260916_v2/report_v3/REPORT_RU.md`.
+The live stage state remains `runs/followthrough_20260915_v1/flow/latest.json`.
+
+The new followthrough was stopped, not waiting for resources: P2 token-alignment exclusions
+aborted before journal append and vLLM shutdown hid errors behind TIMEOUT; P5 omitted the
+already validated C compiler binding. Recovery is isolated in
+`audit/followthrough_recovery_20260916_v2`; see its `AMENDMENT.md` for missing-data limitations.
+It retains original requests and saved rows, records alignment exclusions, restores the validated
+compiler, and reuses the tested Qwen3 architecture check for Goedel extraction. No existing jobs
+were cancelled. Regression preflight and real GPU grammar-mask validation have passed.
+
+Submission receipts: `runs/followthrough_recovery_20260916_v2/submissions.json`.
+The existing half-hour controller now uses the frozen recovery `flow_v3.py` and the same job
+history and lock. P5 evaluation remains gated on adequate disjoint verified calibration.
+Do not infer current states from this note; read the live state and Slurm.
+
+Historical status follows.
+
+# Continuation 2026-09-13: substantive review and exact-length development pilot
+
+- Main v7 reverification and all prespecified controls continue under their existing immutable sources. Both old v4 verification jobs have finished naturally; no cancellation.
+- Independent standalone Lean audit completed: job 8466072, 36 fixed gate examples, 52 compilations, zero infrastructure/time-limit interruptions. Assistant case attestation: 8466083. This is not human signoff or a random audit of main.
+- All eight Kimina pilot `sorry_invalid_proof` exclusions are native-policy-only: whole/replay pass, no literal formal sorry. The pinned compiler creates native auxiliary axioms absent from the frozen allowlist. Do not describe these as mathematical model errors. Primary labels remain unchanged.
+- P3 availability mechanism audit completed: 8466076, all 800 saved datasets. Original-support candidate loses 45 intervals solely because calibration exceedances fall below 20. Main method not promoted.
+- Fresh numbered-slots-v3 deduction: source deduction-numbered-v3, seed 2026091303, allow_main=false, unchanged checker/gate. Preflight 8466080 passed; full answer audit 8466088: 36/80 format eligible (45%), 43 format errors, one truncation, 35 invalid inferences, one verified. 34 first inference failures repeat the given fact. This prompt did not pass the 90% format requirement; retain negative outcome.
+- Exact-length pilot queue: runs/development_20260913_exactlength. Its extraction/measurement/analysis completed; final gate remains the original unchanged check.
+- All counts above originate from the named artifact manifests/metrics; full report renderer now includes these additive audits and the fresh pilot.
+- Next: complete main and 69 controls; quantify native-policy exclusions in complete main; report fixed main cell and limitations. Any native-inclusive or structured-generation alternative needs a separate protocol. Diagnose GPD bootstrap fit failures before a new independent calibration run.
+
+Historical status follows.
+
+<!-- revision-20260913:start -->
+## Продолжение 2026-09-13: состояние после инцидента хранилища
+
+Программа экспериментов ещё не завершена. Рабочий снимок восстановления:
+`audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7`.
+Ранние исправления scoped namespaces, очистки процессов и ошибок ядра проверены
+в `audit/revision_2026_09_13/acceptance/manifest.json`.
+
+Основная повторная проверка `runs/lean_reverification_20260913` столкнулась с
+Remote I/O error при чтении Lean и записи артефактов. Первопричина не установлена.
+Аудит частичных меток и ограниченная проба хранилища:
+`audit/revision_2026_09_13/io-audit-8466023/manifest.json`.
+Его отсутствие совпадений диагностических строк не заменяет полную валидацию.
+
+В v7 стандартная библиотека и весь прежний toolchain копируются на диск узла
+с проверкой хешей. I/O-диагностики REPL отделены от математических ошибок.
+Допуск новой очереди пройден: полный набор тестов и сохранённые доказательства
+проверены в Slurm-задании 8466032. Полные результаты и хеши:
+`audit/revision_2026_09_13/8466032-preflight/manifest.json` и `all-8466032.xml`.
+Старые задания не отменялись.
+Новая очередь: `runs/lean_reverification_20260913_local`; использует прежние
+генерации и протокол, заново получает метки. Основные контроли:
+`runs/controls_20260913_local`. Автоматический отчёт по завершению или отказу:
+`audit/revision_2026_09_13/delivery-local`.
+
+Свежий технический пилот дедукции завершён; исходный порог формата не пройден.
+Все ошибки формата связаны с числом шагов; проверяющий алгоритм не менялся.
+Аудит: `audit/revision_2026_09_13/8465954-deduction-review/manifest.json`.
+Большая серия остаётся закрыта.
+
+Независимая проверка P3 завершена:
+`runs/p3_validation_20260913/summary/manifest.json`.
+Высокое условное покрытие кандидата сочетается с потерей доступных интервалов;
+в некоторых сценариях недопокрытие сохраняется. Оснований заменить основной
+метод нет. P4 уже завершён; ожидаемый переход хвостового индекса не подтверждён.
+
+Ниже сохранён исторический статус; актуальные очереди и выводы указаны выше.
+<!-- revision-20260913:end -->
+
 # Status
 
 Updated during the additive 2026-09-11 readiness campaign on Zhores.
@@ -121,3 +211,36 @@ The generic `SyntheticConfig` CLI remains unimplemented; the new controlled task
 runner and does not claim to reproduce every synthetic/code setting in the draft. P5 length-fit
 p-values are descriptive until task dependence and held-out prediction are addressed. Two-hop,
 recurrent-depth, Tracr/ngram and supervised-probe experiments remain unvalidated and unlaunched.
+
+## 2026-09-13: current main lineage and separate P3 candidate
+
+The active main queue is `runs/lean_reverification_20260913_local/queue.json`, using the
+immutable source `audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7` and the sealed,
+node-local Lean toolchain. The paired controls queue is `runs/controls_20260913_local/queue.json`.
+Earlier recovery directories remain preserved historical lineages; their completion does not
+imply that the current main measurements have finished.
+
+The substantive review package is `audit/revision_2026_09_13/reviews/substantive-review-v2`.
+The fixed-draw P3 failure diagnosis is `runs/p3_fit_diagnostics_20260913`; the partial main
+native-axiom inventory is in `audit/revision_2026_09_13/reviews/active-followthrough-v2`.
+Primary Lean labels were retained throughout these audits.
+
+A separate constrained GPD candidate lives in `audit/revision_2026_09_13/p3_constrained_v1/code`.
+Its `method-freeze.json` pins the code and protocol before new validation data. The numerical
+preflight manifest is under the same directory's `preflight/`; the paired independent validation
+is `runs/p3_constrained_validation_20260913`. Completed results require a final manifest, not
+merely a directory or a progress log. The complete review is written to
+`audit/revision_2026_09_13/reviews/p3-constrained-validation-v1` after validation and a dense-grid
+audit of the fresh point fits. Read those generated metrics for coverage, availability and
+numerical failures. This candidate does not replace the frozen main GPD estimator; numerical
+agreement alone does not establish confidence-interval calibration.
+
+
+<!-- followthrough-20260915 -->
+## Followthrough: independent calibration, Lean audit, prospective P2 and controlled P5
+
+The completed audit, corrected calibration, and prospective protocols are recorded in [the new report](runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.md). The fixed P2 protocol is [here](audit/followthrough_20260915_v1/p2-confirmatory-protocol.json).
+
+Current job states and alerts are read from [flow/latest.json](runs/followthrough_20260915_v1/flow/latest.json); do not infer completion from a submitted job. The fixed controller [flow_v2.py](audit/followthrough_20260915_v1/flow_v2.py) runs every thirty minutes and can resume resource interruptions only. It preserves existing GPU requests. The independent P5 evaluation remains gated on adequate disjoint verified calibration.
+
+Container runtime paths in new audit/reference manifests were mapped to immutable binaries with identical observed digests. Original manifests and the audit trail are retained in [provenance_repair](runs/followthrough_20260915_v1/provenance_repair). Scientific output bytes were unchanged.

@@ -1,0 +1,2914 @@
+[
+  {
+    "trace_id": "evaluation:L3:0000:T1.0:a0",
+    "problem_id": "evaluation:L3:0000",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0001:T1.0:a0",
+    "problem_id": "evaluation:L3:0001",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0002:T1.0:a0",
+    "problem_id": "evaluation:L3:0002",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0003:T1.0:a0",
+    "problem_id": "evaluation:L3:0003",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0004:T1.0:a0",
+    "problem_id": "evaluation:L3:0004",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0005:T1.0:a0",
+    "problem_id": "evaluation:L3:0005",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0006:T1.0:a0",
+    "problem_id": "evaluation:L3:0006",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0007:T1.0:a0",
+    "problem_id": "evaluation:L3:0007",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0011:T1.0:a0",
+    "problem_id": "evaluation:L3:0011",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0012:T1.0:a0",
+    "problem_id": "evaluation:L3:0012",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0013:T1.0:a0",
+    "problem_id": "evaluation:L3:0013",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0014:T1.0:a0",
+    "problem_id": "evaluation:L3:0014",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0015:T1.0:a0",
+    "problem_id": "evaluation:L3:0015",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0018:T1.0:a0",
+    "problem_id": "evaluation:L3:0018",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0019:T1.0:a0",
+    "problem_id": "evaluation:L3:0019",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0020:T1.0:a0",
+    "problem_id": "evaluation:L3:0020",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0021:T1.0:a0",
+    "problem_id": "evaluation:L3:0021",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0023:T1.0:a0",
+    "problem_id": "evaluation:L3:0023",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0025:T1.0:a0",
+    "problem_id": "evaluation:L3:0025",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0026:T1.0:a0",
+    "problem_id": "evaluation:L3:0026",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0027:T1.0:a0",
+    "problem_id": "evaluation:L3:0027",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0029:T1.0:a0",
+    "problem_id": "evaluation:L3:0029",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0030:T1.0:a0",
+    "problem_id": "evaluation:L3:0030",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0031:T1.0:a0",
+    "problem_id": "evaluation:L3:0031",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0032:T1.0:a0",
+    "problem_id": "evaluation:L3:0032",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0033:T1.0:a0",
+    "problem_id": "evaluation:L3:0033",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0034:T1.0:a0",
+    "problem_id": "evaluation:L3:0034",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0037:T1.0:a0",
+    "problem_id": "evaluation:L3:0037",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L3:0041:T1.0:a0",
+    "problem_id": "evaluation:L3:0041",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0042:T1.0:a0",
+    "problem_id": "evaluation:L3:0042",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0044:T1.0:a0",
+    "problem_id": "evaluation:L3:0044",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0046:T1.0:a0",
+    "problem_id": "evaluation:L3:0046",
+    "length": 3,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L3:0047:T1.0:a0",
+    "problem_id": "evaluation:L3:0047",
+    "length": 3,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0000:T1.0:a0",
+    "problem_id": "evaluation:L4:0000",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0002:T1.0:a0",
+    "problem_id": "evaluation:L4:0002",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0004:T1.0:a0",
+    "problem_id": "evaluation:L4:0004",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0005:T1.0:a0",
+    "problem_id": "evaluation:L4:0005",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0006:T1.0:a0",
+    "problem_id": "evaluation:L4:0006",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0007:T1.0:a0",
+    "problem_id": "evaluation:L4:0007",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0008:T1.0:a0",
+    "problem_id": "evaluation:L4:0008",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0009:T1.0:a0",
+    "problem_id": "evaluation:L4:0009",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0010:T1.0:a0",
+    "problem_id": "evaluation:L4:0010",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0012:T1.0:a0",
+    "problem_id": "evaluation:L4:0012",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0015:T1.0:a0",
+    "problem_id": "evaluation:L4:0015",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0016:T1.0:a0",
+    "problem_id": "evaluation:L4:0016",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0017:T1.0:a0",
+    "problem_id": "evaluation:L4:0017",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0020:T1.0:a0",
+    "problem_id": "evaluation:L4:0020",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0023:T1.0:a0",
+    "problem_id": "evaluation:L4:0023",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0025:T1.0:a0",
+    "problem_id": "evaluation:L4:0025",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0026:T1.0:a0",
+    "problem_id": "evaluation:L4:0026",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0027:T1.0:a0",
+    "problem_id": "evaluation:L4:0027",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0032:T1.0:a0",
+    "problem_id": "evaluation:L4:0032",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0036:T1.0:a0",
+    "problem_id": "evaluation:L4:0036",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0037:T1.0:a0",
+    "problem_id": "evaluation:L4:0037",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0039:T1.0:a0",
+    "problem_id": "evaluation:L4:0039",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0040:T1.0:a0",
+    "problem_id": "evaluation:L4:0040",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0041:T1.0:a0",
+    "problem_id": "evaluation:L4:0041",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0042:T1.0:a0",
+    "problem_id": "evaluation:L4:0042",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0043:T1.0:a0",
+    "problem_id": "evaluation:L4:0043",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0046:T1.0:a0",
+    "problem_id": "evaluation:L4:0046",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0047:T1.0:a0",
+    "problem_id": "evaluation:L4:0047",
+    "length": 4,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L4:0048:T1.0:a0",
+    "problem_id": "evaluation:L4:0048",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L4:0049:T1.0:a0",
+    "problem_id": "evaluation:L4:0049",
+    "length": 4,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0000:T1.0:a0",
+    "problem_id": "evaluation:L5:0000",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0001:T1.0:a0",
+    "problem_id": "evaluation:L5:0001",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0003:T1.0:a0",
+    "problem_id": "evaluation:L5:0003",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0004:T1.0:a0",
+    "problem_id": "evaluation:L5:0004",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0005:T1.0:a0",
+    "problem_id": "evaluation:L5:0005",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0007:T1.0:a0",
+    "problem_id": "evaluation:L5:0007",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0008:T1.0:a0",
+    "problem_id": "evaluation:L5:0008",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0009:T1.0:a0",
+    "problem_id": "evaluation:L5:0009",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0012:T1.0:a0",
+    "problem_id": "evaluation:L5:0012",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0013:T1.0:a0",
+    "problem_id": "evaluation:L5:0013",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0014:T1.0:a0",
+    "problem_id": "evaluation:L5:0014",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0015:T1.0:a0",
+    "problem_id": "evaluation:L5:0015",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0016:T1.0:a0",
+    "problem_id": "evaluation:L5:0016",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0018:T1.0:a0",
+    "problem_id": "evaluation:L5:0018",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0019:T1.0:a0",
+    "problem_id": "evaluation:L5:0019",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0020:T1.0:a0",
+    "problem_id": "evaluation:L5:0020",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0021:T1.0:a0",
+    "problem_id": "evaluation:L5:0021",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0023:T1.0:a0",
+    "problem_id": "evaluation:L5:0023",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0025:T1.0:a0",
+    "problem_id": "evaluation:L5:0025",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0026:T1.0:a0",
+    "problem_id": "evaluation:L5:0026",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0027:T1.0:a0",
+    "problem_id": "evaluation:L5:0027",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0028:T1.0:a0",
+    "problem_id": "evaluation:L5:0028",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0029:T1.0:a0",
+    "problem_id": "evaluation:L5:0029",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0030:T1.0:a0",
+    "problem_id": "evaluation:L5:0030",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0031:T1.0:a0",
+    "problem_id": "evaluation:L5:0031",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0032:T1.0:a0",
+    "problem_id": "evaluation:L5:0032",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0036:T1.0:a0",
+    "problem_id": "evaluation:L5:0036",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0037:T1.0:a0",
+    "problem_id": "evaluation:L5:0037",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0038:T1.0:a0",
+    "problem_id": "evaluation:L5:0038",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0040:T1.0:a0",
+    "problem_id": "evaluation:L5:0040",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0041:T1.0:a0",
+    "problem_id": "evaluation:L5:0041",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0042:T1.0:a0",
+    "problem_id": "evaluation:L5:0042",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0044:T1.0:a0",
+    "problem_id": "evaluation:L5:0044",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0045:T1.0:a0",
+    "problem_id": "evaluation:L5:0045",
+    "length": 5,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L5:0047:T1.0:a0",
+    "problem_id": "evaluation:L5:0047",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L5:0048:T1.0:a0",
+    "problem_id": "evaluation:L5:0048",
+    "length": 5,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0000:T1.0:a0",
+    "problem_id": "evaluation:L6:0000",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0001:T1.0:a0",
+    "problem_id": "evaluation:L6:0001",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0002:T1.0:a0",
+    "problem_id": "evaluation:L6:0002",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0003:T1.0:a0",
+    "problem_id": "evaluation:L6:0003",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0004:T1.0:a0",
+    "problem_id": "evaluation:L6:0004",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0005:T1.0:a0",
+    "problem_id": "evaluation:L6:0005",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0006:T1.0:a0",
+    "problem_id": "evaluation:L6:0006",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0007:T1.0:a0",
+    "problem_id": "evaluation:L6:0007",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0008:T1.0:a0",
+    "problem_id": "evaluation:L6:0008",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0009:T1.0:a0",
+    "problem_id": "evaluation:L6:0009",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0010:T1.0:a0",
+    "problem_id": "evaluation:L6:0010",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0011:T1.0:a0",
+    "problem_id": "evaluation:L6:0011",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0012:T1.0:a0",
+    "problem_id": "evaluation:L6:0012",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0013:T1.0:a0",
+    "problem_id": "evaluation:L6:0013",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0014:T1.0:a0",
+    "problem_id": "evaluation:L6:0014",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0016:T1.0:a0",
+    "problem_id": "evaluation:L6:0016",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0018:T1.0:a0",
+    "problem_id": "evaluation:L6:0018",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0019:T1.0:a0",
+    "problem_id": "evaluation:L6:0019",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0021:T1.0:a0",
+    "problem_id": "evaluation:L6:0021",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0022:T1.0:a0",
+    "problem_id": "evaluation:L6:0022",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0023:T1.0:a0",
+    "problem_id": "evaluation:L6:0023",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0025:T1.0:a0",
+    "problem_id": "evaluation:L6:0025",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0026:T1.0:a0",
+    "problem_id": "evaluation:L6:0026",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0027:T1.0:a0",
+    "problem_id": "evaluation:L6:0027",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0028:T1.0:a0",
+    "problem_id": "evaluation:L6:0028",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0029:T1.0:a0",
+    "problem_id": "evaluation:L6:0029",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0030:T1.0:a0",
+    "problem_id": "evaluation:L6:0030",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0031:T1.0:a0",
+    "problem_id": "evaluation:L6:0031",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0032:T1.0:a0",
+    "problem_id": "evaluation:L6:0032",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0033:T1.0:a0",
+    "problem_id": "evaluation:L6:0033",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0034:T1.0:a0",
+    "problem_id": "evaluation:L6:0034",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0035:T1.0:a0",
+    "problem_id": "evaluation:L6:0035",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0036:T1.0:a0",
+    "problem_id": "evaluation:L6:0036",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0037:T1.0:a0",
+    "problem_id": "evaluation:L6:0037",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0038:T1.0:a0",
+    "problem_id": "evaluation:L6:0038",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0041:T1.0:a0",
+    "problem_id": "evaluation:L6:0041",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0042:T1.0:a0",
+    "problem_id": "evaluation:L6:0042",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0043:T1.0:a0",
+    "problem_id": "evaluation:L6:0043",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0045:T1.0:a0",
+    "problem_id": "evaluation:L6:0045",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L6:0046:T1.0:a0",
+    "problem_id": "evaluation:L6:0046",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0047:T1.0:a0",
+    "problem_id": "evaluation:L6:0047",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0048:T1.0:a0",
+    "problem_id": "evaluation:L6:0048",
+    "length": 6,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L6:0049:T1.0:a0",
+    "problem_id": "evaluation:L6:0049",
+    "length": 6,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0000:T1.0:a0",
+    "problem_id": "evaluation:L7:0000",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0001:T1.0:a0",
+    "problem_id": "evaluation:L7:0001",
+    "length": 7,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0002:T1.0:a0",
+    "problem_id": "evaluation:L7:0002",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0003:T1.0:a0",
+    "problem_id": "evaluation:L7:0003",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0004:T1.0:a0",
+    "problem_id": "evaluation:L7:0004",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0005:T1.0:a0",
+    "problem_id": "evaluation:L7:0005",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0006:T1.0:a0",
+    "problem_id": "evaluation:L7:0006",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0007:T1.0:a0",
+    "problem_id": "evaluation:L7:0007",
+    "length": 7,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0009:T1.0:a0",
+    "problem_id": "evaluation:L7:0009",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0010:T1.0:a0",
+    "problem_id": "evaluation:L7:0010",
+    "length": 7,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0011:T1.0:a0",
+    "problem_id": "evaluation:L7:0011",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0013:T1.0:a0",
+    "problem_id": "evaluation:L7:0013",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0014:T1.0:a0",
+    "problem_id": "evaluation:L7:0014",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0017:T1.0:a0",
+    "problem_id": "evaluation:L7:0017",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0018:T1.0:a0",
+    "problem_id": "evaluation:L7:0018",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0019:T1.0:a0",
+    "problem_id": "evaluation:L7:0019",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0020:T1.0:a0",
+    "problem_id": "evaluation:L7:0020",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0021:T1.0:a0",
+    "problem_id": "evaluation:L7:0021",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0022:T1.0:a0",
+    "problem_id": "evaluation:L7:0022",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0023:T1.0:a0",
+    "problem_id": "evaluation:L7:0023",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0024:T1.0:a0",
+    "problem_id": "evaluation:L7:0024",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0025:T1.0:a0",
+    "problem_id": "evaluation:L7:0025",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0027:T1.0:a0",
+    "problem_id": "evaluation:L7:0027",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0029:T1.0:a0",
+    "problem_id": "evaluation:L7:0029",
+    "length": 7,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0030:T1.0:a0",
+    "problem_id": "evaluation:L7:0030",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0031:T1.0:a0",
+    "problem_id": "evaluation:L7:0031",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0032:T1.0:a0",
+    "problem_id": "evaluation:L7:0032",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0033:T1.0:a0",
+    "problem_id": "evaluation:L7:0033",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0034:T1.0:a0",
+    "problem_id": "evaluation:L7:0034",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0035:T1.0:a0",
+    "problem_id": "evaluation:L7:0035",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0036:T1.0:a0",
+    "problem_id": "evaluation:L7:0036",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0037:T1.0:a0",
+    "problem_id": "evaluation:L7:0037",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0038:T1.0:a0",
+    "problem_id": "evaluation:L7:0038",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0039:T1.0:a0",
+    "problem_id": "evaluation:L7:0039",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0040:T1.0:a0",
+    "problem_id": "evaluation:L7:0040",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0042:T1.0:a0",
+    "problem_id": "evaluation:L7:0042",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0043:T1.0:a0",
+    "problem_id": "evaluation:L7:0043",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0044:T1.0:a0",
+    "problem_id": "evaluation:L7:0044",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0045:T1.0:a0",
+    "problem_id": "evaluation:L7:0045",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0046:T1.0:a0",
+    "problem_id": "evaluation:L7:0046",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L7:0047:T1.0:a0",
+    "problem_id": "evaluation:L7:0047",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0048:T1.0:a0",
+    "problem_id": "evaluation:L7:0048",
+    "length": 7,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L7:0049:T1.0:a0",
+    "problem_id": "evaluation:L7:0049",
+    "length": 7,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0000:T1.0:a0",
+    "problem_id": "evaluation:L8:0000",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0002:T1.0:a0",
+    "problem_id": "evaluation:L8:0002",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0003:T1.0:a0",
+    "problem_id": "evaluation:L8:0003",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0004:T1.0:a0",
+    "problem_id": "evaluation:L8:0004",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0005:T1.0:a0",
+    "problem_id": "evaluation:L8:0005",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0006:T1.0:a0",
+    "problem_id": "evaluation:L8:0006",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0007:T1.0:a0",
+    "problem_id": "evaluation:L8:0007",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0008:T1.0:a0",
+    "problem_id": "evaluation:L8:0008",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0009:T1.0:a0",
+    "problem_id": "evaluation:L8:0009",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0010:T1.0:a0",
+    "problem_id": "evaluation:L8:0010",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0011:T1.0:a0",
+    "problem_id": "evaluation:L8:0011",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0012:T1.0:a0",
+    "problem_id": "evaluation:L8:0012",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0013:T1.0:a0",
+    "problem_id": "evaluation:L8:0013",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0014:T1.0:a0",
+    "problem_id": "evaluation:L8:0014",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0015:T1.0:a0",
+    "problem_id": "evaluation:L8:0015",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0016:T1.0:a0",
+    "problem_id": "evaluation:L8:0016",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0017:T1.0:a0",
+    "problem_id": "evaluation:L8:0017",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0018:T1.0:a0",
+    "problem_id": "evaluation:L8:0018",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0019:T1.0:a0",
+    "problem_id": "evaluation:L8:0019",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0020:T1.0:a0",
+    "problem_id": "evaluation:L8:0020",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0022:T1.0:a0",
+    "problem_id": "evaluation:L8:0022",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0023:T1.0:a0",
+    "problem_id": "evaluation:L8:0023",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0024:T1.0:a0",
+    "problem_id": "evaluation:L8:0024",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0026:T1.0:a0",
+    "problem_id": "evaluation:L8:0026",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0027:T1.0:a0",
+    "problem_id": "evaluation:L8:0027",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0029:T1.0:a0",
+    "problem_id": "evaluation:L8:0029",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0030:T1.0:a0",
+    "problem_id": "evaluation:L8:0030",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0031:T1.0:a0",
+    "problem_id": "evaluation:L8:0031",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0032:T1.0:a0",
+    "problem_id": "evaluation:L8:0032",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0033:T1.0:a0",
+    "problem_id": "evaluation:L8:0033",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0034:T1.0:a0",
+    "problem_id": "evaluation:L8:0034",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0035:T1.0:a0",
+    "problem_id": "evaluation:L8:0035",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0037:T1.0:a0",
+    "problem_id": "evaluation:L8:0037",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0038:T1.0:a0",
+    "problem_id": "evaluation:L8:0038",
+    "length": 8,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0039:T1.0:a0",
+    "problem_id": "evaluation:L8:0039",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0040:T1.0:a0",
+    "problem_id": "evaluation:L8:0040",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0041:T1.0:a0",
+    "problem_id": "evaluation:L8:0041",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0042:T1.0:a0",
+    "problem_id": "evaluation:L8:0042",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0043:T1.0:a0",
+    "problem_id": "evaluation:L8:0043",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0044:T1.0:a0",
+    "problem_id": "evaluation:L8:0044",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0045:T1.0:a0",
+    "problem_id": "evaluation:L8:0045",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0046:T1.0:a0",
+    "problem_id": "evaluation:L8:0046",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L8:0047:T1.0:a0",
+    "problem_id": "evaluation:L8:0047",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L8:0048:T1.0:a0",
+    "problem_id": "evaluation:L8:0048",
+    "length": 8,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0000:T1.0:a0",
+    "problem_id": "evaluation:L9:0000",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0001:T1.0:a0",
+    "problem_id": "evaluation:L9:0001",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0002:T1.0:a0",
+    "problem_id": "evaluation:L9:0002",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0003:T1.0:a0",
+    "problem_id": "evaluation:L9:0003",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0004:T1.0:a0",
+    "problem_id": "evaluation:L9:0004",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0005:T1.0:a0",
+    "problem_id": "evaluation:L9:0005",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0006:T1.0:a0",
+    "problem_id": "evaluation:L9:0006",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0007:T1.0:a0",
+    "problem_id": "evaluation:L9:0007",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0008:T1.0:a0",
+    "problem_id": "evaluation:L9:0008",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0009:T1.0:a0",
+    "problem_id": "evaluation:L9:0009",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0011:T1.0:a0",
+    "problem_id": "evaluation:L9:0011",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0012:T1.0:a0",
+    "problem_id": "evaluation:L9:0012",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0013:T1.0:a0",
+    "problem_id": "evaluation:L9:0013",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0015:T1.0:a0",
+    "problem_id": "evaluation:L9:0015",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0016:T1.0:a0",
+    "problem_id": "evaluation:L9:0016",
+    "length": 9,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0017:T1.0:a0",
+    "problem_id": "evaluation:L9:0017",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0018:T1.0:a0",
+    "problem_id": "evaluation:L9:0018",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0019:T1.0:a0",
+    "problem_id": "evaluation:L9:0019",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0020:T1.0:a0",
+    "problem_id": "evaluation:L9:0020",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0021:T1.0:a0",
+    "problem_id": "evaluation:L9:0021",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0022:T1.0:a0",
+    "problem_id": "evaluation:L9:0022",
+    "length": 9,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0023:T1.0:a0",
+    "problem_id": "evaluation:L9:0023",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0024:T1.0:a0",
+    "problem_id": "evaluation:L9:0024",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0025:T1.0:a0",
+    "problem_id": "evaluation:L9:0025",
+    "length": 9,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0027:T1.0:a0",
+    "problem_id": "evaluation:L9:0027",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0028:T1.0:a0",
+    "problem_id": "evaluation:L9:0028",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0029:T1.0:a0",
+    "problem_id": "evaluation:L9:0029",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0030:T1.0:a0",
+    "problem_id": "evaluation:L9:0030",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0032:T1.0:a0",
+    "problem_id": "evaluation:L9:0032",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0033:T1.0:a0",
+    "problem_id": "evaluation:L9:0033",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0034:T1.0:a0",
+    "problem_id": "evaluation:L9:0034",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0035:T1.0:a0",
+    "problem_id": "evaluation:L9:0035",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0036:T1.0:a0",
+    "problem_id": "evaluation:L9:0036",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0037:T1.0:a0",
+    "problem_id": "evaluation:L9:0037",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0038:T1.0:a0",
+    "problem_id": "evaluation:L9:0038",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0039:T1.0:a0",
+    "problem_id": "evaluation:L9:0039",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0040:T1.0:a0",
+    "problem_id": "evaluation:L9:0040",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0041:T1.0:a0",
+    "problem_id": "evaluation:L9:0041",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L9:0043:T1.0:a0",
+    "problem_id": "evaluation:L9:0043",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0044:T1.0:a0",
+    "problem_id": "evaluation:L9:0044",
+    "length": 9,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0045:T1.0:a0",
+    "problem_id": "evaluation:L9:0045",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0046:T1.0:a0",
+    "problem_id": "evaluation:L9:0046",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0047:T1.0:a0",
+    "problem_id": "evaluation:L9:0047",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L9:0048:T1.0:a0",
+    "problem_id": "evaluation:L9:0048",
+    "length": 9,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0000:T1.0:a0",
+    "problem_id": "evaluation:L10:0000",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0001:T1.0:a0",
+    "problem_id": "evaluation:L10:0001",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0002:T1.0:a0",
+    "problem_id": "evaluation:L10:0002",
+    "length": 10,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0003:T1.0:a0",
+    "problem_id": "evaluation:L10:0003",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0004:T1.0:a0",
+    "problem_id": "evaluation:L10:0004",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0005:T1.0:a0",
+    "problem_id": "evaluation:L10:0005",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0006:T1.0:a0",
+    "problem_id": "evaluation:L10:0006",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0007:T1.0:a0",
+    "problem_id": "evaluation:L10:0007",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0008:T1.0:a0",
+    "problem_id": "evaluation:L10:0008",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0009:T1.0:a0",
+    "problem_id": "evaluation:L10:0009",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0010:T1.0:a0",
+    "problem_id": "evaluation:L10:0010",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0011:T1.0:a0",
+    "problem_id": "evaluation:L10:0011",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0012:T1.0:a0",
+    "problem_id": "evaluation:L10:0012",
+    "length": 10,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0013:T1.0:a0",
+    "problem_id": "evaluation:L10:0013",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0014:T1.0:a0",
+    "problem_id": "evaluation:L10:0014",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0016:T1.0:a0",
+    "problem_id": "evaluation:L10:0016",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0017:T1.0:a0",
+    "problem_id": "evaluation:L10:0017",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0018:T1.0:a0",
+    "problem_id": "evaluation:L10:0018",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0019:T1.0:a0",
+    "problem_id": "evaluation:L10:0019",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0021:T1.0:a0",
+    "problem_id": "evaluation:L10:0021",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0022:T1.0:a0",
+    "problem_id": "evaluation:L10:0022",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0023:T1.0:a0",
+    "problem_id": "evaluation:L10:0023",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0024:T1.0:a0",
+    "problem_id": "evaluation:L10:0024",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0026:T1.0:a0",
+    "problem_id": "evaluation:L10:0026",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0028:T1.0:a0",
+    "problem_id": "evaluation:L10:0028",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0029:T1.0:a0",
+    "problem_id": "evaluation:L10:0029",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0030:T1.0:a0",
+    "problem_id": "evaluation:L10:0030",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0031:T1.0:a0",
+    "problem_id": "evaluation:L10:0031",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0033:T1.0:a0",
+    "problem_id": "evaluation:L10:0033",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0034:T1.0:a0",
+    "problem_id": "evaluation:L10:0034",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0035:T1.0:a0",
+    "problem_id": "evaluation:L10:0035",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0036:T1.0:a0",
+    "problem_id": "evaluation:L10:0036",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0037:T1.0:a0",
+    "problem_id": "evaluation:L10:0037",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0038:T1.0:a0",
+    "problem_id": "evaluation:L10:0038",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0039:T1.0:a0",
+    "problem_id": "evaluation:L10:0039",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0040:T1.0:a0",
+    "problem_id": "evaluation:L10:0040",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0041:T1.0:a0",
+    "problem_id": "evaluation:L10:0041",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0042:T1.0:a0",
+    "problem_id": "evaluation:L10:0042",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0043:T1.0:a0",
+    "problem_id": "evaluation:L10:0043",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0044:T1.0:a0",
+    "problem_id": "evaluation:L10:0044",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0045:T1.0:a0",
+    "problem_id": "evaluation:L10:0045",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0046:T1.0:a0",
+    "problem_id": "evaluation:L10:0046",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0047:T1.0:a0",
+    "problem_id": "evaluation:L10:0047",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L10:0048:T1.0:a0",
+    "problem_id": "evaluation:L10:0048",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L10:0049:T1.0:a0",
+    "problem_id": "evaluation:L10:0049",
+    "length": 10,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0000:T1.0:a0",
+    "problem_id": "evaluation:L11:0000",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0001:T1.0:a0",
+    "problem_id": "evaluation:L11:0001",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0002:T1.0:a0",
+    "problem_id": "evaluation:L11:0002",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0003:T1.0:a0",
+    "problem_id": "evaluation:L11:0003",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0005:T1.0:a0",
+    "problem_id": "evaluation:L11:0005",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0006:T1.0:a0",
+    "problem_id": "evaluation:L11:0006",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0007:T1.0:a0",
+    "problem_id": "evaluation:L11:0007",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0008:T1.0:a0",
+    "problem_id": "evaluation:L11:0008",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0009:T1.0:a0",
+    "problem_id": "evaluation:L11:0009",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0010:T1.0:a0",
+    "problem_id": "evaluation:L11:0010",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0011:T1.0:a0",
+    "problem_id": "evaluation:L11:0011",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0012:T1.0:a0",
+    "problem_id": "evaluation:L11:0012",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0013:T1.0:a0",
+    "problem_id": "evaluation:L11:0013",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0014:T1.0:a0",
+    "problem_id": "evaluation:L11:0014",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0015:T1.0:a0",
+    "problem_id": "evaluation:L11:0015",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0016:T1.0:a0",
+    "problem_id": "evaluation:L11:0016",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0017:T1.0:a0",
+    "problem_id": "evaluation:L11:0017",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0018:T1.0:a0",
+    "problem_id": "evaluation:L11:0018",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0019:T1.0:a0",
+    "problem_id": "evaluation:L11:0019",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0020:T1.0:a0",
+    "problem_id": "evaluation:L11:0020",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0021:T1.0:a0",
+    "problem_id": "evaluation:L11:0021",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0022:T1.0:a0",
+    "problem_id": "evaluation:L11:0022",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0023:T1.0:a0",
+    "problem_id": "evaluation:L11:0023",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0024:T1.0:a0",
+    "problem_id": "evaluation:L11:0024",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0025:T1.0:a0",
+    "problem_id": "evaluation:L11:0025",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0026:T1.0:a0",
+    "problem_id": "evaluation:L11:0026",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0027:T1.0:a0",
+    "problem_id": "evaluation:L11:0027",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0028:T1.0:a0",
+    "problem_id": "evaluation:L11:0028",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0029:T1.0:a0",
+    "problem_id": "evaluation:L11:0029",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0030:T1.0:a0",
+    "problem_id": "evaluation:L11:0030",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0031:T1.0:a0",
+    "problem_id": "evaluation:L11:0031",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0032:T1.0:a0",
+    "problem_id": "evaluation:L11:0032",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0033:T1.0:a0",
+    "problem_id": "evaluation:L11:0033",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0034:T1.0:a0",
+    "problem_id": "evaluation:L11:0034",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0035:T1.0:a0",
+    "problem_id": "evaluation:L11:0035",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0037:T1.0:a0",
+    "problem_id": "evaluation:L11:0037",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0038:T1.0:a0",
+    "problem_id": "evaluation:L11:0038",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0039:T1.0:a0",
+    "problem_id": "evaluation:L11:0039",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0040:T1.0:a0",
+    "problem_id": "evaluation:L11:0040",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0041:T1.0:a0",
+    "problem_id": "evaluation:L11:0041",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0042:T1.0:a0",
+    "problem_id": "evaluation:L11:0042",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0043:T1.0:a0",
+    "problem_id": "evaluation:L11:0043",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0044:T1.0:a0",
+    "problem_id": "evaluation:L11:0044",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0045:T1.0:a0",
+    "problem_id": "evaluation:L11:0045",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L11:0046:T1.0:a0",
+    "problem_id": "evaluation:L11:0046",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0047:T1.0:a0",
+    "problem_id": "evaluation:L11:0047",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0048:T1.0:a0",
+    "problem_id": "evaluation:L11:0048",
+    "length": 11,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L11:0049:T1.0:a0",
+    "problem_id": "evaluation:L11:0049",
+    "length": 11,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0000:T1.0:a0",
+    "problem_id": "evaluation:L12:0000",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0001:T1.0:a0",
+    "problem_id": "evaluation:L12:0001",
+    "length": 12,
+    "jump_hit": 1,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0002:T1.0:a0",
+    "problem_id": "evaluation:L12:0002",
+    "length": 12,
+    "jump_hit": 1,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0003:T1.0:a0",
+    "problem_id": "evaluation:L12:0003",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0004:T1.0:a0",
+    "problem_id": "evaluation:L12:0004",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0005:T1.0:a0",
+    "problem_id": "evaluation:L12:0005",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0006:T1.0:a0",
+    "problem_id": "evaluation:L12:0006",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0007:T1.0:a0",
+    "problem_id": "evaluation:L12:0007",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0008:T1.0:a0",
+    "problem_id": "evaluation:L12:0008",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0009:T1.0:a0",
+    "problem_id": "evaluation:L12:0009",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0010:T1.0:a0",
+    "problem_id": "evaluation:L12:0010",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0011:T1.0:a0",
+    "problem_id": "evaluation:L12:0011",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0012:T1.0:a0",
+    "problem_id": "evaluation:L12:0012",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0013:T1.0:a0",
+    "problem_id": "evaluation:L12:0013",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0014:T1.0:a0",
+    "problem_id": "evaluation:L12:0014",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0015:T1.0:a0",
+    "problem_id": "evaluation:L12:0015",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0016:T1.0:a0",
+    "problem_id": "evaluation:L12:0016",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0017:T1.0:a0",
+    "problem_id": "evaluation:L12:0017",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0018:T1.0:a0",
+    "problem_id": "evaluation:L12:0018",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0019:T1.0:a0",
+    "problem_id": "evaluation:L12:0019",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0020:T1.0:a0",
+    "problem_id": "evaluation:L12:0020",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0021:T1.0:a0",
+    "problem_id": "evaluation:L12:0021",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0022:T1.0:a0",
+    "problem_id": "evaluation:L12:0022",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0023:T1.0:a0",
+    "problem_id": "evaluation:L12:0023",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0024:T1.0:a0",
+    "problem_id": "evaluation:L12:0024",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0025:T1.0:a0",
+    "problem_id": "evaluation:L12:0025",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0026:T1.0:a0",
+    "problem_id": "evaluation:L12:0026",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0027:T1.0:a0",
+    "problem_id": "evaluation:L12:0027",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0028:T1.0:a0",
+    "problem_id": "evaluation:L12:0028",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0029:T1.0:a0",
+    "problem_id": "evaluation:L12:0029",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0030:T1.0:a0",
+    "problem_id": "evaluation:L12:0030",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0031:T1.0:a0",
+    "problem_id": "evaluation:L12:0031",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0032:T1.0:a0",
+    "problem_id": "evaluation:L12:0032",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0033:T1.0:a0",
+    "problem_id": "evaluation:L12:0033",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0034:T1.0:a0",
+    "problem_id": "evaluation:L12:0034",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0035:T1.0:a0",
+    "problem_id": "evaluation:L12:0035",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0036:T1.0:a0",
+    "problem_id": "evaluation:L12:0036",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0037:T1.0:a0",
+    "problem_id": "evaluation:L12:0037",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0038:T1.0:a0",
+    "problem_id": "evaluation:L12:0038",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0039:T1.0:a0",
+    "problem_id": "evaluation:L12:0039",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0040:T1.0:a0",
+    "problem_id": "evaluation:L12:0040",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0041:T1.0:a0",
+    "problem_id": "evaluation:L12:0041",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0042:T1.0:a0",
+    "problem_id": "evaluation:L12:0042",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0043:T1.0:a0",
+    "problem_id": "evaluation:L12:0043",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0044:T1.0:a0",
+    "problem_id": "evaluation:L12:0044",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0045:T1.0:a0",
+    "problem_id": "evaluation:L12:0045",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0046:T1.0:a0",
+    "problem_id": "evaluation:L12:0046",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 1
+  },
+  {
+    "trace_id": "evaluation:L12:0047:T1.0:a0",
+    "problem_id": "evaluation:L12:0047",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0048:T1.0:a0",
+    "problem_id": "evaluation:L12:0048",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  },
+  {
+    "trace_id": "evaluation:L12:0049:T1.0:a0",
+    "problem_id": "evaluation:L12:0049",
+    "length": 12,
+    "jump_hit": 0,
+    "surprisal_hit": 0
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "files": {
+    "audit/result_review_20260914_v1/report_v2.py": "bcbd80b499ce7906e2296a6f22a9fdbeb4bea39e407779847962b599677f8e31",
+    "audit/result_review_20260914_v1/report_v2.sbatch": "9d764eb6c878670c022a5f423702b79256ff96664ef7409b2cf8eb3c21dda978"
+  },
+  "revision": "explicit dirty-tree reproducibility limitation; scientific values unchanged"
+}

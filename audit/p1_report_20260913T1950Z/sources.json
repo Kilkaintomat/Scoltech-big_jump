@@ -1,0 +1,332 @@
+[
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/protocol.json",
+    "sha256": "4a48219c7eb18ecbf5d1364a0ea88e6e99fbc6e73d04c28143bfa53c83bd598a",
+    "bytes": 1441,
+    "mtime_utc": "2026-09-08T17:40:58+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/analysis/metrics.json",
+    "sha256": "8abfa86cedb513c64b0e36db32bdde17bb0e136bba29b03d1a28fb7484ad6b78",
+    "bytes": 158334,
+    "mtime_utc": "2026-09-13T15:22:30.779288+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/analysis/manifest.json",
+    "sha256": "632983f4652f6cfe5fa5ebfa8452f78370a9d8172ecb8178822eec1a0e2d7c4c",
+    "bytes": 1843,
+    "mtime_utc": "2026-09-13T15:22:32.051564+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/measurement/calibration.json",
+    "sha256": "555059fb4513005df366f65923cf47501316efd8c68dcf07d49df876785bc5d3",
+    "bytes": 3814,
+    "mtime_utc": "2026-09-13T15:21:59.709008+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/measurement/deviations.parquet",
+    "sha256": "9aa76771d9e078bc645157adae53705684c145ca223874a1631df1078c0e163a",
+    "bytes": 33128,
+    "mtime_utc": "2026-09-13T15:21:59.707049+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/verification/labels.jsonl",
+    "sha256": "6b18bda1c478d47de586d0a48b49e7ce59f68cd7bb56452ccf5d1564ea2c6bbc",
+    "bytes": 1519577,
+    "mtime_utc": "2026-09-13T15:20:15.084719+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/verification/manifest.json",
+    "sha256": "3d1d7c075a5d707c53aed74a906b8a2b91b952efd5b6bd33c97557ab11b75e9b",
+    "bytes": 2511,
+    "mtime_utc": "2026-09-13T15:20:16.508074+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/inputs/input-versions.json",
+    "sha256": "0c7fbd108ab71fdf4cbd38922333d31a594ed64b07c8255b461dd14b3419b227",
+    "bytes": 315,
+    "mtime_utc": "2026-09-08T17:18:57+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-000-of-008/labels.jsonl",
+    "sha256": "607bb8ecd96b26d7983e3c2b57b4cb4b560ea050b01a284919ea38bec2f860bb",
+    "bytes": 23371528,
+    "mtime_utc": "2026-09-13T17:03:54.022674+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-001-of-008/labels.jsonl",
+    "sha256": "cb45775e92da8cd60670d1c8812c3a73bdff048bb9feaabf5c0bed9365407993",
+    "bytes": 36308598,
+    "mtime_utc": "2026-09-13T16:53:04.417221+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-002-of-008/labels.jsonl",
+    "sha256": "af264a13bb9ebfca4aab9828d06fa93bf73584b1ab2a064f816a84ba09328924",
+    "bytes": 16703928,
+    "mtime_utc": "2026-09-13T18:44:02.035991+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-003-of-008/labels.jsonl",
+    "sha256": "1c59fa197349ea7f17133f679043870d60ed413c5446dec5d4cddd6d6c66ef2c",
+    "bytes": 26399647,
+    "mtime_utc": "2026-09-13T18:40:08.358714+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-004-of-008/labels.jsonl",
+    "sha256": "b4f9b1c09ff1d0d6107b493b0289fc4a90caa57b371a7ce6e85b6f96ea959cf7",
+    "bytes": 15552621,
+    "mtime_utc": "2026-09-13T19:06:32.722037+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-005-of-008/labels.jsonl",
+    "sha256": "2e42f992970242777aaaecb1441525d575c8856392f22627f3e201686e052b6a",
+    "bytes": 16456921,
+    "mtime_utc": "2026-09-13T19:50:15.984339+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/main/verification/shard-006-of-008/labels.jsonl",
+    "sha256": "4529ca675c5becbf8ca7f0c81595dff92f6a54d3b0b76fd66340298d3056e753",
+    "bytes": 15940091,
+    "mtime_utc": "2026-09-13T19:46:51.883017+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/protocol.json",
+    "sha256": "a11fbfea3f3d4b171fd526e737023548f22d98cc8ba1317e36cb2524fcd2802c",
+    "bytes": 1465,
+    "mtime_utc": "2026-09-09T15:52:04+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/analysis/metrics.json",
+    "sha256": "4b09796d145ff1b2e064a94d2ab6f666366832dc65bed7b3ee0d64cf4fa6868b",
+    "bytes": 182501,
+    "mtime_utc": "2026-09-13T15:20:29.956754+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/analysis/manifest.json",
+    "sha256": "1c9b21af72493d705e72904cb243db7f6e6cc91d5df0a96ae08c902378a682fd",
+    "bytes": 1835,
+    "mtime_utc": "2026-09-13T15:20:31.048567+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/measurement/calibration.json",
+    "sha256": "e01b64e573dbc7dce0547030f208fa2c7de3b0876bb785d91275b9b9100d4f56",
+    "bytes": 3787,
+    "mtime_utc": "2026-09-13T15:19:56.903741+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/measurement/deviations.parquet",
+    "sha256": "9d058b4a9cff7fe00a5ba588aef037897ddbc7a1b68ffc68f22ae4a10b50cbdb",
+    "bytes": 37493,
+    "mtime_utc": "2026-09-13T15:19:56.902107+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/verification/labels.jsonl",
+    "sha256": "8042951cee74add259569079184b53053c33c5603ec9d0112e803de4e51eb759",
+    "bytes": 1612313,
+    "mtime_utc": "2026-09-13T15:18:02.485013+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/pilot/verification/manifest.json",
+    "sha256": "aa4e63c4f5a3cae22d35d92fb1df9a6c19f91c330e67b094367141a8d769b6be",
+    "bytes": 2537,
+    "mtime_utc": "2026-09-13T15:18:04.002448+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/inputs/input-versions.json",
+    "sha256": "066d9716de629441f293b667ead59b6ef5a7730b2258d8a797ae1c2fedda1ffc",
+    "bytes": 286,
+    "mtime_utc": "2026-09-09T15:52:04+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-000-of-008/labels.jsonl",
+    "sha256": "f6e0f125ae0f99fb6934dc27f5305b2da6ed21a49e558dd1e403f8facb83df23",
+    "bytes": 19734983,
+    "mtime_utc": "2026-09-13T16:32:01.893818+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-001-of-008/labels.jsonl",
+    "sha256": "590d82928ad3572659ac2c187ffb97924bb14a9a64e6acecbefe1e3f2a6950bf",
+    "bytes": 20553458,
+    "mtime_utc": "2026-09-13T16:57:40.936616+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-002-of-008/labels.jsonl",
+    "sha256": "90877be70f48de9efb4fb56f131ab9ddd97fbd1dca4d4cd621e7589d63b3dc80",
+    "bytes": 16770250,
+    "mtime_utc": "2026-09-13T18:20:03.473555+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-003-of-008/labels.jsonl",
+    "sha256": "d8f9168eb0e8c35811e0d461a41d7e1e700081eb8b3d7b1321ec235e6e0eccff",
+    "bytes": 22514115,
+    "mtime_utc": "2026-09-13T18:49:03.860245+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-004-of-008/labels.jsonl",
+    "sha256": "841bafdd753813138468f1ef37cd5838ae2a328d1053ece5aa46c96b35379b85",
+    "bytes": 13944775,
+    "mtime_utc": "2026-09-13T19:25:06.708405+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-005-of-008/labels.jsonl",
+    "sha256": "14a502d59d1a2d06f1d596398030d191c67f4a7aa255e911d7bebacd7c803b4e",
+    "bytes": 20832965,
+    "mtime_utc": "2026-09-13T19:33:33.868010+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/main/verification/shard-006-of-008/labels.jsonl",
+    "sha256": "039824622e1aa0dcfc7d59b4d34ef2669fee27c05e44048be3035e1322fc8081",
+    "bytes": 15308881,
+    "mtime_utc": "2026-09-13T19:50:11.296718+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/protocol.json",
+    "sha256": "03d2d2dd940aadcc38572e9c0f99145bd864ed730e1563de87327fa9bd3cd14f",
+    "bytes": 1465,
+    "mtime_utc": "2026-09-09T15:52:05+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/analysis/metrics.json",
+    "sha256": "2b43ae1f6abce48eda721ce9e9e534d3f530fed8fc7c637f514d076a467176ea",
+    "bytes": 242402,
+    "mtime_utc": "2026-09-13T15:25:58.985286+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/analysis/manifest.json",
+    "sha256": "2037a0acc216fee74d28ca1d2c4cf3ee54a524e57b5bdbb1327ff880385b90b3",
+    "bytes": 1835,
+    "mtime_utc": "2026-09-13T15:26:00.301134+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/measurement/calibration.json",
+    "sha256": "78b946b0ff465843f8dbff56505a0eb54b6c4b5f178f374046938845e179e138",
+    "bytes": 3567,
+    "mtime_utc": "2026-09-13T15:25:28.073117+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/measurement/deviations.parquet",
+    "sha256": "a7e77d2b0320ee0553935f588e973e52f3b69fe4503ecdd6d1d0e64a8f101862",
+    "bytes": 51979,
+    "mtime_utc": "2026-09-13T15:25:28.070302+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/verification/labels.jsonl",
+    "sha256": "aa2101e79f3171e9f88ea94a10e8a259eb15b0ff20f8d6dd765ef64fd1d350c0",
+    "bytes": 1183488,
+    "mtime_utc": "2026-09-13T15:23:23.773478+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/verification/manifest.json",
+    "sha256": "066d44f8b28a74dcdf2a3793690f754010ad9884e9dee2b4c8d5f072de8e145a",
+    "bytes": 2509,
+    "mtime_utc": "2026-09-13T15:23:25.248864+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/inputs/input-versions.json",
+    "sha256": "da27315261250f8755b1e4ede08a415eec2d949e99575c6fcf017ddbd05ac9b8",
+    "bytes": 287,
+    "mtime_utc": "2026-09-09T15:52:04+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-000-of-008/labels.jsonl",
+    "sha256": "41cf03294494edce29f62951a2c2cf81e3fd6c8167797ff0afea0f6a1a28e747",
+    "bytes": 12701238,
+    "mtime_utc": "2026-09-13T16:09:02.126954+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-001-of-008/labels.jsonl",
+    "sha256": "bb6eab8fc5d5d77332986de3493a641e9f4994b471ecb515fc274d4ff44ce50b",
+    "bytes": 12334943,
+    "mtime_utc": "2026-09-13T17:05:18.171577+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-002-of-008/labels.jsonl",
+    "sha256": "a8aeba17af3d82b74f5b52483ad26b0057dd29ce5d859a5f53b06476c62bba9b",
+    "bytes": 16148989,
+    "mtime_utc": "2026-09-13T18:39:25.710362+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-003-of-008/labels.jsonl",
+    "sha256": "59ceb2e996d98fbf9e2ceb8b0e1b786fe609b4fc611b35f34c1e39d6cc2050cf",
+    "bytes": 12053209,
+    "mtime_utc": "2026-09-13T19:00:52.653548+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-004-of-008/labels.jsonl",
+    "sha256": "71a43b7d655b9e7f7cc2223cc152735cefefb04f8e432f3db90c07a888ca8f83",
+    "bytes": 10822859,
+    "mtime_utc": "2026-09-13T19:06:49.983871+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/main/verification/shard-005-of-008/labels.jsonl",
+    "sha256": "fa8c00af61311e7700dae142e35c45f735bc0be9ef3e58c6358def7e356a0203",
+    "bytes": 12118241,
+    "mtime_utc": "2026-09-13T19:50:15.801529+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/calibration-summary/metrics.json",
+    "sha256": "54f739b6a24b9e60fcd0c2183385de94af1f1be72c55a5404eb2b3349e1ee847",
+    "bytes": 3843,
+    "mtime_utc": "2026-09-11T19:22:26+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/calibration-summary/manifest.json",
+    "sha256": "6b4d445d877b2ab0e49a847bc44cec19a3c78117eb9103ac4bf77325bf27c761",
+    "bytes": 15368,
+    "mtime_utc": "2026-09-11T19:22:31+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/queue.json",
+    "sha256": "81e0cdd4bc6907a18ce3727dcdb113196f4c882430334420860fb7953ff04ca1",
+    "bytes": 94612,
+    "mtime_utc": "2026-09-13T19:50:15+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/deepseek/whitening-01/metrics.json",
+    "sha256": "4051a8608aa35fc9e94c6e4689272952e941eac39f8071b13ccba844285cb2e9",
+    "bytes": 6269,
+    "mtime_utc": "2026-09-13T12:24:50+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/deepseek/whitening-04/metrics.json",
+    "sha256": "72aaab42617cd69531bd57195894d1d94676a639d76ae7aae247c57435b1b7e5",
+    "bytes": 5957,
+    "mtime_utc": "2026-09-13T12:26:54+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/goedel/whitening-01/metrics.json",
+    "sha256": "e69fd95de5b3b639137f6a4faa96ad9de4a2513e7b3bbbb2bbf92d9781d4208a",
+    "bytes": 6312,
+    "mtime_utc": "2026-09-13T12:24:50+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/goedel/whitening-04/metrics.json",
+    "sha256": "b491217e3e912a59cb7800a5702ced203ba786fa55bb72439a95e68624e8df03",
+    "bytes": 6020,
+    "mtime_utc": "2026-09-13T12:27:18+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/kimina/whitening-01/metrics.json",
+    "sha256": "032488265f8cd92c055dd682ef638b37cf5333e879083956f1362060a0b8398f",
+    "bytes": 6182,
+    "mtime_utc": "2026-09-13T12:25:15+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/controls_20260913_local/pilot/kimina/whitening-04/metrics.json",
+    "sha256": "72b6d42d22d75297493bbfd5bafbfa473d8fdc9e9572af45f06b1285881d827a",
+    "bytes": 5975,
+    "mtime_utc": "2026-09-13T12:27:18+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/pilot/generation/shard-000-of-001/samples.jsonl",
+    "sha256": "82ff2a8ad0df05acb91c378b32edda780786f7535ff60d19b81aff1365a13fa8",
+    "bytes": 8013231,
+    "mtime_utc": "2026-09-09T18:00:59.578314+00:00"
+  },
+  {
+    "path": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/pilot/generation/shard-000-of-001/samples.jsonl",
+    "sha256": "aa1d00b0dfba35a65d8dd85d6d354708e77887eee522b75839e9ebed24a30895",
+    "bytes": 6167602,
+    "mtime_utc": "2026-09-09T18:17:56.685906+00:00"
+  }
+]

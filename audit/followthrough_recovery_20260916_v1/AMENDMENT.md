@@ -1,0 +1,9 @@
+# Runtime recovery, 2026-09-16
+
+The September 15 scientific protocol, requests, seeds, model weights, sampling settings, estimands, labels and gates are unchanged. All frozen sources and previously saved rows are preserved. The original source manifest remains the journal identity for continuation; new rows and final generation manifests additionally identify this recovery source.
+
+P2 raised SourceExclusion before writing an alignment-ineligible answer. The process then hung during shutdown; Slurm reported TIMEOUT. Two automatic retries occurred. Unsaved answers from these failed batches cannot be reconstructed from logs. Pending requests will be rerun with their original per-request seeds; bitwise reproduction of lost answers is not claimed. This missing-data/retry limitation must accompany interpretation. Saved answers are not regenerated. The new wrapper preserves every returned answer including raw token IDs, decoded text and an explicit alignment status. Ineligible alignment remains in the assigned-attempt denominator and must not be counted as a mathematical error or forced into activation extraction. The strict downstream alignment checks are unchanged.
+
+P5 failed because the fresh launch omitted the already validated C compiler binding. The original compiler wrapper is restored; an exact CPU/GPU grammar-bitmask test runs before model acquisition. Neither the grammar nor the checker nor the calibration gate changes.
+
+The wrapper exits after closed journals/manifests, avoiding interpreter shutdown deadlock. Failures produce a traceback artifact and nonzero exit. New jobs request 12 hours, same GPU/CPU/memory. Existing jobs are not cancelled. Automatic recovery of failed programs remains prohibited. New generation wrappers are not automatically retried; another timeout requires inspection.

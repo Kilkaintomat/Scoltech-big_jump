@@ -1,0 +1,11 @@
+{
+  "stage": "latex-editorial-render",
+  "source_report": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/report_v3/REPORT_RU.md",
+  "source_report_sha256": "37a583a675b19415787c2e14a71df74f5c16cceaf42428ee23f89ca2372ee7d6",
+  "source_manifest": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/report_v3/manifest.json",
+  "source_manifest_sha256": "bf5f82100ab7bf5952f7e8f045b7dca661ee4fa06b1e6363f2bb3275f0720591",
+  "changes": [
+    "typeset_dated_status_report_without_changing_scientific_metrics"
+  ],
+  "scientific_metrics_unchanged": true
+}

@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-09-14T22:50:59.818615Z",
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  },
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/later_error_sensitivity.py": "7f8ded9895a99c64ab5f3c6f15844f5227ec436736b104fc3a3336c880b4b9af",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/later_error_sensitivity-plan.json": "acbb625fdc932ea39ce963239bd8704ed73fbb9b8849693ee93148996a2e55d8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/later_error_sensitivity.sbatch": "ce63a2c7d2743c29e047a6d4cb04f13d2e18ec1e7d6529c0274ea2e05cabc5a0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/analysis_math.py": "f6eadc2754d883483ea9941efb7e596e51abf52cfbd668ed2e7cde66bfba101d"
+  }
+}

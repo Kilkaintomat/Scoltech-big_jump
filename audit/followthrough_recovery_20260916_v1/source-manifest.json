@@ -1,0 +1,22 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/p2_generate_recovery.py": "45b8e382cb0efb37583053229984fff5fe3e7e0aa914951ac9a1ab16cde34090",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/flow_v3.py": "8fd6de855f484b66aca3337914a1222c33c8743b493d3ecd769158aa060055b0",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/p5_resume.py": "c33a46931c5f4a0db64b9cfebf5d1d424d945f7100a984bc7059e4f6734b4896",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/preflight.sbatch": "37b57d83ce424499db774183c2f5aec004c112dd92b348ff3428865dec2d4996",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/preflight.py": "d0ac0e59f0d775a33def8fdcae746a5a81b4c0c9f3be3311ce5c346c09a0ad62",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/p5_evaluation.sbatch": "077669f643211634cf8179f09f2af1391dea0c2e3a0c7c5bf13f49747890ce4b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/mask_check.py": "a6ddce9bc8ec86d534f85877516b16540f57378b0fe9dcacc718e93681c1a363",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/p2_generate.sbatch": "6f45110c4d22c689504b1dd99f53ecb49515b58df10853662a1da78123c636e8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/p5_calibration.sbatch": "f0537c299b3b36fd2a20749615deb1f191b34fc4749353d7ea52cb6e38979c8b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/entry.py": "02d25d64074ca9fb463c509be31045a30372d27809bffb98cdf3008406da8c41",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/AMENDMENT.md": "3a3db8aa7cdb32b655422e1d3a0d88c93f303d73f689f158af411760a5d226b3",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v1/flow-plan-v3.json": "0e2717e7cf47e59d9ecc8220afb49cf75c6083049bfb58dd1084db289537d1e1",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/p5_repair_20260914_v2/runtime_cc/cc-wrapper.sh": "bcbbd8422272297d8eb43a40fe1bc411cf47fa747e5c9f7dfa5db0b9a7ecb45b"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true,
+    "runtime_recovery": "20260916-v1"
+  }
+}

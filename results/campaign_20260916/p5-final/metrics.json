@@ -1,0 +1,521 @@
+{
+  "temperatures": {
+    "0.6": {
+      "attempts": 1500,
+      "categories": {
+        "invalid_inference": 1221,
+        "verified": 279
+      },
+      "length_prediction": {
+        "calibration_counts": {
+          "3": [
+            34,
+            100
+          ],
+          "4": [
+            37,
+            100
+          ],
+          "5": [
+            34,
+            100
+          ],
+          "6": [
+            19,
+            100
+          ],
+          "7": [
+            21,
+            100
+          ],
+          "8": [
+            18,
+            100
+          ],
+          "9": [
+            6,
+            100
+          ],
+          "10": [
+            12,
+            100
+          ],
+          "11": [
+            6,
+            100
+          ],
+          "12": [
+            1,
+            100
+          ]
+        },
+        "evaluation_counts": {
+          "3": [
+            14,
+            50
+          ],
+          "4": [
+            17,
+            50
+          ],
+          "5": [
+            19,
+            50
+          ],
+          "6": [
+            9,
+            50
+          ],
+          "7": [
+            9,
+            50
+          ],
+          "8": [
+            4,
+            50
+          ],
+          "9": [
+            4,
+            50
+          ],
+          "10": [
+            8,
+            50
+          ],
+          "11": [
+            5,
+            50
+          ],
+          "12": [
+            2,
+            50
+          ]
+        },
+        "calibration_rate": {
+          "status": "interior",
+          "rate_per_step": 0.2554113257151848,
+          "rate_is_infinite": false,
+          "loglik": -439.2196857196549,
+          "loglik_saturated": -428.94613291632515,
+          "lr_statistic": 20.547105606659443,
+          "identified_parameters": 1,
+          "p_value": null,
+          "p_value_status": "not_reported_without_dependence_calibration",
+          "theta": null,
+          "tau": null,
+          "tolerance_status": "not_identified_from_length_counts",
+          "predictions": [
+            {
+              "length": 3,
+              "verified": 34,
+              "attempts": 100,
+              "predicted_success": 0.46476007367465405
+            },
+            {
+              "length": 4,
+              "verified": 37,
+              "attempts": 100,
+              "predicted_success": 0.3600021400880082
+            },
+            {
+              "length": 5,
+              "verified": 34,
+              "attempts": 100,
+              "predicted_success": 0.2788568730597776
+            },
+            {
+              "length": 6,
+              "verified": 19,
+              "attempts": 100,
+              "predicted_success": 0.2160019260820699
+            },
+            {
+              "length": 7,
+              "verified": 21,
+              "attempts": 100,
+              "predicted_success": 0.16731462115033582
+            },
+            {
+              "length": 8,
+              "verified": 18,
+              "attempts": 100,
+              "predicted_success": 0.12960154086794587
+            },
+            {
+              "length": 9,
+              "verified": 6,
+              "attempts": 100,
+              "predicted_success": 0.10038907107976998
+            },
+            {
+              "length": 10,
+              "verified": 12,
+              "attempts": 100,
+              "predicted_success": 0.0777611556526769
+            },
+            {
+              "length": 11,
+              "verified": 6,
+              "attempts": 100,
+              "predicted_success": 0.06023362168213522
+            },
+            {
+              "length": 12,
+              "verified": 1,
+              "attempts": 100,
+              "predicted_success": 0.04665683207116399
+            }
+          ]
+        },
+        "heldout": {
+          "loglik": -224.8091135511528,
+          "loglik_status": "finite",
+          "brier": 0.14242882929310852,
+          "attempts": 500,
+          "predictions": [
+            {
+              "length": 3,
+              "predicted_success": 0.46476007367465405
+            },
+            {
+              "length": 4,
+              "predicted_success": 0.3600021400880082
+            },
+            {
+              "length": 5,
+              "predicted_success": 0.2788568730597776
+            },
+            {
+              "length": 6,
+              "predicted_success": 0.2160019260820699
+            },
+            {
+              "length": 7,
+              "predicted_success": 0.16731462115033582
+            },
+            {
+              "length": 8,
+              "predicted_success": 0.12960154086794587
+            },
+            {
+              "length": 9,
+              "predicted_success": 0.10038907107976998
+            },
+            {
+              "length": 10,
+              "predicted_success": 0.0777611556526769
+            },
+            {
+              "length": 11,
+              "predicted_success": 0.06023362168213522
+            },
+            {
+              "length": 12,
+              "predicted_success": 0.04665683207116399
+            }
+          ],
+          "scope": "prediction from calibration tasks; evaluation outcomes were not used to fit the rate"
+        },
+        "constant_calibration_baseline": {
+          "probability": 0.188,
+          "heldout_brier": 0.14891200000000002
+        },
+        "brier_improvement": 0.0064831707068915,
+        "brier_improvement_ci975": [
+          -0.003993596194521537,
+          0.017775938196216815
+        ],
+        "bootstrap_unit": "independent problem within assigned length; refit on resampled calibration, evaluate on independently resampled evaluation",
+        "bootstrap_replicates": 2000,
+        "interpretation": "Length-dependent predictive performance; does not identify theta, tau or a heavy-tail mechanism."
+      },
+      "independent_whitening": {
+        "layer": 13,
+        "shrinkage": 0.1,
+        "fit_tasks": 98,
+        "threshold_tasks": 90,
+        "fit_steps": 543,
+        "threshold_steps": 534,
+        "tau": 51.24216940556609,
+        "verified_FPR": {
+          "steps": 549,
+          "rate": 0.012750455373406194
+        },
+        "pre_error_FPR": {
+          "steps": 1302,
+          "rate": 0.005376344086021506
+        },
+        "error_TPR": {
+          "steps": 409,
+          "rate": 0.02444987775061125
+        },
+        "localization": {
+          "eligible": 409,
+          "jump": 0.1784841075794621,
+          "surprisal": 0.27383863080684595
+        },
+        "scope": "Descriptive P2/P3 on the controlled family; no endpoint-specific tuning."
+      }
+    },
+    "1": {
+      "attempts": 1500,
+      "categories": {
+        "invalid_inference": 1245,
+        "verified": 255
+      },
+      "length_prediction": {
+        "calibration_counts": {
+          "3": [
+            29,
+            100
+          ],
+          "4": [
+            33,
+            100
+          ],
+          "5": [
+            31,
+            100
+          ],
+          "6": [
+            18,
+            100
+          ],
+          "7": [
+            20,
+            100
+          ],
+          "8": [
+            16,
+            100
+          ],
+          "9": [
+            5,
+            100
+          ],
+          "10": [
+            7,
+            100
+          ],
+          "11": [
+            7,
+            100
+          ],
+          "12": [
+            5,
+            100
+          ]
+        },
+        "evaluation_counts": {
+          "3": [
+            17,
+            50
+          ],
+          "4": [
+            20,
+            50
+          ],
+          "5": [
+            14,
+            50
+          ],
+          "6": [
+            7,
+            50
+          ],
+          "7": [
+            7,
+            50
+          ],
+          "8": [
+            6,
+            50
+          ],
+          "9": [
+            6,
+            50
+          ],
+          "10": [
+            5,
+            50
+          ],
+          "11": [
+            2,
+            50
+          ],
+          "12": [
+            0,
+            50
+          ]
+        },
+        "calibration_rate": {
+          "status": "interior",
+          "rate_per_step": 0.26838347545213004,
+          "rate_is_infinite": false,
+          "loglik": -426.21554508701064,
+          "loglik_saturated": -417.1205153015226,
+          "lr_statistic": 18.190059570976132,
+          "identified_parameters": 1,
+          "p_value": null,
+          "p_value_status": "not_reported_without_dependence_calibration",
+          "theta": null,
+          "tau": null,
+          "tolerance_status": "not_identified_from_length_counts",
+          "predictions": [
+            {
+              "length": 3,
+              "verified": 29,
+              "attempts": 100,
+              "predicted_success": 0.4470206778096971
+            },
+            {
+              "length": 4,
+              "verified": 33,
+              "attempts": 100,
+              "predicted_success": 0.3417984983023077
+            },
+            {
+              "length": 5,
+              "verified": 31,
+              "attempts": 100,
+              "predicted_success": 0.2613440926583874
+            },
+            {
+              "length": 6,
+              "verified": 18,
+              "attempts": 100,
+              "predicted_success": 0.19982748638944103
+            },
+            {
+              "length": 7,
+              "verified": 20,
+              "attempts": 100,
+              "predicted_success": 0.1527909963854342
+            },
+            {
+              "length": 8,
+              "verified": 16,
+              "attempts": 100,
+              "predicted_success": 0.11682621344171261
+            },
+            {
+              "length": 9,
+              "verified": 5,
+              "attempts": 100,
+              "predicted_success": 0.08932701841081594
+            },
+            {
+              "length": 10,
+              "verified": 7,
+              "attempts": 100,
+              "predicted_success": 0.06830073476743576
+            },
+            {
+              "length": 11,
+              "verified": 7,
+              "attempts": 100,
+              "predicted_success": 0.052223733118654726
+            },
+            {
+              "length": 12,
+              "verified": 5,
+              "attempts": 100,
+              "predicted_success": 0.03993102431672224
+            }
+          ]
+        },
+        "heldout": {
+          "loglik": -202.16425314700197,
+          "loglik_status": "finite",
+          "brier": 0.12690314753649745,
+          "attempts": 500,
+          "predictions": [
+            {
+              "length": 3,
+              "predicted_success": 0.4470206778096971
+            },
+            {
+              "length": 4,
+              "predicted_success": 0.3417984983023077
+            },
+            {
+              "length": 5,
+              "predicted_success": 0.2613440926583874
+            },
+            {
+              "length": 6,
+              "predicted_success": 0.19982748638944103
+            },
+            {
+              "length": 7,
+              "predicted_success": 0.1527909963854342
+            },
+            {
+              "length": 8,
+              "predicted_success": 0.11682621344171261
+            },
+            {
+              "length": 9,
+              "predicted_success": 0.08932701841081594
+            },
+            {
+              "length": 10,
+              "predicted_success": 0.06830073476743576
+            },
+            {
+              "length": 11,
+              "predicted_success": 0.052223733118654726
+            },
+            {
+              "length": 12,
+              "predicted_success": 0.03993102431672224
+            }
+          ],
+          "scope": "prediction from calibration tasks; evaluation outcomes were not used to fit the rate"
+        },
+        "constant_calibration_baseline": {
+          "probability": 0.171,
+          "heldout_brier": 0.13978499999999996
+        },
+        "brier_improvement": 0.012881852463502513,
+        "brier_improvement_ci975": [
+          0.0023780498271350195,
+          0.024183465985540085
+        ],
+        "bootstrap_unit": "independent problem within assigned length; refit on resampled calibration, evaluate on independently resampled evaluation",
+        "bootstrap_replicates": 2000,
+        "interpretation": "Length-dependent predictive performance; does not identify theta, tau or a heavy-tail mechanism."
+      },
+      "independent_whitening": {
+        "layer": 13,
+        "shrinkage": 0.1,
+        "fit_tasks": 92,
+        "threshold_tasks": 79,
+        "fit_steps": 523,
+        "threshold_steps": 479,
+        "tau": 52.14196519085106,
+        "verified_FPR": {
+          "steps": 466,
+          "rate": 0.0
+        },
+        "pre_error_FPR": {
+          "steps": 1319,
+          "rate": 0.006823351023502654
+        },
+        "error_TPR": {
+          "steps": 416,
+          "rate": 0.026442307692307692
+        },
+        "localization": {
+          "eligible": 416,
+          "jump": 0.1658653846153846,
+          "surprisal": 0.3245192307692308
+        },
+        "scope": "Descriptive P2/P3 on the controlled family; no endpoint-specific tuning."
+      }
+    }
+  },
+  "calibration_evaluation_task_overlap": 0,
+  "tail_estimation": "Not performed by this stage; no inference of gamma, theta or a tail mechanism from length-rate fit alone.",
+  "scope": "Expanded controlled family, syntax-only grammar, all assigned outcomes in denominators; fixed independent calibration."
+}

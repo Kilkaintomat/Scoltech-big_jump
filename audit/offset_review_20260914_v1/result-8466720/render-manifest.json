@@ -1,0 +1,43 @@
+{
+  "stage": "experiment-report-render",
+  "job": "8466765",
+  "created_utc": "2026-09-14T11:56:19.756188+00:00",
+  "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "git_dirty": true,
+  "environment": {
+    "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+    "packages": {
+      "numpy": "2.2.2",
+      "pandas": "3.0.5",
+      "scipy": "1.17.1",
+      "pyarrow": "25.0.1",
+      "matplotlib": "3.11.1",
+      "markdown": "3.10.3",
+      "reportlab": null,
+      "python-docx": null
+    },
+    "hostname": "cn55.zhores",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "cpu_count": 64,
+    "allocated_cpus": "2",
+    "hardware": "x86_64"
+  },
+  "config": {
+    "data_job": "8466720",
+    "format": "Markdown + standalone HTML + plots",
+    "pdf_status": "reportlab unavailable; standalone HTML is ready for browser printing"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/metrics.json": "dda00e3b99470f2e025214934e15a063d82755a99dadcc2e61d0df17333dfbe5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/manifest.json": "b8d1d31fda2b790a7b55be928e7cca0b06cdc93c40103cd1fb26490b10378437",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/render.py": "12e95eedfb87edde083a2163e95d2d5e6d7c1df8860382ec3d8fa4d11167eaa8"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/REPORT_RU.md": "05e0b990cfcbb20d514a46f8c04450aacb0b9ee04326edb705ff77ad415da3e5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/REPORT_RU.html": "2ba77c59fe0594242a7dc6b046a91b979cd07171a8bd9a44aaf49e71d660d3fb",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/offsets.png": "d1b2e16db69ed9aafa58a553875740c4ca08d7e38d98641808ef418af0bfa9dc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/offsets.pdf": "440a29e2c4ac6ca9e4dc41b7e05934fab2e198f9b068cb2b8106a832f360d488",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/onebigjumpdraft.pdf": "c8477f7cad4e48a407b0e2751d0a348af6b5f6515ac8e4368ae86bcdba3d1d4b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/boundary_metrics.json": "b618672952c27314c3ddf27342aa248431441e5eca700a89b1c086f7c82deb67"
+  }
+}

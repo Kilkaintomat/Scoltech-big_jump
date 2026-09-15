@@ -1,0 +1,11 @@
+{
+  "scope": "isolated CPU diagnostic on saved answers; no main changes or new GPU generation",
+  "selection": "hash order, different problem IDs, eight native-only cases, up to two cases per fixed alias, one verified control per model",
+  "command_timeout_s": 20,
+  "max_heartbeats": 400000,
+  "workers": 1,
+  "reference_mathlib_tag": "v4.9.0",
+  "reference_is_static_only": true,
+  "primary_labels_unchanged": true,
+  "created_utc": "2026-09-13T20:32:12.615335Z"
+}

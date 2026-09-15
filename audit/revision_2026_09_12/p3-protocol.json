@@ -1,0 +1,37 @@
+{
+  "version": "p3-diagnosis-prespecified-20260912-v1",
+  "seed": 712091200,
+  "datasets": 200,
+  "per_shard": 50,
+  "q": 0.01,
+  "tasks": 48,
+  "statistics": {
+    "bootstrap": 500,
+    "min_tasks": 20,
+    "valid_fraction": 0.9,
+    "family_size": 9
+  },
+  "scenarios": {
+    "original_support": {
+      "shape": 0.25,
+      "failure_quantile": 0.99,
+      "seed_offset": 0
+    },
+    "lower_support": {
+      "shape": 0.25,
+      "failure_quantile": 0.98,
+      "seed_offset": 100000
+    },
+    "exponential_null": {
+      "shape": 0.0,
+      "failure_quantile": 0.98,
+      "seed_offset": 200000
+    }
+  },
+  "candidates": [
+    "existing percentile",
+    "basic bootstrap with same task draws"
+  ],
+  "oracle": "known support, diagnosis only; forbidden for real data",
+  "promotion_rule": "No automatic method change. Report every scenario, availability, coverage, bias and null rejection. Independent calibration does not establish transformer coverage."
+}

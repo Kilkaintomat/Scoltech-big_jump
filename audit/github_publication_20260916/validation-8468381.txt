@@ -1,0 +1,43 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+provenance: bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98 on experiment/e1-20260908 (git 2.55.0)
+WARNING: /beegfs/home/denis.rakhmankin/onebigjump is dirty; results will be recorded as unreproducible.
+lean-runtime.tar: OK
+Pinned complete Lean toolchain staged on node storage: /tmp/onebigjump-elan-e5xOkbSX
+Lean runtime staged on node storage: /tmp/onebigjump-lean-Lpnym6KF
+Pinned REPL runtime manifest: /beegfs/home/denis.rakhmankin/onebigjump/runs/repl_runtime_20260913_sealed/manifest.json
+INFO:    Environment variable SINGULARITY_BIND is set, but APPTAINER_BIND is preferred
+INFO:    Environment variable SINGULARITYENV_PREPEND_PATH is set, but APPTAINERENV_PREPEND_PATH is preferred
+All checks passed!
+INFO:    Environment variable SINGULARITY_BIND is set, but APPTAINER_BIND is preferred
+INFO:    Environment variable SINGULARITYENV_PREPEND_PATH is set, but APPTAINERENV_PREPEND_PATH is preferred
+123 files already formatted
+INFO:    Environment variable SINGULARITY_BIND is set, but APPTAINER_BIND is preferred
+INFO:    Environment variable SINGULARITYENV_PREPEND_PATH is set, but APPTAINERENV_PREPEND_PATH is preferred
+Success: no issues found in 71 source files
+INFO:    Environment variable SINGULARITY_BIND is set, but APPTAINER_BIND is preferred
+INFO:    Environment variable SINGULARITYENV_PREPEND_PATH is set, but APPTAINERENV_PREPEND_PATH is preferred
+........................................................................ [ 11%]
+........................................................................ [ 22%]
+........................................................................ [ 34%]
+........................................................................ [ 45%]
+........................................................................ [ 56%]
+........................................................................ [ 68%]
+........................................................................ [ 79%]
+........................................................................ [ 90%]
+...........................................................              [100%]
+INFO:    Environment variable SINGULARITY_BIND is set, but APPTAINER_BIND is preferred
+INFO:    Environment variable SINGULARITYENV_PREPEND_PATH is set, but APPTAINERENV_PREPEND_PATH is preferred
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  9%]
+........................................................................ [ 19%]
+........................................................................ [ 29%]
+........................................................................ [ 39%]
+........................................................................ [ 49%]
+........................................................................ [ 58%]
+........................................................................ [ 68%]
+........................................................................ [ 78%]
+........................................................................ [ 88%]
+........................................................................ [ 98%]
+..............                                                           [100%]

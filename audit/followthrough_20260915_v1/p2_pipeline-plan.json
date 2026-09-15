@@ -1,0 +1,13 @@
+{
+  "version": "prospective-P2-pipeline-20260915-v1",
+  "context_limit": 12288,
+  "reference_adapter": "new_reference_v2; exact JSON theorem certified with a fresh unique declaration",
+  "representative_selection": "Choose lowest SHA256([seed,exercise_group,trace_id]) among all reliably localized evaluation failures before error-position filtering; a missing formal-entry boundary excludes that representative without substitution.",
+  "technical_pilot_gate": "Complete fixed attempts with exact saved original token reconstruction and finite aligned log probabilities; at least one extractable matching theorem declaration. No semantic correctness gate.",
+  "fixed_maxima": "All observed source positions including absorbing unreached suffix; exclude first increment only for the DeepSeek primary later-error positional test. D0 primary; other offsets descriptive.",
+  "analysis_unit": "Equal exercise groups: attempt average within problem, then problem average within group. DeepSeek uses one trace per group.",
+  "primary_family_size": 2,
+  "proof_files_in_prompts": false,
+  "first_increment_note": "Formal-entry X0 differs from original paper prompt X0; this is a prospectively declared measurement variant.",
+  "infrastructure_retry": "Only checkpoint continuation after TIMEOUT/NODE_FAIL/PREEMPTED, at most two retries; no silent retry of semantic or integrity failures."
+}

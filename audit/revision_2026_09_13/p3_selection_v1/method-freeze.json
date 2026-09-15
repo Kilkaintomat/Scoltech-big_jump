@@ -1,0 +1,16 @@
+{
+  "created_utc": "2026-09-13T17:03:00.722033+00:00",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/protocol.json": "3eb708114c4528274aa8d75bf47d36c73ad753063908d11a2234c7cdcb8c61b9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/validation_protocol.json": "7b677972e1cd3ee90cb1aa435f5826c5620b04c8e710cc08566845b83f49f6ad",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/code/candidate.py": "dbb96eba6b5a5b20540144b064c2b9c90948aae9908adaf27e94bd2a1e546bcc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/code/experiment.py": "4e2bc26524dce233f2f86c0f521f54c4bd80e4b47c1493ec4e1ab56f7223e9d5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/code/preflight.py": "1545638816b083841bea7455373638b4be851254a41c1fc9ca8c913f1e5ebb09",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/code/run.py": "7a3841c3cf00b2ebb188d0b79a4a381be0cfd3b75a1741b9a30d592dc52526d6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/preflight.sbatch": "4e8b3e89b344e0e0a91f584f78ba0f83bbd1ca4be55a9288c5ed102ee91bb561",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/p3_selection_v1/validation.sbatch": "6af74b7451656a6b9ad73e2e3530d756ae53929d8c4f1a1cb82f95f93f0f5001"
+  },
+  "preflight_job": "8466116",
+  "independent_data_not_started": true,
+  "primary_changed": false
+}

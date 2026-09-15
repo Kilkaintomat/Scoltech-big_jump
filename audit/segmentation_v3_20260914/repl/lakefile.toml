@@ -1,0 +1,15 @@
+name = "REPL"
+defaultTargets = ["repl"]
+testDriver = "test"
+
+[[lean_lib]]
+name = "REPL"
+
+[[lean_exe]]
+name = "repl"
+root = "REPL.Main"
+supportInterpreter = true
+
+[[lean_exe]]
+name = "test"
+root = "Test"

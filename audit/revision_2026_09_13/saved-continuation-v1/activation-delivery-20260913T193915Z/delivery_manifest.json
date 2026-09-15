@@ -1,0 +1,29 @@
+{
+  "kind": "operational-activation-delivery",
+  "captured_utc": "20260913T193915Z",
+  "files_sha256": {
+    "state.json": "90ffd8037d09764a93088017b3fbc327435c4df35d88dd8bc676a39dcd459ffb",
+    "authorization-and-prior-jobs.json": "8cc7290f1b98219e0c17b0a7742acb5cec6451a4e7a569f82bfc59f45e033f74",
+    "tests-8466244.xml": "a49e246d2ef250be8fc4d4a1fed48ac7511f154b22998dda446fd525e444b4ee",
+    "repair-v9.sbatch": "221efdbbc6a8ff2d411231f7f0d315edb52843031b5c5b8e4cfb4ab9eaa66045",
+    "preflight.py": "fdf7e76834833002dcd1254d164fa6c4a12312ab7a96eecfdbe8359d874d1393",
+    "test_policy.py": "9f7dc03610d8809c3ce188b73504a569228789d4b6cf3eb9986afeed67719969",
+    "verify-v9-node.sbatch": "d9ff497a21a138e45d9641a34a6d00f4f7f029df95207aa188b34ae7bdd2efe8",
+    "policy.py": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158",
+    "controller.py": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+    "controller-log.txt": "9901d215071d7146dbc085945a30323fec7224b0079a5885e15c168ee429c13e",
+    "queue-current.json": "44aa3286de36d8ed02818ba3c8fe9ac331300d463436ec00907c3e59ec601698",
+    "squeue.txt": "69361180d696b986f9d777a5bc1227986bfa258a664f4fc839a213224668775b",
+    "pass.py": "c3e98464265e1bb69c364e65548e6bf56e8561be307d3d50ba8afc7fa1ae2d69",
+    "README.txt": "be5c8594db8ac9365f10d84750b3bd7939e3a76feab32b84643d42b47616989d",
+    "preflight.sbatch": "df3811f740445dc9ad77dfda8b66e1bedd479a065c8e0d98013549affdf2b887",
+    "repair-body.sh": "54e774779f5577320ea2f1afc96f6e099dc539c0213766b7553e3bf9d19a083b",
+    "preflight/metrics.json": "bf5b2a639b0c384fec480eab3a421695ca4f8c0e671476e36e14926aa49b7736",
+    "preflight/manifest.json": "395f8975c69e7793cf62e32b60be2159466400a9e01f34a42afaab502105cc8c",
+    "events/2026-09-13T19-37-42.701281Z-activate/receipt.json": "cce6a1d5b18e3f66fd5cd9d1dc07c803711e7462378d7e5e0b6b50ceeda2a4c5",
+    "events/2026-09-13T19-37-42.701281Z-activate/queue-before.json": "6edbb01e54fc0a2fbde456f0b783d21242967df58df19898b07db41281192604",
+    "events/2026-09-13T19-37-42.701281Z-activate/queue-after.json": "10b6b0b3afd2ae4e8034be7930c0f4b116605de11ff3658189a7f4efb6e72366"
+  },
+  "preflight_manifest_sha256": "395f8975c69e7793cf62e32b60be2159466400a9e01f34a42afaab502105cc8c",
+  "controller_last_poll_utc": "2026-09-13T19:39:13.098017Z"
+}

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/lean_audit_select.py": "467f15593334a94f4a62be6b9328e9671682953797eb960bc0df4601059c7443",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/lean_audit_worker.py": "d8710bde30f16eb02759db2e430ea8b78c292069d28eb2ed088cd8a4d7327251",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/lean_audit-plan.json": "156821d452e14f315dbb353449139b680268b188d6f0ae7498ef46193c3dfe7d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/lean_audit_select.sbatch": "bf691bc65a986b8fc426b3ae58e01d5cb8a18d1925ef7762273071f69fb0a88e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/lean_audit_worker.sbatch": "22e472e862d7df983bc1341dd9662a7f99fee1ca025a9c7088be727940e185cf",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/segmenter.py": "b6df449b86c5a01b5cebb39a3fd2dff324534be267cc63036816cb00bd012d57",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/segmenter_v2.py": "0ab7245227aa4ccf98ca57a97f24364c66491a4e1e5886353a8d5c2a75bdcf47",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/segmenter_fast.py": "2e5e5458398990eced485afb1af0aae7bd8c7dfa369d62ceb5390bb92f7f07ec",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/campaign_annotation.py": "729af62b062d960e68ced7406c3863a86ef269b9c4346a184a179604f9132e67",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/export_observations.py": "229fbdd1be4e0360474c52d617f9bda5039e57b07029b98bafd82c0b956d8d06",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/syntax_command.lean": "313169efbd75a7228fff8800963d818c1f20dc8c10161a6e2f8c9cdfd60d1dc7"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

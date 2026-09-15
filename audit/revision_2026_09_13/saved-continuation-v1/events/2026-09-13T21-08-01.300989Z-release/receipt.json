@@ -1,0 +1,16 @@
+{
+  "utc": "2026-09-13T21:08:01.311288Z",
+  "kind": "release",
+  "detail": {
+    "job_id": "8466288",
+    "models": [
+      "deepseek",
+      "goedel",
+      "kimina"
+    ]
+  },
+  "before_sha256": "c902c7f482a08e87293b7a101e9de4ec6b832141278f264c8cce0ea1fcb9458a",
+  "after_sha256": "170c8013bc0180889ab185716042ad9b4988f0890ff8917059a0b929765b561d",
+  "controller_sha256": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+  "policy_sha256": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158"
+}

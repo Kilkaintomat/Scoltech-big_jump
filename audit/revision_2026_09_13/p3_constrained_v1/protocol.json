@@ -1,0 +1,73 @@
+{
+  "version": "p3-constrained-gpd-independent-validation-v1",
+  "seed": 916130000,
+  "datasets": 200,
+  "tasks": 48,
+  "q": 0.01,
+  "statistics": {
+    "bootstrap": 500,
+    "min_tasks": 20,
+    "valid_fraction": 0.9,
+    "family_size": 9
+  },
+  "scenarios": {
+    "original_support": {
+      "shape": 0.25,
+      "failure_quantile": 0.99,
+      "seed_offset": 0
+    },
+    "lower_support": {
+      "shape": 0.25,
+      "failure_quantile": 0.98,
+      "seed_offset": 100000
+    },
+    "exponential_null": {
+      "shape": 0,
+      "failure_quantile": 0.98,
+      "seed_offset": 200000
+    },
+    "bounded_null": {
+      "shape": -0.2,
+      "failure_quantile": 0.98,
+      "seed_offset": 300000
+    }
+  },
+  "estimators": [
+    "legacy",
+    "constrained"
+  ],
+  "thresholds": [
+    "original",
+    "observed_support"
+  ],
+  "intervals": [
+    "percentile",
+    "basic"
+  ],
+  "numerics": {
+    "grid_size_per_side": 513,
+    "dense_preflight_grid_size": 2049,
+    "root_xtol": 1e-12,
+    "root_rtol": 1e-12,
+    "score_series_switch": 0.001,
+    "likelihood_tie_per_observation": 1e-10
+  },
+  "method": "Grimshaw profile stationary solutions with gamma>-1, compared with uniform boundary gamma=-1 sigma=max(excesses). Boundary or numerical failure is unusable, never clipped into an accepted shape.",
+  "reference": {
+    "url": "https://www.stat.cmu.edu/technometrics/90-00/vol-35-02/v3502185.pdf",
+    "sections": "2.1-2.2 and published nylon example in section 4",
+    "sign_convention": "project gamma equals minus paper k"
+  },
+  "comparison": "Paired estimators and threshold methods on identical new datasets and task-resampling indices. Calibration tasks drawn first then failure tasks; seed+10000000 bootstrap. Cache only exactly equal threshold fits within a bootstrap.",
+  "eligibility": {
+    "calibration_tail_tasks": 10,
+    "calibration_excesses": 20,
+    "failure_tail_tasks": 20,
+    "failure_excesses": 50,
+    "finite_point_required_for_new_candidate": true
+  },
+  "reporting": "Report all scenarios/candidates, availability, coverage conditional and counting unavailable as failure, common-pair coverage and gains/losses, mean point bias, CI width, family null false rejection. No automatic promotion; overlap with nominal is inconclusive, upper binomial bound below nominal detects undercoverage.",
+  "primary_candidate_for_decision": "constrained/original/percentile",
+  "scope": "P3 GPD numerical method validation at q=.01 only. Not a whole P1/P2/P3 gate, not q=.001 validation. Main production estimator and all main labels remain untouched.",
+  "workers": 16
+}

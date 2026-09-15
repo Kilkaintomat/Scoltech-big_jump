@@ -1,0 +1,178 @@
+{
+  "version": "followthrough-fixed-stage-orchestration-v1",
+  "interval_minutes": 30,
+  "scope": "Manage only the explicitly authorized followthrough stages. Do not cancel jobs or alter the protected main campaign.",
+  "maximum_gpu_jobs_live": 2,
+  "maximum_resource_retries": 2,
+  "stages": {
+    "calibration": {
+      "script": "calibration.sbatch"
+    },
+    "audit": {
+      "script": "audit_finalize.sbatch",
+      "indices": [
+        0,
+        1,
+        2
+      ],
+      "concurrency": 2
+    },
+    "audit_cli": {
+      "script": "audit_cli.sbatch",
+      "indices": [
+        0,
+        1,
+        2
+      ],
+      "concurrency": 2,
+      "resumable": true
+    },
+    "references": {
+      "script": "new_reference_v2.sbatch",
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "concurrency": 2,
+      "resumable": true
+    },
+    "p2_setup": {
+      "script": "p2_setup.sbatch",
+      "requires": [
+        "references"
+      ]
+    },
+    "p5_calibration": {
+      "script": "p5_calibration_resume.sbatch",
+      "gpu": true,
+      "resumable": true
+    },
+    "p5_evaluation": {
+      "script": "p5_evaluation_resume.sbatch",
+      "requires": [
+        "p5_calibration"
+      ],
+      "gate": "p5_calibration/calibration_gate/metrics.json",
+      "gate_field": "ready_for_evaluation",
+      "gpu": true,
+      "resumable": true
+    },
+    "p2_generate": {
+      "script": "p2_generate.sbatch",
+      "requires": [
+        "p2_setup"
+      ],
+      "gate": "p2_pipeline/metrics.json",
+      "gate_field": "preflight_passed",
+      "gpu": true,
+      "resumable": true
+    },
+    "p2_verify": {
+      "script": "p2_verify.sbatch",
+      "requires": [
+        "p2_generate"
+      ],
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "concurrency": 4,
+      "resumable": true
+    },
+    "p2_extract": {
+      "script": "p2_extract.sbatch",
+      "requires": [
+        "p2_verify"
+      ],
+      "gpu": true,
+      "resumable": true
+    },
+    "p2_analyze": {
+      "script": "p2_analyze.sbatch",
+      "requires": [
+        "p2_extract"
+      ]
+    },
+    "p5_analysis": {
+      "script": "p5_analyze.sbatch",
+      "requires": [
+        "p5_evaluation"
+      ]
+    }
+  },
+  "initial_jobs": {
+    "calibration": [
+      {
+        "id": "8467315"
+      }
+    ],
+    "audit": [
+      {
+        "id": "8467339",
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "audit_cli": [
+      {
+        "id": "8467348",
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "references": [
+      {
+        "id": "8467338",
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "p2_setup": [
+      {
+        "id": "8467346"
+      }
+    ],
+    "p5_calibration": [
+      {
+        "id": "8467324"
+      }
+    ],
+    "p2_generate": [
+      {
+        "id": "8467351"
+      }
+    ]
+  },
+  "submission_order": [
+    "calibration",
+    "audit",
+    "audit_cli",
+    "references",
+    "p2_setup",
+    "p5_calibration",
+    "p5_evaluation",
+    "p2_generate",
+    "p2_verify",
+    "p2_extract",
+    "p2_analyze",
+    "p5_analysis"
+  ]
+}

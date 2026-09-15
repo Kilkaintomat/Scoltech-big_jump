@@ -1,0 +1,31 @@
+{
+  "stage": "node-file-capacity-guard",
+  "source_control": [
+    {
+      "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+      "git_branch": "experiment/e1-20260908",
+      "dirty": true
+    }
+  ],
+  "environment": {
+    "python": "3.6.8",
+    "platform": "Linux-5.4.270-1.el7.elrepo.x86_64-x86_64-with-centos-7.9.2009-Core",
+    "hostname": "cn57.zhores",
+    "slurm_job_id": "8466175",
+    "packages": "standard library only; numerical environment is in the child manifest"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/resource_guard.py": "2000553a233b98de7dafd01612ac337505c1ea438535250b26e8dde4eb989acb",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/statistical-fitness-v1/source-manifest.json": "5b99b7065f7ab0bdf93b0a4a35aacdb24065def6fe3afb525734436ea662b336",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/guarded-benchmark-body.sh": "73f300c1e629747713916ae5f15706453b0f92719fa4b03a45d553635f60c67d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/benchmark-guarded/manifest.json": "84201bb66a6f087e151f4ecf16e9f3a11dc4941ca92217e9a4786d796a2be36d"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/resource-guard-runs/8466175/capacity.json": "507192f41dbf9cbe4876f423ac473019e0680bee6333ab35ca9f8eda85384751",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/resource-guard-runs/8466175/status.json": "774ec759624d416d325d043a82af01f2c3fc8926f6658d250e94ec2877764131"
+  },
+  "metrics": {
+    "workers": 2,
+    "returncode": 0
+  }
+}

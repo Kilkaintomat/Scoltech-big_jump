@@ -1,0 +1,1 @@
+{"acquisition_passed":true,"all_accounted":true,"attempts":104,"exact_original_token_reconstruction":true,"finish_reasons":{"length":49,"stop":55},"logprob_alignment":true,"parse_exclusions":{"context_statement_mismatch":1,"parse_error":35},"parseable_declarations":68,"semantic_success_not_used_for_gate":true}

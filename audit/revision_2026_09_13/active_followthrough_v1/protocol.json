@@ -1,0 +1,8 @@
+{
+  "version": "active-followthrough-p3-and-partial-kimina-v1",
+  "purpose": "Complete independent analysis alongside the ongoing main experiment",
+  "p3_run": "runs/p3_fit_diagnostics_20260913",
+  "native_inventory_scope": "Kimina completed main shard 0 of 8 only; descriptive policy audit",
+  "native_rule": "reuse immutable report helper validated in Slurm 8466093; never relabel",
+  "primary_change": false
+}

@@ -1,0 +1,22 @@
+{
+  "temperature": 0.6,
+  "layers": {
+    "deepseek": 14,
+    "goedel": 17,
+    "kimina": 17
+  },
+  "formal_anchor": "Last original token ending at the start of the formal proof body, optionally including only trailing whitespace; reject if token reaches non-whitespace proof content or first observed step. Replace X0 only; later increments unchanged before transform refit.",
+  "shrinkage": [
+    0.1,
+    0.5,
+    1
+  ],
+  "q": 0.01,
+  "seed": 2026091502,
+  "bootstrap_replicates": 10000,
+  "min_tasks_per_fold": 20,
+  "primary_baseline": "formal_entry",
+  "comparison_baseline": "original_prompt",
+  "folds": "sha256 task-ID order alternating within verified original calibration; fit one, threshold other, swap",
+  "scope": "Exploratory calibration and formal-entry diagnosis on existing data; no best-fold or shrinkage selection."
+}

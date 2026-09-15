@@ -1,0 +1,26 @@
+{
+  "p2_generate": {
+    "id": "8468361",
+    "submitted_utc": "2026-09-15T22:26:27.866747+00:00",
+    "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p2_generate.sbatch",
+    "script_sha256": "b826c8a0e08328a0ca847c47a316660979866bf8b27b666f21f3178da8503cb0",
+    "recovery_source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/source-manifest.json",
+    "reason": "validated runtime repair; same scientific requests and gates",
+    "preflight_job": "8468360"
+  },
+  "p5_calibration": {
+    "id": "8468362",
+    "submitted_utc": "2026-09-15T22:26:27.878643+00:00",
+    "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p5_calibration.sbatch",
+    "script_sha256": "8e7a3e243d5b2c8c3df6e282a7709a1efe932670fe809260cd40fc84e2ffb195",
+    "recovery_source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/source-manifest.json",
+    "reason": "validated runtime repair; same scientific requests and gates",
+    "preflight_job": "8468360"
+  },
+  "p5_evaluation": {
+    "id": "8468367",
+    "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/p5_evaluation.sbatch",
+    "recovery_source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_recovery_20260916_v2/source-manifest.json",
+    "submitted_utc": "2026-09-15T22:37:56.992900+00:00"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_render_v2.py": "b552a90e16c20dd5cb61ea7775389a43827720f4168f982a00b81edce8275066",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_report_v2.py": "a9669ca4c93f90d5d13bf7fe8a572c00e54b7323fa1cb2c272703ac6a88df818",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_report_v2-plan.json": "afc7c91d02ebd78da27bc01a7b560049cfb755cbad7bd2971dc0c4b494118e48",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_report_v2.sbatch": "3b18608578c904d607a4944c9a1a35d4ba7db1cc75cc74cc4cd9bb9e35f7350e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2-confirmatory-protocol.json": "f828673cc7ae8f8fc3eb7f0cce6592193cd879b5c2edfe5265befd97cc054a8f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5-plan.json": "fe6dbfb3c6e885475afe98aa46d0edba29df564dbf85ebdcef488ba2cb618593",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/flow-plan-v2.json": "65d1c2d3c51408023dd761b0990ae19b1726e4090ed41deb0a6811c3b325a036"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

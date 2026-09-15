@@ -1,0 +1,20 @@
+{
+  "job": "8466492",
+  "base": "runs/repl_runtime_20260913_sealed",
+  "purpose": "isolated observer and root-propagation repair; not production verifier",
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Frontend.lean": "483d6cd5f5121605153a84ad724568a4fd2137a3bcd9d527f0dfb5545aed9b04",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Snapshots.lean": "14bff85f2d4e71019042ca57214225a36254fa47eeee485f4db88f49562c4e99",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/JSON.lean": "f4f37d31381cff6ac626c414187f610fee59a50e8a4f778f167e3c9cf432d6d6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Main.lean": "9c48b9bd6069b6a1849ff2ff4f0bfda4f86706230bf8b0be09463de415390343",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Util/Path.lean": "4ef291a8c1b763e1ee5750d46dcd6bc6f9be5a89c6a9f7b577814ad61193b161",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Util/Pickle.lean": "7d4ba5908d5ee3a17aa9d6bb7a6063529b7c6c179a5aa90743ba06e7d4eef955",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Lean/ContextInfo.lean": "8ebd5796e09ec1b4434640a211450bd4bd6d60c8670614c34b615c109ac3221e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Lean/Environment.lean": "da91570c1672569ccd3fff49b3b44db858f1ca0a58b9e5556ede56760d0493db",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Lean/InfoTree.lean": "d2893dab63c5b21602e7936ee7ff7801d77670b9f40b06524b6532603f2e04ad",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Lean/Replay.lean": "b5127e93848f95231ff1ea1541166136f4c95a7303463c610b4fe5005240d339",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl/REPL/Lean/InfoTree/ToJson.lean": "e0dc8312ca78b42157232d4a8bd2a55ba245906779c112bf8e074e4697f3ad74",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/repl-observer": "142ad804c756f49879987e15959bc6d660ccbc2bd080b6fec140d5c889de3fa9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v2_20260914/build_observer.py": "8d595adb653dc5d770022e69127a78609aaf48230e43086939538b815ae07dab"
+  }
+}

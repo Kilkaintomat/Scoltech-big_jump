@@ -1,0 +1,12 @@
+{
+  "created_utc": "2026-09-13T21:07:37.004506+00:00",
+  "job_id": "8466301",
+  "files": {
+    "REPORT_RU.md": "7bff021bda9e7428c806c730c2ede5c95ec2f372d1ba98daa52ae550cdecd0ef",
+    "REPORT_RU.html": "ec6e476a52e2d5b3dd607541924055299aa5bf69cb1fa0a8256759b504cba7a2",
+    "render_report.py": "6640458e7aad377809bc9d05e9d8281b8dd6e1e694953c0c1bd995e6d1e01812",
+    "statistics.json": "ded1ebcdd966ac064a8e4cdcf19d17d13eb28abfa41fb8072ebdbb6bc3849eaa",
+    "review/metrics.json": "deaf0c7c607f15297bddb4e6133e6397ddd4d26aab75b1813b371e4e57f763c9",
+    "validation_supplement/metrics.json": "9c0e54d654fca135ead06ba3fccf41ddb3343e0fdcc9af194bc8084b03fc4753"
+  }
+}

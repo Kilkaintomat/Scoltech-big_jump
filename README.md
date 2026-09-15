@@ -3,12 +3,14 @@
 Code for the experimental section of *One Big Jump: Heavy Tails in Residual-Stream Reasoning
 Trajectories as an Order Parameter for Algorithmic Computation* (ICLR 2027 submission).
 
-**Private repository. No license is declared until the paper is public.**
+**No project-wide license is declared. Retained upstream components keep their own licenses; see `third_party/`.**
 
-> **Current audit:** [September revision](audit/revision_2026_09_08/REPORT.md).
-> The experiment implementation is incomplete. Existing P4 archives do not establish the
-> proposed order-parameter transition, and Lean P1–P3 have no model activation results yet.
-> Historical artifact digests must be checked before using any published numbers.
+> **Current snapshot (16 September 2026):** [code and experiment index](docs/revisions/2026-09-16-publication.md),
+> [reports and metrics](results/campaign_20260916/README.md).
+> The three-model miniF2F campaign, paired P4 runs and independent controlled P5 evaluation
+> are complete. Fresh prospective P2 acquisition on ProofNet is ongoing.
+> Evidence is mixed and does not establish the proposed universal heavy-tail mechanism.
+> Historical reports remain dated; consult the index before interpreting earlier findings.
 
 ## What the paper claims, and what this measures
 
@@ -24,17 +26,17 @@ together heuristics. This repository estimates it and tests the five predictions
 
 | | Prediction | State |
 |---|---|---|
-| P1 | Tail separation — refuted traces have a heavier tail than verified ones | implemented; surrogate checks, model experiment pending |
-| P2 | Localization — the first rejected step is the largest jump | implemented, surrogate checks; model experiment pending |
-| P3 | Overshoot — `Z_{t*}/tau` is Pareto-like, not concentrated at 1 | implemented; **see the finding below** |
-| P4 | Order parameter — `xi` drops when a circuit forms during grokking | training archives exist; proposed signal unconfirmed |
-| P5 | Length law — `P(V_L=1) ≈ exp(-theta L Fbar(tau))` | implemented; **see the finding below** |
+| P1 | Tail separation — refuted traces have a heavier tail than verified ones | three-model analysis complete; robust separation not established |
+| P2 | Localization — the first rejected step is the largest jump | miniF2F analysis complete; prospective ProofNet acquisition ongoing |
+| P3 | Overshoot — `Z_{t*}/tau` is Pareto-like, not concentrated at 1 | model and calibration audits complete; selection and coverage limitations remain |
+| P4 | Order parameter — `xi` drops when a circuit forms during grokking | paired real/null training and audit complete; proposed signal unconfirmed |
+| P5 | Length law — `P(V_L=1) ≈ exp(-theta L Fbar(tau))` | independent controlled evaluation complete; endpoints reported separately |
 
 ## Three things the measurements say that the paper does not
 
 These are historical observations, predating the current revision. Their archived reports and
 numerical artifacts require the provenance checks described in the
-[revision report](audit/revision_2026_09_08/REPORT.md); they do not replace the missing model experiments.
+[revision report](audit/revision_2026_09_08/REPORT.md); they do not replace the current model experiments linked above.
 
 1. **P3 as written measures the wrong thing when steps cluster.** On the Kesten surrogate at
    `p = 0.05`, where `gamma = 0.357` exactly, the 99.9% threshold gives shape **+0.454** for the
@@ -61,11 +63,10 @@ numerical artifacts require the provenance checks described in the
 the Lyapunov exponent vanishes; 184 refuted traces at `p = 0` against the caption's 185; top-1
 localisation 0.846 at `p = 0.05` against a predicted 0.85.
 
-**P4.** Modular-addition training and a shuffled-label control have been run. The earlier
-interpretation of a Hill transient as a transition in `xi` is withdrawn. The current audit also
-corrects the Fourier projection and the evaluation split for excluded loss. Archived progress
-losses require a new run; the signed tail estimates can be reanalysed from saved checkpoints.
-See the [generated audit measurements](audit/revision_2026_09_08/server-diagnostics/MEASUREMENTS.md).
+**P4.** Paired modular-addition training and shuffled-label controls have completed. The models
+learned the real task, but the proposed robust transition in the tail index was not established.
+See the [completed P4 audit and measurements](results/campaign_20260916/p4-audit/REPORT_RU.md).
+Earlier archive corrections remain documented in the September revision.
 
 ## Layout
 

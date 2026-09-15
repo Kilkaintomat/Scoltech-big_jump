@@ -1,0 +1,20 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/portable_runtime.py": "8bf758ee766dfd073177c925685bcb5ba790be272bf5a8ece2e5be9bf5af157c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/repair_runtime_paths.py": "981aa5ef40477b887b6b1fbb09f2c77a779a4082fa155f129bca9e798e873a48",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/audit_cli_finalize.py": "7ff3fc6f67aef807a9b269467c17b112cf5279ce9250a8df505e9aefa69965d5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2_verify_portable.py": "e31c3e817279bb852ba3f47ef81868077a583955c39aae0606528a3195d30241",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/portable_runtime-plan.json": "431f17b69a8b0aee17c5df83dab43ffc130e2f9815f18cb9303d86156f8ff9d4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/repair_runtime_paths.sbatch": "74d12541e84a07a51c61b9f720c4d4587ec70e34ce88a7c2aa993248771f1257",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/audit_cli_finalize.sbatch": "0388ddeff0c814e90f37303a8ac34efd876163cc7591d51e70e672e58692dd82",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2_verify_portable.sbatch": "89d6d530e53a36726a318cb381a7b335e64d1b03a05dc1e8654df46bf1aab5b3",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/artifact_bridge.py": "0d3a7d3b25a8df338caac8bd0e86f317ea57711db8f24a97eb1660af9e7315bb",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_v3_20260914/frozen/repl-observer": "bb80d73f255816886c4e8a34192dff21ec57b42df515b99c09ab50c4ab694130",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/repl_runtime_20260913_sealed/repl": "24400d23ee3b0b86e7d7fc9bcfe324e22b6465de8ecf31ef9a46a149ac6de2e5"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

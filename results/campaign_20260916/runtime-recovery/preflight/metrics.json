@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "architecture_regressions_passed": 7,
+  "checks": [
+    "split Unicode bytes reconstruct exactly",
+    "invalid UTF-8 remains an explicit exclusion",
+    "all batch responses saved despite one alignment failure",
+    "original token IDs preserved",
+    "resume does not regenerate saved rows",
+    "recovery source in artifact inputs",
+    "original frozen source manifests verified",
+    "P5 calibration gate unchanged",
+    "program failures not automatically retried"
+  ],
+  "saved_before_recovery": {
+    "deepseek/pilot": {
+      "saved": 104,
+      "sha256": "e5a9c1091daef7db46f607d17fa6d89c42c37c3c7bd2f398f819902443cd50bc",
+      "last_slurm_job": "8467418"
+    },
+    "deepseek/evaluation": {
+      "saved": 177,
+      "sha256": "5d76efc3e1bc62399d0066ac8253a1a5a34524fa6a9beb9c44cfabed80acc3c3",
+      "last_slurm_job": "8467485"
+    },
+    "goedel/pilot": {
+      "saved": 104,
+      "sha256": "0b29ceff407b0b586cdda4d06f3739c81b7837abce1a3b1b3872d8d39fcce1f2",
+      "last_slurm_job": "8467485"
+    },
+    "goedel/evaluation": {
+      "saved": 0,
+      "sha256": null,
+      "last_slurm_job": null
+    }
+  }
+}

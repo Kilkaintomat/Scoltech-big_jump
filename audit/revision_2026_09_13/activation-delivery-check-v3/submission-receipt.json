@@ -1,0 +1,9 @@
+{
+  "superseded_jobs": [
+    "8466291",
+    "8466295"
+  ],
+  "reason": "Audit stage-specific request identities against original generation plus verifier label. Checks strengthened; completed-shard inventory unchanged.",
+  "source_sha256": "3412867911dc9fe86187c77889f5d407eaaea627f37233e78c2ae4de072b8c0e",
+  "job_id": "8466298"
+}

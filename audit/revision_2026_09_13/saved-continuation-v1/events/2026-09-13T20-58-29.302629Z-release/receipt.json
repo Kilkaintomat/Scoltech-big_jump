@@ -1,0 +1,15 @@
+{
+  "utc": "2026-09-13T20:58:29.312878Z",
+  "kind": "release",
+  "detail": {
+    "job_id": "8466280",
+    "models": [
+      "deepseek",
+      "goedel"
+    ]
+  },
+  "before_sha256": "355fcd8e387ed82f3e471db3dd069442cb486244cfd79cdee74b3db429fef003",
+  "after_sha256": "aaa1ae30cb433a3cbabffd0158042a570c329bb78cef6eefc039748388d408b6",
+  "controller_sha256": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+  "policy_sha256": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158"
+}

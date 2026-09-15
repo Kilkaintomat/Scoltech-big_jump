@@ -1,0 +1,202 @@
+{
+  "real-0": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": false,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 0
+  },
+  "null-0": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": true,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 0
+  },
+  "real-1": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": false,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 1
+  },
+  "null-1": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": true,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 1
+  },
+  "real-2": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": false,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 2
+  },
+  "null-2": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": true,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 2
+  },
+  "real-3": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": false,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 3
+  },
+  "null-3": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": true,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 3
+  },
+  "real-4": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": false,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 4
+  },
+  "null-4": {
+    "grokking": {
+      "betas": [
+        0.9,
+        0.98
+      ],
+      "checkpoint_every": 100,
+      "d_mlp": 512,
+      "d_model": 128,
+      "device": "cuda",
+      "lr": 0.001,
+      "n_heads": 4,
+      "p": 113,
+      "shuffle_labels": true,
+      "steps": 40000,
+      "train_frac": 0.3,
+      "weight_decay": 1.0
+    },
+    "seed": 4
+  }
+}

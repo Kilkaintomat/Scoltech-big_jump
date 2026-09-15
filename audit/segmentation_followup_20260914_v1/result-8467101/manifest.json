@@ -1,0 +1,47 @@
+{
+  "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "dirty": true,
+  "environment": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.51.3",
+      "tokenizers": "0.21.4",
+      "vllm": "0.8.5.post1",
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "python": "3.11.11",
+    "platform": "Linux-5.4.270-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "hostname": "cn56.zhores",
+    "gpu": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "slurm_job_id": "8467101",
+    "slurm_cpus": "1"
+  },
+  "config": {
+    "scope": "semantic segmentation sensitivity; original primary run preserved",
+    "generation": false,
+    "model_forward": true,
+    "models": [
+      "deepseek",
+      "goedel",
+      "kimina"
+    ],
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "logit_chunk_tokens": 128,
+    "surprisal": "mean realised-token surprisal over unchanged source interval for each exported observation",
+    "baseline": "last original prompt token; formal-entry state saved separately",
+    "analysis_primary_cell": "original temperature 0.6, original middle layer, whitened",
+    "calibration": "original problem-disjoint roles; refit on new positions",
+    "statistical_decisions": "sensitivity analysis, no replacement of original confirmatory results"
+  },
+  "source": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_followup_20260914_v1/status.py": "ad9a286d818627a3d2bf814015b465c844f39069b82d868bc155d57831cac819"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_followup_20260914_v1/result-8467101/metrics.json": "f4bce8c872afa8cfa29b5a6d78ddcd1aa95931a92c561d4ab1c0841a7baa8fa3",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/segmentation_followup_20260914_v1/result-8467101/REPORT_RU.md": "a64b6d6d3c4d45106726261bd28c5cb7a1ba5872530784b18d6606f42b1f714c"
+  }
+}

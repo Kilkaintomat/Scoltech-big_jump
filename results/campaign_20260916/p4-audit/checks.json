@@ -1,0 +1,726 @@
+[
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/readiness/p4.py",
+    "recorded": "c739c8dc2ef402dec314d6d0edfec47061839014edf6dbd9ed7f18ee4b83111c",
+    "actual": "c739c8dc2ef402dec314d6d0edfec47061839014edf6dbd9ed7f18ee4b83111c",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/models/grokking.py",
+    "recorded": "5deb7f8a46d563ab0bef8d352b39a05aada7f21e68a055587ce560a822a37d29",
+    "actual": "5deb7f8a46d563ab0bef8d352b39a05aada7f21e68a055587ce560a822a37d29",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/experiments/p4_grokking.py",
+    "recorded": "6512370f9526b949511b46893d6f75f8f3676912359e323b30ee1e7cefa7736f",
+    "actual": "6512370f9526b949511b46893d6f75f8f3676912359e323b30ee1e7cefa7736f",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/stats/gpd.py",
+    "recorded": "6cad533ebbbe67cbe3f1475f36dc19e6056856ab1b6cad1e4c96506e76ef84dc",
+    "actual": "6cad533ebbbe67cbe3f1475f36dc19e6056856ab1b6cad1e4c96506e76ef84dc",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/stats/hill.py",
+    "recorded": "b3ccf232d7df9514dd2852abf94350cc21c300bc61e00d96cab312198c6814f5",
+    "actual": "b3ccf232d7df9514dd2852abf94350cc21c300bc61e00d96cab312198c6814f5",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/stats/moment.py",
+    "recorded": "28a042341380139605afd714bbd4426a68d4b7a83dc464f6853be428c809656c",
+    "actual": "28a042341380139605afd714bbd4426a68d4b7a83dc464f6853be428c809656c",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/stats/thresholds.py",
+    "recorded": "461823ee045ac158d06fdadfbf85e5952fbf625abfd6148733cff42e1c5ec712",
+    "actual": "461823ee045ac158d06fdadfbf85e5952fbf625abfd6148733cff42e1c5ec712",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/stats/bootstrap.py",
+    "recorded": "98b47749291e6e566fb7f07f1aab6fbd21bf4a9b324b9cbde63a57906663a45e",
+    "actual": "98b47749291e6e566fb7f07f1aab6fbd21bf4a9b324b9cbde63a57906663a45e",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "src/onebigjump/config.py",
+    "recorded": "5c770038898e82516ff974499724f2608ffa24faa57c0a8c7fdac96d2ce97ba9",
+    "actual": "5c770038898e82516ff974499724f2608ffa24faa57c0a8c7fdac96d2ce97ba9",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "tests/unit/test_grokking.py",
+    "recorded": "9dc7006f301539fbb9f47cd6881b1d51fe48ffb686eac122238bda2ef2bbb301",
+    "actual": "9dc7006f301539fbb9f47cd6881b1d51fe48ffb686eac122238bda2ef2bbb301",
+    "matches": true
+  },
+  {
+    "check": "source_sha",
+    "file": "tests/unit/test_readiness.py",
+    "recorded": "5c5eb98b5d6c7484bd575403d3cbf10b50ef3de47b7a473ff98641e8f2faf84c",
+    "actual": "5c5eb98b5d6c7484bd575403d3cbf10b50ef3de47b7a473ff98641e8f2faf84c",
+    "matches": true
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "real-0",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "null-0",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "paired_initialization_and_data",
+    "seed": 0,
+    "weights_equal": true,
+    "initial_optimizer_equal": true,
+    "train_indices_equal": true,
+    "test_indices_equal": true,
+    "disjoint": true,
+    "n_train": 3830,
+    "n_test": 8939,
+    "label_histogram_equal": true,
+    "config_diff": [
+      "shuffle_labels"
+    ]
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "real",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 0,
+    "arm": "null",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "real-1",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "null-1",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "paired_initialization_and_data",
+    "seed": 1,
+    "weights_equal": true,
+    "initial_optimizer_equal": true,
+    "train_indices_equal": true,
+    "test_indices_equal": true,
+    "disjoint": true,
+    "n_train": 3830,
+    "n_test": 8939,
+    "label_histogram_equal": true,
+    "config_diff": [
+      "shuffle_labels"
+    ]
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "real",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 1,
+    "arm": "null",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "real-2",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "null-2",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "paired_initialization_and_data",
+    "seed": 2,
+    "weights_equal": true,
+    "initial_optimizer_equal": true,
+    "train_indices_equal": true,
+    "test_indices_equal": true,
+    "disjoint": true,
+    "n_train": 3830,
+    "n_test": 8939,
+    "label_histogram_equal": true,
+    "config_diff": [
+      "shuffle_labels"
+    ]
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "real",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 2,
+    "arm": "null",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "real-3",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "null-3",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "paired_initialization_and_data",
+    "seed": 3,
+    "weights_equal": true,
+    "initial_optimizer_equal": true,
+    "train_indices_equal": true,
+    "test_indices_equal": true,
+    "disjoint": true,
+    "n_train": 3830,
+    "n_test": 8939,
+    "label_histogram_equal": true,
+    "config_diff": [
+      "shuffle_labels"
+    ]
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "real",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 3,
+    "arm": "null",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "real-4",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "all_scalar_digests",
+    "tag": "null-4",
+    "checked": 401,
+    "mismatches": []
+  },
+  {
+    "check": "paired_initialization_and_data",
+    "seed": 4,
+    "weights_equal": true,
+    "initial_optimizer_equal": true,
+    "train_indices_equal": true,
+    "test_indices_equal": true,
+    "disjoint": true,
+    "n_train": 3830,
+    "n_test": 8939,
+    "label_histogram_equal": true,
+    "config_diff": [
+      "shuffle_labels"
+    ]
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "real",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "hill",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "moment",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "gpd",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "restricted_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "excluded_loss",
+    "matches": true
+  },
+  {
+    "check": "paired_summary_arithmetic",
+    "seed": 4,
+    "arm": "null",
+    "metric": "test_acc",
+    "matches": true
+  },
+  {
+    "check": "selected_norms_digests",
+    "checked": 100,
+    "mismatches": []
+  },
+  {
+    "check": "independent_moment_hill_arithmetic",
+    "max_abs_error": {
+      "hill": 3.608224830031759e-16,
+      "moment": 4.218847493575595e-14
+    }
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-0/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-0/training/step-021600.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-0/training/step-022200.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-0/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-1/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-1/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-2/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-2/training/step-015000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-2/training/step-015600.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-2/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-3/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-3/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-4/training/step-040000.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-4/training/step-021300.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-4/training/step-021900.pt",
+    "matches": true
+  },
+  {
+    "check": "selected_checkpoint_digest",
+    "file": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-4/training/step-040000.pt",
+    "matches": true
+  }
+]

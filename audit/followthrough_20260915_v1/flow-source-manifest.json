@@ -1,0 +1,15 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/flow.py": "cda1ae7c9e0b27929e33a56f00f0251cbd508273561d4ff5c52906d70ff79f17",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/flow-plan.json": "8cfc7c9337d26a424a47298a3c3cba328aa53d1ea99649a4bf16c0ddfe7368dd",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_resume.py": "55d3069fbe8cabc2524590a8866230dd26445e951ef8a3876ee929f405a3d9a8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_calibration_resume.sbatch": "012fc7091ee4d065b0f30b5c81a1f668df5034029c766d5c2043c22277ed8f16",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_evaluation_resume.sbatch": "dacc9695c2b28b83fcd404557bdc8f296c07c086318f23ec4dde5867e608974d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/artifact_bridge.py": "0d3a7d3b25a8df338caac8bd0e86f317ea57711db8f24a97eb1660af9e7315bb"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

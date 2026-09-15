@@ -1,0 +1,53 @@
+{
+  "version": "P2-prospective-confirmation-20260915-v1",
+  "seed": 2026091504,
+  "models": [
+    "deepseek",
+    "goedel"
+  ],
+  "temperature": 0.6,
+  "attempts_per_task": 4,
+  "max_new_tokens": 8192,
+  "layers": {
+    "deepseek": 14,
+    "goedel": 17
+  },
+  "statistic": "whitened",
+  "shrinkage": 0.1,
+  "baseline": "formal_entry",
+  "transform": "Existing-data disjoint calibration, formal_entry, fixed fold0; freeze artifact digests before any new generation.",
+  "new_source": {
+    "repository": "https://github.com/marcusm117/ProofNet-Verified",
+    "commit": "160414332dc196583f6c37c310b420d2a3b07c58",
+    "dataset": "data/proofnet-verified.jsonl"
+  },
+  "source_scope": "New to this project's generation history after overlap audit; no claim that benchmark problems were absent from model pretraining. Textbook domain differs from original miniF2F.",
+  "units": "Equal weight of independent exercise groups, with textbook plus exercise stem grouping subparts; average eligible attempts within problem then problems within group.",
+  "primary_family": {
+    "size": 2,
+    "alpha": 0.05,
+    "method": "Bonferroni: individual two-sided 97.5% task-group bootstrap interval for Goedel, one-sided exact positional permutation p <= .025 for DeepSeek.",
+    "goedel": "Mean equal-exercise-group difference of top1 jump minus top1 surprisal over eligible first-failure-localized traces.",
+    "deepseek": "Error after first observation; exclude first increment; choose one deterministic trace per exercise group; exact permutation of error indices within textbook and exact eligible length; require at least 20 matched independent groups."
+  },
+  "bootstrap_replicates": 50000,
+  "minimum_independent_groups": 20,
+  "ties": "Lowest original source index; report tie frequency.",
+  "boundaries": "No clipping or wrapping. D=j-tstar. Missing offsets are misses in unconditional rate; report offset-available conditional rates. Main D0; shifts and window descriptive.",
+  "selection": "No labels or scores from new responses used to select problems or settings. Reference compilation, holes/axioms, exact and exercise-family overlap checks precede generation.",
+  "technical_pilot_groups": 24,
+  "technical_pilot_scope": "Disjoint exercise groups used only for acquisition checks, never pooled into confirmatory evaluation. No semantic success gate or endpoint tuning.",
+  "primary_missing": "Report all assigned attempts and exclusion categories. Confirmatory outcomes conditional on reliably localized failed traces; do not substitute malformed, incomplete or runtime failures as localized errors.",
+  "stopping": "Fixed complete compatible heldout corpus, four attempts per task; no stopping or extension based on p-values.",
+  "secondary": [
+    "trace-weighted effects",
+    "uniform chance",
+    "always-first eligible",
+    "position predictor trained only on old calibration tasks",
+    "top3 and AUC",
+    "D-1,D+1,window",
+    "other failure positions",
+    "raw and other layers if collected"
+  ],
+  "no_primary_tail_claim": true
+}

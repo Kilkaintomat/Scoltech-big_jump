@@ -1,0 +1,12 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/flow_v2.py": "8fcd87df0e22ed2344e73650f0cb41e75454495e677f7603a1f83e3cc1d6430e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/flow-plan-v2.json": "65d1c2d3c51408023dd761b0990ae19b1726e4090ed41deb0a6811c3b325a036",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2_verify_portable.sbatch": "89d6d530e53a36726a318cb381a7b335e64d1b03a05dc1e8654df46bf1aab5b3",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/portable_runtime-source-manifest.json": "596bde5f967ebdfaed704f01921b38ad4977353ed3303f501ab13643cac418aa"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

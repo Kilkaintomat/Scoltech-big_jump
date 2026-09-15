@@ -1,0 +1,27 @@
+[
+  {
+    "component": "sum",
+    "restricted_retained_norm_ratio": 1.0,
+    "excluded_retained_norm_ratio": 1.304201047875363e-15
+  },
+  {
+    "component": "difference",
+    "restricted_retained_norm_ratio": 1.0,
+    "excluded_retained_norm_ratio": 6.578167343911935e-16
+  },
+  {
+    "component": "mixed",
+    "restricted_retained_norm_ratio": 1.9927783492557531e-16,
+    "excluded_retained_norm_ratio": 1.0
+  },
+  {
+    "component": "single",
+    "restricted_retained_norm_ratio": 2.783329634645282e-16,
+    "excluded_retained_norm_ratio": 0.9999999999999997
+  },
+  {
+    "component": "dc",
+    "restricted_retained_norm_ratio": 1.0,
+    "excluded_retained_norm_ratio": 1.0
+  }
+]

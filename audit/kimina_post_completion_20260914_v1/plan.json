@@ -1,0 +1,24 @@
+{
+  "schema": "kimina-post-completion-sensitivity-v1",
+  "scope": "Structural sensitivity prompted by source audit, specified before new activation results; preserves both earlier analyses.",
+  "model": "kimina",
+  "rule": "Trim only the terminal suffix of verified traces tagged post_completion, with every source point root_closed_before=true and active_goal_ids=[]; preserve the root-closing step.",
+  "failure_policy": "Refuted traces and absorbing labels remain byte-for-byte unchanged. Ambiguous, mixed, nonterminal or empty-prefix cases block automatic processing.",
+  "source_preservation": "Original generated text, token IDs, whole-proof verdict, observation alignment and all queued jobs are retained.",
+  "temperatures": [
+    0.6,
+    1
+  ],
+  "layer": 17,
+  "primary_temperature": 0.6,
+  "primary_statistic": "whitened",
+  "calibration": "Refit whitening and innovation using cleaned verified calibration traces only, separately by temperature; retain shrinkage/ridge/minimum-task settings.",
+  "thresholds": "Recompute P3 thresholds from cleaned calibration values using original q values. Shared transform/threshold calibration remains a limitation.",
+  "statistics": "Reuse existing P1/P2/P3 methods, all three tail estimators, original resampling settings and task split; no significance tuning.",
+  "positional_controls": "Reuse frozen offset plan and tested functions on cleaned measurements; Kimina-only additional sensitivity, not an additional confirmatory discovery family.",
+  "compute": "CPU only; reuse saved states after successful completion of Kimina GPU extraction, without waiting for other models. Comparison report waits for original analysis.",
+  "no_new_generation": true,
+  "no_new_model_forward": true,
+  "frozen_utc": "2026-09-14T17:48:13.060715Z",
+  "new_gpu_journals_present_at_freeze": false
+}

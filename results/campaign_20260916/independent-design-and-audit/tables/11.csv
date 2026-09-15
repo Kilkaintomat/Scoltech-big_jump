@@ -1,0 +1,15 @@
+Этап,Статус,Заявки
+calibration,COMPLETED,8467315
+audit,COMPLETED,"8467339_0, 8467339_1, 8467339_2"
+audit_cli,COMPLETED,"8467357_0, 8467357_1, 8467357_2"
+references,COMPLETED,"8467338_0, 8467338_1, 8467338_2, 8467338_3"
+p2_setup,COMPLETED,8467346
+p5_calibration,PENDING (Priority),8467324
+p5_evaluation,NOT_SUBMITTED,
+p2_generate,PENDING (Priority),8467351
+p2_verify,NOT_SUBMITTED,
+p2_extract,NOT_SUBMITTED,
+p2_analyze,NOT_SUBMITTED,
+p5_analysis,NOT_SUBMITTED,
+provenance_repair,COMPLETED,8467356
+flow_checks,COMPLETED,8467358

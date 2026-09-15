@@ -1,0 +1,9 @@
+{
+  "scope": "Layout-only revision of frozen position histograms; numerical data must remain byte-identical.",
+  "source_stage": "position_histograms",
+  "changes": [
+    "Separate figure legend from first model label",
+    "Remove overlapping neighboring offset tick labels"
+  ],
+  "same_statistics": true
+}

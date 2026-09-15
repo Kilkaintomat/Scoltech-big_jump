@@ -1,0 +1,52 @@
+{
+  "utc": "2026-09-13T19:37:42.712848Z",
+  "kind": "activate",
+  "detail": {
+    "preflight": {
+      "focused_tests": 12,
+      "full_source_tests": 734,
+      "gpu_release": "6672 attempts/model, all planned IDs, immutable digests, zero unexplained disagreements",
+      "job_id": "8466244",
+      "live_gate_manifests": [
+        "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/deepseek/checks/lean-smoke-lean-saved-repair-v8/manifest.json",
+        "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/goedel/checks/lean-smoke-lean-saved-repair-v8/manifest.json",
+        "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260913_local/kimina/checks/lean-smoke-lean-saved-repair-v8/manifest.json"
+      ],
+      "operational_code": {
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/controller.py": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/pass.py": "c3e98464265e1bb69c364e65548e6bf56e8561be307d3d50ba8afc7fa1ae2d69",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/policy.py": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/preflight.py": "fdf7e76834833002dcd1254d164fa6c4a12312ab7a96eecfdbe8359d874d1393",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/preflight.sbatch": "df3811f740445dc9ad77dfda8b66e1bedd479a065c8e0d98013549affdf2b887",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/repair-body.sh": "54e774779f5577320ea2f1afc96f6e099dc539c0213766b7553e3bf9d19a083b",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/repair-v9.sbatch": "221efdbbc6a8ff2d411231f7f0d315edb52843031b5c5b8e4cfb4ab9eaa66045",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/test_policy.py": "9f7dc03610d8809c3ce188b73504a569228789d4b6cf3eb9986afeed67719969",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/saved-continuation-v1/verify-v9-node.sbatch": "d9ff497a21a138e45d9641a34a6d00f4f7f029df95207aa188b34ae7bdd2efe8",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7/scripts/campaign/dispatch.py": "4e06cb1e9423d30fc10d736723cb92462dd15aa5ddee9c136dc51e65753cc43b",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/speedup-v2/repair.py": "448b41e720642cf16e49d2c795aa0129608f868d6b1af6d23c4ff15c70bbe3f9",
+        "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/statistical-fitness-v1/resource_guard.py": "2000553a233b98de7dafd01612ac337505c1ea438535250b26e8dde4eb989acb"
+      },
+      "passed": true,
+      "scope": "saved population only",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_13/snapshots/lean-io-v9",
+      "source_sha256": "7b0aee138aed7e72f7516fa70e92d912fb4c25899dd7305ea16900f5ae560f68"
+    },
+    "promoted": [
+      "kimina/main-verify-6",
+      "deepseek/main-verify-7",
+      "goedel/main-verify-7",
+      "kimina/main-verify-7"
+    ],
+    "merged": [],
+    "original_partition_caps": {
+      "ais-htc": 4,
+      "ais-gpu": 6
+    },
+    "cpu_policy": "3 before main submission; 4 before repair submission; one repair maximum",
+    "scientific_protocol_unchanged": true
+  },
+  "before_sha256": "6edbb01e54fc0a2fbde456f0b783d21242967df58df19898b07db41281192604",
+  "after_sha256": "10b6b0b3afd2ae4e8034be7930c0f4b116605de11ff3658189a7f4efb6e72366",
+  "controller_sha256": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+  "policy_sha256": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158"
+}

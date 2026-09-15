@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#SBATCH --account=rsollmrs
+#SBATCH --partition=ais-htc
+#SBATCH --exclude=cn69
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=02:00:00
+set -euo pipefail
+cd /beegfs/home/denis.rakhmankin/onebigjump
+export E1_SNAPSHOT="$PWD/audit/revision_2026_09_13/snapshots/lean-local-toolchain-v7"
+export PATH="$PWD/runs/e1_20260908T171727Z/tools/env/bin:$PATH"
+source "$E1_SNAPSHOT/scripts/slurm/common.sh"
+export PYTHONPATH="$E1_SNAPSHOT/src" PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+export HF_HUB_OFFLINE=1
+py audit/revision_2026_09_13/p3_fit_diagnostics_v1/code/replay.py

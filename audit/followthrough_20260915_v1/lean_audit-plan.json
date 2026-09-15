@@ -1,0 +1,20 @@
+{
+  "seed": 2026091503,
+  "samples_per_stratum_per_model": 6,
+  "strata": [
+    "verified",
+    "localized_first",
+    "localized_later",
+    "localization_unavailable",
+    "terminal_unsolved",
+    "truncated",
+    "resource_compatibility",
+    "format_other"
+  ],
+  "sampling": "Uniform without replacement among traces within each model/category stratum; selection before new verification; record stratum sizes and task identities; do not treat traces sharing tasks as independent.",
+  "whole_timeout_s": 180,
+  "step_timeout_s": 60,
+  "replay_budget_s": 300,
+  "max_heartbeats": 400000,
+  "scope": "Random stratified audit of authoritative verdict repeatability, fresh kernel axiom evidence, source alignment and fine failure localization. Not a claim that repeating the same verifier proves absence of systematic errors. All missing/resource outcomes retained."
+}

@@ -4,3 +4,7 @@
 *.parquet binary
 *.ipynb binary linguist-documentation
 uv.lock linguist-generated=true merge=binary
+
+# Frozen sources and evidence retain exact bytes for their SHA-256 manifests.
+audit/** -text
+results/campaign_20260916/** -text

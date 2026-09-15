@@ -1,0 +1,14 @@
+{
+  "utc": "2026-09-13T20:48:26.706309Z",
+  "kind": "release",
+  "detail": {
+    "job_id": "8466278",
+    "models": [
+      "goedel"
+    ]
+  },
+  "before_sha256": "c9d8394f2503793838a88609bf4ef565546d97c2eb462cae24e71f34a0b29b07",
+  "after_sha256": "dc0adc5824c969d82ab94186cc162140fe5801f729ba802380bde972fa0293cf",
+  "controller_sha256": "bf2ce639761c15118333331825703c40ad0d3ea7de530d95843334ecc313c5b8",
+  "policy_sha256": "c8f2cc62934dc6ea6aede2c53be3d0f938843cc37522a2c74f3a750929364158"
+}

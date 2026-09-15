@@ -1,0 +1,26 @@
+{
+  "created_for": "User request to exclude first-step errors and then first increment, preserving ongoing GPU jobs.",
+  "scope": "Exploratory old evaluation data. No confirmatory or best-setting selection.",
+  "temperature": 0.6,
+  "layers": {
+    "deepseek": 14,
+    "goedel": 17,
+    "kimina": 17
+  },
+  "baseline": "formal_entry",
+  "shrinkage": 0.1,
+  "folds": [
+    0,
+    1
+  ],
+  "cases": [
+    "all_errors",
+    "later_errors",
+    "later_errors_drop_first_increment"
+  ],
+  "bootstrap_seed": 2026091509,
+  "bootstrap_replicates": 10000,
+  "minimum_bootstrap_tasks": 20,
+  "representative": "lexicographically first eligible failed trace per original problem chosen before excluding first-step errors",
+  "boundary": "Later error required before dropping first increment. Uniform chance averages reciprocal candidate length. No wrapping/clamping. All suffix candidates remain."
+}

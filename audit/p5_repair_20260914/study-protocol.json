@@ -1,0 +1,26 @@
+{
+  "seed": 2026091405,
+  "arms": [
+    "unguided",
+    "guided"
+  ],
+  "planned_attempts_per_arm": 80,
+  "paired_factors": [
+    "tasks",
+    "prompts",
+    "temperatures",
+    "attempt_seeds",
+    "token_budget"
+  ],
+  "intervention": "Only syntax-only xgrammar mask; arbitrary p0000..p9999 remain allowed.",
+  "format_gate": 0.9,
+  "allow_main": false,
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "model_root": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/models/qwen25",
+  "release": "After all 24 protected main extraction shards complete and user GPU queue is empty.",
+  "no_main_mutations": true,
+  "old_pilots": [
+    "runs/development_20260913/deduction",
+    "runs/development_20260913_exactlength/deduction"
+  ]
+}

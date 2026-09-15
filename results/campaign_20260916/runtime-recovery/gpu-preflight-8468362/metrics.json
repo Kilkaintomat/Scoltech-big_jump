@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "vocab": 151936,
+      "columns": 151936,
+      "indices": null,
+      "exact_match": true
+    },
+    {
+      "vocab": 151936,
+      "columns": 151936,
+      "indices": [
+        0,
+        2
+      ],
+      "exact_match": true
+    },
+    {
+      "vocab": 47,
+      "columns": 64,
+      "indices": null,
+      "exact_match": true
+    }
+  ],
+  "CC": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p5_repair_20260914_v2/runtime_cc/cc-wrapper.sh"
+}

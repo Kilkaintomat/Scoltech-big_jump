@@ -1,0 +1,100 @@
+{
+  "schema": "segmentation-quality-and-localization-followup-v1",
+  "scope": "Prospective sensitivity plan for the new segmentation, written after seeing the original experiment; not a new confirmatory preregistration.",
+  "primary_cells": {
+    "deepseek": {
+      "temperature": 0.6,
+      "layer": 14,
+      "statistic": "whitened"
+    },
+    "goedel": {
+      "temperature": 0.6,
+      "layer": 17,
+      "statistic": "whitened"
+    },
+    "kimina": {
+      "temperature": 0.6,
+      "layer": 17,
+      "statistic": "whitened"
+    }
+  },
+  "offset_definition": "D = argmax observation index - first rejected observation index; +1 is the following step",
+  "fixed_offsets": [
+    -1,
+    0,
+    1
+  ],
+  "window_radius": 1,
+  "tie_rule": "Earliest maximum, as in the existing primary analysis; report tied maxima separately.",
+  "boundary_rule": "No clipping or wraparound. Impossible offsets are misses in the unconditional denominator. Also report offset-available and common-both-neighbors denominators.",
+  "subsets": [
+    "all",
+    "error_after_first_with_original_scores",
+    "error_after_first_excluding_first_increment",
+    "both_neighbors"
+  ],
+  "baselines": [
+    "same-trace surprisal",
+    "uniform eligible candidate",
+    "always first",
+    "between-task positional null"
+  ],
+  "positional_null": {
+    "trace_selection": "first lexicographic eligible trace per problem",
+    "strata": [
+      "task_family",
+      "exact_length"
+    ],
+    "singleton_strata": "excluded with coverage reported",
+    "permutations": 9999,
+    "seed": 2026091401,
+    "min_tasks": 20,
+    "alternative": "excess localization over the position-preserving null",
+    "multiple_testing": "Bonferroni over 3 models x 4 prespecified endpoints for the all-trace whitened comparison only; other subsets are sensitivity diagnostics"
+  },
+  "bootstrap": {
+    "unit": "problem",
+    "replicates": 2000,
+    "min_tasks": 20,
+    "scope": "descriptive paired confidence intervals conditional on the fitted transform"
+  },
+  "manual_review": {
+    "selection": "deterministic structural strata; no activation values inspected",
+    "buckets": [
+      "verified_short",
+      "verified_long",
+      "error_first_short",
+      "error_first_long",
+      "error_interior",
+      "error_last",
+      "error_branch",
+      "verified_branch",
+      "merged_boundary",
+      "rejected_boundary",
+      "post_completion",
+      "largest_length_increase"
+    ],
+    "max_cases_per_model": 12
+  },
+  "profile": {
+    "selection": "within each model and verified/refuted class, nearest saved token length to quantiles 0.1,0.5,0.9,1.0; deduplicate",
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9,
+      1
+    ],
+    "gpu_limit": 1,
+    "time_limit_minutes": 25,
+    "new_generation": false,
+    "output": "timings only, stored separately from scientific results"
+  },
+  "limitations": [
+    "New source observations are not independent reasoning steps by definition.",
+    "Whole-proof verdicts are inherited; local context checks are not a new chronological proof certificate.",
+    "Primary whitening parameters and statistical settings stay unchanged; transform/threshold calibration reuse is reported as a limitation for P3.",
+    "Original queued GPU jobs are retained; no reductions in their time limit."
+  ],
+  "frozen_utc": "2026-09-14T17:12:04.543639Z",
+  "gpu_output_journals_present_at_freeze": false
+}

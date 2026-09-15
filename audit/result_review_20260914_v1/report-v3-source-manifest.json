@@ -1,0 +1,7 @@
+{
+  "files": {
+    "audit/result_review_20260914_v1/report_v3.py": "029864ec06904d18f28829c24e949dfec630bdef9accc9c2307021398a91152a",
+    "audit/result_review_20260914_v1/report_v3.sbatch": "8bed29e6bd3939a1d5e7f52f1eda7b4d14e43abf00956f624a95057c4d8e6fc9"
+  },
+  "revision": "avoid orphan captions and near-empty PDF pages; scientific content unchanged"
+}

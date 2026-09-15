@@ -1,0 +1,42 @@
+{
+  "cutoff_utc": "2026-09-12T19:39:02.858165Z",
+  "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_12/snapshots/lean-runtime-v3",
+  "campaign": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912",
+  "previous_campaign": "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_recovery_20260911_v3",
+  "validation": "8465493",
+  "regression": "8465494",
+  "runtime_identity": "8465496",
+  "p3_summary": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_diagnosis_20260912/summary/manifest.json",
+  "historical_p3": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_12/historical-p3/manifest.json",
+  "runtime_manifest": "/beegfs/home/denis.rakhmankin/onebigjump/runs/repl_runtime_20260912_sealed/manifest.json",
+  "generation_manifests": {
+    "deepseek": [
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-000-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-001-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-002-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-003-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-004-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-005-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-006-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek/main/generation/shard-007-of-008/manifest.json"
+    ],
+    "goedel": [
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-000-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-001-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-002-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-003-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-004-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-005-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/goedel/main/generation/shard-006-of-008/manifest.json"
+    ],
+    "kimina": [
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-000-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-001-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-002-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-003-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-004-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-005-of-008/manifest.json",
+      "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/kimina/main/generation/shard-006-of-008/manifest.json"
+    ]
+  }
+}

@@ -1,0 +1,764 @@
+{
+  "exported_utc": "2026-09-15T23:28:59.191538+00:00",
+  "source_repository": "/beegfs/home/denis.rakhmankin/onebigjump",
+  "base_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "entries": [
+    {
+      "path": "results/campaign_20260916/main-review/REPORT_RU.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/REPORT_RU.pdf",
+      "sha256": "73da27a2cf8101c6df915908970cde2503aef6be160b509af16102c26c3f34fd",
+      "bytes": 1130729
+    },
+    {
+      "path": "results/campaign_20260916/main-review/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/metrics.json",
+      "sha256": "1f194c5be56de632c745eb071b1ed7eaac8810306065d4ad5e61f44d99b0df43",
+      "bytes": 28426
+    },
+    {
+      "path": "results/campaign_20260916/main-review/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/manifest.json",
+      "sha256": "2fde506784dd1d70338ad0eae5a82347ce9b436d1ec7c08313461186fc3002d6",
+      "bytes": 10058
+    },
+    {
+      "path": "results/campaign_20260916/main-review/REPORT_RU.md",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/REPORT_RU.md",
+      "sha256": "c4e5cdbc1d9edb7d4807b437628ff5698bb2f6a06d06b4acfdd9a5ef6eab328b",
+      "bytes": 59555
+    },
+    {
+      "path": "results/campaign_20260916/main-review/REPORT_RU.html",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/REPORT_RU.html",
+      "sha256": "9dde99fc7c854c8140e6cefeec8e2f892722df090d18d37525ed6d5194604225",
+      "bytes": 67077
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/09.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/09.csv",
+      "sha256": "8eba688ffe5b5a602a2ec06c6be3c7bd0e00e192e2d3212754da92468480df4f",
+      "bytes": 168
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/06.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/06.csv",
+      "sha256": "cfebed5bf0af4e9c32a2af3a5b4d002fdb24e6fde047bda5a7355fe8c60a4ad2",
+      "bytes": 207
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/16.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/16.csv",
+      "sha256": "bdcaf541859ffb696d2cb06caee9715f9c68ae338899a099c4e2f20a83487be9",
+      "bytes": 1060
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/11.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/11.csv",
+      "sha256": "190ba512cc5e146ea875dccca1ddeafaf6c84560ae53b5278df44387f2d17a97",
+      "bytes": 147
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/17.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/17.csv",
+      "sha256": "d9f2c2a31f59ed774e436bd60a252e01c97d47faeb45f8430ca76e35f216ca1b",
+      "bytes": 112
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/21.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/21.csv",
+      "sha256": "3a3d58d21b487d362c7d69dc31837f9e38680f3cfecfa8c4db4bb4df5f4314a7",
+      "bytes": 314
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/13.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/13.csv",
+      "sha256": "d52fb081dbece673c0a8df17b1dcfd5934ab0e04baf700f92a0e99064544902c",
+      "bytes": 228
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/04.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/04.csv",
+      "sha256": "0c6aee0a119b3cf99b058f55ffffe75b7c9422175b3e71eb2c98eb7e57744e4c",
+      "bytes": 185
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/14.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/14.csv",
+      "sha256": "95c4b6554839df30e35de7a392546ab7f4a431cca903030922794c724649b617",
+      "bytes": 211
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/19.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/19.csv",
+      "sha256": "0ad3981f24ca077d5184dc47623b6c6a311271d40761fc842e235784e16013a7",
+      "bytes": 194
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/15.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/15.csv",
+      "sha256": "9cc7aacd17f5ebf1cce0a84dcefa354c465240da13cbda89721a53492c7d7b2a",
+      "bytes": 175
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/02.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/02.csv",
+      "sha256": "c325a646d16d3c3195168d303ab0624288444785ba2a4b555df288e1792cce70",
+      "bytes": 376
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/08.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/08.csv",
+      "sha256": "159ddb2114077b2eebc0804315625a5f7a8ccbecf33eacef1b664c73c41c519c",
+      "bytes": 231
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/18.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/18.csv",
+      "sha256": "ffdbe26cfebe06da99fb9e408dfb3dd46f2433d6bbf47aabc88e01a9938d998f",
+      "bytes": 264
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/20.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/20.csv",
+      "sha256": "e40324e82c434119da1770fada857edf54ba2ad33b5625a204c49c8d758d6016",
+      "bytes": 182
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/10.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/10.csv",
+      "sha256": "5db75e17d853193dc1247d625bf0ca62849de5ff6135c467637b68d048b80354",
+      "bytes": 439
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/22.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/22.csv",
+      "sha256": "0732146733aad786dfe17bad2448bba5a31f0bbf910669590fe9aaa744ebc3af",
+      "bytes": 580
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/24.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/24.csv",
+      "sha256": "70a59c887c7dddb6a6354c7b0c0bc680bd21905e4088e25cdeaab48ea5e6b943",
+      "bytes": 210
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/27.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/27.csv",
+      "sha256": "8bc650c989a5f3c0f398955ee7cc07273fd3dbfb8ece54b1aa4f43e2b6d87d21",
+      "bytes": 129
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/25.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/25.csv",
+      "sha256": "4fc0c85a33b466d8a84286d06a15b906bff217ec3d0da1c9675092a8ae7d7d5e",
+      "bytes": 127
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/05.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/05.csv",
+      "sha256": "462ee1ae28da85b98abc33e2525916a42e26ea052e659bb052750745dceb49f9",
+      "bytes": 194
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/03.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/03.csv",
+      "sha256": "9e9f128b4eead4118f91bf69f455026a714289d813025222bb286b0cc725f536",
+      "bytes": 260
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/23.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/23.csv",
+      "sha256": "dd58c42cf6b85be4726d0e6b62f08020ecd7924bc87ec200095a54073c8a6519",
+      "bytes": 269
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/01.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/01.csv",
+      "sha256": "ede93996ba9354c52c46dabeb36847db8459ff084e8315df01aecefc316853eb",
+      "bytes": 1568
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/26.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/26.csv",
+      "sha256": "7d7dbc30325df0bc27ef6528a45ecf56da37dcc866bab380c150126516244f92",
+      "bytes": 3268
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/12.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/12.csv",
+      "sha256": "86e56dd38d8eebe20c59974f2d4ba923e0c2e04ea09eb413ab3899ad41c70148",
+      "bytes": 337
+    },
+    {
+      "path": "results/campaign_20260916/main-review/tables/07.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/tables/07.csv",
+      "sha256": "ce6a6c109bfcde91b834b9600685018c219d0fc882a1613feb3130950314e932",
+      "bytes": 217
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/tail_stability.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/tail_stability.pdf",
+      "sha256": "71e18418b816f0c49c89022c1b698556f82141b4c33f18042811568234564a4a",
+      "bytes": 23544
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/threshold_split.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/threshold_split.pdf",
+      "sha256": "b5bc6a7ede5e960cff65d6d99e9b468ac3efc6ff475b0fec409d745e363c219c",
+      "bytes": 23095
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/p2_intervals.png",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/p2_intervals.png",
+      "sha256": "307d8f82d27402fce704ce9c038e6e74c417815a0dd23c4a1cb35c19079e4003",
+      "bytes": 33008
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/tail_stability.png",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/tail_stability.png",
+      "sha256": "b6f06b88db79c7be82c9ff638d1dbf2df98432319af1522f45606857c7116865",
+      "bytes": 147537
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/p4_training_curves.png",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/p4_training_curves.png",
+      "sha256": "2c2875b0708e2fffad042ec1a9e5279d9f52b1f4feddb9b6609acfd252e0e36d",
+      "bytes": 636717
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/p2_intervals.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/p2_intervals.pdf",
+      "sha256": "b82d69026307b1ecd3af94ad38bab0790b639f468e6421c238903cb3b17616f5",
+      "bytes": 18587
+    },
+    {
+      "path": "results/campaign_20260916/main-review/figures/threshold_split.png",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/result_review_20260914_v1/report_v3/figures/threshold_split.png",
+      "sha256": "d984b981c0ce1dba0f368a132e964a9d1e310e1618bf70cc84b95765f7c07955",
+      "bytes": 46283
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/REPORT_RU.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.pdf",
+      "sha256": "bf326125753af9506e755e8ebf6c29cb2f24c15922aaa35a9c197d099e49d57e",
+      "bytes": 141762
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/metrics.json",
+      "sha256": "818b8fe982268abbfc0d521034b5dd1615c632b03b292e24e4b7c71b6b5d6888",
+      "bytes": 145806
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/calibration.png",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/calibration.png",
+      "sha256": "57d2bce8ca21ae0dafde6e2ab82c466a14cb372ea53379314699e5bd01423add",
+      "bytes": 60531
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/REPORT_RU.html",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.html",
+      "sha256": "7837df4b319159c9ded745cca9dc7ed4495de8197fad8a6cca9ec2e184f53648",
+      "bytes": 24641
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/manifest.json",
+      "sha256": "4b275f0a83ecec7a0090b12bac1f1d51bced20f715b2b02a7e6eac14139558f1",
+      "bytes": 6096
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/REPORT_RU.md",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.md",
+      "sha256": "9a993e9d081717b6417f4c61dc7179bf89d6ba1834fc497af4cbc2e645c34f5b",
+      "bytes": 21802
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/5.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/5.csv",
+      "sha256": "78b65ee9277a22a72ddbd67f43d60c86fff34f4efe75ac4abe30cf4310866b70",
+      "bytes": 233
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/2.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/2.csv",
+      "sha256": "bec264d4528986cd9e6434e36cd21323978b5ba6600c5eb88eb8040b8c1a9f03",
+      "bytes": 397
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/3.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/3.csv",
+      "sha256": "44567676b87ffd77d96286cc0295d753dde6f7bcd0400eb78b9b2c56eb8038f3",
+      "bytes": 324
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/1.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/1.csv",
+      "sha256": "f48323c0ff839840af1df608a1242a688d1fb9533d76bbace3f90c6e137eb1c2",
+      "bytes": 201
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/9.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/9.csv",
+      "sha256": "0aaa265bfe6a4dc838810eed3335bd9020b53f9265fa379ceaba088e1d849c40",
+      "bytes": 163
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/6.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/6.csv",
+      "sha256": "ef76a2fc9b78ab75d03a2403ec64fc6f651e8f42fdc651f88aae67d5ee9d0801",
+      "bytes": 223
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/8.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/8.csv",
+      "sha256": "cfd4b3bc15864484531df065b55eb04974858874d009900cacedc3d5e7e6461d",
+      "bytes": 168
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/10.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/10.csv",
+      "sha256": "8e62edddbc429a8e2a424fab564f47ec85cd56df119f09c0eddc3d8b0932d997",
+      "bytes": 82
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/11.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/11.csv",
+      "sha256": "b401a6ea31408fb9600d63f31f00aee0456e3e4b6ea5bcf0bce5454ca7ac3096",
+      "bytes": 557
+    },
+    {
+      "path": "results/campaign_20260916/independent-design-and-audit/tables/7.csv",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/7.csv",
+      "sha256": "571ca71cef7b5f55ecfd462e4f4148549a955128c55f268f1e11a8cddf7c5a0e",
+      "bytes": 324
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/report_v3/metrics.json",
+      "sha256": "fa4705fb8978a9d8c57ee223c65c69a65b79c859a7a45694df79b36a4f2b11f6",
+      "bytes": 118503
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/report_v3/manifest.json",
+      "sha256": "bf5f82100ab7bf5952f7e8f045b7dca661ee4fa06b1e6363f2bb3275f0720591",
+      "bytes": 2105
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/REPORT_RU.md",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/report_v3/REPORT_RU.md",
+      "sha256": "37a583a675b19415787c2e14a71df74f5c16cceaf42428ee23f89ca2372ee7d6",
+      "bytes": 12082
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/REPORT.pdf",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/latex_final/REPORT.pdf",
+      "sha256": "6da81dbc7152f26238dcfb34dd78bcd9f5f62a591a0cacf43c802ad51cdf9225",
+      "bytes": 70773
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/REPORT.tex",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/latex_final/REPORT.tex",
+      "sha256": "fe24a60de90fac0921f9e9780a2070a2f6b3cc130282cdedb0c50c74695b8a48",
+      "bytes": 15654
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/render-receipt.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/latex_final/render-receipt.json",
+      "sha256": "bc7875473dee38616f0558d7c14a26ba95b0a91e5dd15b3183abf14a5117409a",
+      "bytes": 615
+    },
+    {
+      "path": "results/campaign_20260916/status-0139-msk/pdf-checks.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/latex_final/pdf-checks.json",
+      "sha256": "c9fd0031ac15204c077dcb6d3fc3723a5c0997a0feaa80636d2cd6df9937a023",
+      "bytes": 110
+    },
+    {
+      "path": "results/campaign_20260916/p5-final/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/metrics.json",
+      "sha256": "7021786e0885c3dd07f5abe980165122bae8f3879ea6d5e954fc8a0003fbf88c",
+      "bytes": 13507
+    },
+    {
+      "path": "results/campaign_20260916/p5-final/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/manifest.json",
+      "sha256": "f720d834afc0ebb77ce195988a1167e5ecb6b70badf83559a10928b0b2513a99",
+      "bytes": 3628
+    },
+    {
+      "path": "results/campaign_20260916/p5-final/assigned-attempts.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/assigned-attempts.json",
+      "sha256": "f3a36d92b495b631264cbc40e97f566ef21115faa770b8ec12a1429997e36f8a",
+      "bytes": 753363
+    },
+    {
+      "path": "results/campaign_20260916/p5-final/localization-T0.6.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/localization-T0.6.json",
+      "sha256": "b931c7413ff62e50e7098e1f5e9348aa328a4c979dc0aef7e8acf243f99a8c71",
+      "bytes": 63394
+    },
+    {
+      "path": "results/campaign_20260916/p5-final/localization-T1.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_analysis/localization-T1.json",
+      "sha256": "27281837ff1e85bf0416ba9b90d8f59345d1ea8e80150d8572a15972a0141989",
+      "bytes": 64496
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/generation/shard-000-of-001/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/main/generation/shard-000-of-001/manifest.json",
+      "sha256": "25538c52bbcdf38a69ea5ec1d2ebdba8226d11dd89bec9363a56b4e21f1b4f98",
+      "bytes": 2256
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/verification/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/main/verification/manifest.json",
+      "sha256": "1b3a12612db2cd7796dda66cf1d0103747c6def1d5607ee97f506a6fb9df234a",
+      "bytes": 1773
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/extraction/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/main/extraction/manifest.json",
+      "sha256": "0e528951c8b88830fc2e322c1285aa412ded9e37a66f5ac8331d594ea50c528f",
+      "bytes": 497821
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/protocol.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/protocol.json",
+      "sha256": "3c9c52639f4023c9519b14692cb910abb960256deacd6c84d5b84432164b8233",
+      "bytes": 1131
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/calibration_gate/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/calibration_gate/metrics.json",
+      "sha256": "0cd2dcb43c9d11daca4722bd68735671299073f009c18f8ceb4b0640f206ccce",
+      "bytes": 8339
+    },
+    {
+      "path": "results/campaign_20260916/p5-calibration/calibration_gate/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_calibration/calibration_gate/manifest.json",
+      "sha256": "93bea12f6bd9aaef4f76a911d058c64ed7c787771b4d83a36fe72bd0f6fd5b3c",
+      "bytes": 10104
+    },
+    {
+      "path": "results/campaign_20260916/p5-evaluation/generation/shard-000-of-001/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/main/generation/shard-000-of-001/manifest.json",
+      "sha256": "13267c74ba11734873e6502fbfa82adb757fded78602fa1072994ee356dc3963",
+      "bytes": 2251
+    },
+    {
+      "path": "results/campaign_20260916/p5-evaluation/verification/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/main/verification/manifest.json",
+      "sha256": "906a5a615375d9d215f2061d1f342942823731285f9a2cfd740ef8c1cf7b1967",
+      "bytes": 1768
+    },
+    {
+      "path": "results/campaign_20260916/p5-evaluation/extraction/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/main/extraction/manifest.json",
+      "sha256": "6d999837b14a47134923f6ab59237f2791a2096edf6673dcdd29edbbfd981d64",
+      "bytes": 248818
+    },
+    {
+      "path": "results/campaign_20260916/p5-evaluation/protocol.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5_evaluation/protocol.json",
+      "sha256": "ef78d3d199936c7c0c4db1d002397f6f2d7072aaddbc142edc9d6180abbc3a66",
+      "bytes": 1129
+    },
+    {
+      "path": "results/campaign_20260916/p3-original-validation/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_validation_20260913/summary/metrics.json",
+      "sha256": "c8bc7433568d9e48589299464d7ca5d6d4c1f5288a5bc3a1b99d26d98ec3e074",
+      "bytes": 12104
+    },
+    {
+      "path": "results/campaign_20260916/p3-original-validation/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_validation_20260913/summary/manifest.json",
+      "sha256": "9d997fb4bffb1a8b77654ec12fdeb632a6c9decd1e6b767920c836eb3240cfcf",
+      "bytes": 2613
+    },
+    {
+      "path": "results/campaign_20260916/p3-constrained-candidate/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_constrained_validation_20260913/metrics.json",
+      "sha256": "fe4bf6a67a633a5e89b02cb988e841a3356afb254197d3e9f244333a583b7002",
+      "bytes": 36256
+    },
+    {
+      "path": "results/campaign_20260916/p3-constrained-candidate/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_constrained_validation_20260913/manifest.json",
+      "sha256": "aeb33eabb04f50f650f0465805e1b3295d24ae8d4ab26e892e7bba3beb9cbbae",
+      "bytes": 156177
+    },
+    {
+      "path": "results/campaign_20260916/p3-selection-candidate/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_selection_validation_20260913/metrics.json",
+      "sha256": "96e243fb34016bc86920f7738281992538da196ddccf98b63b5c05832355bfde",
+      "bytes": 113175
+    },
+    {
+      "path": "results/campaign_20260916/p3-selection-candidate/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/p3_selection_validation_20260913/manifest.json",
+      "sha256": "654899d9cb0ee296684212596bcd73d2fcb5c6cada025e5a9a2384361ae18d1a",
+      "bytes": 194358
+    },
+    {
+      "path": "results/campaign_20260916/monte-carlo/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/calibration-summary/metrics.json",
+      "sha256": "54f739b6a24b9e60fcd0c2183385de94af1f1be72c55a5404eb2b3349e1ee847",
+      "bytes": 3843
+    },
+    {
+      "path": "results/campaign_20260916/monte-carlo/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/calibration-summary/manifest.json",
+      "sha256": "6b4d445d877b2ab0e49a847bc44cec19a3c78117eb9103ac4bf77325bf27c761",
+      "bytes": 15368
+    },
+    {
+      "path": "results/campaign_20260916/segmentation-quality/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/segmentation_quality_20260914_v1/metrics.json",
+      "sha256": "7d686fd665aaaa99545a1bca152fa7924cce3c724b2805243f093963fb6e36f4",
+      "bytes": 55181
+    },
+    {
+      "path": "results/campaign_20260916/segmentation-quality/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/segmentation_quality_20260914_v1/manifest.json",
+      "sha256": "cdc41d33993d32a42f9e3c86889cd404be921563b7f6cc9586f6c1fc2023ef20",
+      "bytes": 4621
+    },
+    {
+      "path": "results/campaign_20260916/kimina-cleanup/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/kimina_post_completion_20260914_v1/comparison/metrics.json",
+      "sha256": "735a45bc31007e967faa6fabda0cdf12127cf6fb1bc0b2966bb9a42bb495ef6e",
+      "bytes": 89
+    },
+    {
+      "path": "results/campaign_20260916/kimina-cleanup/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/kimina_post_completion_20260914_v1/comparison/manifest.json",
+      "sha256": "1708ce32e870279b7e16386501946a360b671e1e62d8eb9a618c69d7fd45fbe6",
+      "bytes": 4109
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/REPORT_RU.md",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/REPORT_RU.md",
+      "sha256": "ea3164cc4e12b1037b14d18d07e62d07d07c1eb1e713048d7cbd1974729381f7",
+      "bytes": 26230
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/summary-audit.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/summary-audit.json",
+      "sha256": "377c403e9e270a77f5d0faefb481707fa295b0c9d86dc1a99ab6e949d0d5d432",
+      "bytes": 15628
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/full-tail.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/full-tail.json",
+      "sha256": "c54de4eb95397bd14b81fc0c7bed40c9d6a8fea3c6cfdc4873f2450c757bd8cd",
+      "bytes": 34745
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/artifact-manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/artifact-manifest.json",
+      "sha256": "11bda52f03b321e66aa1679935e749783cfa09a91c7ecee45116203a7f071604",
+      "bytes": 4316
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/checks.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/checks.json",
+      "sha256": "de1a9143de328aebfce1b5f75a9690c990eb3d55c06aa499ffb03a151fe77d31",
+      "bytes": 16854
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/provenance.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/provenance.json",
+      "sha256": "80fb76d1292e60dad4c9f713113a7ae7cf41154f71bc88cd9ab70b2201765529",
+      "bytes": 4836
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/forward-reconstruction.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/forward-reconstruction.json",
+      "sha256": "9d4c5e36e8bced849353cb7ad9eebca649c4b69ef04841a5d824faa1e141ebfc",
+      "bytes": 8233
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/windows.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/windows.json",
+      "sha256": "c19dce4fee53653d1221290df625894643034bb4b137034f9e1f8e1ba2132dab",
+      "bytes": 11427
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/original-paired-summary.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/original-paired-summary.json",
+      "sha256": "a09159827bed3164d28406cb412d92df04c135d1fb4a7de707a3b8287bf0ffeb",
+      "bytes": 3554
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/runs.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/runs.json",
+      "sha256": "5a0bafda7d8b24781fa8e7fbc1ffc221b0c3b90bca6d71fcb2a1ba1f73802ecb",
+      "bytes": 20505
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/fourier-mask-controls.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/fourier-mask-controls.json",
+      "sha256": "075e47dee8e11b53ad246ae14d1a10f988138123a38ba9bf0fbedd8e17b80c1f",
+      "bytes": 681
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/sensitivity.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/sensitivity.json",
+      "sha256": "132ae2030cf1dfc7e41f283fb5b98accdf959299bdda517d6b7fc9433ed511ec",
+      "bytes": 55661
+    },
+    {
+      "path": "results/campaign_20260916/p4-audit/configs.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/audit/p4_audit_20260914/configs.json",
+      "sha256": "57ee7a9c1f7760483becfdf699ae20fc0a348cd6c3381277b48c03b4eb6b965d",
+      "bytes": 3657
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/submissions-current.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/submissions-current.json",
+      "sha256": "8d4e1c5c0841fed0b7cfaf521e82170e251a03e0876cb8b04a1779d0655640fd",
+      "bytes": 1454
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/inspection-final.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/inspection-final.json",
+      "sha256": "7577cc11a876ac2b88335f6ff9e0bd24bdde481820f3652906dfb4ffb27b1f45",
+      "bytes": 327
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/preflight/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/preflight/metrics.json",
+      "sha256": "465f2c020752f47dc563d3c0b820b93db41c83b61f351789aff35d930af95356",
+      "bytes": 1144
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/preflight/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/preflight/manifest.json",
+      "sha256": "56b0fe074c4e07605226a654d48fd80fbef5371d821a4d6989ca2b51e5a48a0d",
+      "bytes": 1984
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/gpu-preflight-8468362/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/gpu-preflight-8468362/metrics.json",
+      "sha256": "da18c09caf303c77ca481fc0a095a266d745f297790e2dd8c878c318a4fbe31d",
+      "bytes": 491
+    },
+    {
+      "path": "results/campaign_20260916/runtime-recovery/gpu-preflight-8468362/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_recovery_20260916_v2/gpu-preflight-8468362/manifest.json",
+      "sha256": "7756d1dfe74f53062ad6a81573747ebed9c47999b16d098aa393cfe867cdc162",
+      "bytes": 1507
+    },
+    {
+      "path": "results/campaign_20260916/integrity-check-0206-msk/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/status_check_20260916_0205/metrics.json",
+      "sha256": "41c5b6ed6bb8e564345ad38b4781282b2f4bcfc0b8c3897c3af48644445360fd",
+      "bytes": 2563
+    },
+    {
+      "path": "results/campaign_20260916/integrity-check-0206-msk/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/status_check_20260916_0205/manifest.json",
+      "sha256": "99a8efb632480d320641b01bcc7bc8f32e86cc2e0938157ffe8082182cd5233a",
+      "bytes": 1150
+    },
+    {
+      "path": "results/campaign_20260916/live-state-snapshot/latest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/flow/latest.json",
+      "sha256": "ebfb362f3d2edcf0ee62715fc972a610e1f3ae215ed52896a72fff6f4f5190c5",
+      "bytes": 7343
+    },
+    {
+      "path": "results/campaign_20260916/live-state-snapshot/jobs.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/flow/jobs.json",
+      "sha256": "b93692368c0e962db7b7443d87cd296865bd3cdf0b2a64360c061df9db8063d0",
+      "bytes": 4049
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/metrics.json",
+      "sha256": "20ac1055b8e39fc4e8c7e4ddc0f314aeebdb760727fbab872dacffb8165b909d",
+      "bytes": 834
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/manifest.json",
+      "sha256": "6c264a4bfd893a12f3a929a6a744f175b39ce131b809a71ec28770e236e9fc42",
+      "bytes": 6479
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/task-population.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/task-population.json",
+      "sha256": "f04923d74b4088c7d7706e4e296dc5b97c64abd7512d203e3ef39fe8ba6bbc0a",
+      "bytes": 158724
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek-config.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek-config.json",
+      "sha256": "cf34fce9dd172fc6976591dc8b95f35f8f17c3a32933144de191e8c61d14114a",
+      "bytes": 2266
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/goedel-config.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel-config.json",
+      "sha256": "7a6c82f3fa7c68f8b6f845ab0c78c65c6a9571ff0a40590b1766207631175e02",
+      "bytes": 2256
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek-requests.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek-requests.json",
+      "sha256": "519dd51f0153d94abd3143c1cd61eab935c17947781da55f13289fa82761bc7b",
+      "bytes": 894409
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/goedel-requests.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel-requests.json",
+      "sha256": "e97d021c175bf5b0cc83017df9681382820b63f6494f9b66c419ccfac1dd699e",
+      "bytes": 894406
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek/pilot/progress.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek/pilot/generation/progress.json",
+      "sha256": "d3d1a6590336000c1cebb9318c7aed401db736758792d758b51732fa01c2fd63",
+      "bytes": 121
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek/pilot/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek/pilot/generation/metrics.json",
+      "sha256": "9a2e5c31b9e127776d1ab1cd5221cb73690df52f7edde908b47989142e3eceab",
+      "bytes": 279
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek/pilot/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek/pilot/generation/manifest.json",
+      "sha256": "6c546ad777c69acbcb357965cb64e4f50d8d57b541e54ce83bb6156b98e15fed",
+      "bytes": 2411
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/deepseek/evaluation/progress.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/deepseek/evaluation/generation/progress.json",
+      "sha256": "81c077290ee16a84177f0e41fd1a57ca2f506a06087018d3c2d78a36bb0cc008",
+      "bytes": 126
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/goedel/pilot/progress.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel/pilot/generation/progress.json",
+      "sha256": "97899d29043fff54b94051eb6ca4c04e634eee27f2b5e6f9ddd9fb48249fa472",
+      "bytes": 120
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/goedel/pilot/metrics.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel/pilot/generation/metrics.json",
+      "sha256": "04f8fcb64047d89f34c70c4d3bc744c941e5287e515da07ce6ded7b7ef8f4448",
+      "bytes": 312
+    },
+    {
+      "path": "results/campaign_20260916/p2-prospective/goedel/pilot/manifest.json",
+      "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/goedel/pilot/generation/manifest.json",
+      "sha256": "0b0b80ec62b4bb408eaea378e1abdff28325416a03d6705ce35776411c6c7dab",
+      "bytes": 2434
+    }
+  ],
+  "scope": "Exact-byte compact evidence export. P2 is an ongoing fixed-population campaign; snapshots are dated, not final results. Original manifests retain server paths and describe heavy artifacts not shipped in Git."
+}

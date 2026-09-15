@@ -1,0 +1,33 @@
+# Figure 1 of the paper: the dichotomy on the heuristic-mixture model of Theorem 5.
+# The caption fixes rho = 0.7, kappa = 2.5, d = 8, 3000 traces of 64 steps per setting,
+# and tau at the 99.9% quantile. Do not change these without changing the paper.
+name: figure1-kesten
+kind: kesten
+description: >-
+  Reproduce Figure 1: closed-form alpha(p) against Hill, moment and GPD estimates,
+  the localisation rate, and the overshoot at the failing step.
+seed: 20270101
+
+kesten:
+  rho: 0.7
+  kappa: 2.5
+  p_values: [0.0, 0.02, 0.05, 0.10, 0.15, 0.20]
+  d: 8
+  n_traces: 3000
+  n_steps: 64
+  burn_in: 200
+  sigma: 1.0
+  tolerance_quantile: 0.999
+  seed: 20270101
+  figure_p_trace: 0.05
+  out_dir: results/simulations/kesten
+  tail:
+    k_min: 20
+    k_max_frac: 0.25
+    k_selector: double_bootstrap
+    double_bootstrap_resamples: 200
+    double_bootstrap_n1_exponent: 0.9
+    bootstrap_resamples: 500
+    bootstrap_unit: trace
+    ci_level: 0.95
+    estimators: [hill, moment, gpd]

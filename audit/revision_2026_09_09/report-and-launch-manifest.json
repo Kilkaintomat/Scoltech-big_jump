@@ -1,0 +1,37 @@
+{
+  "stage": "audit-report-and-launch-receipt",
+  "captured_at": "2026-09-09T17:35:34.108272+03:00",
+  "git_commit": "5302b9f8435c0e653c4a0c5eeacd50fb25e3df07",
+  "git_dirty": true,
+  "config": {
+    "root": "/beegfs/home/denis.rakhmankin/onebigjump/runs/e1_20260908T171727Z",
+    "source": "/beegfs/home/denis.rakhmankin/onebigjump/runs/e1_20260908T171727Z/snapshots/pilot-20260909T143152Z",
+    "jobs": {
+      "generation": "8462802",
+      "verification": "8462803",
+      "extraction": "8462804",
+      "measurement": "8462805",
+      "analysis": "8462806"
+    }
+  },
+  "environment": {
+    "host": "an01",
+    "python": "3.6.8",
+    "action": "Slurm submission; stage hardware recorded by execution manifests"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/e1_20260908T171727Z/pilot/submission-8462802.json": "2bd8eeec65522ca65b56de3847c1fba5a311bf88611f82cdbd26b422ca499309",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/e1_20260908T171727Z/snapshots/pilot-20260909T143152Z/source-manifest.json": "febc8cbcac5d2e6569d2b4edb4fa843127bcba86013d3804fc476e72c0fd730d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/validation-8462797-manifest.json": "df51212dfb4fc5b42747ca81dc01704a70012759a1261158f2eadf933766298a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/e1_20260908T171727Z/checks/pipeline-fixture-8462800/manifest.json": "549b1f22f1ae4a70deb58942e764ed3441a46e9726b13599b7e292b3e654051c"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/REPORT.md": "85c2cfeb1d0c42733b933cf53d363835439e16da263715772307481b25994051",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/LAUNCH.md": "e227cee9e4bec85bf571dd7aa4b9cea8593c0a7a50876b61a7a24cb9f4b1b46d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/launch.json": "9d2810b6fb4efd7d33f525efdea4c31654e3328128a9b71b8d6778a91c7b08cf",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/launch-accounting.tsv": "04a6a315a48e6fd2cf6cb667ba4b9eedcd1c3dec33f726213cfc24265defdc5a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/code-after.tar.gz": "6659bad9b2eb1ad481b164bf2bcd87ce32849c9695fc8bd1ee88b5db190a0aca",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/after.patch": "807b83f0aa8a27a0cf0081f33bdc45c2a00b36d2ba71fd97595e66b9d846fd52",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_09/after-status.txt": "cfad40dd914f2773d61efe79900afe01061f3c8b303420dba5a1f5fb16753074"
+  }
+}

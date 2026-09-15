@@ -1,0 +1,3873 @@
+{
+  "calibration": {
+    "models": {
+      "deepseek": {
+        "input_population": 2486,
+        "paired_population": 2486,
+        "missing_formal_traces": 0,
+        "removed_terminal_steps": 0,
+        "formal_anchor_definition": "Last original token ending at the start of the formal proof body, optionally including only trailing whitespace; reject if token reaches non-whitespace proof content or first observed step. Replace X0 only; later increments unchanged before transform refit.",
+        "variants": {
+          "original_prompt": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "aime_1984_p15",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2009_p5",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2016_p3",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "induction_sum_1oktkp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_126",
+                "mathd_algebra_13",
+                "mathd_algebra_132",
+                "mathd_algebra_140",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_206",
+                "mathd_algebra_214",
+                "mathd_algebra_22",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_410",
+                "mathd_algebra_421",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_55",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn"
+              ],
+              "threshold_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2001_p2",
+                "amc12a_2009_p2",
+                "amc12a_2015_p10",
+                "amc12b_2003_p9",
+                "imo_1961_p1",
+                "imo_1973_p3",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "mathd_algebra_10",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_131",
+                "mathd_algebra_144",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_185",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_405",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_568",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_92",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 150.53961838539243,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.008341722997267367,
+                    "equal_task_rate": 0.0036717046951347605
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.011354079058031959,
+                    "equal_task_rate": 0.021391585125089187
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.009565291655991117,
+                    "equal_task_rate": 0.01224990905832716
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.007575757575757576,
+                    "equal_task_rate": 0.007172131147540984
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.24053030303030304,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.17543911007025764,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.01345628415300547,
+                    "ci95_fixed_transform": [
+                      -0.08439841920374708,
+                      0.05698916861826694
+                    ],
+                    "first_max": 0.0
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 78.03173126214975,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.009492305479649072,
+                    "equal_task_rate": 0.0044416692592954155
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.014087468460891506,
+                    "equal_task_rate": 0.022525000038991907
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.011358783841489452,
+                    "equal_task_rate": 0.01403962390272201
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.028409090909090908,
+                    "equal_task_rate": 0.022345823575331773
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.23674242424242425,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.17870804059328652,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.010187353629976586,
+                    "ci95_fixed_transform": [
+                      -0.08187012099921936,
+                      0.062179205698672885
+                    ],
+                    "first_max": 0.0
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 82.75708551911279,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.012224938875305624,
+                    "equal_task_rate": 0.009653548969988353
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.018292682926829267,
+                    "equal_task_rate": 0.033531972213455385
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.014689555043129217,
+                    "equal_task_rate": 0.01814182363856148
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.022727272727272728,
+                    "equal_task_rate": 0.026375878220140512
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.0946969696969697,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.1136319281811085,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.07526346604215456,
+                    "ci95_fixed_transform": [
+                      -0.14081942818110849,
+                      -0.009688963700234202
+                    ],
+                    "first_max": 0.3939393939393939
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.010178817056396148
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2001_p2",
+                "amc12a_2009_p2",
+                "amc12a_2015_p10",
+                "amc12b_2003_p9",
+                "imo_1961_p1",
+                "imo_1973_p3",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "mathd_algebra_10",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_131",
+                "mathd_algebra_144",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_185",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_405",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_568",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_92",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aime_1984_p15",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2009_p5",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2016_p3",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "induction_sum_1oktkp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_126",
+                "mathd_algebra_13",
+                "mathd_algebra_132",
+                "mathd_algebra_140",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_206",
+                "mathd_algebra_214",
+                "mathd_algebra_22",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_410",
+                "mathd_algebra_421",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_55",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 136.7055597842507,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.015676686322450742,
+                    "equal_task_rate": 0.01179363782733863
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.04352396972245585,
+                    "equal_task_rate": 0.043188554910305536
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.026987787172260653,
+                    "equal_task_rate": 0.02727647976484627
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.022727272727272728,
+                    "equal_task_rate": 0.022492193598750976
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.22916666666666666,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.1909543325526932,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": 0.0020589383294301344,
+                    "ci95_fixed_transform": [
+                      -0.07288641686182672,
+                      0.07661031420765026
+                    ],
+                    "first_max": 0.005681818181818182
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 73.52113676438084,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.01481374946066446,
+                    "equal_task_rate": 0.010876662350742557
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.04058031959629941,
+                    "equal_task_rate": 0.0426836037659682
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.025279699376547955,
+                    "equal_task_rate": 0.026539696462852487
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.022727272727272728,
+                    "equal_task_rate": 0.022345823575331773
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.24431818181818182,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.2138368462138954,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": 0.024941451990632316,
+                    "ci95_fixed_transform": [
+                      -0.05204430132708821,
+                      0.1018254781420765
+                    ],
+                    "first_max": 0.003787878787878788
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 83.02756017181729,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.011937293254710197,
+                    "equal_task_rate": 0.009298064220093665
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.018713204373423043,
+                    "equal_task_rate": 0.03409075035192593
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.014689555043129217,
+                    "equal_task_rate": 0.01812480379045188
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.020833333333333332,
+                    "equal_task_rate": 0.025351288056206088
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.0928030303030303,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.11275370804059327,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.0761416861826698,
+                    "ci95_fixed_transform": [
+                      -0.14107191647150666,
+                      -0.011093384074941478
+                    ],
+                    "first_max": 0.4053030303030303
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.01037967768369298
+                }
+              }
+            }
+          ],
+          "formal_entry": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "aime_1984_p15",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2009_p5",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2016_p3",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "induction_sum_1oktkp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_126",
+                "mathd_algebra_13",
+                "mathd_algebra_132",
+                "mathd_algebra_140",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_206",
+                "mathd_algebra_214",
+                "mathd_algebra_22",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_410",
+                "mathd_algebra_421",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_55",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn"
+              ],
+              "threshold_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2001_p2",
+                "amc12a_2009_p2",
+                "amc12a_2015_p10",
+                "amc12b_2003_p9",
+                "imo_1961_p1",
+                "imo_1973_p3",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "mathd_algebra_10",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_131",
+                "mathd_algebra_144",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_185",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_405",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_568",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_92",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 152.72465936487274,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.008341722997267367,
+                    "equal_task_rate": 0.0036778177624274054
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.010723296888141295,
+                    "equal_task_rate": 0.020815859805075
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.009309078486634212,
+                    "equal_task_rate": 0.0119559471651247
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.007575757575757576,
+                    "equal_task_rate": 0.007172131147540984
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.24431818181818182,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.18090359094457456,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.007991803278688531,
+                    "ci95_fixed_transform": [
+                      -0.07755659640905542,
+                      0.06086285128805618
+                    ],
+                    "first_max": 0.003787878787878788
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 79.28837006358108,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.009492305479649072,
+                    "equal_task_rate": 0.0044416692592954155
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.013666947014297728,
+                    "equal_task_rate": 0.02199596385778181
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.011187975061918183,
+                    "equal_task_rate": 0.013732355413635338
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.026515151515151516,
+                    "equal_task_rate": 0.021321233411397345
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.24053030303030304,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.18417252146760343,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.004722872755659646,
+                    "ci95_fixed_transform": [
+                      -0.07479630171740827,
+                      0.06628073770491796
+                    ],
+                    "first_max": 0.003787878787878788
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 82.95117948915589,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.0152452178915576,
+                    "equal_task_rate": 0.01394973430697545
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.022077375946173254,
+                    "equal_task_rate": 0.03557739433233986
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.018020326244768983,
+                    "equal_task_rate": 0.02332163710030625
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.02462121212121212,
+                    "equal_task_rate": 0.023790007806401246
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.16477272727272727,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.16450039032006245,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.024395003903200627,
+                    "ci95_fixed_transform": [
+                      -0.09070355191256828,
+                      0.042225068306010895
+                    ],
+                    "first_max": 0.08333333333333333
+                  },
+                  "threshold_calibration_rate": 0.010106528270964218,
+                  "fit_calibration_rate": 0.017606602475928473
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2001_p2",
+                "amc12a_2009_p2",
+                "amc12a_2015_p10",
+                "amc12b_2003_p9",
+                "imo_1961_p1",
+                "imo_1973_p3",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "mathd_algebra_10",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_131",
+                "mathd_algebra_144",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_185",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_405",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_568",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_92",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aime_1984_p15",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2009_p5",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2016_p3",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "induction_sum_1oktkp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_126",
+                "mathd_algebra_13",
+                "mathd_algebra_132",
+                "mathd_algebra_140",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_206",
+                "mathd_algebra_214",
+                "mathd_algebra_22",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_410",
+                "mathd_algebra_421",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_55",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 138.26782676312095,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.015532863512153028,
+                    "equal_task_rate": 0.011641012674713479
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.04352396972245585,
+                    "equal_task_rate": 0.043188554910305536
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.026902382782475018,
+                    "equal_task_rate": 0.027216354704721203
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.022727272727272728,
+                    "equal_task_rate": 0.022492193598750976
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.23674242424242425,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.20564012490241998,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": 0.01674473067915691,
+                    "ci95_fixed_transform": [
+                      -0.05800229313036691,
+                      0.09128781225604993
+                    ],
+                    "first_max": 0.011363636363636364
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 74.53864465643008,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.014526103840069035,
+                    "equal_task_rate": 0.010525624499704707
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.040370058873002525,
+                    "equal_task_rate": 0.04261671413386117
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.02502348620719105,
+                    "equal_task_rate": 0.026304691816083137
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.022727272727272728,
+                    "equal_task_rate": 0.022345823575331773
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.2481060606060606,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.21930132708821234,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": 0.030405932864949258,
+                    "ci95_fixed_transform": [
+                      -0.04550473263075721,
+                      0.10555230288836845
+                    ],
+                    "first_max": 0.011363636363636364
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 84.00147595837029,
+                  "verified": {
+                    "steps": 6953,
+                    "tasks": 126,
+                    "step_rate": 0.010211419531137638,
+                    "equal_task_rate": 0.009091482429506284
+                  },
+                  "pre": {
+                    "steps": 4756,
+                    "tasks": 115,
+                    "step_rate": 0.01703111858704794,
+                    "equal_task_rate": 0.028930965125608325
+                  },
+                  "accepted": {
+                    "steps": 11709,
+                    "tasks": 198,
+                    "step_rate": 0.012981467247416518,
+                    "equal_task_rate": 0.01815064017067853
+                  },
+                  "at": {
+                    "steps": 528,
+                    "tasks": 122,
+                    "step_rate": 0.017045454545454544,
+                    "equal_task_rate": 0.015446916471506636
+                  },
+                  "P2": {
+                    "traces": 528,
+                    "tasks": 122,
+                    "jump": 0.16098484848484848,
+                    "surprisal": 0.17613636363636365,
+                    "equal_task_jump": 0.1624512099921936,
+                    "equal_task_surprisal": 0.18889539422326307,
+                    "equal_task_difference": -0.026444184231069482,
+                    "ci95_fixed_transform": [
+                      -0.09295765027322404,
+                      0.03984582357533172
+                    ],
+                    "first_max": 0.08712121212121213
+                  },
+                  "threshold_calibration_rate": 0.010178817056396148,
+                  "fit_calibration_rate": 0.005462988254575253
+                }
+              }
+            }
+          ]
+        }
+      },
+      "goedel": {
+        "input_population": 2381,
+        "paired_population": 2381,
+        "missing_formal_traces": 0,
+        "removed_terminal_steps": 0,
+        "formal_anchor_definition": "Last original token ending at the start of the formal proof body, optionally including only trailing whitespace; reject if token reaches non-whitespace proof content or first observed step. Replace X0 only; later increments unchanged before transform refit.",
+        "variants": {
+          "original_prompt": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "aime_1984_p15",
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p2",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2016_p3",
+                "amc12b_2002_p3",
+                "imo_1961_p1",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_126",
+                "mathd_algebra_140",
+                "mathd_algebra_149",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_206",
+                "mathd_algebra_22",
+                "mathd_algebra_224",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_327",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_156",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_236",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p15",
+                "amc12a_2002_p1",
+                "amc12a_2008_p4",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "imo_1965_p1",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_185",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_31",
+                "mathd_algebra_323",
+                "mathd_algebra_405",
+                "mathd_algebra_410",
+                "mathd_algebra_422",
+                "mathd_algebra_451",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_55",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_92"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 99.84970473254711,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.007496084135153278,
+                    "equal_task_rate": 0.009278394491391015
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.029049111807732498,
+                    "equal_task_rate": 0.03223072693131956
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.015011294906361583,
+                    "equal_task_rate": 0.019945539421523585
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.033482142857142856,
+                    "equal_task_rate": 0.032308743169398906
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.25,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.20914324746291962,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.07764441842310696,
+                    "ci95_fixed_transform": [
+                      0.007130415690866519,
+                      0.1488978337236534
+                    ],
+                    "first_max": 0.008928571428571428
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 57.44430556945971,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.006377265607518461,
+                    "equal_task_rate": 0.007746923156656025
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.023406478578892373,
+                    "equal_task_rate": 0.02654685529684901
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.012315091452306347,
+                    "equal_task_rate": 0.016201344824305686
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.026785714285714284,
+                    "equal_task_rate": 0.02923497267759563
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.26339285714285715,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.21750585480093673,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.08600702576112412,
+                    "ci95_fixed_transform": [
+                      0.013581430523028888,
+                      0.1569508684621389
+                    ],
+                    "first_max": 0.011160714285714286
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.0002208968411751712
+                },
+                "1": {
+                  "tau": 89.78725737074106,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.009621839337659432,
+                    "equal_task_rate": 0.011873889281817648
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.0073145245559038665,
+                    "equal_task_rate": 0.008942360675665964
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.008817313998396852,
+                    "equal_task_rate": 0.011585697772332738
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.002232142857142857,
+                    "equal_task_rate": 0.00273224043715847
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.08035714285714286,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.06949648711943793,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": -0.062002341920374696,
+                    "ci95_fixed_transform": [
+                      -0.11654981459797033,
+                      -0.009449892661982902
+                    ],
+                    "first_max": 0.203125
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.014137397835210957
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p15",
+                "amc12a_2002_p1",
+                "amc12a_2008_p4",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "imo_1965_p1",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_185",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_31",
+                "mathd_algebra_323",
+                "mathd_algebra_405",
+                "mathd_algebra_410",
+                "mathd_algebra_422",
+                "mathd_algebra_451",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_55",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_92"
+              ],
+              "threshold_task_ids": [
+                "aime_1984_p15",
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p2",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2016_p3",
+                "amc12b_2002_p3",
+                "imo_1961_p1",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_126",
+                "mathd_algebra_140",
+                "mathd_algebra_149",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_206",
+                "mathd_algebra_22",
+                "mathd_algebra_224",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_327",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_156",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_236",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 106.68681865683227,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.004363392257775788,
+                    "equal_task_rate": 0.0057699576667870935
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.025078369905956112,
+                    "equal_task_rate": 0.02763227800082411
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.011586387816075202,
+                    "equal_task_rate": 0.01846075510643483
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.04017857142857143,
+                    "equal_task_rate": 0.03333333333333334
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.22767857142857142,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.18831967213114753,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.0568208430913349,
+                    "ci95_fixed_transform": [
+                      -0.012492925448868066,
+                      0.12551741803278688
+                    ],
+                    "first_max": 0.011160714285714286
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 63.029984554765434,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.0034683374356679346,
+                    "equal_task_rate": 0.004525036658034838
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.018808777429467086,
+                    "equal_task_rate": 0.021887861601892513
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.008817313998396852,
+                    "equal_task_rate": 0.014374410760764645
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.04017857142857143,
+                    "equal_task_rate": 0.03333333333333334
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.21205357142857142,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.17861046057767366,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.04711163153786105,
+                    "ci95_fixed_transform": [
+                      -0.02028908079625293,
+                      0.11378195745511314
+                    ],
+                    "first_max": 0.006696428571428571
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 94.23197073380072,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.00760796598791676,
+                    "equal_task_rate": 0.008323660038040095
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.006060606060606061,
+                    "equal_task_rate": 0.006902160266276447
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.007068425271442105,
+                    "equal_task_rate": 0.008529518348611759
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.002232142857142857,
+                    "equal_task_rate": 0.00273224043715847
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.08258928571428571,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.07066744730679156,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": -0.06083138173302107,
+                    "ci95_fixed_transform": [
+                      -0.11536934035909445,
+                      -0.007918618266978992
+                    ],
+                    "first_max": 0.21428571428571427
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.0063066614111154905
+                }
+              }
+            }
+          ],
+          "formal_entry": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "aime_1984_p15",
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p2",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2016_p3",
+                "amc12b_2002_p3",
+                "imo_1961_p1",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_126",
+                "mathd_algebra_140",
+                "mathd_algebra_149",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_206",
+                "mathd_algebra_22",
+                "mathd_algebra_224",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_327",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_156",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_236",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p15",
+                "amc12a_2002_p1",
+                "amc12a_2008_p4",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "imo_1965_p1",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_185",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_31",
+                "mathd_algebra_323",
+                "mathd_algebra_405",
+                "mathd_algebra_410",
+                "mathd_algebra_422",
+                "mathd_algebra_451",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_55",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_92"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 98.94707668748349,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.007496084135153278,
+                    "equal_task_rate": 0.009278394491391015
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.029049111807732498,
+                    "equal_task_rate": 0.032736066366864935
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.015011294906361583,
+                    "equal_task_rate": 0.019994521957533547
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.03125,
+                    "equal_task_rate": 0.031284153005464485
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.2544642857142857,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.21460772833723651,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.0831088992974239,
+                    "ci95_fixed_transform": [
+                      0.012585870413739259,
+                      0.15468652419984386
+                    ],
+                    "first_max": 0.015625
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 56.89184965264381,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.0064891474602819426,
+                    "equal_task_rate": 0.00776708688613943
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.023406478578892373,
+                    "equal_task_rate": 0.02654685529684901
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.012387961815929462,
+                    "equal_task_rate": 0.01621366312930692
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.026785714285714284,
+                    "equal_task_rate": 0.02923497267759563
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.26785714285714285,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.22126268540202965,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.08976385636221704,
+                    "ci95_fixed_transform": [
+                      0.017681254879000782,
+                      0.1613585577673692
+                    ],
+                    "first_max": 0.015625
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.0002208968411751712
+                },
+                "1": {
+                  "tau": 90.02042359825,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.010069366748713358,
+                    "equal_task_rate": 0.010481303908978428
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.007105538140020898,
+                    "equal_task_rate": 0.014867339668317436
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.009035925089266195,
+                    "equal_task_rate": 0.01203089073573956
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.002232142857142857,
+                    "equal_task_rate": 0.00273224043715847
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.06696428571428571,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.07664910226385636,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": -0.05484972677595628,
+                    "ci95_fixed_transform": [
+                      -0.11283250390320061,
+                      0.0027337041373926433
+                    ],
+                    "first_max": 0.45089285714285715
+                  },
+                  "threshold_calibration_rate": 0.010051241623965314,
+                  "fit_calibration_rate": 0.0130329136293351
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_amgm_sqrtxymulxmyeqxpy_xpygeq4",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p15",
+                "amc12a_2002_p1",
+                "amc12a_2008_p4",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p7",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2002_p6",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "imo_1965_p1",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_185",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_31",
+                "mathd_algebra_323",
+                "mathd_algebra_405",
+                "mathd_algebra_410",
+                "mathd_algebra_422",
+                "mathd_algebra_451",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_55",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_149",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_92"
+              ],
+              "threshold_task_ids": [
+                "aime_1984_p15",
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p2",
+                "amc12_2001_p9",
+                "amc12a_2008_p2",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2016_p3",
+                "amc12b_2002_p3",
+                "imo_1961_p1",
+                "imo_1974_p5",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "induction_seq_mul2pnp1",
+                "mathd_algebra_101",
+                "mathd_algebra_104",
+                "mathd_algebra_110",
+                "mathd_algebra_119",
+                "mathd_algebra_126",
+                "mathd_algebra_140",
+                "mathd_algebra_149",
+                "mathd_algebra_181",
+                "mathd_algebra_182",
+                "mathd_algebra_206",
+                "mathd_algebra_22",
+                "mathd_algebra_224",
+                "mathd_algebra_234",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_327",
+                "mathd_algebra_37",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_67",
+                "mathd_numbertheory_109",
+                "mathd_numbertheory_155",
+                "mathd_numbertheory_156",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_236",
+                "mathd_numbertheory_24",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_403",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_461",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 105.57296602637605,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.004363392257775788,
+                    "equal_task_rate": 0.0057699576667870935
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.02528735632183908,
+                    "equal_task_rate": 0.028598461575703334
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.011659258179698317,
+                    "equal_task_rate": 0.01902192233426872
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.04017857142857143,
+                    "equal_task_rate": 0.03333333333333334
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.23214285714285715,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.1951502732240437,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.06365144418423108,
+                    "ci95_fixed_transform": [
+                      -0.006627634660421549,
+                      0.13234801912568306
+                    ],
+                    "first_max": 0.017857142857142856
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 62.54503193307358,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.003356455582904453,
+                    "equal_task_rate": 0.004273337690000607
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.018599791013584117,
+                    "equal_task_rate": 0.02172683100607931
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.008671573271150623,
+                    "equal_task_rate": 0.01419528110894196
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.04017857142857143,
+                    "equal_task_rate": 0.03333333333333334
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.21651785714285715,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.18236729117876657,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": 0.05086846213895394,
+                    "ci95_fixed_transform": [
+                      -0.016570062451209993,
+                      0.11805254683840749
+                    ],
+                    "first_max": 0.015625
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 95.19640061551543,
+                  "verified": {
+                    "steps": 8938,
+                    "tasks": 137,
+                    "step_rate": 0.007496084135153278,
+                    "equal_task_rate": 0.007730241609497124
+                  },
+                  "pre": {
+                    "steps": 4785,
+                    "tasks": 115,
+                    "step_rate": 0.00522466039707419,
+                    "equal_task_rate": 0.008710211097160553
+                  },
+                  "accepted": {
+                    "steps": 13723,
+                    "tasks": 198,
+                    "step_rate": 0.006704073453326532,
+                    "equal_task_rate": 0.009495938517094932
+                  },
+                  "at": {
+                    "steps": 448,
+                    "tasks": 122,
+                    "step_rate": 0.002232142857142857,
+                    "equal_task_rate": 0.00273224043715847
+                  },
+                  "P2": {
+                    "traces": 448,
+                    "tasks": 122,
+                    "jump": 0.0625,
+                    "surprisal": 0.13169642857142858,
+                    "equal_task_jump": 0.07364363778298204,
+                    "equal_task_surprisal": 0.13149882903981264,
+                    "equal_task_difference": -0.0578551912568306,
+                    "ci95_fixed_transform": [
+                      -0.11479361826697891,
+                      -0.0010338602654176516
+                    ],
+                    "first_max": 0.4799107142857143
+                  },
+                  "threshold_calibration_rate": 0.010161254694057875,
+                  "fit_calibration_rate": 0.007686243594797004
+                }
+              }
+            }
+          ]
+        }
+      },
+      "kimina": {
+        "input_population": 2265,
+        "paired_population": 2265,
+        "missing_formal_traces": 0,
+        "removed_terminal_steps": 988,
+        "formal_anchor_definition": "Last original token ending at the start of the formal proof body, optionally including only trailing whitespace; reject if token reaches non-whitespace proof content or first observed step. Replace X0 only; later increments unchanged before transform refit.",
+        "variants": {
+          "original_prompt": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2016_p3",
+                "amc12a_2017_p7",
+                "amc12b_2002_p6",
+                "imo_1961_p1",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "mathd_algebra_101",
+                "mathd_algebra_110",
+                "mathd_algebra_126",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_149",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_206",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_69",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_42",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_92",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aimeII_2001_p3",
+                "aime_1984_p15",
+                "aime_1991_p1",
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p15",
+                "amc12_2001_p2",
+                "amc12a_2002_p1",
+                "amc12a_2002_p12",
+                "amc12a_2008_p2",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_104",
+                "mathd_algebra_119",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_140",
+                "mathd_algebra_182",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_234",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_410",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_510",
+                "mathd_algebra_536",
+                "mathd_algebra_55",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_169",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_326",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 106.75021133269179,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.02527353983664663,
+                    "equal_task_rate": 0.019738822816950583
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.05062836624775584,
+                    "equal_task_rate": 0.05652012618089817
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.032887642872546904,
+                    "equal_task_rate": 0.030940683155014907
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.17592592592592593,
+                    "equal_task_rate": 0.14326241134751772
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.17592592592592593,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.20810536980749744,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.088031914893617,
+                    "ci95_fixed_transform": [
+                      0.006230686423505577,
+                      0.17137854609929076
+                    ],
+                    "first_max": 0.006172839506172839
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 61.182853431570535,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.0212667591308368,
+                    "equal_task_rate": 0.017267809038981927
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.04524236983842011,
+                    "equal_task_rate": 0.05171963710472067
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.028466681043778305,
+                    "equal_task_rate": 0.027704326718906717
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.1574074074074074,
+                    "equal_task_rate": 0.12606382978723404
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.17901234567901234,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.21528622087132723,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.09521276595744681,
+                    "ci95_fixed_transform": [
+                      0.010561360182370822,
+                      0.1798530901722391
+                    ],
+                    "first_max": 0.0030864197530864196
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 83.62655267644867,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.0027739251040221915,
+                    "equal_task_rate": 0.002883669395186835
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.00718132854578097,
+                    "equal_task_rate": 0.012539688638589737
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.004097476816907484,
+                    "equal_task_rate": 0.0046687060937637016
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.012345679012345678,
+                    "equal_task_rate": 0.008865248226950354
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.1882716049382716,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.17991388044579534,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.0598404255319149,
+                    "ci95_fixed_transform": [
+                      -0.01932750759878419,
+                      0.1388931104356636
+                    ],
+                    "first_max": 0.12037037037037036
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.008191747572815534
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aimeII_2001_p3",
+                "aime_1984_p15",
+                "aime_1991_p1",
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p15",
+                "amc12_2001_p2",
+                "amc12a_2002_p1",
+                "amc12a_2002_p12",
+                "amc12a_2008_p2",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_104",
+                "mathd_algebra_119",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_140",
+                "mathd_algebra_182",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_234",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_410",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_510",
+                "mathd_algebra_536",
+                "mathd_algebra_55",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_169",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_326",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84"
+              ],
+              "threshold_task_ids": [
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2016_p3",
+                "amc12a_2017_p7",
+                "amc12b_2002_p6",
+                "imo_1961_p1",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "mathd_algebra_101",
+                "mathd_algebra_110",
+                "mathd_algebra_126",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_149",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_206",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_69",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_42",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_92",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 135.1108454144806,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.00785945446139621,
+                    "equal_task_rate": 0.0065885142461356945
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.015439856373429085,
+                    "equal_task_rate": 0.013301358604810474
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.010135863704981669,
+                    "equal_task_rate": 0.009525617541300721
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.06481481481481481,
+                    "equal_task_rate": 0.04136271529888551
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.15432098765432098,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.18415653495440726,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.06408308004052683,
+                    "ci95_fixed_transform": [
+                      -0.016870883991894632,
+                      0.14596282928064838
+                    ],
+                    "first_max": 0.006172839506172839
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 72.33081107817115,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.008321775312066574,
+                    "equal_task_rate": 0.006945578106849191
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.01436265709156194,
+                    "equal_task_rate": 0.013067424802198881
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.010135863704981669,
+                    "equal_task_rate": 0.009691346667371802
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.05864197530864197,
+                    "equal_task_rate": 0.0360435663627153
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.16666666666666666,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.1690856129685917,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.04901215805471124,
+                    "ci95_fixed_transform": [
+                      -0.028242147922998985,
+                      0.12798917173252278
+                    ],
+                    "first_max": 0.006172839506172839
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 83.29529906919784,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.0030821390044691015,
+                    "equal_task_rate": 0.0030792369148730063
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.00718132854578097,
+                    "equal_task_rate": 0.012539688638589737
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.004313133491481561,
+                    "equal_task_rate": 0.004815919006934062
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.012345679012345678,
+                    "equal_task_rate": 0.008865248226950354
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.1697530864197531,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.16874366767983787,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.04867021276595745,
+                    "ci95_fixed_transform": [
+                      -0.02681389311043566,
+                      0.12445573708206686
+                    ],
+                    "first_max": 0.08333333333333333
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.01012292118582791
+                }
+              }
+            }
+          ],
+          "formal_entry": [
+            {
+              "fit_fold": 0,
+              "fit_task_ids": [
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2016_p3",
+                "amc12a_2017_p7",
+                "amc12b_2002_p6",
+                "imo_1961_p1",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "mathd_algebra_101",
+                "mathd_algebra_110",
+                "mathd_algebra_126",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_149",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_206",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_69",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_42",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_92",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "threshold_task_ids": [
+                "aimeII_2001_p3",
+                "aime_1984_p15",
+                "aime_1991_p1",
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p15",
+                "amc12_2001_p2",
+                "amc12a_2002_p1",
+                "amc12a_2002_p12",
+                "amc12a_2008_p2",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_104",
+                "mathd_algebra_119",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_140",
+                "mathd_algebra_182",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_234",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_410",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_510",
+                "mathd_algebra_536",
+                "mathd_algebra_55",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_169",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_326",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 105.85499315082316,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.025735860687316998,
+                    "equal_task_rate": 0.0200367242768046
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.05206463195691203,
+                    "equal_task_rate": 0.058736885163155804
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.033642441233556176,
+                    "equal_task_rate": 0.032116992503778787
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.17592592592592593,
+                    "equal_task_rate": 0.14326241134751772
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.1728395061728395,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.20544579533941235,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.0853723404255319,
+                    "ci95_fixed_transform": [
+                      0.003911474164133739,
+                      0.1679657421479229
+                    ],
+                    "first_max": 0.009259259259259259
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 60.95242849938591,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.021574973031283712,
+                    "equal_task_rate": 0.017381860133872436
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.04488330341113106,
+                    "equal_task_rate": 0.051582274467358025
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.028574509381065344,
+                    "equal_task_rate": 0.027716446951615188
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.1574074074074074,
+                    "equal_task_rate": 0.12606382978723404
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.17592592592592593,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.21262664640324214,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.0925531914893617,
+                    "ci95_fixed_transform": [
+                      0.007990438196555217,
+                      0.17714159067882468
+                    ],
+                    "first_max": 0.006172839506172839
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 83.39681399993242,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.003852673755586377,
+                    "equal_task_rate": 0.006011401681737111
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.006463195691202872,
+                    "equal_task_rate": 0.012654622544732435
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.004636618503342679,
+                    "equal_task_rate": 0.006799259946469299
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.024691358024691357,
+                    "equal_task_rate": 0.016590678824721376
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.1574074074074074,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.1341818642350557,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.014108409321175276,
+                    "ci95_fixed_transform": [
+                      -0.05273777862208713,
+                      0.07891369047619048
+                    ],
+                    "first_max": 0.25617283950617287
+                  },
+                  "threshold_calibration_rate": 0.01012292118582791,
+                  "fit_calibration_rate": 0.008798543689320388
+                }
+              }
+            },
+            {
+              "fit_fold": 1,
+              "fit_task_ids": [
+                "aimeII_2001_p3",
+                "aime_1984_p15",
+                "aime_1991_p1",
+                "aime_1996_p5",
+                "algebra_2complexrootspoly_xsqp49eqxp7itxpn7i",
+                "algebra_2rootsintpoly_am10tap11eqasqpam110",
+                "algebra_2varlineareq_xpeeq7_2xpeeq3_eeq11_xeqn4",
+                "algebra_3rootspoly_amdtamctambeqnasqmbpctapcbtdpasqmbpctapcbta",
+                "algebra_apb4leq8ta4pb4",
+                "algebra_sqineq_2at2pclta2c2p41pc",
+                "algebra_sqineq_4bap1lt4bsqpap1sq",
+                "amc12_2000_p15",
+                "amc12_2001_p2",
+                "amc12a_2002_p1",
+                "amc12a_2002_p12",
+                "amc12a_2008_p2",
+                "amc12a_2009_p2",
+                "amc12a_2009_p5",
+                "amc12a_2013_p8",
+                "amc12a_2015_p10",
+                "amc12a_2021_p7",
+                "amc12b_2003_p9",
+                "amc12b_2020_p5",
+                "imo_1964_p1_2",
+                "induction_divisibility_3divnto3m2n",
+                "mathd_algebra_10",
+                "mathd_algebra_104",
+                "mathd_algebra_119",
+                "mathd_algebra_13",
+                "mathd_algebra_131",
+                "mathd_algebra_140",
+                "mathd_algebra_182",
+                "mathd_algebra_190",
+                "mathd_algebra_192",
+                "mathd_algebra_214",
+                "mathd_algebra_234",
+                "mathd_algebra_245",
+                "mathd_algebra_251",
+                "mathd_algebra_267",
+                "mathd_algebra_28",
+                "mathd_algebra_37",
+                "mathd_algebra_410",
+                "mathd_algebra_455",
+                "mathd_algebra_462",
+                "mathd_algebra_510",
+                "mathd_algebra_536",
+                "mathd_algebra_55",
+                "mathd_algebra_67",
+                "mathd_algebra_73",
+                "mathd_algebra_89",
+                "mathd_numbertheory_102",
+                "mathd_numbertheory_132",
+                "mathd_numbertheory_169",
+                "mathd_numbertheory_269",
+                "mathd_numbertheory_301",
+                "mathd_numbertheory_326",
+                "mathd_numbertheory_37",
+                "mathd_numbertheory_412",
+                "mathd_numbertheory_466",
+                "mathd_numbertheory_81",
+                "mathd_numbertheory_84"
+              ],
+              "threshold_task_ids": [
+                "algebra_amgm_faxinrrp2msqrt2geq2mxm1div2x",
+                "algebra_binomnegdiscrineq_10alt28asqp1",
+                "algebra_manipexpr_2erprsqpesqeqnrpnesq",
+                "algebra_manipexpr_apbeq2cceqiacpbceqm2",
+                "algebra_sqineq_36azm9asqle36zsq",
+                "algebra_xmysqpymzsqpzmxsqeqxyz_xpypzp6dvdx3y3z3",
+                "amc12_2000_p11",
+                "amc12_2000_p5",
+                "amc12_2001_p9",
+                "amc12a_2008_p8",
+                "amc12a_2011_p18",
+                "amc12a_2013_p7",
+                "amc12a_2016_p3",
+                "amc12a_2017_p7",
+                "amc12b_2002_p6",
+                "imo_1961_p1",
+                "induction_divisibility_3div2tooddnp1",
+                "induction_divisibility_9div10tonm1",
+                "mathd_algebra_101",
+                "mathd_algebra_110",
+                "mathd_algebra_126",
+                "mathd_algebra_132",
+                "mathd_algebra_144",
+                "mathd_algebra_149",
+                "mathd_algebra_15",
+                "mathd_algebra_151",
+                "mathd_algebra_159",
+                "mathd_algebra_181",
+                "mathd_algebra_206",
+                "mathd_algebra_323",
+                "mathd_algebra_327",
+                "mathd_algebra_393",
+                "mathd_algebra_421",
+                "mathd_algebra_422",
+                "mathd_algebra_43",
+                "mathd_algebra_437",
+                "mathd_algebra_451",
+                "mathd_algebra_48",
+                "mathd_algebra_51",
+                "mathd_algebra_568",
+                "mathd_algebra_616",
+                "mathd_algebra_69",
+                "mathd_numbertheory_110",
+                "mathd_numbertheory_136",
+                "mathd_numbertheory_188",
+                "mathd_numbertheory_198",
+                "mathd_numbertheory_200",
+                "mathd_numbertheory_22",
+                "mathd_numbertheory_252",
+                "mathd_numbertheory_284",
+                "mathd_numbertheory_335",
+                "mathd_numbertheory_35",
+                "mathd_numbertheory_42",
+                "mathd_numbertheory_45",
+                "mathd_numbertheory_458",
+                "mathd_numbertheory_48",
+                "mathd_numbertheory_64",
+                "mathd_numbertheory_690",
+                "mathd_numbertheory_92",
+                "numbertheory_2dvd4expn",
+                "numbertheory_prmdvsneqnsqmodpeq0",
+                "numbertheory_sqmod3in01d"
+              ],
+              "settings": {
+                "0.1": {
+                  "tau": 134.4792787344957,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.008013561411619664,
+                    "equal_task_rate": 0.007150968823188812
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.015080789946140035,
+                    "equal_task_rate": 0.01322906247988277
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.010135863704981669,
+                    "equal_task_rate": 0.009898938429339255
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.06790123456790123,
+                    "equal_task_rate": 0.04402228976697061
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.1419753086419753,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.1602203647416413,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.04014690982776089,
+                    "ci95_fixed_transform": [
+                      -0.03837386018237082,
+                      0.12068167426545086
+                    ],
+                    "first_max": 0.009259259259259259
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.0
+                },
+                "0.5": {
+                  "tau": 72.0247260526994,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.008321775312066574,
+                    "equal_task_rate": 0.006945578106849191
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.014721723518850987,
+                    "equal_task_rate": 0.013156766354955067
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.010243692042268708,
+                    "equal_task_rate": 0.009736017443749896
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.06172839506172839,
+                    "equal_task_rate": 0.038703140830800405
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.16358024691358025,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.16376646403242148,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.04369300911854103,
+                    "ci95_fixed_transform": [
+                      -0.034221124620060786,
+                      0.12417679837892603
+                    ],
+                    "first_max": 0.006172839506172839
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.0
+                },
+                "1": {
+                  "tau": 82.91578623009478,
+                  "verified": {
+                    "steps": 6489,
+                    "tasks": 137,
+                    "step_rate": 0.003544459855139467,
+                    "equal_task_rate": 0.0034739084774277804
+                  },
+                  "pre": {
+                    "steps": 2785,
+                    "tasks": 91,
+                    "step_rate": 0.006822262118491921,
+                    "equal_task_rate": 0.013071071175466778
+                  },
+                  "accepted": {
+                    "steps": 9274,
+                    "tasks": 182,
+                    "step_rate": 0.004528790166055639,
+                    "equal_task_rate": 0.005252143208398498
+                  },
+                  "at": {
+                    "steps": 324,
+                    "tasks": 94,
+                    "step_rate": 0.024691358024691357,
+                    "equal_task_rate": 0.017477203647416412
+                  },
+                  "P2": {
+                    "traces": 324,
+                    "tasks": 94,
+                    "jump": 0.15432098765432098,
+                    "surprisal": 0.12037037037037036,
+                    "equal_task_jump": 0.14330040526849036,
+                    "equal_task_surprisal": 0.12007345491388044,
+                    "equal_task_difference": 0.023226950354609928,
+                    "ci95_fixed_transform": [
+                      -0.04741926291793312,
+                      0.09480781408308003
+                    ],
+                    "first_max": 0.19135802469135801
+                  },
+                  "threshold_calibration_rate": 0.010012135922330098,
+                  "fit_calibration_rate": 0.009761388286334056
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "checks": {
+      "direct_inverse_covariance": true,
+      "formal_entry_only_changes_first_increment": true
+    },
+    "generation_calls": 0,
+    "model_forward_calls": 0,
+    "scope": "paired baseline sensitivity on existing evaluation tasks; clean Kimina; all settings reported, not a new confirmation"
+  },
+  "audit": {
+    "deepseek": {
+      "all_accounted": true,
+      "category_agreement": 43,
+      "category_disagreement": 0,
+      "completed": 43,
+      "expected": 43,
+      "model": "deepseek",
+      "runtime_errors": 0,
+      "strata": {
+        "format_other": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "parse_error": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localization_unavailable": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 5
+        },
+        "localized_first": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localized_later": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "resource_compatibility": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "timeout_resource": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "terminal_unsolved": {
+          "category_agreement": 1,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "terminal_unsolved_goals": 1
+          },
+          "n": 1,
+          "tasks": 1
+        },
+        "truncated": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "generation_truncation": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "verified": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "verified": 6
+          },
+          "n": 6,
+          "tasks": 6
+        }
+      }
+    },
+    "goedel": {
+      "all_accounted": true,
+      "category_agreement": 42,
+      "category_disagreement": 0,
+      "completed": 42,
+      "expected": 42,
+      "model": "goedel",
+      "runtime_errors": 0,
+      "strata": {
+        "format_other": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "parse_error": 6
+          },
+          "n": 6,
+          "tasks": 5
+        },
+        "localization_unavailable": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localized_first": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 4
+        },
+        "localized_later": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 5
+        },
+        "resource_compatibility": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "context_statement_mismatch": 2,
+            "timeout_resource": 4
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "terminal_unsolved": {
+          "category_agreement": 0,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {},
+          "n": 0,
+          "tasks": 0
+        },
+        "truncated": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "generation_truncation": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "verified": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "verified": 6
+          },
+          "n": 6,
+          "tasks": 6
+        }
+      }
+    },
+    "kimina": {
+      "all_accounted": true,
+      "category_agreement": 48,
+      "category_disagreement": 0,
+      "completed": 48,
+      "expected": 48,
+      "model": "kimina",
+      "runtime_errors": 0,
+      "strata": {
+        "format_other": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "parse_error": 2,
+            "sorry_invalid_proof": 4
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localization_unavailable": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localized_first": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "localized_later": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 6,
+          "fresh_categories": {
+            "localized_tactic_failure": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "resource_compatibility": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "context_statement_mismatch": 3,
+            "timeout_resource": 3
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "terminal_unsolved": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "terminal_unsolved_goals": 6
+          },
+          "n": 6,
+          "tasks": 5
+        },
+        "truncated": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "generation_truncation": 6
+          },
+          "n": 6,
+          "tasks": 6
+        },
+        "verified": {
+          "category_agreement": 6,
+          "fine_not_reproduced": 0,
+          "fine_reproduced": 0,
+          "fresh_categories": {
+            "verified": 6
+          },
+          "n": 6,
+          "tasks": 6
+        }
+      }
+    }
+  },
+  "independent_cli": {
+    "deepseek": {
+      "completed": 43,
+      "expected": 43,
+      "nontruncated_category_disagreements": 0,
+      "original_verified": 6,
+      "scope": "Separate standalone compiler path using the same trusted statement and pinned Lean/Mathlib; complements REPL repeatability, does not establish correctness of informal formalization.",
+      "statuses": {
+        "source_excluded": 5,
+        "standalone_checked": 38
+      },
+      "truncated_but_certificate_valid": 0,
+      "verified_independently_certified": 6
+    },
+    "goedel": {
+      "completed": 42,
+      "expected": 42,
+      "nontruncated_category_disagreements": 0,
+      "original_verified": 6,
+      "scope": "Separate standalone compiler path using the same trusted statement and pinned Lean/Mathlib; complements REPL repeatability, does not establish correctness of informal formalization.",
+      "statuses": {
+        "source_excluded": 7,
+        "standalone_checked": 35
+      },
+      "truncated_but_certificate_valid": 0,
+      "verified_independently_certified": 6
+    },
+    "kimina": {
+      "completed": 48,
+      "expected": 48,
+      "nontruncated_category_disagreements": 0,
+      "original_verified": 6,
+      "scope": "Separate standalone compiler path using the same trusted statement and pinned Lean/Mathlib; complements REPL repeatability, does not establish correctness of informal formalization.",
+      "statuses": {
+        "source_excluded": 9,
+        "standalone_checked": 38,
+        "standalone_resource_timeout": 1
+      },
+      "truncated_but_certificate_valid": 0,
+      "verified_independently_certified": 6
+    }
+  },
+  "new_population": {
+    "preflight_passed": true,
+    "candidate_problems": 364,
+    "reference_categories": {
+      "reference_incompatible": 113,
+      "reference_verified": 236,
+      "context_statement_mismatch": 1,
+      "reference_unapproved_axiom": 14
+    },
+    "compatible_problems": 236,
+    "compatible_exercise_groups": 221,
+    "technical_pilot_groups": 24,
+    "evaluation_groups": 197,
+    "models": {
+      "deepseek": {
+        "planned_attempts": 944,
+        "pilot_attempts": 104,
+        "evaluation_attempts": 840,
+        "context_exclusions": 0
+      },
+      "goedel": {
+        "planned_attempts": 944,
+        "pilot_attempts": 104,
+        "evaluation_attempts": 840,
+        "context_exclusions": 0
+      }
+    },
+    "reference_proofs_in_model_prompts": false,
+    "generation_calls": 0,
+    "protocol_sha256": "f828673cc7ae8f8fc3eb7f0cce6592193cd879b5c2edfe5265befd97cc054a8f"
+  },
+  "p5_setup": {
+    "setup_complete": true,
+    "checks": [
+      {
+        "stage": "calibration",
+        "problems": 1000,
+        "attempts": 2000,
+        "gold_checks": 1000,
+        "negative_checks": 2000
+      },
+      {
+        "stage": "evaluation",
+        "problems": 500,
+        "attempts": 1000,
+        "gold_checks": 500,
+        "negative_checks": 1000
+      }
+    ],
+    "calibration_evaluation_task_overlap": 0,
+    "old_exact_problem_overlap": 0,
+    "structural_scope": "random symbol assignments and rule order within the same chain-and-distractor family",
+    "new_generation_calls": 0
+  },
+  "queue": {
+    "checked_utc": "2026-09-14T22:39:54.435171+00:00",
+    "stages": {
+      "calibration": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467315",
+            "index": null,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467315",
+              "COMPLETED",
+              "0:0",
+              "00:08:22",
+              "2026-09-15T00:37:49",
+              "2026-09-15T00:46:11"
+            ]
+          }
+        ]
+      },
+      "audit": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467339_0",
+            "index": 0,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467339_0",
+              "COMPLETED",
+              "0:0",
+              "00:00:46",
+              "2026-09-15T01:10:41",
+              "2026-09-15T01:11:27"
+            ]
+          },
+          {
+            "job": "8467339_1",
+            "index": 1,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467339_1",
+              "COMPLETED",
+              "0:0",
+              "00:00:46",
+              "2026-09-15T01:10:41",
+              "2026-09-15T01:11:27"
+            ]
+          },
+          {
+            "job": "8467339_2",
+            "index": 2,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467339_2",
+              "COMPLETED",
+              "0:0",
+              "00:00:42",
+              "2026-09-15T01:11:27",
+              "2026-09-15T01:12:09"
+            ]
+          }
+        ]
+      },
+      "audit_cli": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467357_0",
+            "index": 0,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467357_0",
+              "COMPLETED",
+              "0:0",
+              "00:00:03",
+              "2026-09-15T01:33:00",
+              "2026-09-15T01:33:03"
+            ]
+          },
+          {
+            "job": "8467357_1",
+            "index": 1,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467357_1",
+              "COMPLETED",
+              "0:0",
+              "00:00:03",
+              "2026-09-15T01:33:00",
+              "2026-09-15T01:33:03"
+            ]
+          },
+          {
+            "job": "8467357_2",
+            "index": 2,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467357_2",
+              "COMPLETED",
+              "0:0",
+              "00:00:03",
+              "2026-09-15T01:33:03",
+              "2026-09-15T01:33:06"
+            ]
+          }
+        ]
+      },
+      "references": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467338_0",
+            "index": 0,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467338_0",
+              "COMPLETED",
+              "0:0",
+              "00:04:09",
+              "2026-09-15T01:10:41",
+              "2026-09-15T01:14:50"
+            ]
+          },
+          {
+            "job": "8467338_1",
+            "index": 1,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467338_1",
+              "COMPLETED",
+              "0:0",
+              "00:06:02",
+              "2026-09-15T01:10:41",
+              "2026-09-15T01:16:43"
+            ]
+          },
+          {
+            "job": "8467338_2",
+            "index": 2,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467338_2",
+              "COMPLETED",
+              "0:0",
+              "00:03:57",
+              "2026-09-15T01:14:50",
+              "2026-09-15T01:18:47"
+            ]
+          },
+          {
+            "job": "8467338_3",
+            "index": 3,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467338_3",
+              "COMPLETED",
+              "0:0",
+              "00:04:49",
+              "2026-09-15T01:16:43",
+              "2026-09-15T01:21:32"
+            ]
+          }
+        ]
+      },
+      "p2_setup": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467346",
+            "index": null,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467346",
+              "COMPLETED",
+              "0:0",
+              "00:01:12",
+              "2026-09-15T01:21:32",
+              "2026-09-15T01:22:44"
+            ]
+          }
+        ]
+      },
+      "p5_calibration": {
+        "state": "ACTIVE",
+        "members": [
+          {
+            "job": "8467324",
+            "index": null,
+            "state": "PENDING",
+            "reason": "Priority",
+            "accounting": [
+              "8467324",
+              "PENDING",
+              "0:00",
+              "4:00:00",
+              "Priority",
+              "p5-calibration-expansion",
+              "ais-gpu"
+            ]
+          }
+        ]
+      },
+      "p5_evaluation": {
+        "state": "NOT_SUBMITTED",
+        "members": []
+      },
+      "p2_generate": {
+        "state": "ACTIVE",
+        "members": [
+          {
+            "job": "8467351",
+            "index": null,
+            "state": "PENDING",
+            "reason": "Priority",
+            "accounting": [
+              "8467351",
+              "PENDING",
+              "0:00",
+              "4:00:00",
+              "Priority",
+              "ft15-p2-generate",
+              "ais-gpu"
+            ]
+          }
+        ]
+      },
+      "p2_verify": {
+        "state": "NOT_SUBMITTED",
+        "members": []
+      },
+      "p2_extract": {
+        "state": "NOT_SUBMITTED",
+        "members": []
+      },
+      "p2_analyze": {
+        "state": "NOT_SUBMITTED",
+        "members": []
+      },
+      "p5_analysis": {
+        "state": "NOT_SUBMITTED",
+        "members": []
+      },
+      "provenance_repair": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467356",
+            "index": null,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467356",
+              "COMPLETED",
+              "0:0",
+              "00:00:19",
+              "2026-09-15T01:32:05",
+              "2026-09-15T01:32:24"
+            ]
+          }
+        ]
+      },
+      "flow_checks": {
+        "state": "COMPLETED",
+        "members": [
+          {
+            "job": "8467358",
+            "index": null,
+            "state": "COMPLETED",
+            "reason": "",
+            "accounting": [
+              "8467358",
+              "COMPLETED",
+              "0:0",
+              "00:00:04",
+              "2026-09-15T01:33:00",
+              "2026-09-15T01:33:04"
+            ]
+          }
+        ]
+      }
+    },
+    "alerts": [],
+    "gpu_active_or_pending": 2,
+    "policy": "Fixed dependency chain; only resource interruptions automatically resumed at most twice. No cancellations, no statistical tuning, no chat notifications."
+  },
+  "report_pages": 6,
+  "generation_calls_by_report": 0
+}

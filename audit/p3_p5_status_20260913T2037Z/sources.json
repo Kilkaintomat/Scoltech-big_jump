@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-09-13T20:37:37.303354Z",
+  "sources": {
+    "p3-selection-validation.json": "runs/p3_selection_validation_20260913/metrics.json",
+    "p4-paired-results.json": "runs/expansion_20260911/p4/summary/metrics.json",
+    "archived-review-metrics.json": "audit/revision_2026_09_13/reviews/whole-project-final-v2/metrics.json",
+    "p5-pilot-v2.json": "runs/development_20260913/deduction/pilot/analysis/metrics.json",
+    "p5-pilot-v3.json": "runs/development_20260913_exactlength/deduction/pilot/analysis/metrics.json",
+    "p5-protocol-v3.json": "runs/development_20260913_exactlength/deduction/protocol.json",
+    "main-queue.json": "runs/lean_reverification_20260913_local/queue.json",
+    "p4-queue.json": "runs/expansion_20260911/queue.json",
+    "p5-queue.json": "runs/development_20260913_exactlength/queue.json",
+    "experimental-specification.md": "docs/experimental_specification.md",
+    "p4-measurement-code.py": "src/onebigjump/readiness/p4.py",
+    "p5-length-law-code.py": "src/onebigjump/experiments/p5_length_law.py"
+  }
+}

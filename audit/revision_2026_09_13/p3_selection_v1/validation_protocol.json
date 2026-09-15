@@ -1,0 +1,94 @@
+{
+  "version": "p3-selection-threshold-independent-validation-v1",
+  "seed": 919130000,
+  "datasets_per_scenario": 200,
+  "scenarios": {
+    "original_support": {
+      "shape": 0.25,
+      "selection": "hard",
+      "failure_quantile": 0.99,
+      "seed_offset": 0
+    },
+    "lower_support": {
+      "shape": 0.25,
+      "selection": "hard",
+      "failure_quantile": 0.98,
+      "seed_offset": 100000
+    },
+    "exponential_null": {
+      "shape": 0,
+      "selection": "hard",
+      "failure_quantile": 0.98,
+      "seed_offset": 200000
+    },
+    "bounded_null": {
+      "shape": -0.2,
+      "selection": "hard",
+      "failure_quantile": 0.98,
+      "seed_offset": 300000
+    },
+    "soft_selection_stress": {
+      "shape": 0.25,
+      "selection": "soft",
+      "seed_offset": 400000
+    }
+  },
+  "soft_selection": {
+    "background": 0.005,
+    "amplitude": 0.9,
+    "cdf_center": 0.98,
+    "cdf_scale": 0.005
+  },
+  "calibration_budgets": {
+    "current": 48,
+    "larger": 192
+  },
+  "support_tasks": 48,
+  "evaluation_tasks": 48,
+  "steps_per_calibration_task": 48,
+  "failures_per_task": 3,
+  "q": 0.01,
+  "statistics": {
+    "bootstrap": 500,
+    "min_tasks": 20,
+    "valid_fraction": 0.9,
+    "family_size": 9
+  },
+  "methods": [
+    "original",
+    "observed_minimum",
+    "independent_floor",
+    "oracle_correct_selection",
+    "pooled_original"
+  ],
+  "primary_candidate": "larger/independent_floor/percentile",
+  "interval_kinds": [
+    "percentile",
+    "basic"
+  ],
+  "method_definitions": {
+    "original": "GPD on evaluation values above calibration quantile tau",
+    "observed_minimum": "tau=max(calibration quantile,min evaluation failure); same-sample support selection",
+    "independent_floor": "tau=max(calibration quantile,min independent support-pilot failure); fit only evaluation tasks",
+    "oracle_correct_selection": "hard-selection diagnostic only: tau=max(calibration quantile,known true selection cutoff); never available on soft selection or real proofs",
+    "pooled_original": "calibration-only tau; pool independent pilot and evaluation tasks, giving a baseline matched to the same total failure-data budget"
+  },
+  "eligibility": {
+    "calibration_tail_tasks": 10,
+    "calibration_excesses": 20,
+    "failure_tail_tasks": 20,
+    "failure_excesses": 50,
+    "finite_point_required": true
+  },
+  "random_streams": "SeedSequence([role,seed]): roles 0/1/2 are calibration/evaluation/support generation. Bootstrap role=100+10*budget_id+group_id, group 0 calibration,1 evaluation,2 support,3 pooled. Budgets use nested calibration data and separate deterministic bootstrap streams. All methods share their group resamples; pooled_original resamples all 96 failure tasks.",
+  "preflight_seed": 729130000,
+  "model_scope": "Hard scenarios have exact GPD threshold stability above the selection cutoff. Soft scenario targets recovery of parent/asymptotic tail shape only; the finite selected distribution is not assumed GPD and is not part of the four-scenario calibration family.",
+  "decision": "No automatic primary promotion. Report all cells, data costs, availability, conditional/unconditional coverage, paired comparisons. MC family bounds for fixed primary over the four hard scenarios; soft selection descriptive only. q=.001 is not validated.",
+  "conditional_model": "For hard selection at c, fitting above tau requires excesses above max(tau,c); oracle correction is equivalent to conditioning the likelihood on selection. Independent pilot minimum is >=c only under this hard-selection model.",
+  "unchanged_estimator": "byte-identical constrained candidate from p3_constrained_v1; primary production code remains unchanged",
+  "workers": 16,
+  "references": [
+    "https://academic.oup.com/jrsssb/article/52/3/393/7027838",
+    "https://numpy.org/doc/stable/reference/random/bit_generators/generated/numpy.random.SeedSequence.html"
+  ]
+}

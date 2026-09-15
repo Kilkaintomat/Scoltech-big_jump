@@ -1,0 +1,12 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/calibration.py": "06e6ead02996908313841a713dea0c75e9cff70d5ebba88fb194855bf42f668d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/calibration-plan.json": "73b148b7a3d43b5a1da661fcfbd4d106b7a1f1aa6c3396d84826b0df9a1d3705",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/calibration.sbatch": "555518a94926190ab005d74526902483503b1ff593f002da6052b77290afdaf8"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}

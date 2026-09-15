@@ -1,0 +1,35 @@
+# P4: does the tail lighten when a circuit forms?
+# Appendix B.5: one-layer transformer, d=128, 4 heads, p=113, weight decay 1, full-batch AdamW,
+# 40,000 steps, checkpoints every 100 steps. These are the paper's numbers; do not tune them.
+name: p4-grokking-modular-addition
+kind: grokking
+description: >-
+  Track gamma_hat of the depth-wise step deviations across the grokking transition of the
+  modular-addition transformer of Nanda et al. (2023), against the restricted and excluded
+  progress measures.
+seed: 0
+
+grokking:
+  p: 113
+  d_model: 128
+  n_heads: 4
+  n_layers: 1
+  d_mlp: 512
+  lr: 1.0e-3
+  weight_decay: 1.0
+  betas: [0.9, 0.98]
+  train_frac: 0.3
+  steps: 40000
+  checkpoint_every: 100
+  seeds: [0, 1, 2]
+  device: auto
+  out_dir: results/full/grokking
+  tail:
+    k_min: 20
+    k_max_frac: 0.25
+    k_selector: double_bootstrap
+    double_bootstrap_resamples: 200
+    bootstrap_resamples: 500
+    bootstrap_unit: trace   # one deviation per input, so inputs are the units
+    ci_level: 0.95
+    estimators: [hill, moment, gpd]

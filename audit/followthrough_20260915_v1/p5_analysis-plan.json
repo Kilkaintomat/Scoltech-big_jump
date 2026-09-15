@@ -1,0 +1,1 @@
+{"version":"P5-expanded-calibration-evaluation-20260915-v1","temperatures":[0.6,1],"layer":13,"shrinkage":0.1,"threshold_q":0.01,"bootstrap_replicates":2000,"seed":2026091505,"scope":"Calibration-fitted length-rate prediction versus calibration-fitted constant baseline; separate fit/threshold task sets for whitening; no tail mechanism inferred."}

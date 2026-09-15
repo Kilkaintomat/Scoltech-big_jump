@@ -1,0 +1,94 @@
+{
+  "checked_utc": "2026-09-15T23:06:06.544640+00:00",
+  "p2": {
+    "deepseek": {
+      "saved": {
+        "pilot": 104,
+        "evaluation": 385
+      },
+      "expected": 944,
+      "remaining": 455,
+      "current_job_saved": 208,
+      "rate_reference": "current generation",
+      "median_seconds_per_attempt": 9.337629262940027,
+      "quartiles_seconds_per_attempt": [
+        7.615914761146996,
+        9.337629262940027,
+        11.588277416361962
+      ],
+      "reference_seconds_per_attempt_mean": 10.241779086999417,
+      "estimated_remaining_hours_at_reference_mean": 1.2944470790513152,
+      "alignment_exclusions": 4,
+      "finish_reasons": {
+        "stop": 442,
+        "length": 47
+      },
+      "duplicate_trace_ids": 0,
+      "token_logprob_lengths_consistent": true
+    },
+    "goedel": {
+      "saved": {
+        "pilot": 104,
+        "evaluation": 0
+      },
+      "expected": 944,
+      "remaining": 840,
+      "current_job_saved": 0,
+      "rate_reference": "previous technical pilot; may differ on evaluation",
+      "median_seconds_per_attempt": 15.7431844585808,
+      "quartiles_seconds_per_attempt": [
+        13.384817295562243,
+        15.7431844585808,
+        18.550485344283516
+      ],
+      "reference_seconds_per_attempt_mean": 16.11231187203711,
+      "estimated_remaining_hours_at_reference_mean": 3.759539436808659,
+      "alignment_exclusions": 0,
+      "finish_reasons": {
+        "length": 49,
+        "stop": 55
+      },
+      "duplicate_trace_ids": 0,
+      "token_logprob_lengths_consistent": true
+    }
+  },
+  "p5": {
+    "manifest_integrity_passed": true,
+    "evaluation": {
+      "attempts": 1000,
+      "categories": {
+        "invalid_inference": 825,
+        "verified": 175
+      }
+    },
+    "calibration_evaluation_overlap": 0,
+    "by_temperature": {
+      "0.6": {
+        "evaluation_verified": 91,
+        "brier_improvement": 0.0064831707068915,
+        "brier_improvement_ci975": [
+          -0.003993596194521537,
+          0.017775938196216815
+        ],
+        "jump_localization": {
+          "eligible": 409,
+          "jump": 0.1784841075794621,
+          "surprisal": 0.27383863080684595
+        }
+      },
+      "1": {
+        "evaluation_verified": 84,
+        "brier_improvement": 0.012881852463502513,
+        "brier_improvement_ci975": [
+          0.0023780498271350195,
+          0.024183465985540085
+        ],
+        "jump_localization": {
+          "eligible": 416,
+          "jump": 0.1658653846153846,
+          "surprisal": 0.3245192307692308
+        }
+      }
+    }
+  }
+}

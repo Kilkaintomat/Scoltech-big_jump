@@ -1,0 +1,41 @@
+# Section 5.1: sample whole proofs from an open-weight prover.
+#
+# Needs a GPU: the smallest model named in the paper is 7B, which is ~14 GB in bfloat16.
+# On Linux with CUDA, `backend: auto` picks vLLM if the `inference` extra is installed.
+#
+#   uv run onebigjump run configs/models/prover_sampling.yaml
+#   uv run onebigjump lean-verify data/raw/prover-sampling/samples.jsonl --out-dir results/full/lean
+#
+# Fetch the statements first:
+#   uv run python scripts/fetch_problems.py --all
+# That writes data/raw/{minif2f,proofnet,putnambench}_*.jsonl, normalised and checked against
+# this repository's Mathlib. Which benchmark the paper finally uses is one of its own open
+# placeholders, so point `problems` at whichever you want.
+name: prover-sampling
+kind: generate
+description: Sample whole Lean 4 proofs without verifier feedback (Section 2, Appendix B.3).
+seed: 1234
+
+model:
+  model_id: deepseek-ai/DeepSeek-Prover-V2-7B
+  # One of the files scripts/fetch_problems.py wrote. `max_problems: null` takes the whole
+  # split; set a number for a cheap first look at whether the output resembles Lean.
+  problems: data/raw/minif2f_test.jsonl
+  problem_split: null
+  max_problems: null   # 226 problems in miniF2F-test after the placeholder rows are dropped
+  # The transformers 5 / vLLM 0.8.5 conflict that forced `hf` here is gone: transformers is now
+  # pinned below 5 for a separate and more serious reason (its tokenizer silently deleted every
+  # space, newline and non-ASCII character from the completions -- see cluster-constraints.txt),
+  # and 4.51.3 is exactly what vLLM 0.8.5.post1 wants. `auto` therefore takes vLLM where it
+  # imports and falls back to `generate` elsewhere, which is what a laptop gets.
+  backend: auto
+  batch_size: 4        # 4 prompts x 8 samples x ~1500 tokens of KV fits an A100-80GB
+  dtype: bfloat16
+  device: auto
+  # The paper leaves N a placeholder (`N = [x.xx]`); 8 is the usual pass@8 budget in this
+  # literature. 226 problems x 8 samples x 2 temperatures = 3616 traces.
+  samples_per_problem: 8
+  temperatures: [0.6, 1.0]
+  max_new_tokens: 1024
+  trust_remote_code: false
+  seed: 1234

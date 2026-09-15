@@ -1,0 +1,66 @@
+{
+  "created_utc": "2026-09-13T18:26:47.116583Z",
+  "slurm_job_id": "8466182",
+  "script_sha256": "33792be04d111008a1578bda8d1378c3f68f34fbfd49456c7877fa7fef8a7f47",
+  "metrics_sha256": "1d5ae7c839be1c9cb409cfa7cf35c8d3129071bffa1acad1007debcaab5223da",
+  "sources": [
+    {
+      "path": "runs/lean_reverification_20260913_local/deepseek/main/verification/shard-000-of-008/labels.jsonl",
+      "bytes": 23371528,
+      "sha256": "607bb8ecd96b26d7983e3c2b57b4cb4b560ea050b01a284919ea38bec2f860bb"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/deepseek/main/verification/shard-001-of-008/labels.jsonl",
+      "bytes": 36308598,
+      "sha256": "cb45775e92da8cd60670d1c8812c3a73bdff048bb9feaabf5c0bed9365407993"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/deepseek/main/verification/shard-002-of-008/labels.jsonl",
+      "bytes": 12440127,
+      "sha256": "e6b0d5876dd32016cc49f6e37a2c9fcc7c598b595fcdd44f48573eedcb791a14"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/deepseek/main/verification/shard-003-of-008/labels.jsonl",
+      "bytes": 19699054,
+      "sha256": "33aa4ae6e816b4f9e2c1be7ec0e5e50617fd8c7100c394f377021339fd9128c9"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/goedel/main/verification/shard-000-of-008/labels.jsonl",
+      "bytes": 19734983,
+      "sha256": "f6e0f125ae0f99fb6934dc27f5305b2da6ed21a49e558dd1e403f8facb83df23"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/goedel/main/verification/shard-001-of-008/labels.jsonl",
+      "bytes": 20553458,
+      "sha256": "590d82928ad3572659ac2c187ffb97924bb14a9a64e6acecbefe1e3f2a6950bf"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/goedel/main/verification/shard-002-of-008/labels.jsonl",
+      "bytes": 16770250,
+      "sha256": "90877be70f48de9efb4fb56f131ab9ddd97fbd1dca4d4cd621e7589d63b3dc80"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/kimina/main/verification/shard-000-of-008/labels.jsonl",
+      "bytes": 12701238,
+      "sha256": "41cf03294494edce29f62951a2c2cf81e3fd6c8167797ff0afea0f6a1a28e747"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/kimina/main/verification/shard-001-of-008/labels.jsonl",
+      "bytes": 12334943,
+      "sha256": "bb6eab8fc5d5d77332986de3493a641e9f4994b471ecb515fc274d4ff44ce50b"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/kimina/main/verification/shard-002-of-008/labels.jsonl",
+      "bytes": 11531293,
+      "sha256": "730b5b43425442921573e67c4437fe2d353d15d1d00f98bbb8f5edfda232f700"
+    },
+    {
+      "path": "runs/lean_reverification_20260913_local/queue.json",
+      "sha256": "7e4a2a2b810d7c91f45998942caae9b877866aad3296f8bd178672299b32b418"
+    },
+    {
+      "path": "audit/revision_2026_09_13/statistical-fitness-v1/benchmark-guarded/metrics.json",
+      "sha256": "c0b910db4d8f1f4b1d6be69fc52d2bfdcfe6472f23486c76eab71e37032436dd"
+    }
+  ]
+}

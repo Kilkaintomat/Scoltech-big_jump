@@ -1,0 +1,1130 @@
+{
+  "version": "tree-frontier-v2",
+  "source": "by\n  ring_nf at h ⊢\n  -- explanation\n  rfl\n",
+  "ast": {
+    "args": [
+      {
+        "args": [],
+        "end": 2,
+        "kind": "by",
+        "original": true,
+        "start": 0
+      },
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "args": [],
+                        "end": 12,
+                        "kind": "ring_nf",
+                        "original": true,
+                        "start": 5
+                      },
+                      {
+                        "args": [],
+                        "end": null,
+                        "kind": "null",
+                        "original": false,
+                        "start": null
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [],
+                            "end": null,
+                            "kind": "null",
+                            "original": false,
+                            "start": null
+                          }
+                        ],
+                        "end": null,
+                        "kind": "Lean.Parser.Tactic.optConfig",
+                        "original": false,
+                        "start": null
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [],
+                                "end": 15,
+                                "kind": "at",
+                                "original": true,
+                                "start": 13
+                              },
+                              {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "args": [],
+                                        "end": 17,
+                                        "kind": "ident",
+                                        "original": true,
+                                        "start": 16
+                                      },
+                                      {
+                                        "args": [
+                                          {
+                                            "args": [
+                                              {
+                                                "args": [
+                                                  {
+                                                    "args": [],
+                                                    "end": 21,
+                                                    "kind": "«⊢»",
+                                                    "original": true,
+                                                    "start": 18
+                                                  }
+                                                ],
+                                                "end": 21,
+                                                "kind": "token.«⊢»",
+                                                "original": true,
+                                                "start": 18
+                                              }
+                                            ],
+                                            "end": 21,
+                                            "kind": "patternIgnore",
+                                            "original": true,
+                                            "start": 18
+                                          }
+                                        ],
+                                        "end": 21,
+                                        "kind": "Lean.Parser.Tactic.locationType",
+                                        "original": true,
+                                        "start": 18
+                                      }
+                                    ],
+                                    "end": 21,
+                                    "kind": "null",
+                                    "original": true,
+                                    "start": 16
+                                  }
+                                ],
+                                "end": 21,
+                                "kind": "Lean.Parser.Tactic.locationHyp",
+                                "original": true,
+                                "start": 16
+                              }
+                            ],
+                            "end": 21,
+                            "kind": "Lean.Parser.Tactic.location",
+                            "original": true,
+                            "start": 13
+                          }
+                        ],
+                        "end": 21,
+                        "kind": "null",
+                        "original": true,
+                        "start": 13
+                      }
+                    ],
+                    "end": 21,
+                    "kind": "Mathlib.Tactic.RingNF.ringNF",
+                    "original": true,
+                    "start": 5
+                  },
+                  {
+                    "args": [],
+                    "end": null,
+                    "kind": "null",
+                    "original": false,
+                    "start": null
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [],
+                        "end": 44,
+                        "kind": "rfl",
+                        "original": true,
+                        "start": 41
+                      }
+                    ],
+                    "end": 44,
+                    "kind": "Lean.Parser.Tactic.tacticRfl",
+                    "original": true,
+                    "start": 41
+                  }
+                ],
+                "end": 44,
+                "kind": "null",
+                "original": true,
+                "start": 5
+              }
+            ],
+            "end": 44,
+            "kind": "Lean.Parser.Tactic.tacticSeq1Indented",
+            "original": true,
+            "start": 5
+          }
+        ],
+        "end": 44,
+        "kind": "Lean.Parser.Tactic.tacticSeq",
+        "original": true,
+        "start": 5
+      }
+    ],
+    "end": 44,
+    "kind": "Lean.Parser.Term.byTactic",
+    "original": true,
+    "start": 0
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "parent_id": null,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "start_byte": 5,
+      "end_byte": 21,
+      "start_char": 5,
+      "end_char": 19,
+      "text": "ring_nf at h ⊢",
+      "children": [],
+      "policy": "leaf",
+      "events": [
+        {
+          "id": 4,
+          "parent_id": 3,
+          "start_char": 5,
+          "end_char": 19,
+          "kind": "Mathlib.Tactic.RingNF.ringNF",
+          "goals_before": [
+            "a : ℕ\nh : a = a\n⊢ a = a"
+          ],
+          "goals_after": []
+        }
+      ],
+      "proof_states": [
+        {
+          "proof_state": 118,
+          "tactic": "ring_nf at h\n    ⊢\n      -- explanation\n      ",
+          "goals": "a : ℕ\nh : a = a\n⊢ a = a"
+        }
+      ],
+      "local_goals_empty_before": [
+        false
+      ],
+      "native_events": [
+        {
+          "id": 4,
+          "parent_event_id": 3,
+          "kind": "Mathlib.Tactic.RingNF.ringNF",
+          "start_char": 5,
+          "end_char": 19,
+          "goal_ids_before": [
+            "_uniq.13"
+          ],
+          "goal_ids_after": [],
+          "root_before": [
+            {
+              "pendingIds": [
+                "_uniq.13"
+              ],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": false
+            }
+          ],
+          "root_after": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ]
+        }
+      ],
+      "ancestor_ids": [],
+      "branch_path": []
+    },
+    {
+      "id": 1,
+      "parent_id": null,
+      "kind": "Lean.Parser.Tactic.tacticRfl",
+      "start_byte": 41,
+      "end_byte": 44,
+      "start_char": 39,
+      "end_char": 42,
+      "text": "rfl",
+      "children": [],
+      "policy": "leaf",
+      "events": [
+        {
+          "id": 5,
+          "parent_id": 3,
+          "start_char": 39,
+          "end_char": 42,
+          "kind": "Lean.Parser.Tactic.tacticRfl",
+          "goals_before": [],
+          "goals_after": []
+        }
+      ],
+      "proof_states": [
+        {
+          "proof_state": 119,
+          "tactic": "rfl",
+          "goals": "no goals"
+        }
+      ],
+      "local_goals_empty_before": [
+        true
+      ],
+      "native_events": [
+        {
+          "id": 5,
+          "parent_event_id": 3,
+          "kind": "Lean.Parser.Tactic.tacticRfl",
+          "start_char": 39,
+          "end_char": 42,
+          "goal_ids_before": [],
+          "goal_ids_after": [],
+          "root_before": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ],
+          "root_after": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ]
+        }
+      ],
+      "ancestor_ids": [],
+      "branch_path": []
+    }
+  ],
+  "selected_node_ids": [
+    0,
+    1
+  ],
+  "points": [
+    {
+      "index": 0,
+      "end_char": 19,
+      "end_byte": 21,
+      "node_ids": [
+        0
+      ],
+      "closing_node_ids": [
+        0
+      ],
+      "span_start": 2,
+      "span_end": 19,
+      "text": "\n  ring_nf at h ⊢",
+      "semantic_status": "has_context",
+      "node_id": 0,
+      "branch_path": [],
+      "event_ids": [
+        4
+      ],
+      "observation_kind": "tactic",
+      "event_multiplicity": 1,
+      "trace_label": "pre",
+      "active_goal_ids": [
+        "_uniq.13"
+      ],
+      "next_goal_ids": [],
+      "root_pending_before": [
+        "_uniq.13"
+      ],
+      "root_pending_after": [],
+      "root_closed_before": false,
+      "root_closed_after": true,
+      "goal_namespace": "replay_source_with_goal_and_comment",
+      "execution_status": "observed",
+      "transition": "completes_root",
+      "scope_path": [],
+      "source_transition": {
+        "exit_scope_ids": [],
+        "enter_scope_ids": [],
+        "branch_switch": false,
+        "scope_changed": false
+      },
+      "replay_evidence": [
+        {
+          "node_id": 0,
+          "status": "ok",
+          "proof_status": "Completed"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "end_char": 42,
+      "end_byte": 44,
+      "node_ids": [
+        1
+      ],
+      "closing_node_ids": [
+        1
+      ],
+      "span_start": 19,
+      "span_end": 42,
+      "text": "\n  -- explanation\n  rfl",
+      "semantic_status": "error_candidate_needs_replay",
+      "node_id": 1,
+      "branch_path": [],
+      "event_ids": [
+        5
+      ],
+      "observation_kind": "tactic",
+      "event_multiplicity": 1,
+      "trace_label": "at",
+      "active_goal_ids": [],
+      "next_goal_ids": [],
+      "root_pending_before": [],
+      "root_pending_after": [],
+      "root_closed_before": true,
+      "root_closed_after": true,
+      "goal_namespace": "replay_source_with_goal_and_comment",
+      "execution_status": "post_completion",
+      "transition": "updates_context",
+      "scope_path": [],
+      "source_transition": {
+        "exit_scope_ids": [],
+        "enter_scope_ids": [],
+        "branch_switch": false,
+        "scope_changed": false
+      },
+      "replay_evidence": [
+        {
+          "node_id": 1,
+          "status": "error",
+          "proof_status": null
+        }
+      ]
+    }
+  ],
+  "suffix": "\n",
+  "n_blocks": 2,
+  "n_latent_points_with_prompt": 3,
+  "parse_ok": true,
+  "label_ready": false,
+  "execution_order": "not inferred from source order",
+  "whole_reply": {
+    "tactics": [
+      {
+        "usedConstants": [
+          "Eq.mp",
+          "Nat",
+          "True",
+          "eq_self",
+          "Eq"
+        ],
+        "tactic": "ring_nf at h\n    ⊢\n      -- explanation\n      ",
+        "proofState": 118,
+        "pos": {
+          "line": 2,
+          "column": 2
+        },
+        "goals": "a : ℕ\nh : a = a\n⊢ a = a",
+        "endPos": {
+          "line": 2,
+          "column": 16
+        }
+      },
+      {
+        "usedConstants": [],
+        "tactic": "rfl",
+        "proofState": 119,
+        "pos": {
+          "line": 4,
+          "column": 2
+        },
+        "goals": "no goals",
+        "endPos": {
+          "line": 4,
+          "column": 5
+        }
+      }
+    ],
+    "messages": [
+      {
+        "severity": "error",
+        "pos": {
+          "line": 4,
+          "column": 2
+        },
+        "endPos": {
+          "line": 4,
+          "column": 5
+        },
+        "data": "No goals to be solved"
+      }
+    ],
+    "infotree": [
+      {
+        "node": {
+          "stx": {
+            "range": {
+              "synthetic": false,
+              "start": {
+                "line": 1,
+                "column": 41
+              },
+              "finish": {
+                "line": 4,
+                "column": 5
+              }
+            },
+            "pp": "by\n  ring_nf at h\n      ⊢\n        -- explanation\n        \n  rfl",
+            "kind": "Lean.Parser.Term.byTactic",
+            "argKinds": [
+              "by",
+              "Lean.Parser.Tactic.tacticSeq"
+            ]
+          },
+          "rootGoalsBefore": [
+            {
+              "pendingIds": [
+                "_uniq.13"
+              ],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": false
+            }
+          ],
+          "rootGoalsAfter": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.13",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ],
+          "name": "Lean.Parser.Term.byTactic",
+          "goalsBefore": [
+            "a : ℕ\nh : a = a\n⊢ a = a"
+          ],
+          "goalsAfter": [],
+          "goalIdsBefore": [
+            "_uniq.13"
+          ],
+          "goalIdsAfter": []
+        },
+        "kind": "TacticInfo",
+        "children": [
+          {
+            "node": {
+              "stx": {
+                "range": {
+                  "synthetic": false,
+                  "start": {
+                    "line": 1,
+                    "column": 41
+                  },
+                  "finish": {
+                    "line": 1,
+                    "column": 43
+                  }
+                },
+                "pp": "<failed to pretty print>",
+                "kind": "by",
+                "argKinds": []
+              },
+              "rootGoalsBefore": [
+                {
+                  "pendingIds": [
+                    "_uniq.13"
+                  ],
+                  "id": "_uniq.13",
+                  "containsSorry": false,
+                  "containsMVar": true,
+                  "assigned": false
+                }
+              ],
+              "rootGoalsAfter": [
+                {
+                  "pendingIds": [],
+                  "id": "_uniq.13",
+                  "containsSorry": false,
+                  "containsMVar": false,
+                  "assigned": true
+                }
+              ],
+              "name": null,
+              "goalsBefore": [
+                "a : ℕ\nh : a = a\n⊢ a = a"
+              ],
+              "goalsAfter": [],
+              "goalIdsBefore": [
+                "_uniq.13"
+              ],
+              "goalIdsAfter": []
+            },
+            "kind": "TacticInfo",
+            "children": [
+              {
+                "node": {
+                  "stx": {
+                    "range": {
+                      "synthetic": false,
+                      "start": {
+                        "line": 2,
+                        "column": 2
+                      },
+                      "finish": {
+                        "line": 4,
+                        "column": 5
+                      }
+                    },
+                    "pp": "  ring_nf at h\n      ⊢\n        -- explanation\n        \n  rfl",
+                    "kind": "Lean.Parser.Tactic.tacticSeq",
+                    "argKinds": [
+                      "Lean.Parser.Tactic.tacticSeq1Indented"
+                    ]
+                  },
+                  "rootGoalsBefore": [
+                    {
+                      "pendingIds": [
+                        "_uniq.13"
+                      ],
+                      "id": "_uniq.13",
+                      "containsSorry": false,
+                      "containsMVar": true,
+                      "assigned": false
+                    }
+                  ],
+                  "rootGoalsAfter": [
+                    {
+                      "pendingIds": [],
+                      "id": "_uniq.13",
+                      "containsSorry": false,
+                      "containsMVar": false,
+                      "assigned": true
+                    }
+                  ],
+                  "name": "Lean.Parser.Tactic.tacticSeq",
+                  "goalsBefore": [
+                    "a : ℕ\nh : a = a\n⊢ a = a"
+                  ],
+                  "goalsAfter": [],
+                  "goalIdsBefore": [
+                    "_uniq.13"
+                  ],
+                  "goalIdsAfter": []
+                },
+                "kind": "TacticInfo",
+                "children": [
+                  {
+                    "node": {
+                      "stx": {
+                        "range": {
+                          "synthetic": false,
+                          "start": {
+                            "line": 2,
+                            "column": 2
+                          },
+                          "finish": {
+                            "line": 4,
+                            "column": 5
+                          }
+                        },
+                        "pp": "  ring_nf at h\n      ⊢\n        -- explanation\n        \n  rfl",
+                        "kind": "Lean.Parser.Tactic.tacticSeq1Indented",
+                        "argKinds": [
+                          "null"
+                        ]
+                      },
+                      "rootGoalsBefore": [
+                        {
+                          "pendingIds": [
+                            "_uniq.13"
+                          ],
+                          "id": "_uniq.13",
+                          "containsSorry": false,
+                          "containsMVar": true,
+                          "assigned": false
+                        }
+                      ],
+                      "rootGoalsAfter": [
+                        {
+                          "pendingIds": [],
+                          "id": "_uniq.13",
+                          "containsSorry": false,
+                          "containsMVar": false,
+                          "assigned": true
+                        }
+                      ],
+                      "name": "Lean.Parser.Tactic.tacticSeq1Indented",
+                      "goalsBefore": [
+                        "a : ℕ\nh : a = a\n⊢ a = a"
+                      ],
+                      "goalsAfter": [],
+                      "goalIdsBefore": [
+                        "_uniq.13"
+                      ],
+                      "goalIdsAfter": []
+                    },
+                    "kind": "TacticInfo",
+                    "children": [
+                      {
+                        "node": {
+                          "stx": {
+                            "range": {
+                              "synthetic": false,
+                              "start": {
+                                "line": 2,
+                                "column": 2
+                              },
+                              "finish": {
+                                "line": 2,
+                                "column": 16
+                              }
+                            },
+                            "pp": "ring_nf at h\n    ⊢\n      -- explanation\n      ",
+                            "kind": "Mathlib.Tactic.RingNF.ringNF",
+                            "argKinds": [
+                              "ring_nf",
+                              "null",
+                              "Lean.Parser.Tactic.optConfig",
+                              "null"
+                            ]
+                          },
+                          "rootGoalsBefore": [
+                            {
+                              "pendingIds": [
+                                "_uniq.13"
+                              ],
+                              "id": "_uniq.13",
+                              "containsSorry": false,
+                              "containsMVar": true,
+                              "assigned": false
+                            }
+                          ],
+                          "rootGoalsAfter": [
+                            {
+                              "pendingIds": [],
+                              "id": "_uniq.13",
+                              "containsSorry": false,
+                              "containsMVar": false,
+                              "assigned": true
+                            }
+                          ],
+                          "name": "Mathlib.Tactic.RingNF.ringNF",
+                          "goalsBefore": [
+                            "a : ℕ\nh : a = a\n⊢ a = a"
+                          ],
+                          "goalsAfter": [],
+                          "goalIdsBefore": [
+                            "_uniq.13"
+                          ],
+                          "goalIdsAfter": []
+                        },
+                        "kind": "TacticInfo",
+                        "children": []
+                      },
+                      {
+                        "node": {
+                          "stx": {
+                            "range": {
+                              "synthetic": false,
+                              "start": {
+                                "line": 4,
+                                "column": 2
+                              },
+                              "finish": {
+                                "line": 4,
+                                "column": 5
+                              }
+                            },
+                            "pp": "rfl",
+                            "kind": "Lean.Parser.Tactic.tacticRfl",
+                            "argKinds": [
+                              "rfl"
+                            ]
+                          },
+                          "rootGoalsBefore": [
+                            {
+                              "pendingIds": [],
+                              "id": "_uniq.13",
+                              "containsSorry": false,
+                              "containsMVar": false,
+                              "assigned": true
+                            }
+                          ],
+                          "rootGoalsAfter": [
+                            {
+                              "pendingIds": [],
+                              "id": "_uniq.13",
+                              "containsSorry": false,
+                              "containsMVar": false,
+                              "assigned": true
+                            }
+                          ],
+                          "name": "Lean.Parser.Tactic.tacticRfl",
+                          "goalsBefore": [],
+                          "goalsAfter": [],
+                          "goalIdsBefore": [],
+                          "goalIdsAfter": []
+                        },
+                        "kind": "TacticInfo",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "env": 80
+  },
+  "events": [
+    {
+      "id": 0,
+      "parent_id": null,
+      "start_char": 0,
+      "end_char": 42,
+      "kind": "Lean.Parser.Term.byTactic",
+      "goals_before": [
+        "a : ℕ\nh : a = a\n⊢ a = a"
+      ],
+      "goals_after": []
+    },
+    {
+      "id": 1,
+      "parent_id": 0,
+      "start_char": 0,
+      "end_char": 2,
+      "kind": "by",
+      "goals_before": [
+        "a : ℕ\nh : a = a\n⊢ a = a"
+      ],
+      "goals_after": []
+    },
+    {
+      "id": 2,
+      "parent_id": 1,
+      "start_char": 5,
+      "end_char": 42,
+      "kind": "Lean.Parser.Tactic.tacticSeq",
+      "goals_before": [
+        "a : ℕ\nh : a = a\n⊢ a = a"
+      ],
+      "goals_after": []
+    },
+    {
+      "id": 3,
+      "parent_id": 2,
+      "start_char": 5,
+      "end_char": 42,
+      "kind": "Lean.Parser.Tactic.tacticSeq1Indented",
+      "goals_before": [
+        "a : ℕ\nh : a = a\n⊢ a = a"
+      ],
+      "goals_after": []
+    },
+    {
+      "id": 4,
+      "parent_id": 3,
+      "start_char": 5,
+      "end_char": 19,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "goals_before": [
+        "a : ℕ\nh : a = a\n⊢ a = a"
+      ],
+      "goals_after": []
+    },
+    {
+      "id": 5,
+      "parent_id": 3,
+      "start_char": 39,
+      "end_char": 42,
+      "kind": "Lean.Parser.Tactic.tacticRfl",
+      "goals_before": [],
+      "goals_after": []
+    }
+  ],
+  "whole_errors": [
+    {
+      "severity": "error",
+      "pos": {
+        "line": 4,
+        "column": 2
+      },
+      "endPos": {
+        "line": 4,
+        "column": 5
+      },
+      "data": "No goals to be solved"
+    }
+  ],
+  "whole_sorries": [],
+  "whole_elaboration_ok": false,
+  "diagnostics": [
+    {
+      "message": {
+        "severity": "error",
+        "pos": {
+          "line": 4,
+          "column": 2
+        },
+        "endPos": {
+          "line": 4,
+          "column": 5
+        },
+        "data": "No goals to be solved"
+      },
+      "parse_char": 39,
+      "candidate_id": 1
+    }
+  ],
+  "fine_failure_candidate": 1,
+  "selected_context_coverage": 2,
+  "localization_blockers": [],
+  "trace_id": "replay_source_with_goal_and_comment",
+  "native_events": [
+    {
+      "id": 0,
+      "parent_event_id": null,
+      "kind": "Lean.Parser.Term.byTactic",
+      "start_char": 0,
+      "end_char": 42,
+      "goal_ids_before": [
+        "_uniq.13"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.13"
+          ],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "parent_event_id": 0,
+      "kind": "by",
+      "start_char": 0,
+      "end_char": 2,
+      "goal_ids_before": [
+        "_uniq.13"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.13"
+          ],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "parent_event_id": 1,
+      "kind": "Lean.Parser.Tactic.tacticSeq",
+      "start_char": 5,
+      "end_char": 42,
+      "goal_ids_before": [
+        "_uniq.13"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.13"
+          ],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "parent_event_id": 2,
+      "kind": "Lean.Parser.Tactic.tacticSeq1Indented",
+      "start_char": 5,
+      "end_char": 42,
+      "goal_ids_before": [
+        "_uniq.13"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.13"
+          ],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "parent_event_id": 3,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "start_char": 5,
+      "end_char": 19,
+      "goal_ids_before": [
+        "_uniq.13"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.13"
+          ],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "parent_event_id": 3,
+      "kind": "Lean.Parser.Tactic.tacticRfl",
+      "start_char": 39,
+      "end_char": 42,
+      "goal_ids_before": [],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.13",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    }
+  ],
+  "source_sha256": "3dfabc7cddfd467521e115481a1d44b9ed270240ceb23539a7be0970a94f648a",
+  "header_sha256": "64aca919036d01471d84b0e3d8098c4fcefc1b57e29afdcbe6fe89b9b99c1e63",
+  "localization_status": "prefix_and_failure_reproduced",
+  "annotation_ready": true,
+  "runtime_semantics": "original elaboration; goal IDs scoped to this trace; source order is distinct from execution nesting",
+  "scopes": [],
+  "context_replays": [
+    {
+      "node_id": 0,
+      "source": "ring_nf at h ⊢",
+      "ok": true,
+      "status": "ok",
+      "reply": {
+        "proofStatus": "Completed",
+        "proofState": 120,
+        "goals": []
+      },
+      "replay_source": "exact_AST_slice",
+      "stored_text_matches": false
+    },
+    {
+      "node_id": 1,
+      "source": "rfl",
+      "ok": false,
+      "status": "error",
+      "reply": {
+        "message": "Lean error:\nNo goals to be solved"
+      },
+      "replay_source": "exact_AST_slice",
+      "stored_text_matches": true
+    }
+  ],
+  "failure_reproduced": true,
+  "prefix_tested_ok": true,
+  "prefix_replay_complete": true,
+  "prefix_reproduced": true,
+  "failure_and_prefix_reproduced": true,
+  "replay_skipped_node_ids": [],
+  "case": {
+    "group": "curated",
+    "name": "replay_source_with_goal_and_comment",
+    "header": "example (a : Nat) (h : a = a) : a = a := by",
+    "body": "\n  ring_nf at h ⊢\n  -- explanation\n  rfl\n",
+    "expected_ok": true,
+    "expected_points": 2
+  }
+}

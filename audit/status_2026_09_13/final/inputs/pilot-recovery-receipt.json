@@ -1,0 +1,76 @@
+{
+  "utc": "2026-09-13T12:33:01.262823Z",
+  "purpose": "reconcile completed DeepSeek pilot recovery only; main remains stopped for scoped-notation bug",
+  "changes": {
+    "deepseek/pilot-measure": {
+      "before": {
+        "model": "deepseek",
+        "stage": "measure",
+        "dependencies": [
+          "deepseek/pilot-extract"
+        ],
+        "partition": "ais-htc",
+        "hours": 2,
+        "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_12/snapshots/lean-runtime-v3/scripts/campaign/run.sbatch",
+        "arguments": [
+          "measure",
+          "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek",
+          "--phase",
+          "pilot"
+        ],
+        "job_name": "obj0912-deepseek-pilot-measure",
+        "job_id": "8465571",
+        "state": "FAILED",
+        "submitted_utc": "2026-09-12T21:30:50.340465Z"
+      },
+      "recovery_job_id": "8465844"
+    },
+    "deepseek/pilot-analyze": {
+      "before": {
+        "model": "deepseek",
+        "stage": "analyze",
+        "dependencies": [
+          "deepseek/pilot-measure"
+        ],
+        "partition": "ais-htc",
+        "hours": 2,
+        "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_12/snapshots/lean-runtime-v3/scripts/campaign/run.sbatch",
+        "arguments": [
+          "analyze",
+          "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek",
+          "--phase",
+          "pilot"
+        ],
+        "job_name": "obj0912-deepseek-pilot-analyze",
+        "job_id": null,
+        "state": "BLOCKED"
+      },
+      "recovery_job_id": "8465845"
+    },
+    "deepseek/gate": {
+      "before": {
+        "model": "deepseek",
+        "stage": "gate",
+        "dependencies": [
+          "deepseek/pilot-analyze",
+          "validation",
+          "regression"
+        ],
+        "partition": "ais-htc",
+        "hours": 2,
+        "script": "/beegfs/home/denis.rakhmankin/onebigjump/audit/revision_2026_09_12/snapshots/lean-runtime-v3/scripts/campaign/run.sbatch",
+        "arguments": [
+          "gate",
+          "/beegfs/home/denis.rakhmankin/onebigjump/runs/lean_reverification_20260912/deepseek",
+          "--phase",
+          "main"
+        ],
+        "job_name": "obj0912-deepseek-gate",
+        "job_id": null,
+        "state": "BLOCKED",
+        "submitted_utc": "2026-09-11T01:55:51.275001Z"
+      },
+      "recovery_job_id": "8465880"
+    }
+  }
+}

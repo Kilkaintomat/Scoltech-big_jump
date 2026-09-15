@@ -1,0 +1,20 @@
+{
+  "failures": [
+    "Missing optional generation_token_logprobs in segmentation exports",
+    "Qwen3 architecture rejected",
+    "profile.py shadows Python standard-library profile during torch import; renamed gpu_profile.py"
+  ],
+  "monitor": {
+    "interval_minutes": 30,
+    "scope": "read-only Slurm state and progress; no automatic blind restarts"
+  },
+  "resume": "original failed artifacts archived; fresh journals with repair source in context",
+  "scheduler": {
+    "model_waves": "all eight shards in one model load",
+    "profile_minutes": 25,
+    "profile_nice": 0,
+    "time_limit_policy": "reduce only after measured representative profile; no blind timeout increase or statistical tuning"
+  },
+  "scope": "Repair extraction failures; original science unchanged",
+  "surprisal": "recomputed teacher-forced probabilities on unchanged original IDs; full-forward equivalence required"
+}

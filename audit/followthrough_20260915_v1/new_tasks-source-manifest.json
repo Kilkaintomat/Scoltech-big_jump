@@ -1,0 +1,24 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/new_tasks_collect.py": "33774f163c2ada85e39c5f22e24dc33370ef7bcec40dde19f679466669f47693",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/new_tasks_reference.py": "4dc2f23f0b5a99bf59a1d5001c3e4c6c84b9c47e77377c618994e4e0de6716aa",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/new_tasks-plan.json": "656d1ff1154ebea3b9a5bc7dd0b116d58cb35fed66c23757b0536f525728538c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p2-confirmatory-protocol.json": "f828673cc7ae8f8fc3eb7f0cce6592193cd879b5c2edfe5265befd97cc054a8f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/new_tasks_collect.sbatch": "69f55acfd2d893fc9116e0c38dfb1c62fedce4aa5ba93ba6fcba70cb5a517acd",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/new_tasks_reference.sbatch": "b39a2814ca072fb35893a64e67258168dd237a4b6b5da2173fd196548db7ec82",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/external/proofnet_verified/data/proofnet-verified.jsonl": "381f4a06548a4ff6d9b923633c94a97b9c70f41033e13023aae31e1161b7f142",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/external/proofnet_verified/data/proofnet-verified_gt.zip": "3bc4fe191a435052eba78e4d846a332ea1983137bcc77d361114cf8490edb37f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/external/proofnet_verified/lean-toolchain": "26df5f74b79af0cd9e298b6583993699a54938d047ba1919428da80d3ae80c6e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/external/proofnet_verified/lake-manifest.json": "669d3644cd187154b5381d5a223de688c1336faf9c8304301ec8b32bd33d0f5e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/external/proofnet_verified/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/calibration/deepseek-formal_entry-fold0-transform.npz": "fc7da9d79b6115740ef7a6d84c8a9f89cd8953e850540874223fd1da74e2b3cd",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/calibration/kimina-formal_entry-fold0-transform.npz": "15efd38cd536eddfecd57993d532557df3c4ad8f5bac5112d7f2600426d0883e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/calibration/goedel-formal_entry-fold0-transform.npz": "d7975609849e76799aeb8e38733a3b09ca60abccebed3bfeec3914625ae44a6c"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  },
+  "external_source_commit": "160414332dc196583f6c37c310b420d2a3b07c58"
+}

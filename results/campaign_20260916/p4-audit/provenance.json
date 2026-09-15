@@ -1,0 +1,33 @@
+{
+  "utc": "2026-09-13T21:25:56Z",
+  "job": "8466319",
+  "source_snapshot": "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z",
+  "run_root": "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4",
+  "script_sha256": "9ebee88483adf96ae8522b8c3952d6d9d225386df0df381cab919094122ccde1",
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/readiness/p4.py": "c739c8dc2ef402dec314d6d0edfec47061839014edf6dbd9ed7f18ee4b83111c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/models/grokking.py": "5deb7f8a46d563ab0bef8d352b39a05aada7f21e68a055587ce560a822a37d29",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/experiments/p4_grokking.py": "6512370f9526b949511b46893d6f75f8f3676912359e323b30ee1e7cefa7736f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/stats/gpd.py": "6cad533ebbbe67cbe3f1475f36dc19e6056856ab1b6cad1e4c96506e76ef84dc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/stats/hill.py": "b3ccf232d7df9514dd2852abf94350cc21c300bc61e00d96cab312198c6814f5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/stats/moment.py": "28a042341380139605afd714bbd4426a68d4b7a83dc464f6853be428c809656c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/stats/thresholds.py": "461823ee045ac158d06fdadfbf85e5952fbf625abfd6148733cff42e1c5ec712",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/stats/bootstrap.py": "98b47749291e6e566fb7f07f1aab6fbd21bf4a9b324b9cbde63a57906663a45e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/src/onebigjump/config.py": "5c770038898e82516ff974499724f2608ffa24faa57c0a8c7fdac96d2ce97ba9",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/tests/unit/test_grokking.py": "9dc7006f301539fbb9f47cd6881b1d51fe48ffb686eac122238bda2ef2bbb301",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/readiness_2026_09_11/snapshots/expansion-v1-20260911T024740Z/tests/unit/test_readiness.py": "5c5eb98b5d6c7484bd575403d3cbf10b50ef3de47b7a473ff98641e8f2faf84c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/summary/manifest.json": "f241dbd5f9b6f400b66acbb17e2126beb5a0350b23b1b494dde356fe22d7349a",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-0/measurement/manifest.json": "63df84e19246015e4df6e9431de9dcbb20a45a3e23531658d82b6355620c4519",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-0/measurement/manifest.json": "618f7703940b7f1b664549d1f53238afb40b7dd2d2c11579f47be79504547437",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-1/measurement/manifest.json": "67ad5f8ceaf050bd82468a757132aee7442e86abcc8f416d84fe4c9856f7713f",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-1/measurement/manifest.json": "22c6014dfbc2f4c93d56dd8c1c9ab0edf63ea1a88870a6fa66b73b68dd534298",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-2/measurement/manifest.json": "f6a72c30058a570ae15c789f5787d0d20bdc1d0ec499abab20a82d450fe960d1",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-2/measurement/manifest.json": "125efb951ee3291960284b9752a01b633fb028fdc24a95815e1d844dbc4adca5",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-3/measurement/manifest.json": "447e268704ce4700688151aab3ce75fcf503df6228aba5b62655e2b1304fdf0e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-3/measurement/manifest.json": "1eaae00278038060c5e19401a91dda6b9806dbb17b5423ab90a1bc20d98766d7",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/real-4/measurement/manifest.json": "a094e01e0ca0108137df7ccbda50dce43dbb6d723bf767c8b459285d6d7401d8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/expansion_20260911/p4/null-4/measurement/manifest.json": "098d9a8e60f87bfd7be3e279cfdb09f3e28f317526de256b090b1ca655bcb29d"
+  },
+  "elapsed_s": 24.47859650477767,
+  "scope": "Read-only audit of stored runs; diagnostic threshold/split grid; sparse forward replay; no training, no confirmatory p-values."
+}

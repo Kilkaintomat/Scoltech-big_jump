@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#SBATCH --account=rsollmrs
+#SBATCH --partition=ais-htc
+#SBATCH --exclude=cn69
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=32G
+#SBATCH --time=02:00:00
+set -euo pipefail
+cd /beegfs/home/denis.rakhmankin/onebigjump
+export E1_SNAPSHOT="$PWD/audit/revision_2026_09_13/snapshots/lean-scopes-v4"
+export PATH="$PWD/runs/e1_20260908T171727Z/tools/env/bin:$PATH"
+source "$E1_SNAPSHOT/scripts/slurm/common.sh"
+export PYTHONPATH="$E1_SNAPSHOT/src" PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+cd "$E1_SNAPSHOT"
+py -m ruff check tests/unit/test_repl_process_cleanup.py
+py -m ruff format --check tests/unit/test_repl_process_cleanup.py
+py -m pytest tests/unit/test_repl_process_cleanup.py -q --junitxml="$REPO/audit/revision_2026_09_13/cleanup-fixed-$SLURM_JOB_ID.xml"

@@ -1,0 +1,826 @@
+{
+  "version": "tree-frontier-v3-selected",
+  "source": "by\n  ring_nf at h ⊢\n  -- explanation\n  nlinarith\n",
+  "ast": {
+    "args": [
+      {
+        "args": [],
+        "end": 2,
+        "kind": "by",
+        "original": true,
+        "start": 0
+      },
+      {
+        "args": [
+          {
+            "args": [
+              {
+                "args": [
+                  {
+                    "args": [
+                      {
+                        "args": [],
+                        "end": 12,
+                        "kind": "ring_nf",
+                        "original": true,
+                        "start": 5
+                      },
+                      {
+                        "args": [],
+                        "end": null,
+                        "kind": "null",
+                        "original": false,
+                        "start": null
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [],
+                            "end": null,
+                            "kind": "null",
+                            "original": false,
+                            "start": null
+                          }
+                        ],
+                        "end": null,
+                        "kind": "Lean.Parser.Tactic.optConfig",
+                        "original": false,
+                        "start": null
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [],
+                                "end": 15,
+                                "kind": "at",
+                                "original": true,
+                                "start": 13
+                              },
+                              {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "args": [],
+                                        "end": 17,
+                                        "kind": "ident",
+                                        "original": true,
+                                        "start": 16
+                                      },
+                                      {
+                                        "args": [
+                                          {
+                                            "args": [
+                                              {
+                                                "args": [
+                                                  {
+                                                    "args": [],
+                                                    "end": 21,
+                                                    "kind": "«⊢»",
+                                                    "original": true,
+                                                    "start": 18
+                                                  }
+                                                ],
+                                                "end": 21,
+                                                "kind": "token.«⊢»",
+                                                "original": true,
+                                                "start": 18
+                                              }
+                                            ],
+                                            "end": 21,
+                                            "kind": "patternIgnore",
+                                            "original": true,
+                                            "start": 18
+                                          }
+                                        ],
+                                        "end": 21,
+                                        "kind": "Lean.Parser.Tactic.locationType",
+                                        "original": true,
+                                        "start": 18
+                                      }
+                                    ],
+                                    "end": 21,
+                                    "kind": "null",
+                                    "original": true,
+                                    "start": 16
+                                  }
+                                ],
+                                "end": 21,
+                                "kind": "Lean.Parser.Tactic.locationHyp",
+                                "original": true,
+                                "start": 16
+                              }
+                            ],
+                            "end": 21,
+                            "kind": "Lean.Parser.Tactic.location",
+                            "original": true,
+                            "start": 13
+                          }
+                        ],
+                        "end": 21,
+                        "kind": "null",
+                        "original": true,
+                        "start": 13
+                      }
+                    ],
+                    "end": 21,
+                    "kind": "Mathlib.Tactic.RingNF.ringNF",
+                    "original": true,
+                    "start": 5
+                  },
+                  {
+                    "args": [],
+                    "end": null,
+                    "kind": "null",
+                    "original": false,
+                    "start": null
+                  },
+                  {
+                    "args": [
+                      {
+                        "args": [],
+                        "end": 50,
+                        "kind": "nlinarith",
+                        "original": true,
+                        "start": 41
+                      },
+                      {
+                        "args": [],
+                        "end": null,
+                        "kind": "null",
+                        "original": false,
+                        "start": null
+                      },
+                      {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [],
+                                "end": null,
+                                "kind": "null",
+                                "original": false,
+                                "start": null
+                              }
+                            ],
+                            "end": null,
+                            "kind": "Lean.Parser.Tactic.optConfig",
+                            "original": false,
+                            "start": null
+                          },
+                          {
+                            "args": [],
+                            "end": null,
+                            "kind": "null",
+                            "original": false,
+                            "start": null
+                          },
+                          {
+                            "args": [],
+                            "end": null,
+                            "kind": "null",
+                            "original": false,
+                            "start": null
+                          }
+                        ],
+                        "end": null,
+                        "kind": "Mathlib.Tactic.linarithArgsRest",
+                        "original": false,
+                        "start": null
+                      }
+                    ],
+                    "end": 50,
+                    "kind": "Mathlib.Tactic.nlinarith",
+                    "original": true,
+                    "start": 41
+                  }
+                ],
+                "end": 50,
+                "kind": "null",
+                "original": true,
+                "start": 5
+              }
+            ],
+            "end": 50,
+            "kind": "Lean.Parser.Tactic.tacticSeq1Indented",
+            "original": true,
+            "start": 5
+          }
+        ],
+        "end": 50,
+        "kind": "Lean.Parser.Tactic.tacticSeq",
+        "original": true,
+        "start": 5
+      }
+    ],
+    "end": 50,
+    "kind": "Lean.Parser.Term.byTactic",
+    "original": true,
+    "start": 0
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "parent_id": null,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "start_byte": 5,
+      "end_byte": 21,
+      "start_char": 5,
+      "end_char": 19,
+      "text": "ring_nf at h ⊢",
+      "children": [],
+      "policy": "leaf",
+      "events": [
+        {
+          "id": 0,
+          "parent_id": null,
+          "start_char": 5,
+          "end_char": 19,
+          "kind": "Mathlib.Tactic.RingNF.ringNF",
+          "goals_before": [
+            "a c : ℝ\nh : 9 * (7 * a / 4) = 20 * c\n⊢ 63 * a = 80 * c"
+          ],
+          "goals_after": [
+            "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+          ]
+        }
+      ],
+      "proof_states": [
+        {
+          "proof_state": 111,
+          "tactic": "",
+          "goals": ""
+        }
+      ],
+      "local_goals_empty_before": [
+        false
+      ],
+      "native_events": [
+        {
+          "id": 0,
+          "parent_event_id": null,
+          "kind": "Mathlib.Tactic.RingNF.ringNF",
+          "start_char": 5,
+          "end_char": 19,
+          "goal_ids_before": [
+            "_uniq.457"
+          ],
+          "goal_ids_after": [
+            "_uniq.1674"
+          ],
+          "root_before": [
+            {
+              "pendingIds": [
+                "_uniq.457"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": false
+            }
+          ],
+          "root_after": [
+            {
+              "pendingIds": [
+                "_uniq.1281",
+                "_uniq.1674"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": true
+            }
+          ]
+        }
+      ],
+      "ancestor_ids": [],
+      "branch_path": []
+    },
+    {
+      "id": 1,
+      "parent_id": null,
+      "kind": "Mathlib.Tactic.nlinarith",
+      "start_byte": 41,
+      "end_byte": 50,
+      "start_char": 39,
+      "end_char": 48,
+      "text": "nlinarith",
+      "children": [],
+      "policy": "leaf",
+      "events": [
+        {
+          "id": 1,
+          "parent_id": null,
+          "start_char": 39,
+          "end_char": 48,
+          "kind": "Mathlib.Tactic.nlinarith",
+          "goals_before": [
+            "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+          ],
+          "goals_after": []
+        }
+      ],
+      "proof_states": [
+        {
+          "proof_state": 112,
+          "tactic": "",
+          "goals": ""
+        }
+      ],
+      "local_goals_empty_before": [
+        false
+      ],
+      "native_events": [
+        {
+          "id": 1,
+          "parent_event_id": null,
+          "kind": "Mathlib.Tactic.nlinarith",
+          "start_char": 39,
+          "end_char": 48,
+          "goal_ids_before": [
+            "_uniq.1674"
+          ],
+          "goal_ids_after": [],
+          "root_before": [
+            {
+              "pendingIds": [
+                "_uniq.1281",
+                "_uniq.1674"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": true
+            }
+          ],
+          "root_after": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ]
+        }
+      ],
+      "ancestor_ids": [],
+      "branch_path": []
+    }
+  ],
+  "selected_node_ids": [
+    0,
+    1
+  ],
+  "points": [
+    {
+      "index": 0,
+      "end_char": 19,
+      "end_byte": 21,
+      "node_ids": [
+        0
+      ],
+      "closing_node_ids": [
+        0
+      ],
+      "span_start": 2,
+      "span_end": 19,
+      "text": "\n  ring_nf at h ⊢",
+      "semantic_status": "has_context",
+      "node_id": 0,
+      "branch_path": [],
+      "event_ids": [
+        0
+      ],
+      "observation_kind": "tactic",
+      "event_multiplicity": 1,
+      "trace_label": "verified_trace",
+      "active_goal_ids": [
+        "_uniq.457"
+      ],
+      "next_goal_ids": [
+        "_uniq.1674"
+      ],
+      "root_pending_before": [
+        "_uniq.457"
+      ],
+      "root_pending_after": [
+        "_uniq.1281",
+        "_uniq.1674"
+      ],
+      "root_closed_before": false,
+      "root_closed_after": false,
+      "goal_namespace": "replay_source_with_goal_and_comment",
+      "execution_status": "observed",
+      "transition": "updates_context",
+      "scope_path": [],
+      "source_transition": {
+        "exit_scope_ids": [],
+        "enter_scope_ids": [],
+        "branch_switch": false,
+        "scope_changed": false
+      },
+      "replay_evidence": [
+        {
+          "node_id": 0,
+          "status": "ok",
+          "proof_status": "Incomplete: open goals remain"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "end_char": 48,
+      "end_byte": 50,
+      "node_ids": [
+        1
+      ],
+      "closing_node_ids": [
+        1
+      ],
+      "span_start": 19,
+      "span_end": 48,
+      "text": "\n  -- explanation\n  nlinarith",
+      "semantic_status": "has_context",
+      "node_id": 1,
+      "branch_path": [],
+      "event_ids": [
+        1
+      ],
+      "observation_kind": "tactic",
+      "event_multiplicity": 1,
+      "trace_label": "verified_trace",
+      "active_goal_ids": [
+        "_uniq.1674"
+      ],
+      "next_goal_ids": [],
+      "root_pending_before": [
+        "_uniq.1281",
+        "_uniq.1674"
+      ],
+      "root_pending_after": [],
+      "root_closed_before": false,
+      "root_closed_after": true,
+      "goal_namespace": "replay_source_with_goal_and_comment",
+      "execution_status": "observed",
+      "transition": "completes_root",
+      "scope_path": [],
+      "source_transition": {
+        "exit_scope_ids": [],
+        "enter_scope_ids": [],
+        "branch_switch": false,
+        "scope_changed": false
+      },
+      "replay_evidence": [
+        {
+          "node_id": 1,
+          "status": "ok",
+          "proof_status": "Completed"
+        }
+      ]
+    }
+  ],
+  "suffix": "\n",
+  "n_blocks": 2,
+  "n_latent_points_with_prompt": 3,
+  "parse_ok": true,
+  "label_ready": false,
+  "execution_order": "not inferred from source order",
+  "whole_reply": {
+    "tactics": [
+      {
+        "usedConstants": [],
+        "tactic": "",
+        "proofState": 111,
+        "pos": {
+          "line": 2,
+          "column": 2
+        },
+        "goals": "",
+        "endPos": {
+          "line": 2,
+          "column": 16
+        }
+      },
+      {
+        "usedConstants": [],
+        "tactic": "",
+        "proofState": 112,
+        "pos": {
+          "line": 4,
+          "column": 2
+        },
+        "goals": "",
+        "endPos": {
+          "line": 4,
+          "column": 11
+        }
+      }
+    ],
+    "observerProfile": {
+      "snapshots_ms": 0,
+      "selection_and_messages_ms": 1,
+      "selected_events": 2,
+      "requested_ranges": 2,
+      "json_ms": 8,
+      "elaboration_ms": 305
+    },
+    "infotree": [
+      {
+        "node": {
+          "stx": {
+            "range": {
+              "synthetic": false,
+              "start": {
+                "line": 2,
+                "column": 2
+              },
+              "finish": {
+                "line": 2,
+                "column": 16
+              }
+            },
+            "pp": "ring_nf at h\n    ⊢\n      -- explanation\n      ",
+            "kind": "Mathlib.Tactic.RingNF.ringNF",
+            "argKinds": [
+              "ring_nf",
+              "null",
+              "Lean.Parser.Tactic.optConfig",
+              "null"
+            ]
+          },
+          "rootGoalsBefore": [
+            {
+              "pendingIds": [
+                "_uniq.457"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": false
+            }
+          ],
+          "rootGoalsAfter": [
+            {
+              "pendingIds": [
+                "_uniq.1281",
+                "_uniq.1674"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": true
+            }
+          ],
+          "name": "Mathlib.Tactic.RingNF.ringNF",
+          "goalsBefore": [
+            "a c : ℝ\nh : 9 * (7 * a / 4) = 20 * c\n⊢ 63 * a = 80 * c"
+          ],
+          "goalsAfter": [
+            "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+          ],
+          "goalIdsBefore": [
+            "_uniq.457"
+          ],
+          "goalIdsAfter": [
+            "_uniq.1674"
+          ]
+        },
+        "kind": "TacticInfo",
+        "children": []
+      },
+      {
+        "node": {
+          "stx": {
+            "range": {
+              "synthetic": false,
+              "start": {
+                "line": 4,
+                "column": 2
+              },
+              "finish": {
+                "line": 4,
+                "column": 11
+              }
+            },
+            "pp": "nlinarith",
+            "kind": "Mathlib.Tactic.nlinarith",
+            "argKinds": [
+              "nlinarith",
+              "null",
+              "Mathlib.Tactic.linarithArgsRest"
+            ]
+          },
+          "rootGoalsBefore": [
+            {
+              "pendingIds": [
+                "_uniq.1281",
+                "_uniq.1674"
+              ],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": true,
+              "assigned": true
+            }
+          ],
+          "rootGoalsAfter": [
+            {
+              "pendingIds": [],
+              "id": "_uniq.457",
+              "containsSorry": false,
+              "containsMVar": false,
+              "assigned": true
+            }
+          ],
+          "name": "Mathlib.Tactic.nlinarith",
+          "goalsBefore": [
+            "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+          ],
+          "goalsAfter": [],
+          "goalIdsBefore": [
+            "_uniq.1674"
+          ],
+          "goalIdsAfter": []
+        },
+        "kind": "TacticInfo",
+        "children": []
+      }
+    ],
+    "env": 80
+  },
+  "events": [
+    {
+      "id": 0,
+      "parent_id": null,
+      "start_char": 5,
+      "end_char": 19,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "goals_before": [
+        "a c : ℝ\nh : 9 * (7 * a / 4) = 20 * c\n⊢ 63 * a = 80 * c"
+      ],
+      "goals_after": [
+        "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+      ]
+    },
+    {
+      "id": 1,
+      "parent_id": null,
+      "start_char": 39,
+      "end_char": 48,
+      "kind": "Mathlib.Tactic.nlinarith",
+      "goals_before": [
+        "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+      ],
+      "goals_after": []
+    }
+  ],
+  "whole_errors": [],
+  "whole_sorries": [],
+  "whole_elaboration_ok": true,
+  "diagnostics": [],
+  "fine_failure_candidate": null,
+  "selected_context_coverage": 2,
+  "localization_blockers": [],
+  "trace_id": "replay_source_with_goal_and_comment",
+  "native_events": [
+    {
+      "id": 0,
+      "parent_event_id": null,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "start_char": 5,
+      "end_char": 19,
+      "goal_ids_before": [
+        "_uniq.457"
+      ],
+      "goal_ids_after": [
+        "_uniq.1674"
+      ],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.457"
+          ],
+          "id": "_uniq.457",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": false
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [
+            "_uniq.1281",
+            "_uniq.1674"
+          ],
+          "id": "_uniq.457",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": true
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "parent_event_id": null,
+      "kind": "Mathlib.Tactic.nlinarith",
+      "start_char": 39,
+      "end_char": 48,
+      "goal_ids_before": [
+        "_uniq.1674"
+      ],
+      "goal_ids_after": [],
+      "root_before": [
+        {
+          "pendingIds": [
+            "_uniq.1281",
+            "_uniq.1674"
+          ],
+          "id": "_uniq.457",
+          "containsSorry": false,
+          "containsMVar": true,
+          "assigned": true
+        }
+      ],
+      "root_after": [
+        {
+          "pendingIds": [],
+          "id": "_uniq.457",
+          "containsSorry": false,
+          "containsMVar": false,
+          "assigned": true
+        }
+      ]
+    }
+  ],
+  "source_sha256": "19fa1559662a2f3d4bc1516646d3455ad72435ec32d83f2a68fb044e99ae4930",
+  "header_sha256": "76e3e35a67422cabd6e0eb812475deb3cdb3e26da4c9fbb89fc2f95827d8b846",
+  "localization_status": "not_applicable_verified",
+  "annotation_ready": true,
+  "runtime_semantics": "original elaboration; goal IDs scoped to this trace; source order is distinct from execution nesting",
+  "scopes": [],
+  "observer_profile": {
+    "snapshots_ms": 0,
+    "selection_and_messages_ms": 1,
+    "selected_events": 2,
+    "requested_ranges": 2,
+    "json_ms": 8,
+    "elaboration_ms": 305
+  },
+  "observer_wall_s": 0.3212043195962906,
+  "observation_ranges": [
+    {
+      "first": 77,
+      "last": 93,
+      "kind": "Mathlib.Tactic.RingNF.ringNF",
+      "descend": false
+    },
+    {
+      "first": 113,
+      "last": 122,
+      "kind": "Mathlib.Tactic.nlinarith",
+      "descend": false
+    }
+  ],
+  "production_label_certificate": false,
+  "context_replays": [
+    {
+      "node_id": 0,
+      "source": "ring_nf at h ⊢",
+      "ok": true,
+      "status": "ok",
+      "reply": {
+        "proofStatus": "Incomplete: open goals remain",
+        "proofState": 113,
+        "goals": [
+          "a c : ℝ\nh : a * (63 / 4) = c * 20\n⊢ a * 63 = c * 80"
+        ]
+      },
+      "replay_source": "exact_AST_slice",
+      "stored_text_matches": false
+    },
+    {
+      "node_id": 1,
+      "source": "nlinarith",
+      "ok": true,
+      "status": "ok",
+      "reply": {
+        "proofStatus": "Completed",
+        "proofState": 114,
+        "goals": []
+      },
+      "replay_source": "exact_AST_slice",
+      "stored_text_matches": false
+    }
+  ],
+  "replay_skipped_node_ids": [],
+  "case": {
+    "group": "curated",
+    "name": "replay_source_with_goal_and_comment",
+    "header": "example (a c : ℝ) (h : 9 * (7 * a / 4) = 20 * c) : 63 * a = 80 * c := by",
+    "body": "\n  ring_nf at h ⊢\n  -- explanation\n  nlinarith\n",
+    "expected_ok": true,
+    "expected_points": 2
+  }
+}

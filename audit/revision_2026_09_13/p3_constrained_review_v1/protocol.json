@@ -1,0 +1,11 @@
+{
+  "version": "p3-constrained-postvalidation-review-v1",
+  "fresh_point_audit": "all 800 datasets, both thresholds, grid 2049; compare gamma/scale and objective to frozen estimates; no replacement",
+  "comparison_tolerances": {
+    "gamma": 1e-06,
+    "sigma_relative": 1e-06,
+    "loglik": 1e-05
+  },
+  "monte_carlo_family_diagnostic": "Bonferroni over four scenarios for the already frozen primary candidate only; do not choose best method",
+  "primary_changed": false
+}

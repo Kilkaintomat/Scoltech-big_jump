@@ -1,0 +1,21 @@
+{
+  "seed": 2026091505,
+  "calibration_per_length": 100,
+  "evaluation_per_length": 50,
+  "attempts_per_temperature": 1,
+  "temperatures": [
+    0.6,
+    1
+  ],
+  "max_new_tokens": 1024,
+  "prompt_version": "worked-example-v2",
+  "syntax_guidance": true,
+  "format_minimum": 0.9,
+  "minimum_verified_tasks_per_transform_fold": 20,
+  "q": 0.01,
+  "shrinkage": 0.1,
+  "bootstrap_replicates": 10000,
+  "scope": "Authorized staged expansion of guided P5. Calibration acquisition first, then held-out evaluation only after adequate independent verified calibration and technical integrity. All assigned outcomes retained. No verifier feedback during generation. Identical random-chain graph family; not new mathematical task families.",
+  "stop_rule": "Fixed counts; no additional sampling based on evaluation outcomes. Insufficient calibration withholds evaluation and is reported.",
+  "calibration_fold": "SHA256(problem_id) parity assignment independent of responses; threshold and transform tasks disjoint."
+}

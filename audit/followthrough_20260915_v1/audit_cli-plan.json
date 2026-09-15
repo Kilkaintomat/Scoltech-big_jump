@@ -1,0 +1,1 @@
+{"timeout_s":180,"scope":"Use exactly the preselected stratified sample; independently run standalone Lean compiler with trusted headers and audit final theorem axioms."}

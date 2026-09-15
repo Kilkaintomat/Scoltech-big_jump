@@ -1,0 +1,30 @@
+{
+  "scope": "Descriptive histograms requested by user, frozen first-error sensitivity trials; no new inference or model selection.",
+  "temperature": 0.6,
+  "baseline": "formal_entry",
+  "statistic": "whitened",
+  "shrinkage": 0.1,
+  "folds": [
+    0,
+    1
+  ],
+  "primary_fold": 0,
+  "cases": [
+    "all_errors",
+    "later_errors",
+    "later_errors_drop_first_increment"
+  ],
+  "display_names": {
+    "deepseek": "DeepSeek",
+    "goedel": "Goedel",
+    "kimina": "Kimina"
+  },
+  "absolute_individual_steps": 25,
+  "relative_bins": 20,
+  "offset_individual_bound": 10,
+  "weight": "equal trace, paired error and maximum on identical populations",
+  "relative_coordinate": "zero-based original position / max(original_L - 1, 1); one-step traces at 0",
+  "uniform_reference": "Uniform among original candidates; first position excluded only in the specified case; exact expectation not Monte Carlo.",
+  "source_stage": "later_error_sensitivity",
+  "posterior_steps": "Included as generated states; labels are absorbing unreached, no independent correctness assertion."
+}

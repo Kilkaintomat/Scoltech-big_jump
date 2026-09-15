@@ -1,0 +1,1 @@
+{"reason":"Container binds give a logical REPL path whose host file differs. Resolve only the two pinned binaries by their observed SHA256. Preserve original manifests and all scientific output hashes.","original_cli_jobs":"8467348","no_scientific_output_changes":true}

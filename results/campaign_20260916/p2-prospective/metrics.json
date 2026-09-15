@@ -1,0 +1,31 @@
+{
+  "preflight_passed": true,
+  "candidate_problems": 364,
+  "reference_categories": {
+    "reference_incompatible": 113,
+    "reference_verified": 236,
+    "context_statement_mismatch": 1,
+    "reference_unapproved_axiom": 14
+  },
+  "compatible_problems": 236,
+  "compatible_exercise_groups": 221,
+  "technical_pilot_groups": 24,
+  "evaluation_groups": 197,
+  "models": {
+    "deepseek": {
+      "planned_attempts": 944,
+      "pilot_attempts": 104,
+      "evaluation_attempts": 840,
+      "context_exclusions": 0
+    },
+    "goedel": {
+      "planned_attempts": 944,
+      "pilot_attempts": 104,
+      "evaluation_attempts": 840,
+      "context_exclusions": 0
+    }
+  },
+  "reference_proofs_in_model_prompts": false,
+  "generation_calls": 0,
+  "protocol_sha256": "f828673cc7ae8f8fc3eb7f0cce6592193cd879b5c2edfe5265befd97cc054a8f"
+}

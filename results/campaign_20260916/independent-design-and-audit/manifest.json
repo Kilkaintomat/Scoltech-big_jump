@@ -1,0 +1,62 @@
+{
+  "created_utc": "2026-09-14T22:39:59.388479+00:00",
+  "config": {
+    "scope": "Same scientific metrics as the first report; show actual Slurm member state and render an explicit white PDF page background.",
+    "locale": "ru_RU",
+    "paper_outputs_modified": false
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  },
+  "environment": {
+    "packages": {
+      "torch": "2.6.0+cu124",
+      "transformers": "4.51.3",
+      "tokenizers": "0.21.4",
+      "vllm": "0.8.5.post1",
+      "numpy": "2.2.2",
+      "scipy": "1.17.1",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "python": "3.11.11",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "hostname": "cn70.zhores",
+    "gpu": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "slurm_job_id": "8467364",
+    "slurm_cpus": "4"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_report_v2-source-manifest.json": "8c65078551b1d591e6657775537325f2a0a3691626d4885a7015357fc6c9316d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/followthrough_report_v2-plan.json": "afc7c91d02ebd78da27bc01a7b560049cfb755cbad7bd2971dc0c4b494118e48",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/calibration/manifest.json": "4250b6474133d8ec29fe47ee166209bd33e0e97a0a68898253b57b83535081d2",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/deepseek/manifest.json": "7f2e1f59e6fc9c921f57ce654895f2ce38536f09fe45b6610b6d843d80cf2999",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/goedel/manifest.json": "bdf490ac81f69d3c6afcb58e14a8b39ea665b18f172a9fcc2ff433b0a0af0cca",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/kimina/manifest.json": "66edc1a8f43e709812d580841a244a3e105472d3034243aa6b46a2778200fa7d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/audit_cli/deepseek/manifest.json": "031a2bdb336973830e61237750c3e0152fef3efe3eb2d9423d7934522397dc23",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/audit_cli/goedel/manifest.json": "42d6ede49f81f066629736450ad18ccff37db3395ab9d0e6d20736d3df71e01d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/audit_cli/kimina/manifest.json": "faaaf31fc692c918c6e5b03c82286f705da041b2d57fd493fed2c272a27eab62",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p2_pipeline/manifest.json": "6c264a4bfd893a12f3a929a6a744f175b39ce131b809a71ec28770e236e9fc42",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/p5/manifest.json": "fc7872cc78bc5b6fb51f9e4399395ce06610522034056aa398d05e99b7f0c880",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/flow/latest.json": "de93c598d7d8db3de3ac47c7fcf8a056e69a59a514e3cb70d0e3c5aa77be2248",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/lean_audit/manifest.json": "f02bae2274c3124c763eb1fc93a079b337b34fc20a1678f7458c80f92eeba164"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/metrics.json": "818b8fe982268abbfc0d521034b5dd1615c632b03b292e24e4b7c71b6b5d6888",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/1.csv": "f48323c0ff839840af1df608a1242a688d1fb9533d76bbace3f90c6e137eb1c2",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/2.csv": "bec264d4528986cd9e6434e36cd21323978b5ba6600c5eb88eb8040b8c1a9f03",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/3.csv": "44567676b87ffd77d96286cc0295d753dde6f7bcd0400eb78b9b2c56eb8038f3",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/calibration.png": "57d2bce8ca21ae0dafde6e2ab82c466a14cb372ea53379314699e5bd01423add",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/5.csv": "78b65ee9277a22a72ddbd67f43d60c86fff34f4efe75ac4abe30cf4310866b70",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/6.csv": "ef76a2fc9b78ab75d03a2403ec64fc6f651e8f42fdc651f88aae67d5ee9d0801",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/7.csv": "571ca71cef7b5f55ecfd462e4f4148549a955128c55f268f1e11a8cddf7c5a0e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/8.csv": "cfd4b3bc15864484531df065b55eb04974858874d009900cacedc3d5e7e6461d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/9.csv": "0aaa265bfe6a4dc838810eed3335bd9020b53f9265fa379ceaba088e1d849c40",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/10.csv": "8e62edddbc429a8e2a424fab564f47ec85cd56df119f09c0eddc3d8b0932d997",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/tables/11.csv": "b401a6ea31408fb9600d63f31f00aee0456e3e4b6ea5bcf0bce5454ca7ac3096",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.pdf": "bf326125753af9506e755e8ebf6c29cb2f24c15922aaa35a9c197d099e49d57e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.md": "9a993e9d081717b6417f4c61dc7179bf89d6ba1834fc497af4cbc2e645c34f5b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/followthrough_20260915_v1/followthrough_report_v2/REPORT_RU.html": "7837df4b319159c9ded745cca9dc7ed4495de8197fad8a6cca9ec2e184f53648"
+  }
+}

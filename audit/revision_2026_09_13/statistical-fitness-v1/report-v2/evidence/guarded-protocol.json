@@ -1,0 +1,48 @@
+{
+  "version": "guarded-throughput-v2",
+  "seed": 926130000,
+  "primary_unchanged": true,
+  "scope": "post-pilot supplementary methods; no confirmatory promotion",
+  "benchmark": {
+    "workers": [
+      1,
+      2
+    ],
+    "trace_selection": "16 smallest sha256([seed,model,trace_id]) per model from archived shards 0 and 1; no outcome selection",
+    "rounds": 1,
+    "semantic_equality_required": true,
+    "minimum_speedup": 1.1,
+    "no_additional_resource_failures": true,
+    "scope": "same identity-fixed traces as prior benchmark; operational validation, not fresh statistical evidence"
+  },
+  "calibration": {
+    "datasets": 5000,
+    "task_counts": [
+      5,
+      20,
+      50,
+      100
+    ],
+    "scenario": "independent heterogeneous Bernoulli task probabilities; dependent repeated attempts",
+    "effect": [
+      0,
+      0.1
+    ],
+    "alpha": 0.05
+  },
+  "finite_metrics": {
+    "task_weighting": "equal",
+    "secondary_family_size": 3,
+    "q": 0.01,
+    "drop_first": "separate exploratory population",
+    "rank": "exploratory"
+  },
+  "new_generation": false,
+  "activation": "only never-submitted verification shards after full tests and equivalent faster live benchmark",
+  "resource_policy": {
+    "maximum_workers": 2,
+    "descriptors_per_worker": 80000,
+    "reserve": 32768,
+    "one_guarded_job_per_node": true
+  }
+}

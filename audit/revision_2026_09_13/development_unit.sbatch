@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#SBATCH --account=rsollmrs
+#SBATCH --partition=ais-htc
+#SBATCH --exclude=cn69
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=32G
+#SBATCH --time=02:00:00
+set -euo pipefail
+cd /beegfs/home/denis.rakhmankin/onebigjump
+export E1_SNAPSHOT="$PWD/audit/revision_2026_09_12/snapshots/lean-runtime-v3"
+export PATH="$PWD/runs/e1_20260908T171727Z/tools/env/bin:$PATH"
+source "$E1_SNAPSHOT/scripts/slurm/common.sh"
+export PYTHONPATH="$PWD/src" PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+py -m ruff check src/onebigjump/readiness/deduction.py src/onebigjump/readiness/p3_validation.py scripts/readiness/run.py tests/unit/test_development_protocols_0913.py --fix
+py -m ruff format src/onebigjump/readiness/deduction.py src/onebigjump/readiness/p3_validation.py scripts/readiness/run.py tests/unit/test_development_protocols_0913.py
+py -m mypy src/onebigjump/readiness/deduction.py src/onebigjump/readiness/p3_validation.py
+py -m pytest tests/unit/test_development_protocols_0913.py -q --junitxml="$REPO/audit/revision_2026_09_13/development-unit-$SLURM_JOB_ID.xml"

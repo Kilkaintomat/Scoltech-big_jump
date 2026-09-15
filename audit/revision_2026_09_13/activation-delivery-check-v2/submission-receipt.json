@@ -1,0 +1,6 @@
+{
+  "superseded_job": "8466291",
+  "reason": "Auditor path canonicalisation; identical completed-shard inventory and all data checks retained.",
+  "source_sha256": "8c727536bd93d418aec80c3ec16dfb7e6751875e3e4c62846e32eb17903d71d3",
+  "job_id": "8466295"
+}

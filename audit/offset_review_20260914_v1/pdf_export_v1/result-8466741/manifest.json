@@ -1,0 +1,39 @@
+{
+  "stage": "pdf-export",
+  "job": "8466741",
+  "created_utc": "2026-09-14T11:26:34.352680+00:00",
+  "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+  "git_dirty": true,
+  "config": {
+    "input": "existing report; no numerical or narrative changes",
+    "pagesize": "A4",
+    "font": "DejaVu Sans"
+  },
+  "environment": {
+    "hostname": "cn55.zhores",
+    "platform": "Linux-5.4.278-1.el7.elrepo.x86_64-x86_64-with-glibc2.35",
+    "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+    "reportlab": "5.0.1",
+    "allocated_cpus": "2"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/REPORT_RU.md": "ffda353dc9b14fce414026fa9c2f52c52ab64fd15ff241f97f96484e288fcbbe",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/offsets.png": "d1b2e16db69ed9aafa58a553875740c4ca08d7e38d98641808ef418af0bfa9dc",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/result-8466720/render-manifest.json": "19bb8311404a3c843f0a3889f08d43dc8fff84d9f05850bbbb7bff29d8030e63",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/pdf_export_v1/export.py": "56438235f353381dcb0973260b20315771358756bcc9a632c38886d93a18508e",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/pdf_export_v1/export.sbatch": "e0049c8feb1ca3f127b094a2cf493acde6ce5c2be06a8902b7f09fbe6abfd12c",
+    "/beegfs/home/denis.rakhmankin/onebigjump/.venvc/lib/python3.11/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+    "/beegfs/home/denis.rakhmankin/onebigjump/.venvc/lib/python3.11/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf": "b184b89e3c1075f22f6b71575b6fc20d4972b3cfd3b23322ca6fd596dcaef167"
+  },
+  "outputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/pdf_export_v1/result-8466741/REPORT_RU.pdf": "b11852fbd097891e886e14769aa1791166080cedba5915e92302b8d1cbf4bdf8",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/offset_review_20260914_v1/pdf_export_v1/result-8466741/dependency-install.json": "fc39416cdb1e7cc3e43cb7bb30c7f0cc7f7b9a4c31e04605ddc5fc5ee028f510"
+  },
+  "metrics": {
+    "pages": 7,
+    "tables": 11,
+    "paragraphs": 49,
+    "figures": 1,
+    "pdf_bytes": 273931
+  }
+}

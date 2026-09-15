@@ -1,0 +1,14 @@
+{
+  "files": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_analyze.py": "bb30b27341f03e7772c2fc9211ea2c0f1058727f19abcd96f72ee907cd2fe90b",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_analyze.sbatch": "9e4ffcf7cabfe1e08861a881f1f624388d22fadfac4ba123280f4b75585396ae",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/p5_analysis-plan.json": "a35de9965f1c3518ddab0beed17c3c7166bfe0a3f247a0af5252ff517f9f3cff",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/analysis_math.py": "f6eadc2754d883483ea9941efb7e596e51abf52cfbd668ed2e7cde66bfba101d",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/stage_support.py": "dff1a7eb2a97c846f98a5406ac41d21b734c1e1673bbd3e797d39a9d19778150",
+    "/beegfs/home/denis.rakhmankin/onebigjump/audit/followthrough_20260915_v1/artifact_bridge.py": "0d3a7d3b25a8df338caac8bd0e86f317ea57711db8f24a97eb1660af9e7315bb"
+  },
+  "source_control": {
+    "git_commit": "bf0bdbe21c00fb9bd677da5a0318eac83f1c8f98",
+    "dirty": true
+  }
+}
