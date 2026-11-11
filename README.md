@@ -3,6 +3,8 @@
 Code for the experimental section of *One Big Jump: Heavy Tails in Residual-Stream Reasoning
 Trajectories as an Order Parameter for Algorithmic Computation* (ICLR 2027 submission).
 
+> **Подробный отчёт, 11 ноября 2026:** [новые эксперименты о скачках и ошибках доказательства](reports/research_update_20261111/REPORT_RU.md) — E0–E16, streaming, PRM, standalone-сравнения, интерпретация probes и протокол новой серии по наличию/прогнозу ошибки. Отчёт содержит постановки, таблицы результатов и ограничения. Сентябрьские snapshots ниже сохранены как исторические.
+
 **No project-wide license is declared. Retained upstream components keep their own licenses; see `third_party/`.**
 
 > **Current snapshot (16 September 2026):** [code and experiment index](docs/revisions/2026-09-16-publication.md),
@@ -130,3 +132,4 @@ the kernel labels must not look like a run that checked them.
 make test        # everything that needs no external toolchain
 make test-all    # the above plus the live Lean and GPT-2 tests
 ```
+
