@@ -1,5 +1,7 @@
 # One Big Jump — experimental pipeline
 
+> **Локализатор ошибки, 13 ноября 2026:** [математическое описание и результаты новых абляций](reports/localizer_explained_20261113/REPORT_RU.md) — признаки, softmax, обучение, скрытое состояние и приращение, ProofNet/Putnam, полные матрицы Hit/NLL и разбор роли позиции, surprisal, типа и длины тактики.
+
 > **Распределения максимумов и ошибок, 11 ноября 2026:** [подробный отчёт с графиками](reports/peak_error_distributions_20261111/REPORT_RU.md) — позиции и величины скачков и surprisal, контроли распределений, сравнение правильных и ошибочных доказательств и альтернативная математическая модель.
 
 Code for the experimental section of *One Big Jump: Heavy Tails in Residual-Stream Reasoning
