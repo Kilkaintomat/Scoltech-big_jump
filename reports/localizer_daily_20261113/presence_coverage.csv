@@ -1,0 +1,7 @@
+model,dataset,included,groups,verified,failed,verified_groups,failed_groups,assigned,exclusions
+deepseek,ProofNet,563,187,111,452,37,166,,{}
+deepseek,miniF2F,1303,202,775,528,126,122,1784,"{""not_extracted"": 403, ""not_in_reliable_score_cohort"": 78}"
+deepseek,Putnam,118,58,0,118,0,58,304,"{""not_eligible"": 185, ""incomplete_token_boundaries"": 1}"
+goedel,ProofNet,338,144,79,259,30,133,,{}
+goedel,miniF2F,1256,200,808,448,137,122,1784,"{""not_extracted"": 497, ""not_in_reliable_score_cohort"": 30, ""rejected_token_boundaries"": 1}"
+goedel,Putnam,48,35,0,48,0,35,304,"{""not_eligible"": 255, ""incomplete_token_boundaries"": 1}"
