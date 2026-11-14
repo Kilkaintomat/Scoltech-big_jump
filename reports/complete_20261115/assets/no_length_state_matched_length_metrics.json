@@ -1,0 +1,66 @@
+[
+  {
+    "length": "with",
+    "arm": "MD",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.5706119187102068,
+    "hit": 0.5731829573934837
+  },
+  {
+    "length": "with",
+    "arm": "MDW",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.6261697231849648,
+    "hit": 0.5568922305764411
+  },
+  {
+    "length": "with",
+    "arm": "MD_state",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.6739357546949614,
+    "hit": 0.5032581453634085
+  },
+  {
+    "length": "with",
+    "arm": "MD_increment",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.7414679371437227,
+    "hit": 0.5149122807017544
+  },
+  {
+    "length": "without",
+    "arm": "MD_noN",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.71832393464229,
+    "hit": 0.5038847117794486
+  },
+  {
+    "length": "without",
+    "arm": "MD_noNW",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.703774653393205,
+    "hit": 0.5105263157894737
+  },
+  {
+    "length": "without",
+    "arm": "MD_noN_state",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.693475190624447,
+    "hit": 0.49197994987468674
+  },
+  {
+    "length": "without",
+    "arm": "MD_noN_deltaX",
+    "attempts": 259,
+    "groups": 133,
+    "nll": 1.7559363422653547,
+    "hit": 0.5136591478696741
+  }
+]

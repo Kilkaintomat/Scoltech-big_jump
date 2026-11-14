@@ -1,0 +1,464 @@
+[
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": 0.017698798102766346,
+    "groups": 133,
+    "ci95": [
+      -0.1316393789816984,
+      0.1687297678476525
+    ],
+    "p": 0.8227177282271773,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "hit",
+    "delta": -0.012280701754385968,
+    "groups": 133,
+    "ci95": [
+      -0.08534461152882206,
+      0.060776942355889714
+    ],
+    "p": 0.7368263173682632,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": 0.02484874401784278,
+    "groups": 133,
+    "ci95": [
+      -0.1259795601309212,
+      0.17996048587382382
+    ],
+    "p": 0.7574242575742426,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "hit",
+    "delta": -0.011904761904761906,
+    "groups": 133,
+    "ci95": [
+      -0.08395989974937344,
+      0.060150375939849614
+    ],
+    "p": 0.7507249275072493,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": 0.13312282887208937,
+    "groups": 35,
+    "ci95": [
+      -0.1352839993629764,
+      0.4074215430694457
+    ],
+    "p": 0.33136686331366866,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "hit",
+    "delta": 0.09523809523809523,
+    "groups": 35,
+    "ci95": [
+      -0.03333333333333334,
+      0.23809523809523805
+    ],
+    "p": 0.17448255174482552,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": 0.15027080902649026,
+    "groups": 35,
+    "ci95": [
+      -0.11587132244901666,
+      0.4152674527101277
+    ],
+    "p": 0.274972502749725,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "hit",
+    "delta": 0.10952380952380951,
+    "groups": 35,
+    "ci95": [
+      -0.02857142857142857,
+      0.2571428571428571
+    ],
+    "p": 0.1371862813718628,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": 0.31085268394384646,
+    "groups": 35,
+    "ci95": [
+      0.06175160710141615,
+      0.5986530844417929
+    ],
+    "p": 0.0221977802219778,
+    "holm12": 0.221977802219778
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "hit",
+    "delta": 0.047619047619047616,
+    "groups": 35,
+    "ci95": [
+      -0.1,
+      0.1904761904761905
+    ],
+    "p": 0.5367463253674633,
+    "holm12": 1.0
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": 0.2978679779311853,
+    "groups": 35,
+    "ci95": [
+      0.04986537815007828,
+      0.583234671307291
+    ],
+    "p": 0.028097190280971903,
+    "holm12": 0.2528747125287471
+  },
+  {
+    "mode": "offline",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "hit",
+    "delta": 0.019047619047619042,
+    "groups": 35,
+    "ci95": [
+      -0.1238095238095238,
+      0.15238095238095237
+    ],
+    "p": 0.8081191880811919,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": 0.05758508936691295,
+    "groups": 144,
+    "ci95": [
+      0.011152253994989023,
+      0.10390458084976378
+    ],
+    "p": 0.0168983101689831,
+    "holm12": 0.1907809219078092
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "exact",
+    "delta": -0.016040100250626563,
+    "groups": 133,
+    "ci95": [
+      -0.07080200501253132,
+      0.03759398496240601
+    ],
+    "p": 0.5511448855114488,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "false_alarm",
+    "delta": -0.0027777777777777753,
+    "groups": 30,
+    "ci95": [
+      -0.09444444444444443,
+      0.09722222222222222
+    ],
+    "p": 0.9791020897910209
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": 0.057955094786763146,
+    "groups": 144,
+    "ci95": [
+      0.011501650726971645,
+      0.10447329754979025
+    ],
+    "p": 0.015898410158984102,
+    "holm12": 0.1907809219078092
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "exact",
+    "delta": -0.011654135338345861,
+    "groups": 133,
+    "ci95": [
+      -0.06704260651629072,
+      0.04348370927318295
+    ],
+    "p": 0.672932706729327,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "false_alarm",
+    "delta": -0.0027777777777777753,
+    "groups": 30,
+    "ci95": [
+      -0.09444444444444443,
+      0.09722222222222222
+    ],
+    "p": 0.9791020897910209
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": 0.009395845219517116,
+    "groups": 35,
+    "ci95": [
+      -0.07882779931036142,
+      0.07995070000319929
+    ],
+    "p": 0.8128187181281872,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "exact",
+    "delta": -0.08095238095238096,
+    "groups": 35,
+    "ci95": [
+      -0.2,
+      0.02857142857142857
+    ],
+    "p": 0.16528347165283472,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "false_alarm",
+    "delta": null,
+    "groups": 0,
+    "ci95": null,
+    "p": null
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": 0.0129763132187274,
+    "groups": 35,
+    "ci95": [
+      -0.07487559387674332,
+      0.08425601104569873
+    ],
+    "p": 0.7511248875112488,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "exact",
+    "delta": -0.0380952380952381,
+    "groups": 35,
+    "ci95": [
+      -0.14285714285714285,
+      0.05714285714285714
+    ],
+    "p": 0.45655434456554345,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "Putnam",
+    "evaluation": "oof",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "false_alarm",
+    "delta": null,
+    "groups": 0,
+    "ci95": null,
+    "p": null
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "nll",
+    "delta": -0.023753761239843296,
+    "groups": 35,
+    "ci95": [
+      -0.12720838856724057,
+      0.07038576009343726
+    ],
+    "p": 0.637036296370363,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "exact",
+    "delta": 0.033333333333333326,
+    "groups": 35,
+    "ci95": [
+      -0.08571428571428572,
+      0.15238095238095237
+    ],
+    "p": 0.5940405959404059,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "PST_state",
+    "base": "PST",
+    "metric": "false_alarm",
+    "delta": null,
+    "groups": 0,
+    "ci95": null,
+    "p": null
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "nll",
+    "delta": -0.025460739645243948,
+    "groups": 35,
+    "ci95": [
+      -0.12935870902848887,
+      0.06823857720504146
+    ],
+    "p": 0.6152384761523848,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "exact",
+    "delta": 0.033333333333333326,
+    "groups": 35,
+    "ci95": [
+      -0.08571428571428572,
+      0.15238095238095237
+    ],
+    "p": 0.5940405959404059,
+    "holm12": 1.0
+  },
+  {
+    "mode": "stream",
+    "train_dataset": "ProofNet",
+    "evaluation": "frozen",
+    "new": "MD_noN_state",
+    "base": "MD_noN",
+    "metric": "false_alarm",
+    "delta": null,
+    "groups": 0,
+    "ci95": null,
+    "p": null
+  }
+]

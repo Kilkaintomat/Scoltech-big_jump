@@ -1,0 +1,32 @@
+[
+  {
+    "fold": 0,
+    "identical_groups": true,
+    "identical_scalers": true,
+    "state_prediction_max_error": 5.551115123125783e-16
+  },
+  {
+    "fold": 1,
+    "identical_groups": true,
+    "identical_scalers": true,
+    "state_prediction_max_error": 2.220446049250313e-16
+  },
+  {
+    "fold": 2,
+    "identical_groups": true,
+    "identical_scalers": true,
+    "state_prediction_max_error": 2.220446049250313e-16
+  },
+  {
+    "fold": 3,
+    "identical_groups": true,
+    "identical_scalers": true,
+    "state_prediction_max_error": 2.220446049250313e-16
+  },
+  {
+    "fold": 4,
+    "identical_groups": true,
+    "identical_scalers": true,
+    "state_prediction_max_error": 2.220446049250313e-16
+  }
+]

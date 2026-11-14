@@ -4,6 +4,14 @@
 
 Срез на 15 ноября 2026 года. [Сводка](REPORT_RU.md), [полный том](FULL_REPORT_RU.md), [HTML полного тома](FULL_REPORT_RU.md). Распакуйте архив целиком, чтобы сохранить относительные ссылки.
 
+## Дополнение от 15 ноября: полное состояние без длины
+
+[Подробный результат](chapters/28_no_length_state.md) · [Все 60 ячеек](tables/no_length_state_metrics.csv) · [Парные интервалы](tables/no_length_state_contrasts.csv).
+
+Серверный источник: /beegfs/home/denis.rakhmankin/onebigjump/runs/goedel_no_tactic_length_state_20261115_v1/report_v2.
+
+Код и протокол: /beegfs/home/denis.rakhmankin/onebigjump/experiments/goedel_no_tactic_length_state_20261115_v1. Новая серия завершена: 44/44 fits, 12 новых ячеек; историческая серия 176/176 сохранена.
+
 ## Новые файлы
 
 | Материал | Локально | На Жоресе |

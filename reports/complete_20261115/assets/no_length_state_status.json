@@ -1,0 +1,79 @@
+{
+  "new_completed_fits": 44,
+  "planned_new_fits": 44,
+  "new_cells": 12,
+  "total_cells": 60,
+  "reused_fits": 176,
+  "failures": [],
+  "preflight": {
+    "offline": {
+      "PST_state": {
+        "length_invariant_train_and_test": true,
+        "prefix_invariant": false,
+        "columns": 4115,
+        "gradient_max": 1.6680252701696627e-08
+      },
+      "MD_noN_state": {
+        "length_invariant_train_and_test": true,
+        "prefix_invariant": false,
+        "columns": 4117,
+        "gradient_max": 1.1371188704783607e-08
+      }
+    },
+    "stream": {
+      "PST_state": {
+        "length_invariant_train_and_test": true,
+        "prefix_invariant": true,
+        "columns": 4109,
+        "gradient_max": 1.2736788922054591e-08
+      },
+      "MD_noN_state": {
+        "length_invariant_train_and_test": true,
+        "prefix_invariant": true,
+        "columns": 4111,
+        "gradient_max": 2.6537695146141693e-08
+      }
+    },
+    "historical_PST_prediction_error": 6.661338147750939e-16
+  },
+  "compatibility_checks": [
+    {
+      "fold": 0,
+      "identical_groups": true,
+      "identical_scalers": true,
+      "state_prediction_max_error": 5.551115123125783e-16
+    },
+    {
+      "fold": 1,
+      "identical_groups": true,
+      "identical_scalers": true,
+      "state_prediction_max_error": 2.220446049250313e-16
+    },
+    {
+      "fold": 2,
+      "identical_groups": true,
+      "identical_scalers": true,
+      "state_prediction_max_error": 2.220446049250313e-16
+    },
+    {
+      "fold": 3,
+      "identical_groups": true,
+      "identical_scalers": true,
+      "state_prediction_max_error": 2.220446049250313e-16
+    },
+    {
+      "fold": 4,
+      "identical_groups": true,
+      "identical_scalers": true,
+      "state_prediction_max_error": 2.220446049250313e-16
+    }
+  ],
+  "utc": "2026-11-14T23:08:40.661175+00:00",
+  "submission": {
+    "old_preflight_job": "8544661",
+    "preflight_job": "8544664",
+    "fit_array_job": "8544662",
+    "cause": "preflight module name collision; imported parent instead of extension; existing output overwrite blocked by assertion; corrected explicit file import",
+    "old_outputs_modified": false
+  }
+}
