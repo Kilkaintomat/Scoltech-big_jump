@@ -1,0 +1,107 @@
+{
+  "repository": "Kilkaintomat/Scoltech-big_jump",
+  "branch": "main",
+  "base_commit": "3481c912018170437bfab35a5f7bc955ad37bd3f",
+  "scope": "report, aggregate summaries, figures, protocol and ready-to-use reply text only",
+  "excluded": [
+    "per-attempt predictions",
+    "bootstrap replicate arrays",
+    "source code",
+    "per-group contrast data",
+    "fit details"
+  ],
+  "source_report_sha256": "889154a125faa5e6874c1a652ef2906e7d6ae5c9428b0c91cb99cfe07427cc45",
+  "report_sha256": "92afe2b1dcbbc71b840367b1fc2b4fabc55290b2018d5e7815a51a2f4587b780",
+  "metrics_sha256": "0f76d3ff9fbf9d9002e245a3c26d454d376aa46943e281886821553a992a6519",
+  "numerical_report_body_unchanged": true,
+  "relative_links_checked": 21,
+  "files": {
+    "README.md": {
+      "sha256": "17106ef2556f385c7b2e524ce25e4c7e382b8139aeca72430442a5587eb34849",
+      "git_blob_sha1": "130a6bd99bb83ff4ae2969bbce2bf26a9b00daa7",
+      "bytes": 10967
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/validation.json": {
+      "sha256": "add42ce856c41ad985d9b0db1129a55f8a5e276020983d1dcb3029ee34bc5368",
+      "git_blob_sha1": "39732d00bca3cc3013f5cde77c27a2d54c7df87d",
+      "bytes": 893
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/TODO_B2_EN.txt": {
+      "sha256": "444855f772e2757a48d507182d7f3467c7d58ba9cf1fd871d527ef90a5148df4",
+      "git_blob_sha1": "f5751b9147c170d70d0bf7bf14ae7435fad67635",
+      "bytes": 1518
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/README.md": {
+      "sha256": "174a46d4649c1cf65a28c0693cb3ca634517ff0917e2feab91db7f90e3e52a3a",
+      "git_blob_sha1": "191746444bc7e6e6d6b29a0f0af035c6b201fce0",
+      "bytes": 816
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/.gitattributes": {
+      "sha256": "b95357803c03ba40f5e35ab78e3a42c0997a597f9bd46b4c65c50967364444ea",
+      "git_blob_sha1": "85e1151363e1cdea1ff69e7ed8b06220bbf59037",
+      "bytes": 12
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/protocol.sha256": {
+      "sha256": "3f61c43df7bd60c6b803f983eeaa498fcb562d392fd211cd7b6cfc40a2bce312",
+      "git_blob_sha1": "ca11b77083fc754312de4f404891caf64d6fe419",
+      "bytes": 78
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/PUBLICATION_RU.md": {
+      "sha256": "ac28e350d695bf85430de879fda03c440bfa0d646bfe418196c26995f2c069c1",
+      "git_blob_sha1": "c7b5c956fe652ab9260a3607288c960de5ebd74f",
+      "bytes": 1420
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/metrics.json": {
+      "sha256": "0f76d3ff9fbf9d9002e245a3c26d454d376aa46943e281886821553a992a6519",
+      "git_blob_sha1": "036814896a1000cd6158387ce1c713e7c29d0d77",
+      "bytes": 65646
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/REPORT_RU.md": {
+      "sha256": "92afe2b1dcbbc71b840367b1fc2b4fabc55290b2018d5e7815a51a2f4587b780",
+      "git_blob_sha1": "d6393e4685da2fb234b6e133dbf5920bc064e46f",
+      "bytes": 23612
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/protocol.md": {
+      "sha256": "91d3fa59aa4d59546d46679e2f629dc43b75da4c0ebbe20f942fece90429e3cb",
+      "git_blob_sha1": "94cc090a14d16af8bbc8d02bcc26bfe67218277c",
+      "bytes": 6823
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/TODO_B2_RU.txt": {
+      "sha256": "b3801d55d5dc7b475022c25114cd789cad8a6b9b92a8eb364e762966b2143706",
+      "git_blob_sha1": "088a615f1c268600a6e2b078a2d57a35842bb051",
+      "bytes": 2223
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/csv/metrics.csv": {
+      "sha256": "f580eb10695be163c8d42dd4974be044494f1195ac3cee05d8f10756349fc1c7",
+      "git_blob_sha1": "e20b38c6d7646387bc3ec47a12710fae2efeaf1e",
+      "bytes": 5196
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/csv/contrasts.csv": {
+      "sha256": "24a8ede8a532b4a031293ced01742ad15bdd176e43751841675bc9030823db44",
+      "git_blob_sha1": "9693b9591efb174694866a3faaa42023d06e8d21",
+      "bytes": 14086
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/csv/cohorts.csv": {
+      "sha256": "6c8ee79beac41808c08c44135c491a46273fc7163852e0b518051236b60419d9",
+      "git_blob_sha1": "d384b9f5e45b0782bf4dc3509954a446a005d6f2",
+      "bytes": 270
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/csv/D_columns.csv": {
+      "sha256": "0b594c57f41eb54025ed37e64ff841f7b8c6198631ae0fd54afdf54b3b326552",
+      "git_blob_sha1": "63dfd6e4756d41556ce801bb86a6cc36eccd6b66",
+      "bytes": 129
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/figures/SDW_minus_SD.png": {
+      "sha256": "08f441faea20829a434ba4f647296cfd2fd34c24adca4ed3732e947634a5ff86",
+      "git_blob_sha1": "3fec9f2c9985380c40045a91e8bffd0437ba3693",
+      "bytes": 109684
+    },
+    "reports/rebuttal_wDaH_surprisal_change_20261115_v1/figures/SDW_minus_SD.pdf": {
+      "sha256": "74a3a949de235798e404f103cd7699b3f81920d0b65c0e6b87997d42dec16a36",
+      "git_blob_sha1": "827c9f0ea7c08c1d0e21943d134f33c24c052f51",
+      "bytes": 22035
+    }
+  },
+  "slurm_job": "8545024",
+  "prepared_at_moscow": "2026-11-15T05:30:16.726266+03:00"
+}

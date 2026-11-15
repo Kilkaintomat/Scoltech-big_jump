@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": {
+    "protocol_hash": true,
+    "main_cohorts": true,
+    "all_child_manifests_inputs_sources_outputs": true,
+    "all_metrics_independently_reconstructed": true,
+    "all_contrasts_bootstrap_arrays_CIs_p": true,
+    "Holm_families": true,
+    "archive_controls": true,
+    "all_fits_converged": true,
+    "optional_failure_provenance": true,
+    "report_rendered_from_metrics": true,
+    "EN_no_Cyrillic": true,
+    "markdown_tables_links": true
+  },
+  "child_manifests": 58,
+  "child_output_hash_checks": 254,
+  "distinct_input_files": 360,
+  "markdown_tables": 14,
+  "markdown_links": 14,
+  "report_sha256": "889154a125faa5e6874c1a652ef2906e7d6ae5c9428b0c91cb99cfe07427cc45",
+  "metrics_sha256": "0f76d3ff9fbf9d9002e245a3c26d454d376aa46943e281886821553a992a6519",
+  "protocol_sha256": "91d3fa59aa4d59546d46679e2f629dc43b75da4c0ebbe20f942fece90429e3cb"
+}

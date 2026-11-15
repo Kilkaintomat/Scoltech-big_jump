@@ -1,0 +1,3 @@
+name,formula
+delta_surprisal_signed,q[t]-q[t-1] for t>1; 0 at t=1
+delta_surprisal_absolute,abs(q[t]-q[t-1]) for t>1; 0 at t=1

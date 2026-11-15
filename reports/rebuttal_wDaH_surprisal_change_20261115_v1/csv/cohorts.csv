@@ -1,0 +1,9 @@
+regime,model,attempts,groups
+ProofNet_OOF,deepseek,452,166
+ProofNet_to_Putnam,deepseek,118,58
+ProofNet_OOF,goedel,259,133
+ProofNet_to_Putnam,goedel,48,35
+Putnam_OOF,deepseek,118,58
+Putnam_OOF,goedel,48,35
+miniF2F_OOF,deepseek,528,122
+miniF2F_OOF,goedel,448,122

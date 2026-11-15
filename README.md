@@ -1,5 +1,7 @@
 # One Big Jump — experimental pipeline
 
+> **Отчёт wDaH, В2:** [скачок, surprisal и его изменение](reports/rebuttal_wDaH_surprisal_change_20261115_v1/REPORT_RU.md) — ProofNet, перенос на Putnam, Putnam OOF, интервалы и Holm. [Метрики и готовые вставки](reports/rebuttal_wDaH_surprisal_change_20261115_v1/README.md).
+
 > **Закрытый отчёт, 15 ноября 2026:** [шум считывания и проекции, N1–N9](reports/rebuttal_noise_20261115_v1/REPORT_RU.md) — SIMEX, спектральные полосы, обученные направления, риск отказа и полное состояние без длины тактики. [Таблицы и метрики](reports/rebuttal_noise_20261115_v1/README.md).
 
 > **Сводный отчёт, 13 ноября 2026:** [локализация, наличие и прогноз ошибки](reports/localizer_daily_20261113/REPORT_RU.md) — полная серия из 19 детекторов и 6 целей, обновлённые результаты локализаторов, чистая абляция Goedel без длины тактики, все таблицы и CSV с интервалами и ложными тревогами. Статус незавершённых прогонов указан отдельно.

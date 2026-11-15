@@ -1,0 +1,2637 @@
+{
+  "status": "main_complete_optional_partial",
+  "missing_cells": [
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "attempts": 320,
+      "groups": 94,
+      "missing_outer_folds": [
+        4
+      ],
+      "completed_outer_folds": 4,
+      "status": "incomplete_optimizer_failure",
+      "reason": "Archived optimizer returned ABNORMAL with gradient max 1.6174562106341384e-08 twice; no change of settings, no incomplete-OOF score.",
+      "jobs": [
+        "8544975_34",
+        "8545015_34"
+      ]
+    }
+  ],
+  "created_utc": "2026-11-15T02:17:18.538864+00:00",
+  "protocol_sha256": "91d3fa59aa4d59546d46679e2f629dc43b75da4c0ebbe20f942fece90429e3cb",
+  "arms": [
+    "S",
+    "SD",
+    "SDW",
+    "D",
+    "DW",
+    "SW"
+  ],
+  "contrasts_defined": [
+    [
+      "SDW",
+      "SD"
+    ],
+    [
+      "DW",
+      "D"
+    ],
+    [
+      "SD",
+      "S"
+    ],
+    [
+      "SW",
+      "S"
+    ]
+  ],
+  "cohorts": [
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "attempts": 452,
+      "groups": 166
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "attempts": 118,
+      "groups": 58
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "attempts": 259,
+      "groups": 133
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "attempts": 48,
+      "groups": 35
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "attempts": 118,
+      "groups": 58
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "attempts": 48,
+      "groups": 35
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "attempts": 528,
+      "groups": 122
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "attempts": 448,
+      "groups": 122
+    }
+  ],
+  "metrics": [
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "S",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.20473321858864024,
+      "nll": 2.2339729174250595,
+      "window1": 0.3727194492254734
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "SD",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.276118760757315,
+      "nll": 2.232933607229809,
+      "window1": 0.4523952954675846
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "SDW",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.2617183017785428,
+      "nll": 2.1905233077564623,
+      "window1": 0.463855421686747
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "D",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.21075731497418246,
+      "nll": 2.5183021464597206,
+      "window1": 0.35585197934595525
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "DW",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.24021801491681008,
+      "nll": 2.4355421222831803,
+      "window1": 0.4223895582329318
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "arm": "SW",
+      "attempts": 452,
+      "groups": 166,
+      "status": "complete",
+      "hit": 0.2792168674698795,
+      "nll": 2.1950127289679835,
+      "window1": 0.46691049913941485
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "S",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.16954022988505746,
+      "nll": 2.461314778254464,
+      "window1": 0.28879310344827586
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "SD",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.17385057471264365,
+      "nll": 2.4695023695321714,
+      "window1": 0.35919540229885055
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "SDW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.17672413793103448,
+      "nll": 2.4173599384483877,
+      "window1": 0.35344827586206895
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "D",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.13793103448275862,
+      "nll": 2.843268981437238,
+      "window1": 0.21982758620689655
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "DW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.20689655172413793,
+      "nll": 2.721696017109896,
+      "window1": 0.3390804597701149
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "arm": "SW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.21408045977011494,
+      "nll": 2.4093840216685596,
+      "window1": 0.3433908045977011
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "S",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.24060150375939848,
+      "nll": 2.280165247064668,
+      "window1": 0.4140350877192982
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "SD",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.28308270676691727,
+      "nll": 2.266223894087388,
+      "window1": 0.42807017543859655
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "SDW",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.3107769423558897,
+      "nll": 2.183433917667266,
+      "window1": 0.4889724310776942
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "D",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.1769423558897243,
+      "nll": 2.5557794789829376,
+      "window1": 0.36979949874686713
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "DW",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.27380952380952384,
+      "nll": 2.362575219288921,
+      "window1": 0.4820802005012531
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "arm": "SW",
+      "attempts": 259,
+      "groups": 133,
+      "status": "complete",
+      "hit": 0.26904761904761904,
+      "nll": 2.2212135346685327,
+      "window1": 0.5073934837092731
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "S",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.20476190476190476,
+      "nll": 2.448516261892587,
+      "window1": 0.34761904761904755
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "SD",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.16190476190476188,
+      "nll": 2.4275795158360505,
+      "window1": 0.29047619047619044
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "SDW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.1333333333333333,
+      "nll": 2.4816839442013157,
+      "window1": 0.2571428571428571
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "D",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.20952380952380953,
+      "nll": 2.723481057853583,
+      "window1": 0.3619047619047619
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "DW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.08095238095238094,
+      "nll": 2.787962932861244,
+      "window1": 0.17619047619047618
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "arm": "SW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.12857142857142856,
+      "nll": 2.5045667270342196,
+      "window1": 0.3
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "S",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.16666666666666669,
+      "nll": 2.4603149277488474,
+      "window1": 0.29166666666666663
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "SD",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.14942528735632182,
+      "nll": 2.474127079138742,
+      "window1": 0.27155172413793105
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "SDW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.16810344827586207,
+      "nll": 2.42099125967953,
+      "window1": 0.31752873563218387
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "D",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.13793103448275862,
+      "nll": 2.7926683406295862,
+      "window1": 0.21982758620689655
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "DW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.19109195402298848,
+      "nll": 2.6810893917993637,
+      "window1": 0.30459770114942525
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "arm": "SW",
+      "attempts": 118,
+      "groups": 58,
+      "status": "complete",
+      "hit": 0.1939655172413793,
+      "nll": 2.4080875867936475,
+      "window1": 0.31752873563218387
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "S",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.15714285714285714,
+      "nll": 2.4974296404360983,
+      "window1": 0.33809523809523806
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "SD",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.13333333333333333,
+      "nll": 2.5150199639402953,
+      "window1": 0.3095238095238095
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "SDW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.07619047619047618,
+      "nll": 2.521002392443346,
+      "window1": 0.2809523809523809
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "D",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.20952380952380953,
+      "nll": 2.74817066055437,
+      "window1": 0.3619047619047619
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "DW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.12857142857142856,
+      "nll": 2.728248552340768,
+      "window1": 0.32380952380952377
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "arm": "SW",
+      "attempts": 48,
+      "groups": 35,
+      "status": "complete",
+      "hit": 0.1238095238095238,
+      "nll": 2.5262508807871704,
+      "window1": 0.32857142857142857
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "S",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.22623926619828258,
+      "nll": 2.3247765362562838,
+      "window1": 0.40240046838407495
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "SD",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.23058157689305225,
+      "nll": 2.3315875574188283,
+      "window1": 0.37427790788446524
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "SDW",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.22556596409055424,
+      "nll": 2.2986300686056125,
+      "window1": 0.3789422326307572
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "D",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.19900468384074937,
+      "nll": 2.6819937629421537,
+      "window1": 0.3591139734582357
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "DW",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.16949648711943793,
+      "nll": 2.6451815026522367,
+      "window1": 0.362675644028103
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "arm": "SW",
+      "attempts": 528,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.2576893052302889,
+      "nll": 2.2921125723467406,
+      "window1": 0.39548204527712727
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "S",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.15292740046838407,
+      "nll": 2.5159494969255456,
+      "window1": 0.3450331772053083
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "SD",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.1650175644028103,
+      "nll": 2.533043043635214,
+      "window1": 0.3762295081967213
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "SDW",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.19844847775175645,
+      "nll": 2.4645613318721566,
+      "window1": 0.4307767369242779
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "D",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.12515612802498047,
+      "nll": 2.8890341682303986,
+      "window1": 0.31892076502732236
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "DW",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.17338992974238876,
+      "nll": 2.788752672455141,
+      "window1": 0.3603337236533959
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "arm": "SW",
+      "attempts": 448,
+      "groups": 122,
+      "status": "complete",
+      "hit": 0.22291178766588604,
+      "nll": 2.4556919308751315,
+      "window1": 0.4304352068696331
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "S",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "SD",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "SDW",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "D",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "DW",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "arm": "SW",
+      "attempts": 320,
+      "groups": 94,
+      "status": "incomplete_optimizer_failure",
+      "hit": null,
+      "nll": null,
+      "window1": null
+    }
+  ],
+  "contrasts": [
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -1.440045897877223,
+      "ci95": [
+        -6.932013769363167,
+        3.9816767068273062
+      ],
+      "p": 0.6098195090245487,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.042410299473346534,
+      "ci95": [
+        0.01495948670238816,
+        0.0684629243636698
+      ],
+      "p": 0.0023498825058747065,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SDW__SD__nll",
+      "p_holm": 0.10339483025848709,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 2.9460699942627655,
+      "ci95": [
+        -1.156052782558807,
+        7.056942053929993
+      ],
+      "p": 0.15799210039498024,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.08276002417653971,
+      "ci95": [
+        0.04347034644477319,
+        0.11993706384643621
+      ],
+      "p": 4.999750012499375e-05,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__DW__D__nll",
+      "p_holm": 0.0023998800059997,
+      "family_size": 48,
+      "reject_holm_005": true
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 7.13855421686747,
+      "ci95": [
+        2.4595883534136544,
+        11.957831325301205
+      ],
+      "p": 0.0031498425078746064,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SD__S__hit",
+      "p_holm": 0.13229338533073348,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.0010393101952503535,
+      "ci95": [
+        -0.018323973569204757,
+        0.017987005333254428
+      ],
+      "p": 0.9081045947702615,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 7.448364888123925,
+      "ci95": [
+        2.306332472748135,
+        12.650602409638553
+      ],
+      "p": 0.004649767511624419,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SW__S__hit",
+      "p_holm": 0.18134093295335235,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.03896018845707621,
+      "ci95": [
+        0.01197583000863681,
+        0.064306092354706
+      ],
+      "p": 0.0038998050097495125,
+      "groups": 166,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__deepseek__SW__S__nll",
+      "p_holm": 0.1559922003899805,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.28735632183908055,
+      "ci95": [
+        -8.045977011494251,
+        8.333333333333334
+      ],
+      "p": 0.9490025498725064,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.05214243108378436,
+      "ci95": [
+        0.00739935629999187,
+        0.09770852306847146
+      ],
+      "p": 0.023298835058247088,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SDW__SD__nll",
+      "p_holm": 0.8620568971551422,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 6.896551724137931,
+      "ci95": [
+        -0.28735632183908005,
+        14.511494252873565
+      ],
+      "p": 0.06809659517024148,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.12157296432734264,
+      "ci95": [
+        0.05478520832680341,
+        0.18772123737100727
+      ],
+      "p": 0.0004999750012499375,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__DW__D__nll",
+      "p_holm": 0.022998850057497123,
+      "family_size": 48,
+      "reject_holm_005": true
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.4310344827586202,
+      "ci95": [
+        -8.908045977011495,
+        9.913793103448276
+      ],
+      "p": 0.9384530773461327,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.008187591277707972,
+      "ci95": [
+        -0.02808376908161887,
+        0.010757559596914228
+      ],
+      "p": 0.4136293185340733,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 4.454022988505747,
+      "ci95": [
+        -4.166666666666666,
+        13.218390804597702
+      ],
+      "p": 0.3247337633118344,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.051930756585904014,
+      "ci95": [
+        0.008005161669085019,
+        0.0966677638618881
+      ],
+      "p": 0.020048997550122495,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__deepseek__SW__S__nll",
+      "p_holm": 0.7618619069046548,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 2.769423558897243,
+      "ci95": [
+        -2.5438596491228065,
+        8.245614035087717
+      ],
+      "p": 0.31218439078046095,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.08278997642012219,
+      "ci95": [
+        0.029326325454234626,
+        0.13453961195208544
+      ],
+      "p": 0.0021498925053747312,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SDW__SD__nll",
+      "p_holm": 0.0967451627418629,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 9.68671679197995,
+      "ci95": [
+        3.421052631578948,
+        15.977443609022556
+      ],
+      "p": 0.002599870006499675,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__DW__D__hit",
+      "p_holm": 0.11179441027948603,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.19320425969401606,
+      "ci95": [
+        0.08937825930733312,
+        0.29224782076522654
+      ],
+      "p": 0.00034998250087495624,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__DW__D__nll",
+      "p_holm": 0.016449177541122944,
+      "family_size": 48,
+      "reject_holm_005": true
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 4.2481203007518795,
+      "ci95": [
+        -3.0457393483709265,
+        11.46679197994982
+      ],
+      "p": 0.2551372431378431,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.01394135297727999,
+      "ci95": [
+        -0.017518527872919607,
+        0.04364099104789767
+      ],
+      "p": 0.3728313584320784,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 2.8446115288220555,
+      "ci95": [
+        -3.2706766917293235,
+        8.959899749373434
+      ],
+      "p": 0.36368181590920456,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.05895171239613558,
+      "ci95": [
+        -0.016642169209317124,
+        0.12633799543303667
+      ],
+      "p": 0.10449477526123693,
+      "groups": 133,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_OOF__goedel__SW__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -2.857142857142857,
+      "ci95": [
+        -12.857142857142858,
+        5.714285714285714
+      ],
+      "p": 0.5768711564421779,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.05410442836526549,
+      "ci95": [
+        -0.15202222325968015,
+        0.04290433803497444
+      ],
+      "p": 0.2777361131943403,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SDW__SD__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -12.857142857142858,
+      "ci95": [
+        -26.666666666666668,
+        0.0
+      ],
+      "p": 0.06414679266036698,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.0644818750076613,
+      "ci95": [
+        -0.23773797543940334,
+        0.10941446098266838
+      ],
+      "p": 0.4680765961701915,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__DW__D__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -4.285714285714286,
+      "ci95": [
+        -17.142857142857142,
+        8.571428571428571
+      ],
+      "p": 0.5862706864656767,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.020936746056536382,
+      "ci95": [
+        -0.027177503966099015,
+        0.06663000233403243
+      ],
+      "p": 0.3870306484675766,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -7.6190476190476195,
+      "ci95": [
+        -22.380952380952383,
+        6.190476190476191
+      ],
+      "p": 0.30218489075546223,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.056050465141632685,
+      "ci95": [
+        -0.15309585213927995,
+        0.04040623427760591
+      ],
+      "p": 0.2577371131443428,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "ProofNet_to_Putnam__goedel__SW__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 1.867816091954023,
+      "ci95": [
+        -3.1609195402298846,
+        7.471264367816093
+      ],
+      "p": 0.4937753112344383,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.05313581945921113,
+      "ci95": [
+        -0.004298508351661509,
+        0.11021351562281098
+      ],
+      "p": 0.06899655017249137,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SDW__SD__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 5.316091954022989,
+      "ci95": [
+        -0.7183908045977011,
+        12.068965517241379
+      ],
+      "p": 0.10309484525773711,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.1115789488302226,
+      "ci95": [
+        0.037857403727788404,
+        0.18519910424133001
+      ],
+      "p": 0.003249837508124594,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__DW__D__nll",
+      "p_holm": 0.13324333783310835,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -1.7241379310344827,
+      "ci95": [
+        -3.8793103448275863,
+        0.0
+      ],
+      "p": 0.1287935603219839,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.013812151389894192,
+      "ci95": [
+        -0.026975729715310117,
+        -0.001750167588503033
+      ],
+      "p": 0.03234838258087096,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 2.729885057471264,
+      "ci95": [
+        -3.4482758620689653,
+        9.339080459770116
+      ],
+      "p": 0.4088795560221989,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.052227340955199694,
+      "ci95": [
+        -0.005404474313429074,
+        0.1095475353520064
+      ],
+      "p": 0.07634618269086546,
+      "groups": 58,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__deepseek__SW__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -5.714285714285714,
+      "ci95": [
+        -15.238095238095239,
+        2.3809523809523814
+      ],
+      "p": 0.2280385980700965,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.005982428503050679,
+      "ci95": [
+        -0.019391397587213314,
+        0.00659742137047515
+      ],
+      "p": 0.3633318334083296,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SDW__SD__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -8.095238095238097,
+      "ci95": [
+        -19.523809523809522,
+        1.4285714285714288
+      ],
+      "p": 0.13489325533723315,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": 0.019922108213602144,
+      "ci95": [
+        -0.042024204484080764,
+        0.09506857533429278
+      ],
+      "p": 0.568121593920304,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__DW__D__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -2.3809523809523814,
+      "ci95": [
+        -13.333333333333336,
+        8.571428571428571
+      ],
+      "p": 0.6902654867256637,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.01759032350419685,
+      "ci95": [
+        -0.12379157695459518,
+        0.06143891697085087
+      ],
+      "p": 0.7176141192940353,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -3.333333333333334,
+      "ci95": [
+        -13.80952380952381,
+        5.714285714285714
+      ],
+      "p": 0.5222238888055597,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "Putnam_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "primary_48",
+      "status": "complete",
+      "delta": -0.02882124035107147,
+      "ci95": [
+        -0.05736494086141028,
+        -0.003935122309841626
+      ],
+      "p": 0.032998350082495874,
+      "groups": 35,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "Putnam_OOF__goedel__SW__S__nll",
+      "p_holm": 1.0,
+      "family_size": 48,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": -0.5015612802498047,
+      "ci95": [
+        -5.285933840749415,
+        4.169642857142853
+      ],
+      "p": 0.8298585070746463,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.032957488813215766,
+      "ci95": [
+        -0.005394318437843273,
+        0.0694951256047077
+      ],
+      "p": 0.08544572771361432,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SDW__SD__nll",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": -2.9508196721311473,
+      "ci95": [
+        -7.9021028493364565,
+        1.7574404761904743
+      ],
+      "p": 0.22668866556672165,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.03681226028991725,
+      "ci95": [
+        -0.0029820759308439872,
+        0.0744215392473399
+      ],
+      "p": 0.06219689015549223,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__DW__D__nll",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.43423106947697093,
+      "ci95": [
+        -3.339236924277908,
+        4.244730679156909
+      ],
+      "p": 0.823708814559272,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": -0.006811021162544428,
+      "ci95": [
+        -0.017765471750340746,
+        0.003379988199925316
+      ],
+      "p": 0.2048397580120994,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 3.145003903200624,
+      "ci95": [
+        -2.5302985948477748,
+        8.89546740827478
+      ],
+      "p": 0.28128593570321486,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SW__S__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "deepseek",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.032663963909543264,
+      "ci95": [
+        -0.00818906473163898,
+        0.07096151118755219
+      ],
+      "p": 0.10379481025948703,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__deepseek__SW__S__nll",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 3.3430913348946136,
+      "ci95": [
+        -2.247365339578454,
+        8.76768637782981
+      ],
+      "p": 0.2335883205839708,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SDW__SD__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.06848171176305776,
+      "ci95": [
+        0.019493054584588183,
+        0.1185001276114291
+      ],
+      "p": 0.005799710014499275,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SDW__SD__nll",
+      "p_holm": 0.13339333033348333,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 4.823380171740828,
+      "ci95": [
+        -0.1513222092115536,
+        9.856606167056984
+      ],
+      "p": 0.05934703264836758,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__DW__D__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.10028149577525725,
+      "ci95": [
+        0.036102549411321565,
+        0.1642631230111496
+      ],
+      "p": 0.0021498925053747312,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__DW__D__nll",
+      "p_holm": 0.05159742012899355,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 1.2090163934426232,
+      "ci95": [
+        -3.8779030054644816,
+        6.465676229508194
+      ],
+      "p": 0.6426678666066696,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SD__S__hit",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": -0.017093546709668273,
+      "ci95": [
+        -0.03715545512350942,
+        0.0009640740143507372
+      ],
+      "p": 0.07684615769211539,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SD__S__nll",
+      "p_holm": 1.0,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 6.998438719750196,
+      "ci95": [
+        1.6402956674473066,
+        12.413251366120209
+      ],
+      "p": 0.011099445027748612,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SW__S__hit",
+      "p_holm": 0.24418779061046947,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "goedel",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "complete",
+      "delta": 0.060257566050414255,
+      "ci95": [
+        0.012355313336037094,
+        0.10825586080904735
+      ],
+      "p": 0.013549322533873306,
+      "groups": 122,
+      "replicates": 20000,
+      "fixed_predictions": true,
+      "bootstrap_array_key": "miniF2F_OOF__goedel__SW__S__nll",
+      "p_holm": 0.28453577321133944,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SDW",
+      "base": "SD",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "DW",
+      "base": "D",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "DW",
+      "base": "D",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SD",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SD",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SW",
+      "base": "S",
+      "metric": "hit",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    },
+    {
+      "regime": "miniF2F_OOF",
+      "model": "kimina",
+      "new": "SW",
+      "base": "S",
+      "metric": "nll",
+      "family": "optional_miniF2F_24",
+      "status": "incomplete_optimizer_failure",
+      "delta": null,
+      "ci95": null,
+      "p": null,
+      "groups": 94,
+      "replicates": 0,
+      "fixed_predictions": true,
+      "bootstrap_array_key": null,
+      "p_holm": null,
+      "family_size": 24,
+      "reject_holm_005": false
+    }
+  ],
+  "D_columns": [
+    {
+      "name": "delta_surprisal_signed",
+      "formula": "q[t]-q[t-1] for t>1; 0 at t=1"
+    },
+    {
+      "name": "delta_surprisal_absolute",
+      "formula": "abs(q[t]-q[t-1]) for t>1; 0 at t=1"
+    }
+  ],
+  "D_has_missing_indicator": false,
+  "no_indicator_variant": "identical to primary; not duplicated",
+  "bootstrap": {
+    "replicates": 20000,
+    "seed": 2026111307,
+    "unit": "whole exercise group; fixed predictions",
+    "individual_confidence": 0.95,
+    "minimum_groups": 20,
+    "p_method": "two-sided null-centered bootstrap",
+    "primary_family_size": 48,
+    "optional_family_size": 24
+  },
+  "control": {
+    "passed": true,
+    "results": [
+      {
+        "model": "deepseek",
+        "fold": 0,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 0,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 1,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 1,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 2,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 2,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 3,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 3,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 4,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": 4,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": "all",
+        "arm": "S",
+        "found": {
+          "hit": 0.20473321858864024,
+          "nll": 2.233972917425059,
+          "window1": 0.3727194492254733
+        },
+        "archive": {
+          "hit": 0.20473321858864024,
+          "nll": 2.2339729174250595,
+          "window1": 0.3727194492254734
+        },
+        "expected_rounded_hit_percent": 20.47,
+        "passed": true
+      },
+      {
+        "model": "deepseek",
+        "fold": "all",
+        "arm": "SW",
+        "found": {
+          "hit": 0.2792168674698795,
+          "nll": 2.1950127289679835,
+          "window1": 0.46691049913941485
+        },
+        "archive": {
+          "hit": 0.2792168674698795,
+          "nll": 2.1950127289679835,
+          "window1": 0.46691049913941485
+        },
+        "expected_rounded_hit_percent": 27.92,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 0,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 0,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 1,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 1,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 2,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 2,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 3,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 3,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 4,
+        "arm": "S",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": 4,
+        "arm": "SW",
+        "probability_max_error": 0.0,
+        "argmax_mismatches": 0,
+        "selected_lambda_same": true,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": "all",
+        "arm": "S",
+        "found": {
+          "hit": 0.24060150375939848,
+          "nll": 2.280165247064668,
+          "window1": 0.4140350877192982
+        },
+        "archive": {
+          "hit": 0.24060150375939848,
+          "nll": 2.280165247064668,
+          "window1": 0.4140350877192982
+        },
+        "expected_rounded_hit_percent": 24.06,
+        "passed": true
+      },
+      {
+        "model": "goedel",
+        "fold": "all",
+        "arm": "SW",
+        "found": {
+          "hit": 0.26904761904761904,
+          "nll": 2.221213534668532,
+          "window1": 0.5073934837092731
+        },
+        "archive": {
+          "hit": 0.26904761904761904,
+          "nll": 2.2212135346685327,
+          "window1": 0.5073934837092731
+        },
+        "expected_rounded_hit_percent": 26.9,
+        "passed": true
+      }
+    ],
+    "protocol_sha256": "91d3fa59aa4d59546d46679e2f629dc43b75da4c0ebbe20f942fece90429e3cb"
+  },
+  "frozen_control": [
+    {
+      "model": "deepseek",
+      "regime": "ProofNet_to_Putnam",
+      "arm": "S",
+      "probability_max_error": 0.0,
+      "argmax_mismatches": 0,
+      "passed": true
+    },
+    {
+      "model": "deepseek",
+      "regime": "ProofNet_to_Putnam",
+      "arm": "SW",
+      "probability_max_error": 0.0,
+      "argmax_mismatches": 0,
+      "passed": true
+    },
+    {
+      "model": "goedel",
+      "regime": "ProofNet_to_Putnam",
+      "arm": "S",
+      "probability_max_error": 0.0,
+      "argmax_mismatches": 0,
+      "passed": true
+    },
+    {
+      "model": "goedel",
+      "regime": "ProofNet_to_Putnam",
+      "arm": "SW",
+      "probability_max_error": 0.0,
+      "argmax_mismatches": 0,
+      "passed": true
+    }
+  ],
+  "archived_contrast_checks": [
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "metric": "hit",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "deepseek",
+      "metric": "nll",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "metric": "hit",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_OOF",
+      "model": "goedel",
+      "metric": "nll",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "metric": "hit",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "deepseek",
+      "metric": "nll",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "metric": "hit",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    },
+    {
+      "regime": "ProofNet_to_Putnam",
+      "model": "goedel",
+      "metric": "nll",
+      "max_point_CI_error": 0.0,
+      "passed": true
+    }
+  ],
+  "fit_diagnostics": {
+    "fits": 3888,
+    "all_converged": true,
+    "max_gradient": 6.718623735664313e-07
+  },
+  "source_alignment": "Saved Putnam split group names have a bijective Putnam: prefix; operational names mapped to original scalar groups without changing fold membership; original split and alias map retained.",
+  "exploratory": true,
+  "retrospective": true,
+  "new_generation": false,
+  "new_forward": false,
+  "gpu_hours": 0,
+  "public_publication": false
+}
