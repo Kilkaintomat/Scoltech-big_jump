@@ -1,0 +1,25 @@
+Модель,Подгруппа,Строка,N,Группы,"Observed hit,%","Predicted hit,%",Brier
+deepseek,all,pooled,353,148,41.27,30.49,0.1812
+deepseek,all,conditioned,353,148,41.27,30.71,0.1811
+deepseek,all,uniform,353,148,41.27,24.00,0.1991
+deepseek,2-4,pooled,173,94,66.67,43.67,0.2394
+deepseek,2-4,conditioned,173,94,66.67,44.25,0.2400
+deepseek,2-4,uniform,173,94,66.67,36.79,0.2730
+deepseek,5-10,pooled,126,87,22.22,21.48,0.1648
+deepseek,5-10,conditioned,126,87,22.22,21.48,0.1648
+deepseek,5-10,uniform,126,87,22.22,14.62,0.1709
+deepseek,11+,pooled,54,39,14.10,11.39,0.1167
+deepseek,11+,conditioned,54,39,14.10,11.39,0.1167
+deepseek,11+,uniform,54,39,14.10,6.38,0.1228
+goedel,all,pooled,176,105,37.62,31.98,0.2014
+goedel,all,conditioned,176,105,37.62,31.98,0.2014
+goedel,all,uniform,176,105,37.62,24.64,0.2106
+goedel,2-4,pooled,88,61,61.20,44.12,0.2662
+goedel,2-4,conditioned,88,61,61.20,44.12,0.2662
+goedel,2-4,uniform,88,61,61.20,37.23,0.2866
+goedel,5-10,pooled,57,46,18.12,23.72,0.1550
+goedel,5-10,conditioned,57,46,18.12,23.72,0.1550
+goedel,5-10,uniform,57,46,18.12,15.66,0.1516
+goedel,11+,pooled,31,23,21.74,12.50,0.1708
+goedel,11+,conditioned,31,23,21.74,12.50,0.1708
+goedel,11+,uniform,31,23,21.74,6.04,0.1893

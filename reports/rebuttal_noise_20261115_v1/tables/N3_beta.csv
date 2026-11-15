@@ -1,0 +1,26 @@
+Ячейка,Фолд,β на logw,1/β при β>0,σ_e из N1
+miniF2F/deepseek,0,1.05621,0.94678,0.09042
+miniF2F/deepseek,1,1.01588,0.98437,0.09042
+miniF2F/deepseek,2,1.08974,0.91765,0.09042
+miniF2F/deepseek,3,1.09039,0.91711,0.09042
+miniF2F/deepseek,4,0.97709,1.02345,0.09042
+miniF2F/goedel,0,0.82398,1.21363,0.05873
+miniF2F/goedel,1,1.16343,0.85953,0.05873
+miniF2F/goedel,2,1.28495,0.77824,0.05873
+miniF2F/goedel,3,1.27631,0.78351,0.05873
+miniF2F/goedel,4,1.03871,0.96273,0.05873
+miniF2F/kimina,0,1.04206,0.95964,0.06574
+miniF2F/kimina,1,1.35933,0.73566,0.06574
+miniF2F/kimina,2,1.61612,0.61877,0.06574
+miniF2F/kimina,3,1.67148,0.59827,0.06574
+miniF2F/kimina,4,1.15503,0.86578,0.06574
+ProofNet/deepseek,0,0.05161,19.37792,0.04369
+ProofNet/deepseek,1,0.45006,2.22192,0.04369
+ProofNet/deepseek,2,0.24725,4.04445,0.04369
+ProofNet/deepseek,3,0.21744,4.59894,0.04369
+ProofNet/deepseek,4,0.23245,4.30200,0.04369
+ProofNet/goedel,0,0.34768,2.87620,0.03597
+ProofNet/goedel,1,0.23443,4.26573,0.03597
+ProofNet/goedel,2,0.76430,1.30838,0.03597
+ProofNet/goedel,3,0.48412,2.06560,0.03597
+ProofNet/goedel,4,0.46280,2.16074,0.03597

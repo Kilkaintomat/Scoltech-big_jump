@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "checked_files": 13721,
+  "manifests": 207,
+  "conflicting_hashes": [],
+  "failed_hashes": [],
+  "geometry": {
+    "miniF2F/deepseek": {
+      "max_energy_error": 1.0913936421275139e-11,
+      "calibration_evaluation_disjoint": true
+    },
+    "miniF2F/goedel": {
+      "max_energy_error": 1.0913936421275139e-11,
+      "calibration_evaluation_disjoint": true
+    },
+    "miniF2F/kimina": {
+      "max_energy_error": 7.275957614183426e-12,
+      "calibration_evaluation_disjoint": true
+    },
+    "ProofNet/deepseek": {
+      "max_energy_error": 1.4551915228366852e-11,
+      "calibration_evaluation_disjoint": true
+    },
+    "ProofNet/goedel": {
+      "max_energy_error": 1.4551915228366852e-11,
+      "calibration_evaluation_disjoint": true
+    },
+    "Putnam/deepseek": {
+      "max_energy_error": 1.4551915228366852e-11,
+      "calibration_evaluation_disjoint": true
+    },
+    "Putnam/goedel": {
+      "max_energy_error": 7.275957614183426e-12,
+      "calibration_evaluation_disjoint": true
+    }
+  },
+  "legacy_compatibility": {
+    "deepseek": [
+      {
+        "fold": 0,
+        "max_probability_error": 3.3306690738754696e-16
+      },
+      {
+        "fold": 1,
+        "max_probability_error": 4.440892098500626e-16
+      },
+      {
+        "fold": 2,
+        "max_probability_error": 2.7755575615628914e-16
+      },
+      {
+        "fold": 3,
+        "max_probability_error": 5.551115123125783e-16
+      },
+      {
+        "fold": 4,
+        "max_probability_error": 2.220446049250313e-16
+      }
+    ],
+    "goedel": [
+      {
+        "fold": 0,
+        "max_probability_error": 5.551115123125783e-16
+      },
+      {
+        "fold": 1,
+        "max_probability_error": 2.220446049250313e-16
+      },
+      {
+        "fold": 2,
+        "max_probability_error": 2.220446049250313e-16
+      },
+      {
+        "fold": 3,
+        "max_probability_error": 2.220446049250313e-16
+      },
+      {
+        "fold": 4,
+        "max_probability_error": 2.220446049250313e-16
+      }
+    ]
+  },
+  "all_required_blocks_complete": true
+}

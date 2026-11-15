@@ -1,0 +1,48 @@
+Ячейка,Категория,N,N tokens,Tokens Q1/median/Q3,N AST,AST Q1/median/Q3,"Observer,%"
+miniF2F/deepseek,eligible_Table1,528,528,2576.7 / 4248.4 / 6012.0,528,9.0 / 15.0 / 28.1,100.0
+miniF2F/deepseek,localization:failure_reproduced_prefix_incomplete,2,2,2090.0 / 2090.0 / 4134.5,2,13.0 / 13.0 / 16.5,100.0
+miniF2F/deepseek,localization:not_localized,73,73,3999.5 / 5275.2 / 6349.9,73,6.0 / 12.0 / 19.5,100.0
+miniF2F/deepseek,localization:replay_resource_limited,3,3,1548.0 / 1590.5 / 2550.2,3,10.0 / 10.0 / 10.0,100.0
+miniF2F/deepseek,localization:unknown,8,8,2250.5 / 2915.0 / 4665.5,0,—,0.0
+miniF2F/deepseek,upstream:context_statement_mismatch,2,2,5341.0 / 5341.0 / 6249.5,0,—,0.0
+miniF2F/deepseek,upstream:generation_truncation,160,160,8192.0 / 8192.0 / 8192.0,0,—,0.0
+miniF2F/deepseek,upstream:parse_error,51,51,1884.1 / 4063.4 / 6481.7,0,—,0.0
+miniF2F/deepseek,upstream:timeout_resource,85,85,3663.0 / 5335.8 / 6653.0,77,9.6 / 21.3 / 32.0,93.8
+miniF2F/deepseek,verified,872,872,1345.5 / 2720.7 / 8192.0,775,3.0 / 8.0 / 13.0,71.3
+miniF2F/goedel,eligible_Table1,448,448,2345.9 / 3946.0 / 5432.4,448,10.0 / 18.0 / 35.0,100.0
+miniF2F/goedel,localization:failure_reproduced_prefix_incomplete,6,6,4394.5 / 4971.0 / 5083.0,6,8.5 / 20.0 / 50.0,100.0
+miniF2F/goedel,localization:not_localized,26,26,3300.0 / 3770.0 / 7194.0,26,6.2 / 17.0 / 26.5,100.0
+miniF2F/goedel,localization:unknown,16,16,1468.0 / 2949.0 / 4369.0,0,—,0.0
+miniF2F/goedel,upstream:context_statement_mismatch,8,8,2135.5 / 2180.0 / 5444.0,0,—,0.0
+miniF2F/goedel,upstream:generation_truncation,230,230,8192.0 / 8192.0 / 8192.0,0,—,0.0
+miniF2F/goedel,upstream:parse_error,62,62,1606.1 / 2790.8 / 5899.6,0,—,0.0
+miniF2F/goedel,upstream:timeout_resource,52,52,3360.9 / 4696.0 / 6068.3,50,10.0 / 27.8 / 47.7,96.0
+miniF2F/goedel,verified,936,936,1272.9 / 2811.6 / 8192.0,810,4.0 / 9.0 / 17.0,70.5
+miniF2F/kimina,eligible_Table1,324,324,2700.1 / 4047.8 / 5693.6,324,8.1 / 15.0 / 28.0,100.0
+miniF2F/kimina,localization:failure_reproduced_prefix_incomplete,5,5,3564.0 / 4238.5 / 4672.2,5,18.5 / 24.0 / 32.5,100.0
+miniF2F/kimina,localization:not_localized,38,38,1941.0 / 3599.0 / 5965.0,38,2.0 / 10.0 / 16.0,100.0
+miniF2F/kimina,localization:unknown,10,10,2583.3 / 3146.2 / 4750.0,0,—,0.0
+miniF2F/kimina,upstream:context_statement_mismatch,8,8,2255.5 / 3946.0 / 5399.7,0,—,0.0
+miniF2F/kimina,upstream:generation_truncation,380,380,8192.0 / 8192.0 / 8192.0,0,—,0.0
+miniF2F/kimina,upstream:parse_error,31,31,2719.3 / 4676.5 / 7057.5,0,—,0.0
+miniF2F/kimina,upstream:timeout_resource,13,13,2998.5 / 4137.0 / 5585.5,12,8.0 / 9.0 / 23.5,83.3
+miniF2F/kimina,verified,975,975,1170.2 / 1825.6 / 3217.1,975,1.0 / 5.0 / 12.0,100.0
+ProofNet/deepseek,accepted_but_unsolved,22,22,2417.8 / 3916.0 / 4979.5,22,4.5 / 8.0 / 12.5,100.0
+ProofNet/deepseek,ambiguous_localization,50,50,2178.5 / 3739.0 / 4761.3,50,11.0 / 18.2 / 28.0,100.0
+ProofNet/deepseek,context_mismatch,9,9,3639.5 / 4413.0 / 5086.2,0,—,0.0
+ProofNet/deepseek,generation_truncation,55,55,8192.0 / 8192.0 / 8192.0,0,—,0.0
+ProofNet/deepseek,included_reproducible_rejection,452,452,2453.7 / 3847.7 / 5251.0,452,6.0 / 14.0 / 26.5,100.0
+ProofNet/deepseek,parse_error,38,38,4632.3 / 5636.5 / 7417.8,0,—,0.0
+ProofNet/deepseek,resource_or_internal,54,54,3598.3 / 4181.7 / 6336.8,0,—,0.0
+ProofNet/deepseek,sorry_invalid,1,1,6664.0 / 6664.0 / 6664.0,0,—,0.0
+ProofNet/deepseek,token_boundary_incomplete,4,4,2162.0 / 2565.0 / 3723.0,4,15.0 / 17.0 / 55.0,100.0
+ProofNet/deepseek,verified,155,155,1559.0 / 3418.6 / 8192.0,111,3.0 / 6.0 / 11.0,50.0
+ProofNet/goedel,accepted_but_unsolved,14,14,2717.0 / 4062.0 / 5708.0,14,5.0 / 13.0 / 22.0,100.0
+ProofNet/goedel,ambiguous_localization,48,48,2542.0 / 3821.2 / 5218.0,48,11.3 / 25.0 / 36.0,100.0
+ProofNet/goedel,context_mismatch,7,7,1654.0 / 4009.0 / 6970.0,0,—,0.0
+ProofNet/goedel,generation_truncation,294,294,8192.0 / 8192.0 / 8192.0,0,—,0.0
+ProofNet/goedel,included_reproducible_rejection,259,259,1985.2 / 3345.8 / 5406.7,259,5.0 / 14.0 / 31.0,100.0
+ProofNet/goedel,parse_error,32,32,4841.1 / 5306.6 / 6612.8,0,—,0.0
+ProofNet/goedel,resource_or_internal,16,16,3163.5 / 4486.0 / 5961.5,0,—,0.0
+ProofNet/goedel,token_boundary_incomplete,3,3,2916.0 / 3640.0 / 4790.2,3,25.0 / 41.0 / 73.5,100.0
+ProofNet/goedel,verified,167,167,1884.7 / 8192.0 / 8192.0,79,2.0 / 3.5 / 9.0,32.1

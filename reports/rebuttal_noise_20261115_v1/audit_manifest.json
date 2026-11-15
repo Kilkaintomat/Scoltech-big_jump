@@ -1,0 +1,10 @@
+{
+  "inputs": {
+    "<PROJECT_ROOT>/runs/rebuttal_noise_20261115_v1/manifest.json": "578a0814e161a6edb26b5e2a5f5a17f3972f4cbd178f6319fd94dfcd2fb7bc09"
+  },
+  "outputs": {
+    "<PROJECT_ROOT>/runs/rebuttal_noise_20261115_v1/audit_integrity.json": "89778e947dee5a42c547eef24277d1207fcd2cdce55f581441978a76e92cb225",
+    "<PROJECT_ROOT>/runs/rebuttal_noise_20261115_v1/audit_results/manifest.json": "c545ef907a66008bae887bdc3af3ead7e7bed1b92ae3505fab4cc1ce064400e6"
+  },
+  "job": "8544908"
+}

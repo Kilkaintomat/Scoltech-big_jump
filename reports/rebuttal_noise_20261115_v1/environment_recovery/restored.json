@@ -1,0 +1,21 @@
+{
+  "status": "restored",
+  "matched_original_python_source_files": 1250,
+  "source_hash_mismatches": 0,
+  "versions": {
+    "numpy": "2.2.2",
+    "pandas": "3.0.5",
+    "scipy": "1.17.1",
+    "sklearn": "1.9.0",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.6",
+    "matplotlib": "3.11.1",
+    "pyarrow": "25.0.1"
+  },
+  "active_path": "<PROJECT_ROOT>/.venvc",
+  "recovered_environment": "<PROJECT_ROOT>/.venvc_recovered_20261115",
+  "ml_packages_source": "Pinned project uv.lock; original full pip freeze was not available",
+  "preserved_secondary_environment": "<PROJECT_ROOT>/.venvc4",
+  "no_model_generation": true,
+  "no_active_experiment_jobs_during_recovery": true
+}

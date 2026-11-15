@@ -1,0 +1,43 @@
+Ячейка/условие,Способ/метрика,Scalar gain,MD_increment gain,Доля,95% CI,Устойчиво положительный знаменатель
+ProofNet/deepseek/oof,mean/hit,0.00000,0.07428,0.0000,"[0.0, 0.0]",True
+ProofNet/deepseek/oof,logit/hit,0.03670,0.07428,0.4941,"[-0.23817791728728357, 1.620215365125327]",True
+ProofNet/deepseek/oof,pls/hit,0.02245,0.07428,0.3022,"[-0.11913769041603124, 1.3103827504943524]",True
+ProofNet/deepseek/oof,mean/nll,-0.00000,-0.00780,—,—,False
+ProofNet/deepseek/oof,logit/nll,-0.09379,-0.00780,—,—,False
+ProofNet/deepseek/oof,pls/nll,-0.03741,-0.00780,—,—,False
+ProofNet/goedel/oof,mean/hit,0.00000,-0.05827,—,—,False
+ProofNet/goedel/oof,logit/hit,-0.06579,-0.05827,—,—,False
+ProofNet/goedel/oof,pls/hit,-0.02757,-0.05827,—,—,False
+ProofNet/goedel/oof,mean/nll,0.00000,-0.17086,—,—,False
+ProofNet/goedel/oof,logit/nll,-0.13718,-0.17086,—,—,False
+ProofNet/goedel/oof,pls/nll,-0.08105,-0.17086,—,—,False
+miniF2F/deepseek/oof,mean/hit,0.00444,0.03070,0.1446,—,False
+miniF2F/deepseek/oof,logit/hit,0.01729,0.03070,0.5633,—,False
+miniF2F/deepseek/oof,pls/hit,-0.00600,0.03070,-0.1955,—,False
+miniF2F/deepseek/oof,mean/nll,-0.04709,-0.04381,—,—,False
+miniF2F/deepseek/oof,logit/nll,-0.06767,-0.04381,—,—,False
+miniF2F/deepseek/oof,pls/nll,-0.05640,-0.04381,—,—,False
+miniF2F/goedel/oof,mean/hit,0.05824,0.08328,0.6992,"[0.16246502104452065, 2.2710638239301875]",True
+miniF2F/goedel/oof,logit/hit,0.06133,0.08328,0.7364,"[0.12650730379592962, 2.2395321578841902]",True
+miniF2F/goedel/oof,pls/hit,0.01481,0.08328,0.1779,"[-0.3483819597078397, 0.7351655186034833]",True
+miniF2F/goedel/oof,mean/nll,0.03350,0.10061,0.3329,—,False
+miniF2F/goedel/oof,logit/nll,0.07164,0.10061,0.7120,—,False
+miniF2F/goedel/oof,pls/nll,0.05565,0.10061,0.5531,—,False
+miniF2F/kimina/oof,mean/hit,0.01790,0.08119,0.2204,—,False
+miniF2F/kimina/oof,logit/hit,0.03961,0.08119,0.4879,—,False
+miniF2F/kimina/oof,pls/hit,0.03119,0.08119,0.3842,—,False
+miniF2F/kimina/oof,mean/nll,0.10614,0.31480,0.3372,"[0.12316921193478246, 0.59601462021908]",True
+miniF2F/kimina/oof,logit/nll,0.16659,0.31480,0.5292,"[0.24050646219951707, 0.9127331819062149]",True
+miniF2F/kimina/oof,pls/nll,0.08057,0.31480,0.2560,"[0.09554138420628065, 0.47435325219304686]",True
+ProofNet/deepseek/frozen,mean/hit,0.00000,0.01580,0.0000,—,False
+ProofNet/deepseek/frozen,logit/hit,-0.00144,0.01580,-0.0909,—,False
+ProofNet/deepseek/frozen,pls/hit,0.02443,0.01580,1.5455,—,False
+ProofNet/deepseek/frozen,mean/nll,-0.00000,-0.11485,—,—,False
+ProofNet/deepseek/frozen,logit/nll,-0.11272,-0.11485,—,—,False
+ProofNet/deepseek/frozen,pls/nll,-0.01189,-0.11485,—,—,False
+ProofNet/goedel/frozen,mean/hit,0.00000,-0.09524,—,—,False
+ProofNet/goedel/frozen,logit/hit,-0.03333,-0.09524,—,—,False
+ProofNet/goedel/frozen,pls/hit,-0.01429,-0.09524,—,—,False
+ProofNet/goedel/frozen,mean/nll,-0.00000,-0.03498,—,—,False
+ProofNet/goedel/frozen,logit/nll,-0.02812,-0.03498,—,—,False
+ProofNet/goedel/frozen,pls/nll,-0.10339,-0.03498,—,—,False
