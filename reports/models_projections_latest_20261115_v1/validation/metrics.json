@@ -1,0 +1,19 @@
+{
+  "utc": "2026-11-15T09:26:00.550600Z",
+  "slurm_job": "8546919",
+  "source_commit": "04d6695fbe37bab36fb6c2c5cf1eb880f489c7d9",
+  "checks": [
+    {
+      "command": "make test",
+      "exit_code": 2,
+      "log": "test.log",
+      "log_sha256": "29600fc0258fc8c6e6f0efe305dc9e399b73a0f6bd8b996ad9fdbd105ced6ec3"
+    },
+    {
+      "command": "make test-all",
+      "exit_code": 2,
+      "log": "test-all.log",
+      "log_sha256": "e6d022966248b6dd42111e14db475a24e96e61f03c9e259a81524266b4c03173"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+./scripts/run_tests.sh
+== ruff ==
+All checks passed!
+123 files already formatted
+== mypy ==
+src/onebigjump/e1/extraction.py:51: error: Argument 1 to "__call__" of "_Wrapped" has incompatible type "str"; expected "PreTrainedModel"  [arg-type]
+src/onebigjump/readiness/deduction.py:410: error: Argument 1 to "__call__" of "_Wrapped" has incompatible type "str"; expected "PreTrainedModel"  [arg-type]
+Found 2 errors in 2 files (checked 71 source files)
+make: *** [test-all] Error 1
