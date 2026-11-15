@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,multirow,graphicx,xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black}
+
+% Placeholder macro (no placeholders remain in this version).
+\newcommand{\tbd}[1]{\textcolor{red}{[#1]}}
+
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}[proposition]{Theorem}
+\newcommand{\Fbar}{\overline{F}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\1}{\mathbf{1}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{An Extreme-Value Perspective on Reasoning\\ Failure in Transformers}
+\author{Anonymous authors\\Paper under double-blind review}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We ask whether a prover's residual stream marks the step at which a formal proof first fails. Lean~4 semantic replay gives the exact first rejected step of every failed proof, so the question can be answered without proxy labels. At a fixed layer we measure the whitened change of the residual state between consecutive proof steps, and interpret it through a conditional extreme-value framework that states what must hold for the largest change to be the failure. Across three provers, two benchmarks and two sampling temperatures, the largest change falls on the first rejected step in 17--29\% of failed proofs, about twice the length-adjusted chance rate. On ProofNet this advantage is positional: always predicting the first step, or a positional prior fitted on calibration failures, does as well. On miniF2F the first-step rule reaches only 6--10\%, and the jump also exceeds the fitted prior in some cells, most clearly for Goedel. Within a proof the signal is specific to failure: among the steps up to the rejection, the rejected step carries the largest change in 35--43\% of failed proofs, 8--17 points above the same cutoff in failed proofs whose rejection comes later, in all five model--benchmark cells. This prefix effect holds at three layers, across shrinkage levels and on a second calibration fold. No fixed level of the change identifies failure, and the framework locates the cause: the rejected step is extreme relative to its own proof, not beyond a common tolerance. Success decays with length, but neither the exponential form nor the constant hazard behind the framework's length law is supported, and the three heavy-tail predictions fail. Residual jumps are a within-proof relative marker of first failure, not a threshold detector.
+\end{abstract}
+
+\section{Introduction}
+
+A formal prover emits a complete proof before Lean checks it, and for a failed proof semantic replay identifies the first tactic that Lean rejects. This gives exact ground truth for a question that matters wherever no step-level verifier exists: does the model's own residual stream register the step at which its reasoning first goes wrong, and does it add information beyond position and token uncertainty?
+
+At a fixed decoder block, we read the residual state at each formal-step boundary and measure consecutive increments. Extreme-value theory supplies a conditional framework for this statistic. If the first rejection is coupled to crossing a fixed geometric tolerance, failure becomes an event about the maximum of the increments, and tail behavior and dependence govern where failures occur, how large the failing step is, and how reliability decays with length. Under coupling and extremal independence the largest increment is the first failure (Theorem~\ref{thm:loc}). A scalar stochastic recurrence shows how occasional expansion produces heavy-tailed deviations, as Kesten recursions do for SGD iterates \citep{gurbuzbalaban2021}.
+
+Trained provers depart from this idealization in an informative way. Across three provers, two benchmarks and two temperatures, the largest whitened increment points to the first rejection about twice as often as a length-adjusted uniform choice. On ProofNet, where many proofs fail at their first step, this is positional: the first-step rule and a fitted positional prior do as well. Within a proof, however, the signal is specific to failure: among the steps up to the rejection, the rejected step is the largest in 35--43\% of failed proofs, 8--17 points above the same cutoff in failed proofs whose rejection comes later. A fixed level of the increment does not identify failure. Exceedances are more frequent in failed proofs, but the first exceedance falls on the rejected step in at most a third of them, and thresholds calibrated on one benchmark shift on the other. The framework names the assumption that breaks: the absolute tolerance in the validity coupling. Within-trace extremality survives. Of five predictions fixed before any proofs were generated, the localization prediction is confirmed within proofs, success decays with length without the mechanism the framework proposes, and the three tail predictions fail (Section~\ref{sec:other}).
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item Conditional laws connecting maxima to first rejection under explicit validity and dependence assumptions, a Kesten-type surrogate, and pooled-trace tail-index estimation (Section~\ref{sec:theory}).
+\item Localization evidence across provers, benchmarks and temperatures, with first-step and fitted positional references, a prefix analysis controlled by later-failing proofs, and read-out and whitening sensitivity (Section~\ref{sec:loc}).
+\item A decomposition of the gap between the idealized limit and observed localization into trace-level coupling, clustering and step-level coupling (Section~\ref{sec:why}), with online (Section~\ref{sec:online}) and learned (Section~\ref{sec:learned}) uses of the jump.
+\item A scorecard of the framework's predictions and a frozen confirmatory protocol (Section~\ref{sec:other}, Appendix~\ref{app:protocol}).
+\end{itemize}
+
+\section{Measurement and evaluation target}\label{sec:measure}
+
+\paragraph{Eligible failures and the first rejected step.} For proof attempt $i$ with extracted formal steps $s_{i1},\dots,s_{iL_i}$, whole-proof verification in Lean~4 \citep{demoura2021} establishes the outcome, and semantic replay identifies
+\begin{equation}\label{eq:tstar}
+t_i^* = \min\{t : s_{it}\text{ is rejected during the aligned replay}\}.
+\end{equation}
+We write $E_i=1$ when an attempt is unsuccessful and has a reliable first-rejection label, token alignment and score extraction. All localization results condition on $E_i=1$. Steps are extracted with Lean syntax and semantic replay, preserving compound tactics; parse errors, resource failures and terminal unsolved goals are not attributed to the last tactic (Appendix~\ref{app:readout}).
+
+\paragraph{Residual changes and surprisal.} At a fixed layer, $X_{it}\in\mathbb{R}^{4096}$ is the decoder block output at the last token of $s_{it}$, before final normalization, and $X_{i0}$ is taken at formal-proof entry. We define
+\begin{equation}\label{eq:w}
+\xi_{it} = X_{it}-X_{i,t-1},\qquad w_{it} = \bigl\|\hat\Sigma^{-1/2}(\xi_{it}-\hat\mu)\bigr\|_2,
+\end{equation}
+with mean and covariance (isotropic shrinkage 0.1) fitted on verified proofs from a disjoint calibration fold. Whitening adjusts for anisotropy of increment coordinates, including massive-activation directions \citep{sun2024}. Mean step surprisal on the same token sequence is
+\begin{equation}\label{eq:q}
+q_{it} = -\frac{1}{|I_{it}|}\sum_{k\in I_{it}}\log p_\theta(y_{ik}\mid \pi_i, y_{i,<k}),
+\end{equation}
+where $I_{it}$ are the token positions of step $s_{it}$ and $\pi_i$ is the prompt. The jump and surprisal localizers are
+\begin{equation}\label{eq:loc}
+J_i = \min\argmax_{1\le t\le L_i} w_{it},\qquad S_i=\min\argmax_{1\le t\le L_i} q_{it}.
+\end{equation}
+Both are retrospective: all steps of the generated proof, including those after the first rejection, compete for the maximum.
+
+\paragraph{Metrics and references.} For $N$ eligible attempts, the exact-localization rate and uniform reference are $\hat a_J = N^{-1}\sum_{i:E_i=1}\1\{J_i=t_i^*\}$ and $\hat a_U = N^{-1}\sum_{i:E_i=1}L_i^{-1}$. The uniform rule adjusts for length but not for concentration of failures or maxima at particular positions. Even if the two positions are conditionally independent,
+\begin{equation}\label{eq:pos}
+\PP(J=t^*\mid L,E)=\sum_{t=1}^{L}\PP(J=t\mid L,E)\,\PP(t^*=t\mid L,E),
+\end{equation}
+which need not equal $1/L$. We therefore also report the first-step rule $\hat t_i=1$ and a positional prior fitted on calibration failures, and test information beyond position directly with a prefix control (Section~\ref{sec:loc}) and a learned localizer (Section~\ref{sec:learned}). Uncertainty resamples whole tasks (exercise groups on ProofNet) with their attempts.
+
+\section{Conditional extreme-value framework}\label{sec:theory}
+
+The localizers above need no tail assumption. This section gives a separate idealized model for interpreting maxima. Let $(Z_t)$ be nonnegative step deviations, $M_L=\max_{t\le L}Z_t$, and $V_L$ indicate acceptance of all $L$ steps. Until the first rejection, $v_t$ records step validity; afterwards labels are absorbing, $v_s=0$. Absorption is a measurement convention.
+
+\begin{hypothesis}[Validity coupling]\label{hyp:coupling}
+For a fixed read-out and deviation statistic there is $\tau>0$ such that, up to and including the first rejection, $v_t=\1\{Z_t\le\tau\}$.
+\end{hypothesis}
+Under Hypothesis~\ref{hyp:coupling} and absorption, $\{V_L=0\}=\{M_L>\tau\}$ and the first rejection is the first exceedance.
+
+Write $\Fbar = 1-F$. Regular variation with index $-\alpha<0$, $\Fbar\in RV_{-\alpha}$, means $\Fbar(xy)/\Fbar(x)\to y^{-\alpha}$ for all $y>0$; rapid variation means the ratio tends to zero for $y>1$. For a stationary regularly varying sequence the spectral tail process $(\Theta_t)$ satisfies $\Theta_0=1$ and
+\begin{equation}\label{eq:tail}
+\mathcal{L}\bigl(Z_0/x,(Z_t/Z_0)_{|t|\le h}\mid Z_0>x\bigr)\Rightarrow\mathcal{L}\bigl(Y,(\Theta_t)_{|t|\le h}\bigr),
+\end{equation}
+with $\PP(Y>y)=y^{-\alpha}$, $y\ge1$, and $Y$ independent of $\Theta$ \citep{basrak2009}. Because a finite-context model has finitely many possible read-outs, tail statements describe an intermediate range of the observed distribution.
+
+\subsection{Overshoots and length}
+
+\begin{proposition}[Marginal overshoot]\label{prop:overshoot}
+For $u<x_F$ let $Q_u(y)=\PP(Z>uy\mid Z>u)$. If $\Fbar\in RV_{-\alpha}$, then $Q_u(y)\to y^{-\alpha}$ for $y\ge1$. If $\Fbar$ is rapidly varying, $Q_u(y)\to0$ for $y>1$; the same holds as $u\uparrow x_F$ when $0<x_F<\infty$.
+\end{proposition}
+This marginal result needs no independence; selecting the first rejected step in a dependent sequence can change the law (Theorem~\ref{thm:loc}).
+
+\begin{proposition}[Conditional failure--length law]\label{prop:length}
+Assume Hypothesis~\ref{hyp:coupling}, absorption, and a stationary sequence with continuous marginal $F$, $x_F=\infty$ and extremal index $\theta$. If $\tau_L\to\infty$ and $L\Fbar(\tau_L)\to\lambda\in(0,\infty)$, then $\PP(V_L=0)=1-e^{-\theta\lambda}+o(1)$, and $1-e^{-\theta\lambda}=\theta\lambda+O(\lambda^2)$.
+\end{proposition}
+The extremal-index assumption means the maximum probability converges to $e^{-\theta\lambda}$ \citep{leadbetter1983}. This joint high-threshold, long-window limit motivates the exponential success--length predictor of Section~\ref{sec:other}, whose single coefficient absorbs $\theta$ and $\tau$ jointly.
+
+\subsection{Localization with and without extremal clustering}
+
+\begin{theorem}[Conditional localization]\label{thm:loc}
+Assume Hypothesis~\ref{hyp:coupling} and absorption. Let $(Z_t)_{t\in\mathbb{Z}}$ be stationary with continuous marginal $F$ and $x_F=\infty$. Fix $L$ and let $\tau\to\infty$. Let $T$ be the earliest argmax on $1,\dots,L$ and $N_\tau=\#\{t\le L:Z_t>\tau\}$.
+\begin{enumerate}
+\item[(i)] If the sequence is regularly varying and $\PP(\Theta_j=1)=0$ for $j\ne0$, then
+\begin{equation}\label{eq:piL}
+\PP(T=t^*\mid V_L=0)\to\pi_L(\Theta)=\frac{\sum_{t=1}^{L}\PP\bigl(Y\Theta_{s-t}\le1\ \forall s<t,\ \Theta_{s-t}<1\ \forall s>t\bigr)}{\sum_{t=1}^{L}\PP\bigl(Y\Theta_{s-t}\le1\ \forall s<t\bigr)}.
+\end{equation}
+The limit lies in $[0,1]$ and is positive if $\PP(\Theta_j<1,\ 1\le j<L)>0$. If $\Theta$ has atoms at one, strict and non-strict future inequalities bound the $\liminf$ and $\limsup$.
+\item[(ii)] Under extremal independence, $\PP(Z_s>x,Z_t>x)=o(\Fbar(x))$ for $s\ne t$,
+\begin{equation}\label{eq:indep}
+\PP(N_\tau=1\mid V_L=0)\to1,\quad \PP(T=t^*\mid V_L=0)\to1,\quad \PP(t^*=t\mid V_L=0)\to L^{-1},
+\end{equation}
+and $\PP(Z_{t^*}>\tau y\mid V_L=0)$ tends to $y^{-\alpha}$ under regular variation and to $0$ for $y>1$ under rapid variation.
+\end{enumerate}
+\end{theorem}
+
+Theorem~\ref{thm:loc} gives a yardstick for the data. Coupling with extremal independence yields near-perfect localization and uniform failure positions; clustering of large steps lowers the limit to $\pi_L(\Theta)$; and without coupling, identity~\eqref{eq:pos} shows how shared positional structure alone lifts localization above $1/L$. Each of these ingredients (coupling, clustering, positional nonstationarity) is estimable from saved traces, and Section~\ref{sec:why} estimates them.
+
+\subsection{A Kesten-type surrogate}
+
+Write $X_t=X_t^\star+E_t$ with $X_t^\star$ a reference trajectory, and postulate
+\begin{equation}\label{eq:kesten}
+E_t=a_tE_{t-1}+B_t,\qquad a_t>0,\quad B_t\sim\mathcal N(0,\Sigma),\quad\Sigma\succ0,
+\end{equation}
+with $(a_t)$ and $(B_t)$ independent i.i.d.\ sequences. Routing is exogenous, so $a_t$ is independent of $E_{t-1}$. This is an illustrative stochastic recurrence \citep{kesten1973,goldie1991,buraczewski2016} that isolates one route to heavy tails.
+
+\begin{theorem}[Scalar multiplier mechanism]\label{thm:kesten}
+Assume $\EE|\log a|<\infty$ and $\EE\log a<0$ in~\eqref{eq:kesten}. Then a unique stationary causal solution exists. Moreover:
+\begin{enumerate}
+\item[(i)] If $\PP(a>1)>0$, $\EE a^\alpha=1$ for some $\alpha>0$, $\EE a^{\alpha+\delta}<\infty$ for some $\delta>0$, and $\log a$ is non-arithmetic, then for some $C>0$,
+\begin{equation}\label{eq:kestentail}
+\PP(\|E_t\|>x)\sim Cx^{-\alpha},\qquad \PP(\|E_t-E_{t-1}\|>x)\sim C\,\EE|a-1|^\alpha x^{-\alpha}.
+\end{equation}
+Adding uniformly bounded reference increments preserves this asymptotic for $\|X_t-X_{t-1}\|$.
+\item[(ii)] If $a\le\rho<1$ a.s., then $\|E_t-E_{t-1}\|$ is rapidly varying with all moments and a Gaussian-type tail bound (Appendix~\ref{app:kesten}).
+\end{enumerate}
+\end{theorem}
+For a two-point multiplier that expands with probability $p$, the tail index decreases in $p$ (Appendix~\ref{app:kesten}), linking heavier tails to more frequent expansive updates within this scalar family.
+
+\subsection{Tail estimation with dependent steps}
+
+Reasoning traces supply many short, internally dependent sequences. Appendix~\ref{app:hill} shows that the Hill estimator on steps pooled across i.i.d.\ traces is consistent under arbitrary within-trace dependence (Theorem~\ref{thm:hill}), and gives a normal limit whose variance is inflated by a cluster term; empirical intervals therefore resample whole tasks.
+
+\section{Experimental setup}\label{sec:setup}
+
+\paragraph{Models and read-out.} We evaluate DeepSeek-Prover-V2-7B, Goedel-Prover-V2-8B and Kimina-Prover-Distill-8B \citep{ren2025,lin2025,wang2025}, reading zero-based layers 14, 17 and 17. States and surprisal come from replaying the sampled token IDs (generated with vLLM; \citealp{kwon2023}) through the pinned HuggingFace model. Appendix~\ref{app:sensitivity} repeats the localization analyses at two further layers, without whitening, with diagonal whitening, with other shrinkage levels and with a second calibration fold.
+
+\paragraph{Benchmarks and populations.} On miniF2F \citep{zheng2022}, 417 tasks per model receive eight attempts at each of temperatures 0.6 and 1.0, with calibration and evaluation separated by task. On ProofNet-Verified, a verified variant of ProofNet \citep{azerbayev2023}, 197 exercise groups are used for evaluation with four attempts per problem at temperature 0.6 (DeepSeek and Goedel). The main analysis uses temperature 0.6, with 2,018 eligible failed attempts across five model--benchmark cells. Temperature-1.0 attempts (1,498 eligible failures) are evaluated with the transform, localizers and learned models frozen from the 0.6 analysis. Threshold diagnostics compare eligible failures with verified evaluation attempts from the same tasks or groups: 172, 231 and 217 on miniF2F and 35 and 40 on ProofNet. The learned comparison on ProofNet requires $L\ge2$ and complete token boundaries, giving 452 DeepSeek attempts in 166 groups and 259 Goedel attempts in 133 groups (62.0\% and 34.0\% of non-verified attempts), with equal group weights and a whitening transform fitted on verified miniF2F calibration tasks.
+
+\paragraph{Eligibility and the target of inference.} All localization results estimate how well a localizer finds the first rejected step among failed attempts that have one. Three exclusion categories have no rejected step by construction: parse errors (no tactic is executed), resource failures (execution stops without a rejection) and terminal unsolved goals (every tactic is accepted and the proof is incomplete). Two further categories carry an unreliable label: unresolved localization, where semantic replay and token alignment do not agree on the first rejection, and incomplete token boundaries, where a step cannot be mapped to its tokens. Every reference in this paper (uniform, first step, positional prior, prefix control, M0) is computed on the same eligible attempts, so each contrast compares localizers on an identical population and length distribution (Appendix~\ref{app:eligibility}).
+
+\paragraph{What was fixed in advance.} Five predictions of the framework were stated before any proofs were generated: (P1) tail indices differ between failed and verified proofs; (P2) the largest increment marks the first rejected step; (P3) the increment at the first rejection has a Pareto overshoot; (P4) the tail index changes at the grokking transition; and (P5) success decays with assigned length. P2 is tested in Section~\ref{sec:loc} and P1, P3, P4 and P5 in Section~\ref{sec:other}. For ProofNet, the transfer protocol and its comparisons with surprisal and a positional reference were fixed before their outcomes were computed, as were the primary (DeepSeek) and replication (Goedel) cells, the +3\,pp useful effect of the learned comparison, and the seven hypotheses of the temperature-1.0 evaluation with their Holm correction. The miniF2F results come from a reanalysis of the planned localization question with the formal-entry anchor, and the temperature-1.0 attempts had entered earlier analyses. The threshold, prefix-restricted, prefix-control, positional-prior, read-out, length-model and online analyses were designed after the localization results were available. Percentile intervals from a bootstrap over whole tasks (exercise groups on ProofNet) measure sampling variability; cells with fewer than 30 exceedances or few verified groups have no intervals. Appendix~\ref{app:protocol} gives a protocol for confirmation on new tasks.
+
+\input{sections}
+
+\input{refs}
+
+\clearpage
+\appendix
+\input{app_proofs}
+\input{app_rest}
+
+\end{document}

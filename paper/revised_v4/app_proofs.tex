@@ -1,0 +1,64 @@
+\section{Proofs and full estimation assumptions}\label{app:proofs}
+
+\subsection{Overshoots and the failure--length law}
+
+For Proposition~\ref{prop:overshoot}, $Q_u(y)=\Fbar(uy)/\Fbar(u)$, so the claims for regularly and rapidly varying laws follow from the definitions. If $0<x_F<\infty$, then $1<Z/u\le x_F/u$ given $Z>u$, and the upper bound tends to one. Unbounded Gumbel-domain laws are a standard rapidly varying case \citep{dehaan2006,resnick1987}: their auxiliary function $f$ satisfies $f(u)/u\to0$ and $\Fbar(u+xf(u))/\Fbar(u)\to e^{-x}$. For fixed $y>1$ and $M>0$, eventually $(y-1)u\ge Mf(u)$, so $\limsup\Fbar(uy)/\Fbar(u)\le e^{-M}$; let $M\to\infty$.
+
+For Proposition~\ref{prop:length}, coupling identifies $\{V_L=0\}$ with $\{M_L>\tau_L\}$, and the extremal-index limit gives the formula; the small-$\lambda$ statement is a Taylor expansion of the limit. The two approximations are logically separate: the joint high-threshold, long-window limit comes first, and only its limiting expression is expanded. Neither implies an exact fixed-threshold exponential law.
+
+\subsection{Proof of conditional localization}
+
+Let $A_t=\{Z_t>\tau,\ Z_s\le\tau\text{ for }s<t\}$. These disjoint events partition $\{M_L>\tau\}$, and coupling gives $t^*=t$ on $A_t$. For a regularly varying sequence, stationarity and~\eqref{eq:tail} give
+\begin{align}
+\PP(A_t)/\Fbar(\tau)&\to q_t=\PP(Y\Theta_{s-t}\le1\text{ for }s<t),\label{eq:qt}\\
+\PP(A_t,T=t)/\Fbar(\tau)&\to r_t=\PP(Y\Theta_{s-t}\le1\text{ for }s<t,\ \Theta_{s-t}<1\text{ for }s>t).\label{eq:rt}
+\end{align}
+The past boundaries have probability zero because $Y$ is continuous and independent of $\Theta$, and $\PP(\Theta_j=1)=0$ removes the future ones. Thus the conditional probability tends to $\sum_tr_t/\sum_tq_t$. The denominator is at least $q_1=1$, $0\le r_t\le q_t$, and $r_1=\PP(\Theta_j<1,\ 1\le j<L)$ gives the positivity criterion. With atoms at one, the Portmanteau theorem applied to strict and non-strict future inequalities gives the bounds. This proves part (i) of Theorem~\ref{thm:loc}.
+
+Under extremal independence and fixed $L$, $\PP(N_\tau\ge2)\le\sum_{s<t}\PP(Z_s>\tau,Z_t>\tau)=o(\Fbar(\tau))$. Also $\PP(A_t)=\Fbar(\tau)(1+o(1))$ and $\PP(M_L>\tau)=L\Fbar(\tau)(1+o(1))$. Conditional on failure there is exactly one exceedance with probability tending to one; it is both the first rejection and the global maximum, and each position has limiting probability $1/L$. For $y\ge1$,
+\begin{equation}\label{eq:overshootloc}
+\PP(Z_{t^*}>\tau y\mid V_L=0)=\frac{L\Fbar(\tau y)+o(\Fbar(\tau))}{L\Fbar(\tau)+o(\Fbar(\tau))},
+\end{equation}
+and regular or rapid variation completes part (ii).
+
+\subsection{Proof of the scalar multiplier mechanism}\label{app:kesten}
+
+Put $\Pi_{t,0}=1$ and $\Pi_{t,j}=a_t\cdots a_{t-j+1}$. The strong law gives $\Pi_{t,j}^{1/j}\to e^{\EE\log a}<1$ a.s., and Gaussian innovations grow subexponentially a.s.\ by Borel--Cantelli, so $E_t=\sum_{j\ge0}\Pi_{t,j}B_{t-j}$ converges absolutely, solves the recurrence and is its stationary causal solution; uniqueness follows from contraction of the products \citep{buraczewski2016}. Conditional on the multipliers, $E_t$ is Gaussian with covariance $R_t\Sigma$, where $R_t=\sum_{j\ge0}\Pi_{t,j}^2=a_t^2R_{t-1}+1$.
+
+\paragraph{Heavy tails.} Goldie's renewal theorem \citep{goldie1991} with multiplier $a^2$ and exponent $\alpha/2$ gives $\PP(R_t>x)\sim C_Rx^{-\alpha/2}$, $C_R>0$; the moment condition implies $\EE a^\alpha\log^+a<\infty$, and the renewal condition is assumed. Since $E_t\overset{d}{=}\sqrt{R_t}\,G$ with $G\sim\mathcal N(0,\Sigma)$ independent of $R_t$, Breiman's lemma \citep{breiman1965} gives $\PP(\|E_t\|>x)\sim C_R\EE\|G\|^\alpha x^{-\alpha}$. Next $E_t-E_{t-1}=(a_t-1)E_{t-1}+B_t$ with $a_t$ independent of $E_{t-1}$, and the same lemma applies because $\EE|a-1|^{\alpha+\delta}<\infty$. Light perturbations do not change the asymptotic: if $\|V\|$ is regularly varying and $\PP(\|W\|>\varepsilon x)=o(\PP(\|V\|>x))$, the triangle inequality places $\PP(\|V+W\|>x)/\PP(\|V\|>x)$ between $(1+\varepsilon)^{-\alpha}+o(1)$ and $(1-\varepsilon)^{-\alpha}+o(1)$; letting $\varepsilon\downarrow0$ covers the Gaussian term and bounded reference increments.
+
+\paragraph{Light tails.} If $a\le\rho<1$, then $R_{t-1}\le(1-\rho^2)^{-1}$ and, conditional on the multipliers, the increment has covariance $s_t^2\Sigma$ with $s_t^2=1+(a_t-1)^2R_{t-1}\in[1,(2-\rho^2)/(1-\rho^2)]$. Gaussian concentration for $\|G\|$, with $G\sim\mathcal N(0,\Sigma)$ and $s_\rho^2=(2-\rho^2)/(1-\rho^2)$, gives $\PP(\|E_t-E_{t-1}\|>x)\le\exp\{-(x/s_\rho-\EE\|G\|)_+^2/(2\|\Sigma\|_{\mathrm{op}})\}$ and all moments. For rapid variation, let $\psi(u)=\PP(\|G\|>u)$; a one-coordinate Gaussian lower bound along a top eigenvector and the concentration upper bound give $\psi(uy)/\psi(u)\to0$ for $y>1$, hence $\EE\psi(xy/s_t)/\EE\psi(x/s_t)\le\sup_{u\ge x/s_\rho}\psi(uy)/\psi(u)\to0$.
+
+\paragraph{Moment index and the two-point example.} Suppose $a$ has all positive moments. Since $\|E_t\|\overset{d}{=}\sqrt{R_t}\|G\|$, $\EE\|E_t\|^s<\infty$ iff $\EE R_t^{s/2}<\infty$. If $\EE a^s<1$, subadditivity ($s\le2$) or Minkowski's inequality ($s>2$) bounds this moment by a geometric series; if $\EE a^s>1$, $R_t\ge\Pi_{t,j}^2$ gives $\EE R_t^{s/2}\ge(\EE a^s)^j\to\infty$. When $\PP(a>1)>0$ and $\EE\log a<0$, convexity of $s\mapsto\log\EE a^s$ gives a unique positive root $\alpha$, the moment index; if $a\le1$ a.s., all moments exist. The increment has the same moment index by the triangle and reverse triangle inequalities. For the two-point law, $g_p(s)=(1-p)\rho^s+p\kappa^s-1$ is strictly convex, vanishes at zero and has negative slope there exactly when $p<p_c$, so it has a unique positive root on that range. Since $\partial_pg_p(s)=\kappa^s-\rho^s>0$, the root decreases strictly and continuously in $p$; as $p\downarrow0$, $\alpha(p)\to\infty$ and $p\kappa^{\alpha(p)}\to1$, so $\alpha(p)\sim\log(1/p)/\log\kappa$; as $p\uparrow p_c$, the slope at zero vanishes and strict convexity forces $\alpha(p)\downarrow0$. These statements need no non-arithmetic condition, which is required only for the exact power-tail constant.
+
+\subsection{Pooled-trace estimation: consistency and a normal limit}\label{app:hill}
+
+Let $Z^{(1)},\dots,Z^{(m)}$ be i.i.d.\ traces of fixed length $L$ with arbitrary within-trace dependence, average marginal survival $\Fbar(x)=L^{-1}\sum_{t\le L}\PP(Z_t>x)$ and pooled sample size $n=mL$. The Hill estimator on the pooled descending order statistics is $\hat\gamma_k^H=k^{-1}\sum_{j\le k}\log(Z_{(j)}/Z_{(k+1)})$.
+
+\begin{theorem}[Pooled-trace consistency]\label{thm:hill}
+If $\Fbar\in RV_{-\alpha}$, $k\to\infty$ and $k/n\to0$, then $\hat\gamma_k^H\to1/\alpha$ in probability for fixed $L$, without any condition on dependence within a trace.
+\end{theorem}
+
+\begin{proof}
+Let $b=b(n/k)$ be the upper quantile of the average marginal law, so $(n/k)\Fbar(b)\to1$, and define $\nu_m=k^{-1}\sum_{j\le m}\sum_{t\le L}\delta_{Z_t^{(j)}/b}$. For bounded continuous $f$ supported in $[y_0,\infty]$, $y_0>0$, the expectation of $\nu_m(f)$ tends to its integral under $\nu_\alpha(y,\infty]=y^{-\alpha}$. A trace contributes at most $L$ points; if it contributes $N$, then $N^2\le LN$, and independence across traces gives
+\begin{equation}\label{eq:varnu}
+\operatorname{Var}\nu_m(f)\le\|f\|_\infty^2\,\frac{L}{k}\cdot\frac{n\PP(Z\ge by_0)}{k}\to0,
+\end{equation}
+where $Z$ has the average marginal law. The pooled tail empirical measure therefore converges in probability under arbitrary within-trace dependence. Quantile bracketing at $b(1\pm\varepsilon)$ gives $Z_{(k+1)}/b\to1$, and $\hat\gamma_k^H=\int_1^\infty\nu_m(yZ_{(k+1)}/b,\infty]\,dy/y$. Monotonicity and continuity of the limit give uniform convergence on compact $y$-intervals; on the bracketing event a Potter bound with $0<\eta<\alpha$ bounds the expected remainder beyond $M$ by a constant times $\int_M^\infty y^{-\alpha+\eta-1}dy\to0$. Hence $\hat\gamma_k^H\to\int_1^\infty y^{-\alpha-1}dy=1/\alpha$ \citep{resnick2007}.
+\end{proof}
+
+\begin{theorem}[Conditional normal limit for pooled Hill estimation]\label{thm:hillclt}
+In the setting of Theorem~\ref{thm:hill}, put $\gamma=1/\alpha$ and assume the average marginal law is continuous in its upper tail. Suppose its upper quantile $U$ satisfies second-order regular variation, $\{U(tx)/U(t)-x^\gamma\}/A(t)\to x^\gamma(x^{\rho_2}-1)/\rho_2$ with $\rho_2\le0$ (logarithmic limit at $\rho_2=0$), $A(t)\to0$ and $\sqrt kA(n/k)\to\lambda\in\mathbb R$. Suppose
+\begin{equation}\label{eq:sigmacl}
+\sigma_{\mathrm{cl}}^2=\lim_{x\to\infty}\frac{\operatorname{Var}\bigl(\sum_{t\le L}g_x(Z_t)\bigr)}{\gamma^2L\Fbar(x)}\in(0,\infty),\qquad g_x(z)=\log^+(z/x)-\gamma\1\{z>x\}.
+\end{equation}
+With $b$ chosen so that $n\Fbar(b)=k$, assume local stochastic equicontinuity at one of $W_m(y)=\sqrt k\{k^{-1}\sum_{j,t}\1\{Z_t^{(j)}>by\}-(n/k)\Fbar(by)\}$: for every $\varepsilon>0$, $\lim_{\delta\downarrow0}\limsup_m\PP(\sup_{|y-1|\le\delta}|W_m(y)-W_m(1)|>\varepsilon)=0$. Then $\sqrt k(\hat\gamma_k^H-\gamma)\Rightarrow\mathcal N(\lambda/(1-\rho_2),\gamma^2\sigma_{\mathrm{cl}}^2)$. For independent steps within a trace, $\sigma_{\mathrm{cl}}^2=1$.
+\end{theorem}
+
+\begin{proof}
+Let $Y_j=\sum_tg_b(Z_t^{(j)})$, let $\tilde\gamma_b$ be the ratio of pooled $\log^+(Z/b)$ to the pooled number of exceedances of $b$, and $N_m(y)=\nu_m(y,\infty]$. Then $\sqrt k(\tilde\gamma_b-\gamma)=k^{-1/2}\sum_jY_j/N_m(1)$, and the denominator tends to one. The second-order condition gives the usual bias $\sqrt k(m/k)\EE Y_1\to\lambda/(1-\rho_2)$, since expectations depend only on the average marginal law \citep{dehaan2006}. The numerator variance tends to $\gamma^2\sigma_{\mathrm{cl}}^2$. For Lindeberg, $|Y_1|\le L(\log^+(\max_tZ_t/b)+\gamma)\1\{\max_tZ_t>b\}$ and regular variation give $\EE Y_1^4=O(L^5\Fbar(b))$, so $(m/k)\EE[Y_1^2\1\{|Y_1|>\varepsilon\sqrt k\}]\to0$ for fixed $L$, and the triangular-array CLT gives the deterministic-threshold limit.
+
+Put $q_m=Z_{(k+1)}/b$ and $I_m(q)=\int_q^\infty N_m(y)\,dy/y$. Since $N_m(1)-1=O_p(k^{-1/2})$, local equicontinuity and the deterministic derivative $-\alpha$ at one give $q_m-1=\gamma\{N_m(1)-1\}+o_p(k^{-1/2})$, after quantile bracketing establishes tightness at this scale. Ties involve at most $L$ observations a.s.\ and contribute $O(L/k)=o(k^{-1/2})$. Hence $\hat\gamma_k^H=I_m(1)-\gamma\{N_m(1)-1\}+o_p(k^{-1/2})$, the same expansion as $\tilde\gamma_b=I_m(1)/N_m(1)$. For independent coordinates the variance is a sum of marginal variances and $\sigma_{\mathrm{cl}}^2=1$; otherwise covariance terms remain.
+\end{proof}
+
+Local equicontinuity is a separate assumption, not a consequence of the scalar variance limit.

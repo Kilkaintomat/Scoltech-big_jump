@@ -1,0 +1,554 @@
+\section{Read-out, segmentation and frozen revisions}\label{app:readout}
+
+DeepSeek has 30 decoder blocks and Goedel and Kimina 36; all read-outs have dimension 4,096. The archived quarter/middle/three-quarter layers are 6/14/21 (DeepSeek) and 8/17/26 (Goedel, Kimina); the middle layer is the principal evaluation, and Appendix~\ref{app:sensitivity} repeats the localization analyses at the other two. The formal-entry anchor is the last original token ending at the start of the formal proof body, allowing only trailing whitespace. Moving the anchor changes the first raw increment, and refitting the transform can change all whitened scores. The formal-entry analysis fixes calibration fold 0 and shrinkage 0.1; no evaluation labels enter the transform. Semantic replay and token alignment must agree on the first reproducible rejection; unresolved localization, parse failures and resource failures are kept distinct from localizable rejection. Kimina's processing removes terminal text after proof completion.
+
+\begin{table}[h]
+\caption{Frozen model revisions and benchmark snapshots.}
+\label{tab:revisions}
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+Artifact & Revision\\
+\midrule
+DeepSeek-Prover-V2-7B & \texttt{a8d9e14432b2e8dd9df2a4d4e70f1ba9bc8d9b7b}\\
+Goedel-Prover-V2-8B & \texttt{dfd02e6271a58375dfbf3ece0175277cf6b6a89a}\\
+Kimina-Prover-Distill-8B & \texttt{74d328a7b1f001ab4871812582fc66d9bf70c68b}\\
+miniF2F (Lean 4) & \texttt{70a1249ce240667f6bcdd1ccd62f847f0e065d57}\\
+ProofNet-Verified & \texttt{160414332dc196583f6c37c310b420d2a3b07c58}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Incremental-analysis protocol and supplementary results}\label{app:incremental}
+
+\paragraph{Population, labels and features.} The comparison retains attempts with $L\ge2$, complete token boundaries and reliable semantic replay; ambiguous localization, parse errors and missing replay exclude the whole attempt, and no candidate step is dropped. The AST fixes candidate boundaries before execution, the diagnostic is mapped to a node, and prefix and rejection are reproduced in saved local contexts. A training label zero means ``not the first rejection'', not ``verified correct'', which differs from the absorbing labels of Section~\ref{sec:theory}. The numeric features $t$, $t/L$, $\log(1+n_{\mathrm{tokens}})$ and mean surprisal use cubic B-splines with four training-quantile knots (linear fallback when knots coincide; constant extrapolation). Categories in fewer than ten training groups, and unseen ones, map to \texttt{OTHER}. No intercept or raw $L$ is added, since attempt-constant scores cancel in the softmax; relative position still lets scores depend on length.
+
+\paragraph{Objective and cross-validation.} With $G$ training groups, $n_g$ attempts in group $g$ and $\ell_{im}=\log\sum_{t\le L_i}e^{r_{it}^{(m)}}-r_{it_i^*}^{(m)}$, each model minimizes
+\begin{equation}\label{eq:objective}
+\mathcal L_m=\frac1G\sum_g\frac1{n_g}\sum_{i\in g}\ell_{im}+\frac\lambda2\|\eta_m\|_2^2,
+\end{equation}
+with no division by $L_i$ and no class reweighting; preprocessing row weights are $1/(Gn_{g(i)}L_i)$. Five outer group folds; within each, three inner folds choose $\lambda\in\{10^{-4},\dots,10\}$ (decades) by pooled inner-validation equal-group NLL, ties within $10^{-10}$ favoring the larger penalty. Scalers, knots and category maps are refitted on each training split. The chosen $\lambda$ is 0.1 throughout except M1 in one Goedel fold ($\lambda=1$). All 190 optimizations per prover converged with $\max|\nabla|<2\times10^{-5}$. Metrics are $H_m=G^{-1}\sum_gn_g^{-1}\sum_{i\in g}\1\{\hat t_i^{(m)}=t_i^*\}$, $\Delta H=H_1-H_0$ and $\Delta\mathrm{NLL}=G^{-1}\sum_gn_g^{-1}\sum_{i\in g}(\ell_{i0}-\ell_{i1})$; the $\pm1$ metric uses $\1\{|\hat t-t^*|\le1\}$.
+
+\paragraph{Uncertainty and sample support.} Twenty thousand bootstrap replicates sample whole groups, identical for both models, without refitting; 95\% percentile intervals plus 97.5\% intervals for the two-cell family. The 97.5\% family intervals for $\Delta$NLL are $[-0.0064, 0.0237]$ (DeepSeek) and $[-0.0967, -0.0180]$ (Goedel). Standardized jump coefficients by outer fold are 0.208, 0.171, 0.231, 0.200, 0.248 (DeepSeek) and 0.211, 0.246, 0.418, 0.251, 0.111 (Goedel); these come from overlapping training sets and are not independent tests. A fixed-fit calculation gives a group standard error of about 1.20\,pp and roughly 209/167 groups for 80\% power at 5\% against the +3\,pp target, compared with 166/133 available. The same calculation gives a Goedel group standard error of about 1.20\,pp at 133 groups, hence a minimum detectable effect of about 3.4\,pp at 80\% power and two-sided level 0.05 (Section~\ref{sec:learned}).
+
+\begin{table}[h]
+\caption{Incremental effect of the jump on ProofNet (equal group weights). $\Delta H=H_1-H_0$ in percentage points; $\Delta\mathrm{NLL}=\mathrm{NLL}_0-\mathrm{NLL}_1$ in nats, positive favors M1. 95\% paired group-bootstrap intervals.}
+\label{tab:incremental}
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrcrc}
+\toprule
+Cell & $H_0$ & $H_1$ & $\Delta H$ & 95\% interval & $\Delta$NLL & 95\% interval\\
+\midrule
+DeepSeek (primary) & 40.85 & 43.51 & $+2.66$ & $[0.45, 5.17]$ & $+0.009$ & $[-0.004, 0.022]$\\
+Goedel (replication) & 57.82 & 57.13 & $-0.69$ & $[-3.13, 1.57]$ & $-0.056$ & $[-0.092, -0.023]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Paired exact outcomes (attempt counts / equal-group shares) and mean absolute error.}
+\label{tab:paired}
+\begin{center}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Model & Both correct & M1 only & M0 only & Both miss & MAE M0$\to$M1\\
+\midrule
+DeepSeek & 191 / 39.8\% & 14 / 3.7\% & 6 / 1.0\% & 241 / 55.5\% & 3.29 $\to$ 3.23\\
+Goedel & 148 / 55.7\% & 5 / 1.4\% & 6 / 2.1\% & 100 / 40.7\% & 3.01 $\to$ 3.10\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Prespecified descriptive strata ($\Delta H$, pp). Groups can appear in several strata. No eligible proof in this population first fails at its last step.}
+\label{tab:strata}
+\begin{center}
+\small
+\begin{tabular}{llrrr}
+\toprule
+Model & Stratum & Attempts & Groups & $\Delta H$\\
+\midrule
+DeepSeek & $L=2$--10 & 188 & 83 & $+3.01$\\
+DeepSeek & $L=11$--24 & 148 & 92 & 0.00\\
+DeepSeek & $L\ge25$ & 116 & 68 & $+0.86$\\
+DeepSeek & first-step failure & 99 & 49 & $+5.10$\\
+DeepSeek & interior failure & 353 & 148 & $+1.69$\\
+Goedel & $L=2$--10 & 120 & 64 & $+0.91$\\
+Goedel & $L=11$--24 & 76 & 53 & $-0.31$\\
+Goedel & $L\ge25$ & 63 & 48 & $-1.39$\\
+Goedel & first-step failure & 83 & 49 & $-0.68$\\
+Goedel & interior failure & 176 & 105 & $-0.32$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Examples selected by smallest SHA256 trace ID within each prover/outcome class.}
+\label{tab:examples}
+\begin{center}
+\small
+\begin{tabular}{lllccc}
+\toprule
+Model & Outcome & Exercise & $t^*/L$ & M0 & M1\\
+\midrule
+DeepSeek & helped & Dummit--Foote 1.1.34 & 7/25 & 1 & 7\\
+DeepSeek & harmed & Artin 10.2.4 & 6/42 & 6 & 1\\
+DeepSeek & unchanged & Rudin 5.5 & 4/50 & 9 & 9\\
+Goedel & helped & Rudin 2.28 & 1/4 & 3 & 1\\
+Goedel & harmed & Dummit--Foote 1.1.5 & 9/16 & 9 & 2\\
+Goedel & unchanged & Artin 2.4.19 & 2/12 & 2 & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Temperature-1.0 replication, controls and threshold diagnostics}\label{app:temp}
+
+\paragraph{Temperature 1.0.} Eligibility, the formal-entry transform (calibration fold 0, shrinkage 0.1), the argmax localizers and M0/M1 (refitted once on temperature-0.6 miniF2F failures) were frozen before evaluation. Seven one-sided hypotheses were tested with Holm correction: Ha, exact jump argmax above uniform (three provers); Hb, $\pm1$ jump argmax above $\pm1$ surprisal argmax (three provers); Hc, M1 above M0 for DeepSeek. Tests use one-sided cluster-$t$ approximations over tasks; intervals use 20,000 task-bootstrap replicates. For DeepSeek, Hc has Holm-adjusted $p=0.479$.
+
+\begin{table}[h]
+\caption{Temperature-1.0 miniF2F evaluation with frozen rules (\%). $p$: Holm-adjusted over seven hypotheses.}
+\label{tab:temp}
+\begin{center}
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & N/tasks & Jump & Uniform & Surprisal & Jump $\pm1$ & Surpr.\ $\pm1$ & $p$ (Ha) & $p$ (Hb)\\
+\midrule
+DeepSeek & 544/140 & 20.40 & 10.31 & 15.99 & 40.07 & 39.34 & $4.2\times10^{-4}$ & 0.547\\
+Goedel & 456/124 & 20.18 & 9.11 & 14.04 & 36.40 & 34.21 & $1.9\times10^{-4}$ & 0.547\\
+Kimina & 498/122 & 19.08 & 10.72 & 12.05 & 35.14 & 24.90 & $6.1\times10^{-4}$ & 0.0021\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Positional references.} The first-step rule predicts $\hat t=1$. The positional prior is a localizer fitted only on first-rejection positions of calibration failures: on miniF2F it is fitted once on temperature-0.6 calibration tasks and applied unchanged at temperature 1.0; on ProofNet it is cross-fitted over five exercise-group folds. Bootstrap intervals resample whole tasks (groups) with the fitted priors held fixed. Table~\ref{tab:positional} gives exact localization under both weightings.
+
+\begin{table}[h]
+\caption{Exact localization against positional references (\%). Jump$-$Prior in percentage points with 95\% task/group bootstrap intervals. Attempt: equal attempt weights (as in Table~\ref{tab:main}); Group: equal task (group) weights.}
+\label{tab:positional}
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{lrrrrcrrrc}
+\toprule
+& \multicolumn{5}{c}{Attempt} & \multicolumn{4}{c}{Group}\\
+\cmidrule(lr){2-6}\cmidrule(lr){7-10}
+Cell & First & Prior & Jump & Surpr. & Jump$-$Prior & First & Prior & Jump & Jump$-$Prior\\
+\midrule
+miniF2F DeepSeek 0.6 & 7.58 & 18.18 & 24.43 & 17.61 & $+6.25$ [0.41, 12.46] & 8.43 & 17.88 & 18.09 & $+0.21$ [$-5.77$, 5.98]\\
+miniF2F Goedel 0.6 & 6.47 & 14.73 & 25.45 & 13.17 & $+10.71$ [4.81, 17.09] & 8.94 & 11.56 & 21.46 & $+9.90$ [4.54, 15.57]\\
+miniF2F Kimina 0.6 & 9.88 & 11.73 & 17.28 & 12.04 & $+5.56$ [$-2.06$, 13.08] & 7.22 & 12.33 & 20.54 & $+8.22$ [1.80, 14.75]\\
+ProofNet DeepSeek 0.6 & 21.71 & 19.30 & 20.39 & 22.59 & $+1.10$ [$-5.56$, 7.60] & 19.69 & 18.43 & 18.39 & $-0.04$ [$-6.27$, 6.08]\\
+ProofNet Goedel 0.6 & 31.68 & 25.57 & 29.39 & 22.52 & $+3.82$ [$-3.40$, 11.15] & 28.42 & 24.32 & 26.37 & $+2.05$ [$-5.10$, 9.27]\\
+miniF2F DeepSeek 1.0 & 6.43 & 20.40 & 20.40 & 15.99 & $+0.00$ [$-6.03$, 6.28] & 6.51 & 18.18 & 16.56 & $-1.63$ [$-6.88$, 3.64]\\
+miniF2F Goedel 1.0 & 6.58 & 16.23 & 20.18 & 14.04 & $+3.95$ [$-1.10$, 9.33] & 6.79 & 15.13 & 19.26 & $+4.13$ [$-0.95$, 9.31]\\
+miniF2F Kimina 1.0 & 9.64 & 13.45 & 19.08 & 12.05 & $+5.62$ [0.00, 11.28] & 9.60 & 16.29 & 21.31 & $+5.02$ [$-0.60$, 10.64]\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Prefix control.} The prefix analysis of Table~\ref{tab:prefix} excludes attempts with $t^*=1$. For a failed attempt with $t^*=k\ge2$, the control uses as donors the eligible failed attempts whose first rejection occurs after step $k$, so that their step $k$ was accepted. The control value is the share of donors in which $w_k$ is the earliest maximum of $w_1,\dots,w_k$; attempts whose cutoff has no donors are left out of the contrast (Supported in Table~\ref{tab:prefix}). Donors come from the same failed population, which removes differences between failed and verified proofs and avoids the small verified samples on ProofNet. Each bootstrap replicate resamples whole tasks (groups) jointly for targets and donors and recomputes donor means and support; the whitening transform is held fixed.
+
+\paragraph{Threshold diagnostics.} Thresholds are quantiles of whitened increments on external verified calibration proofs. Verified controls are restricted to the tasks or exercise groups that contribute eligible failures; an earlier version with unpaired verified controls is retained in the archive as a sensitivity analysis. Cells with fewer than 30 exceedances or few verified groups are shown without intervals.
+
+\paragraph{Online alarms.} Alarm thresholds are set on inner out-of-fold verified attempts at target false-alarm rates of 10\% (primary) and 20\%. Few independent verified groups are available, so realized rates on evaluation attempts can depart from the targets; small cells are reported without intervals.
+
+\begin{table}[h]
+\caption{Online alarms on ProofNet (\%, equal group weights): exact alarm at $t^*$ without earlier alarm, and realized false-alarm rate on verified evaluation attempts. Primary contrast: DeepSeek at 10\%.}
+\label{tab:online}
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrcc}
+\toprule
+Model & Target FPR & Exact H0 & Exact H1 & $\Delta$ (pp) & 95\% interval & Realized FPR H0 / H1\\
+\midrule
+DeepSeek & 10 & 13.85 & 13.39 & $-0.45$ & $[-2.51, 1.86]$ & 15.6 / 15.6\\
+DeepSeek & 20 & 19.86 & 21.08 & $+1.22$ & $[-0.80, 3.33]$ & 28.1 / 34.4\\
+Goedel & 10 & 8.33 & 9.96 & $+1.63$ & $[-1.50, 5.14]$ & 4.4 / 4.4\\
+Goedel & 20 & 19.14 & 14.66 & $-4.47$ & $[-8.67, -0.65]$ & 14.9 / 12.3\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Threshold diagnostics at all quantiles (\%). Columns as in Table~\ref{tab:threshold}; intervals in the archive. $^\dagger$descriptive only.}
+\label{tab:allq}
+\begin{center}
+\small
+\begin{tabular}{llcrrrr}
+\toprule
+Dataset & Model & $q$ & $\PP(M>u)$ failed & $\PP(M>u)$ verified & $\PP(T=F)$ & $\PP(F=t^*)$\\
+\midrule
+miniF2F & DeepSeek & 0.90 & 61.7 & 36.1 & 31.6 & 9.8\\
+ & & 0.95 & 44.1 & 25.0 & 48.9 & 15.0\\
+ & & 0.975 & 23.1 & 13.4 & 54.9 & 18.9\\
+ & & 0.99 & 9.7 & 8.1$^\dagger$ & 58.8 & 2.0\\
+miniF2F & Goedel & 0.90 & 63.4 & 42.0 & 32.4 & 14.4\\
+ & & 0.95 & 50.5 & 29.0 & 37.2 & 17.7\\
+ & & 0.975 & 38.4 & 20.8 & 50.6 & 20.4\\
+ & & 0.99 & 19.0 & 10.8 & 50.6 & 11.8\\
+miniF2F & Kimina & 0.90 & 69.1 & 47.0 & 28.1 & 11.6\\
+ & & 0.95 & 57.7 & 35.5 & 38.0 & 19.8\\
+ & & 0.975 & 48.8 & 27.2 & 41.1 & 23.4\\
+ & & 0.99 & 39.8 & 21.2 & 48.8 & 28.7\\
+ProofNet & DeepSeek & 0.90 & 90.8 & 88.6$^\dagger$ & 14.7 & 21.0\\
+ & & 0.95 & 84.7 & 62.9$^\dagger$ & 25.9 & 22.5\\
+ & & 0.975 & 73.7 & 42.9$^\dagger$ & 40.8 & 22.6\\
+ & & 0.99 & 52.6 & 22.9$^\dagger$ & 50.8 & 20.8\\
+ProofNet & Goedel & 0.90 & 93.1 & 85.0$^\dagger$ & 18.4 & 27.5\\
+ & & 0.95 & 87.8 & 75.0$^\dagger$ & 23.5 & 26.1\\
+ & & 0.975 & 79.8 & 67.5$^\dagger$ & 24.9 & 28.7\\
+ & & 0.99 & 65.7 & 35.0$^\dagger$ & 40.7 & 32.0\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Agreement controls and sensitivity}\label{app:agreement}
+
+\paragraph{Variants and comparisons.} This appendix reports the exact and the near rule; the region itself and a one-step margin around it; comparison with gap controls at matched coverage; comparison with length-standardized argmax references; comparison with length- and candidate-matched top-$K$ references; and use of agreement as a detector of failed proofs.
+
+\paragraph{Rules and matched coverage.} The exact rule outputs $J_i$ when $J_i=S_i$; the near rule fires when $|J_i-S_i|\le1$ and outputs the region $R=[\min(J_i,S_i),\max(J_i,S_i)]$. Precision and coverage are $\PP(t^*\in R\mid\text{fire},E)$ and $\PP(\text{fire}\mid E)$. Table~\ref{tab:gap} compares the exact rule with gap controls that rank proofs by one signal's relative top-two gap $g(u)=(u_{(1)}-u_{(2)})/|u_{(1)}|$, select as many proofs and predict that signal's argmax \citep{geifman2019}. For Goedel on ProofNet, agreement improves precision by 28.1\,pp over the jump-gap control (99.5\% interval $[2.4, 52.8]$) and by 26.3\,pp over the surprisal-gap control ($[3.8, 45.2]$); for Goedel on miniF2F the jump-gap control is higher. These intervals use 50,000 task/group resamples with Bonferroni correction over ten contrasts.
+
+\begin{table}[h]
+\caption{Exact localization when jump and surprisal maxima agree, and precision of gap controls at the same coverage (\%). Intervals: nominal 95\% task/group bootstrap. Kimina has 16 contributing tasks and is descriptive only.}
+\label{tab:gap}
+\begin{center}
+\small
+\begin{tabular}{llrrrcrr}
+\toprule
+& & \multicolumn{4}{c}{Agreement} & \multicolumn{2}{c}{Matched coverage}\\
+\cmidrule(lr){3-6}\cmidrule(lr){7-8}
+Dataset & Model & Hits/agr. & Coverage & Precision & Interval & Jump gap & Surpr.\ gap\\
+\midrule
+miniF2F & DeepSeek & 36/68 & 12.9 & 52.9 & [37.3, 66.2] & 39.7 & 29.4\\
+miniF2F & Goedel & 22/45 & 10.0 & 48.9 & [26.2, 66.7] & 71.1 & 11.1\\
+miniF2F & Kimina & 5/19 & 5.9 & 26.3 & -- & 26.3 & 21.1\\
+ProofNet & DeepSeek & 38/78 & 17.1 & 48.7 & [36.2, 61.1] & 33.3 & 46.2\\
+ProofNet & Goedel & 35/57 & 21.8 & 61.4 & [46.3, 75.0] & 33.3 & 35.1\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Length- and candidate-matched references.} Agreement selects short proofs (Table~\ref{tab:selection}), where any localizer is more accurate. Each reference is therefore computed per selected proof and averaged. The random reference places a contiguous window of $K=|R|$ (or $|R\pm1|$) steps uniformly in a proof of length $L$, with boundaries handled exactly. The single-signal reference gives the jump or the surprisal its $K$ highest steps on all eligible failures of the same length $L$, including selected proofs, and reweights these accuracies to the joint $(L,K)$ distribution of the selected proofs:
+\[
+B_m=\frac1A\sum_{i:\text{ selected}}\operatorname{mean}_{q:\,L_q=L_i}\1\{t_q^*\in\text{top-}K_i\text{ of method }m\text{ on }q\}.
+\]
+Each bootstrap replicate recomputes the per-length accuracies and weights. With $K=1$ this is the ordinary argmax; with larger $K$ the single signal receives the same candidate budget as the rule, without adjacency. Table~\ref{tab:matched} gives the results. With one candidate, three contrasts exclude zero: exact agreement over surprisal for DeepSeek on miniF2F and Goedel on ProofNet, and over jump for DeepSeek on ProofNet. For the near rule, DeepSeek on miniF2F exceeds both references and Goedel on miniF2F exceeds surprisal. With a one-step margin, no contrast excludes zero. Table~\ref{tab:within1} gives the descriptive comparison of exact agreement within one step with each single argmax within one step at the same length distribution.
+
+\begin{table}[h]
+\caption{Selection and localization for the exact rule ($J=S$) and the near rule ($|J-S|\le1$) (\%). Region $R=[\min(J,S),\max(J,S)]$ has one step for the exact rule and at most two for the near rule; $R\pm1$ is clipped at the proof boundaries (at most four steps). $\bar L$: mean length of selected proofs.}
+\label{tab:selection}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+& & \multicolumn{5}{c}{Exact rule} & \multicolumn{5}{c}{Near rule}\\
+\cmidrule(lr){3-7}\cmidrule(lr){8-12}
+Dataset & Model & Sel. & Cov. & $\bar L$ & $t^*\!\in\!R$ & $t^*\!\in\!R\pm1$ & Sel. & Cov. & $\bar L$ & $t^*\!\in\!R$ & $t^*\!\in\!R\pm1$\\
+\midrule
+miniF2F & DeepSeek & 68/528 & 12.9 & 11.5 & 52.9 & 67.6 & 169/528 & 32.0 & 11.5 & 59.8 & 72.2\\
+miniF2F & Goedel & 45/448 & 10.0 & 10.7 & 48.9 & 64.4 & 135/448 & 30.1 & 14.1 & 58.5 & 74.1\\
+miniF2F & Kimina & 19/324 & 5.9 & 14.7 & 26.3 & 47.4 & 74/324 & 22.8 & 11.3 & 44.6 & 51.4\\
+ProofNet & DeepSeek & 78/456 & 17.1 & 8.1 & 48.7 & 80.8 & 174/456 & 38.2 & 8.0 & 55.7 & 81.0\\
+ProofNet & Goedel & 57/262 & 21.8 & 6.8 & 61.4 & 87.7 & 118/262 & 45.0 & 8.8 & 60.2 & 78.0\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Agreement against references matched to the selected proofs' length $L$ and candidate count $K$ (\%). Window: a uniformly placed contiguous window of $K$ steps. Jump/Surprisal: accuracy of the signal's top-$K$ steps on all eligible failures of the same length, reweighted to the selected $(L,K)$ distribution. $\Delta$: agreement minus reference, pp, with 99.875\% intervals (Bonferroni over 40 contrasts; 50,000 paired task/group resamples); bold: interval excludes zero; (--): fewer than 20 contributing groups.}
+\label{tab:matched}
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{lllcrrrrll}
+\toprule
+Dataset & Model & Rule & Region & Agree & Window & Jump & Surpr. & $\Delta$ vs jump & $\Delta$ vs surprisal\\
+\midrule
+miniF2F & DeepSeek & exact & $R$ & 52.9 & 17.6 & 39.3 & 29.4 & $+13.7$ [$-0.8$, 28.5] & $\mathbf{+23.5}$ \textbf{[5.0, 40.1]}\\
+ & & exact & $R\pm1$ & 67.6 & 54.5 & 62.9 & 70.4 & $+4.7$ [$-10.8$, 20.0] & $-2.8$ [$-20.3$, 11.4]\\
+ & & near & $R$ & 59.8 & 30.3 & 47.5 & 44.3 & $\mathbf{+12.3}$ \textbf{[0.3, 26.4]} & $\mathbf{+15.5}$ \textbf{[4.7, 24.9]}\\
+ & & near & $R\pm1$ & 72.2 & 57.4 & 66.7 & 73.8 & $+5.5$ [$-4.7$, 19.0] & $-1.6$ [$-14.3$, 9.0]\\
+miniF2F & Goedel & exact & $R$ & 48.9 & 16.9 & 45.0 & 25.6 & $+3.9$ [$-19.1$, 22.1] & $+23.3$ [$-3.9$, 41.6]\\
+ & & exact & $R\pm1$ & 64.4 & 55.1 & 66.3 & 69.9 & $-1.9$ [$-27.6$, 18.4] & $-5.5$ [$-28.9$, 13.3]\\
+ & & near & $R$ & 58.5 & 30.4 & 49.1 & 41.1 & $+9.4$ [$-3.2$, 20.8] & $\mathbf{+17.4}$ \textbf{[4.9, 31.0]}\\
+ & & near & $R\pm1$ & 74.1 & 55.3 & 68.1 & 70.3 & $+6.0$ [$-5.7$, 16.0] & $+3.8$ [$-12.1$, 21.1]\\
+miniF2F & Kimina & exact & $R$ & 26.3 & 13.8 & 20.4 & 14.0 & $+5.9$ (--) & $+12.3$ (--)\\
+ & & exact & $R\pm1$ & 47.4 & 30.9 & 45.6 & 36.3 & $+1.8$ (--) & $+11.1$ (--)\\
+ & & near & $R$ & 44.6 & 24.3 & 40.3 & 40.4 & $+4.3$ [$-30.4$, 30.7] & $+4.2$ [$-28.8$, 29.6]\\
+ & & near & $R\pm1$ & 51.4 & 42.6 & 57.8 & 56.7 & $-6.4$ [$-37.4$, 16.2] & $-5.3$ [$-37.3$, 22.3]\\
+ProofNet & DeepSeek & exact & $R$ & 48.7 & 26.0 & 37.4 & 45.5 & $\mathbf{+11.3}$ \textbf{[1.1, 22.2]} & $+3.2$ [$-12.1$, 18.3]\\
+ & & exact & $R\pm1$ & 80.8 & 67.8 & 77.7 & 81.0 & $+3.0$ [$-7.4$, 13.8] & $-0.3$ [$-14.3$, 14.7]\\
+ & & near & $R$ & 55.7 & 38.5 & 51.4 & 53.5 & $+4.3$ [$-3.5$, 12.2] & $+2.2$ [$-7.3$, 12.4]\\
+ & & near & $R\pm1$ & 81.0 & 68.2 & 77.3 & 79.8 & $+3.7$ [$-3.2$, 11.6] & $+1.2$ [$-9.6$, 12.0]\\
+ProofNet & Goedel & exact & $R$ & 61.4 & 25.2 & 47.9 & 36.0 & $+13.5$ [$-3.4$, 28.8] & $\mathbf{+25.4}$ \textbf{[7.7, 39.9]}\\
+ & & exact & $R\pm1$ & 87.7 & 64.2 & 78.2 & 76.1 & $+9.5$ [$-7.5$, 22.3] & $+11.6$ [$-3.6$, 27.2]\\
+ & & near & $R$ & 60.2 & 34.9 & 54.0 & 48.3 & $+6.2$ [$-3.8$, 14.9] & $+11.9$ [$-0.6$, 21.2]\\
+ & & near & $R\pm1$ & 78.0 & 63.0 & 76.1 & 76.5 & $+1.9$ [$-8.7$, 9.7] & $+1.5$ [$-10.6$, 11.9]\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Length strata and weighting.} For the near rule (Table~\ref{tab:strataL}), the region contains the first rejection in 56.8--76.4\% of selected proofs with $L\le10$, against 34.1--46.5\% for a random window, and in 31.1--40.0\% of those with $11\le L\le24$, about three times the 10.3--12.2\% of a random window, on 19--45 selected proofs per cell; long proofs are rarely selected. For the exact rule, the corresponding short-proof rates are 55.6--72.1\% against 22.5--31.0\% (Kimina: 25.0\% against 25.2\%), and for $L\ge25$ only 2--6 proofs per cell are selected. With equal group weights, exact-agreement precision is 35.6/36.6/23.8\% on miniF2F and 48.2/57.8\% on ProofNet.
+
+\begin{table}[h]
+\caption{Exact agreement within one step versus each single argmax within one step, reweighted to the selected length distribution (\%; descriptive).}
+\label{tab:within1}
+\begin{center}
+\small
+\begin{tabular}{llrrr}
+\toprule
+Dataset & Model & Agreement $\pm1$ & Jump argmax $\pm1$ & Surprisal argmax $\pm1$\\
+\midrule
+miniF2F & DeepSeek & 67.6 & 61.0 & 57.6\\
+miniF2F & Goedel & 64.4 & 63.4 & 62.4\\
+miniF2F & Kimina & 47.4 & 44.5 & 28.7\\
+ProofNet & DeepSeek & 80.8 & 77.7 & 70.5\\
+ProofNet & Goedel & 87.7 & 76.0 & 69.2\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Near rule by length stratum (\%, descriptive). Sel.: selected over eligible failures in the stratum; $t^*\in R$: localization; Win.: random window of the same size.}
+\label{tab:strataL}
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+& & \multicolumn{3}{c}{$L\le10$} & \multicolumn{3}{c}{$11\le L\le24$} & \multicolumn{3}{c}{$L\ge25$}\\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+Dataset & Model & Sel. & $t^*\!\in\!R$ & Win. & Sel. & $t^*\!\in\!R$ & Win. & Sel. & $t^*\!\in\!R$ & Win.\\
+\midrule
+miniF2F & DeepSeek & 110/174 & 76.4 & 41.3 & 45/202 & 31.1 & 11.6 & 14/152 & 21.4 & 3.8\\
+miniF2F & Goedel & 81/132 & 74.1 & 44.8 & 35/133 & 40.0 & 11.5 & 19/183 & 26.3 & 4.0\\
+miniF2F & Kimina & 44/92 & 56.8 & 34.1 & 22/113 & 31.8 & 11.3 & 8/119 & 12.5 & 5.6\\
+ProofNet & DeepSeek & 136/188 & 62.5 & 46.5 & 28/150 & 39.3 & 12.2 & 10/118 & 10.0 & 4.4\\
+ProofNet & Goedel & 90/120 & 67.8 & 43.1 & 19/77 & 36.8 & 10.3 & 9/65 & 33.3 & 5.3\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Detection.} Treating a firing as a prediction that the proof failed, over eligible failed and verified proofs, gives the positive predictive values in Table~\ref{tab:detect}. In all ten cells the excess over a length-only reference has an adjusted interval containing zero: agreement carries no information about whether a proof failed beyond its length. Counting a firing as correct only when its region contains the first rejection gives 1.6--46.7\% of all firings.
+
+\begin{table}[h]
+\caption{Agreement as a detector of failed proofs, over eligible failed and verified proofs (\%). PPV: share of firings on failed proofs. Length-only: $\Pr(\text{failed}\mid L)$ averaged over the firings' lengths. Excess: PPV minus length-only, pp, with Bonferroni intervals over ten contrasts. Sens.: share of failed proofs selected; FA: share of verified proofs selected; Loc.: firings whose region $R$ contains $t^*$, over all firings.}
+\label{tab:detect}
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllrrrlrrr}
+\toprule
+Dataset & Model & Rule & Firings & PPV & Length-only & Excess & Sens. & FA & Loc.\\
+\midrule
+miniF2F & DeepSeek & exact & 341 & 19.9 & 21.8 & $-1.9$ [$-7.0$, 3.4] & 12.9 & 35.2 & 10.6\\
+ & & near & 640 & 26.4 & 27.4 & $-1.0$ [$-4.2$, 2.2] & 32.0 & 60.8 & 15.8\\
+miniF2F & Goedel & exact & 219 & 20.5 & 18.5 & $+2.0$ [$-4.9$, 9.3] & 10.0 & 21.5 & 10.0\\
+ & & near & 536 & 25.2 & 23.1 & $+2.1$ [$-1.8$, 5.7] & 30.1 & 49.6 & 14.7\\
+miniF2F & Kimina & exact & 318 & 6.0 & 5.1 & $+0.9$ [$-1.7$, 4.0] & 5.9 & 34.4 & 1.6\\
+ & & near & 574 & 12.9 & 11.2 & $+1.7$ [$-1.5$, 5.0] & 22.8 & 57.6 & 5.7\\
+ProofNet & DeepSeek & exact & 114 & 68.4 & 71.0 & $-2.6$ [$-11.9$, 6.1] & 17.1 & 32.4 & 33.3\\
+ & & near & 242 & 71.9 & 70.9 & $+1.0$ [$-3.5$, 5.5] & 38.2 & 61.3 & 40.1\\
+ProofNet & Goedel & exact & 75 & 76.0 & 67.1 & $+8.9$ [$-2.4$, 19.1] & 21.8 & 22.8 & 46.7\\
+ & & near & 167 & 70.7 & 67.6 & $+3.1$ [$-1.6$, 8.0] & 45.0 & 62.0 & 42.5\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Details of the tail hypotheses}\label{app:tails}
+
+\paragraph{Archived tail comparisons.} The older middle-layer, temperature-0.6 analysis uses the prompt-end anchor. With $M_k^{(r)}=k^{-1}\sum_{j\le k}[\log(Z_{(j)}/Z_{(k+1)})]^r$, the moment estimate is $\hat\gamma_k^M=M_k^{(1)}+1-\tfrac12\bigl(1-(M_k^{(1)})^2/M_k^{(2)}\bigr)^{-1}$ \citep{dekkers1989}, and the GPD estimate fits shape and scale to excesses over $Z_{(k+1)}$ \citep{pickands1975}. Hill is positive by construction; moment and GPD estimates keep their signs. Threshold selection is repeated under task resampling with the transform fixed.
+
+\begin{table}[h]
+\caption{Archived tail estimates (prompt-end anchor). $k$: selected extremes; Tasks: distinct contributors; --: failed GPD fit.}
+\label{tab:tails}
+\begin{center}
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+Model & Subset & Hill & Moment & GPD & $k$ & Tasks\\
+\midrule
+DeepSeek & Verified & 0.135 & $-0.062$ & $-0.063$ & 347 & 47\\
+DeepSeek & Refuted & 0.058 & $-0.317$ & $-0.359$ & 41 & 9\\
+DeepSeek & $t<t^*$ & 0.116 & $-0.421$ & $-0.326$ & 237 & 36\\
+DeepSeek & $t=t^*$ & 0.077 & 0.002 & $-0.013$ & 20 & 13\\
+DeepSeek & $t>t^*$ & 0.132 & 0.057 & 0.020 & 593 & 56\\
+Goedel & Verified & 0.171 & 0.168 & 0.172 & 1311 & 86\\
+Goedel & Refuted & 0.183 & 0.214 & 0.263 & 1253 & 79\\
+Goedel & $t<t^*$ & 0.190 & 0.113 & 0.090 & 332 & 52\\
+Goedel & $t=t^*$ & 0.204 & 0.030 & -- & 22 & 16\\
+Goedel & $t>t^*$ & 0.186 & 0.224 & 0.253 & 940 & 72\\
+Kimina & Verified & 0.149 & 0.135 & 0.146 & 773 & 64\\
+Kimina & Refuted & 0.089 & $-0.315$ & $-0.482$ & 36 & 16\\
+Kimina & $t<t^*$ & 0.178 & 0.133 & 0.128 & 600 & 60\\
+Kimina & $t=t^*$ & 0.054 & 0.092 & 0.147 & 20 & 10\\
+Kimina & $t>t^*$ & 0.066 & $-0.036$ & -- & 20 & 9\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Local peak prominence.} For an interior earliest maximum at $j$, $R=w_j/((w_{j-1}+w_{j+1})/2)$. On tasks with both outcomes we regress $\log R$ on a refuted indicator, $\log L$ and $(\log L)^2$ with task fixed effects and equal task weights, resampling tasks 10,000 times with Bonferroni intervals across models.
+
+\begin{table}[h]
+\caption{Length-adjusted outcome effect on local peak prominence, refuted versus verified.}
+\label{tab:prominence}
+\begin{center}
+\small
+\begin{tabular}{lrrc}
+\toprule
+Model & Paired tasks & Factor & 98.33\% interval\\
+\midrule
+DeepSeek & 44 & 0.998 & [0.964, 1.040]\\
+Goedel & 54 & 0.976 & [0.945, 1.013]\\
+Kimina & 42 & 1.017 & [0.982, 1.054]\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Controlled deduction and training-dynamics protocols}\label{app:dynamics}
+
+\paragraph{Deduction.} Calibration/evaluation successes are 171/1,000 and 84/500 at temperature 1.0 ($c=0.26838$; Brier 0.126903 vs.\ 0.139785) and 188/1,000 and 91/500 at 0.6 ($c=0.25541$). Syntax guidance restricts format only. The 2,000-replicate bootstrap resamples tasks within assigned length in both splits and refits the predictor.
+
+\paragraph{Length models.} All models are fitted on calibration outcomes and scored on held-out tasks (Table~\ref{tab:lengthmodels}). The hazard analysis uses the first locally invalid inference, identified by the symbolic checker, rather than failure to reach the goal. Likelihood-ratio statistics against a constant hazard are 64.9 (temperature 0.6) and 43.1 (1.0), and against a trend-only hazard 140.3 and 107.6; all have $p\le10^{-4}$, the resolution of 10,000 resamples.
+
+\begin{table}[h]
+\caption{Held-out scores of success--length models on controlled deduction. Exponential is $\exp(-cL)$ as in Section~\ref{sec:other}; two further parametric forms fall within the range of the non-constant models shown.}
+\label{tab:lengthmodels}
+\begin{center}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{Temperature 0.6} & \multicolumn{2}{c}{Temperature 1.0}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Model & Brier & Log loss & Brier & Log loss\\
+\midrule
+Constant & 0.1489 & 0.4745 & 0.1398 & 0.4527\\
+Exponential & 0.1424 & 0.4496 & 0.1269 & 0.4043\\
+Weibull & 0.1416 & 0.4475 & 0.1268 & 0.4056\\
+Linear & 0.1407 & 0.4498 & 0.1274 & 0.4054\\
+Nonparametric & 0.1388 & 0.4437 & 0.1271 & 0.4090\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Modular addition.} One block, width 128, four heads, a 512-unit ReLU MLP, no layer normalization; modulus 113 with 3,830 training and 8,939 held-out pairs; full-batch AdamW (learning rate $10^{-3}$, weight decay 1, $\beta=(0.9,0.98)$) for 40,000 steps, checkpoints every 100 steps; five real-label seeds paired with shuffled-label controls. The transition is the first of five consecutive checkpoints with at least 90\% test accuracy, and pre/post summaries use five checkpoints on either side. The primary 5\% tail contains 638 of 12,769 normalized block-increment norms, a bounded finite input distribution rather than a sequence of proof steps.
+
+\section{Confirmatory protocol}\label{app:protocol}
+
+This protocol turns the results of Sections~\ref{sec:loc}--\ref{sec:learned} into tests fixed before any new outcome is computed. Every attempt analyzed in this paper, including the temperature-1.0 samples, has entered earlier analyses, and Table~\ref{tab:prefix} computes H2 on these attempts as a diagnostic. The protocol is therefore evaluated on newly generated attempts on new tasks.
+
+\paragraph{Hypotheses.} For each prover, with equal task (group) weights:
+(H1) exact localization of the full-proof jump argmax exceeds the uniform reference $\EE[1/L]$;
+(H2) among failed attempts with $t^*\ge2$, the rate at which $t^*$ is the argmax of $w_t$ over $t\le t^*$ exceeds the prefix control of Appendix~\ref{app:temp}, computed on failed attempts whose first rejection comes later; this separates a failure-specific peak from a positional trend;
+(H3, secondary) the $\pm1$ rate of the jump argmax exceeds that of the surprisal argmax;
+(H4, secondary) the frozen M1 localizer exceeds the frozen M0 localizer in exact localization.
+DeepSeek is the primary prover. H1 and H2 are tested one-sided at level 0.05 with a paired bootstrap over whole tasks (20,000 replicates) and Holm correction; H3 and H4 and the other provers are secondary, with Holm correction within each prover.
+
+\paragraph{Frozen components.} Before any outcome is computed, the following are fixed by SHA256 and a timestamped commit: segmentation and eligibility code; read-out layers (14/17/17) and the formal-entry anchor; the whitening transform (calibration fold 0, shrinkage 0.1); the prefix-control procedure and the positional prior of Appendix~\ref{app:temp}; the M0 and M1 pipelines with coefficients refitted once on all eligible temperature-0.6 miniF2F failures and then frozen; tie-breaking to the earliest step; metrics, tests and multiplicity rules.
+
+\paragraph{Data and sample size.} Newly generated attempts, with the same prompts and decoding settings, on tasks disjoint from every task analyzed here. The primary effects observed so far are 8--22 percentage points. The secondary H4 sets the size: with the fixed-fit group standard error of Appendix~\ref{app:incremental} (1.20\,pp at 166 groups), detecting +2.7\,pp with 80\% power at one-sided level 0.05 requires about 200 task groups, and about 290 at level 0.05/3; the protocol targets 290 groups.
+
+\paragraph{Reporting.} All hypotheses are reported for all provers regardless of outcome, with the secondary metrics of Table~\ref{tab:learned}. Any deviation from the frozen protocol is documented as a dated amendment with its reason.
+
+\section{Read-out sensitivity and whitening stability}\label{app:sensitivity}
+
+\paragraph{Variants.} All variants use the same eligible populations, anchor and tie-breaking as the main analysis, and all transforms are fitted on verified calibration proofs only. V0 is the main score (middle layer, isotropic shrinkage 0.1, calibration fold 0). The shrinkage variants change only the shrinkage; Raw uses $\|\xi_{it}\|_2$ without whitening; Diagonal uses a diagonal covariance with a numerical floor of $10^{-6}$ times the mean variance; Quarter and Three-q.\ refit the shrinkage-0.1 transform at layers 6/8 and 21/26; Fold~1 refits V0 on the second calibration fold. V0 remains the primary score; the variants are descriptive. Table~\ref{tab:sensitivity} gives exact localization and Table~\ref{tab:sensprefix} the prefix contrast with the control of Appendix~\ref{app:temp}.
+
+\begin{table}[h]
+\caption{Exact first-rejection localization of the full-proof argmax under alternative read-outs (\%, temperature 0.6, equal attempt weights).}
+\label{tab:sensitivity}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Dataset & Model & V0 & $\rho=0.01$ & $\rho=0.5$ & Raw & Diagonal & Quarter & Three-q. & Fold 1\\
+\midrule
+miniF2F & DeepSeek & 24.43 & 24.62 & 24.05 & 13.07 & 18.18 & 23.48 & 21.97 & 23.67\\
+miniF2F & Goedel & 25.45 & 24.11 & 26.79 & 5.13 & 4.91 & 26.34 & 22.10 & 23.21\\
+miniF2F & Kimina & 17.28 & 17.28 & 17.59 & 13.89 & 16.05 & 17.90 & 15.12 & 14.20\\
+ProofNet & DeepSeek & 20.39 & 20.61 & 19.96 & 26.32 & 24.12 & 28.73 & 22.15 & 21.05\\
+ProofNet & Goedel & 29.39 & 28.24 & 30.92 & 30.15 & 26.34 & 31.30 & 27.86 & 25.57\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Prefix contrast with the control under alternative read-outs (supported hit minus control, pp). Intervals exclude zero for every whitened variant (V0, both shrinkages, both other layers, Fold~1). For Raw and Diagonal on miniF2F, intervals contain zero for Kimina (Raw) and Goedel (Diagonal) and lie below zero for Goedel (Raw), $[-2.42, -0.30]$.}
+\label{tab:sensprefix}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Dataset & Model & V0 & $\rho=0.01$ & $\rho=0.5$ & Raw & Diagonal & Quarter & Three-q. & Fold 1\\
+\midrule
+miniF2F & DeepSeek & $+12.71$ & $+13.12$ & $+11.62$ & $+7.29$ & $+11.08$ & $+22.21$ & $+7.19$ & $+10.68$\\
+miniF2F & Goedel & $+14.36$ & $+13.31$ & $+15.11$ & $-1.40$ & $-1.53$ & $+21.42$ & $+9.29$ & $+11.97$\\
+miniF2F & Kimina & $+14.12$ & $+13.47$ & $+13.48$ & $+3.23$ & $+7.55$ & $+20.17$ & $+12.26$ & $+11.09$\\
+ProofNet & DeepSeek & $+8.18$ & $+8.34$ & $+7.14$ & $+14.01$ & $+12.90$ & $+14.88$ & $+5.61$ & $+8.11$\\
+ProofNet & Goedel & $+16.65$ & $+13.78$ & $+20.93$ & $+5.07$ & $+8.42$ & $+13.28$ & $+10.30$ & $+12.53$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\paragraph{Whitening stability.} Two calibration folds are available for each model. Between folds 0 and 1, the relative change of the covariance estimate is 0.34 (DeepSeek), 0.30 (Goedel) and 0.42 (Kimina), before and after shrinkage alike, and the relative change of the mean is 0.07, 0.11 and 0.35. Table~\ref{tab:folds} compares the resulting scores on evaluation attempts: mean within-trace rank correlations are 0.81--0.95, exact localization changes by $-3.8$ to $+0.7$\,pp, and the argmax moves in 15--38\% of attempts.
+
+\begin{table}[h]
+\caption{Stability of the whitening transform between calibration folds 0 and 1 (temperature 0.6, middle layer). Spearman: pooled over steps, and mean within trace (attempt / equal-group weights). Argmax moved: share of attempts whose argmax changes (attempt / equal-group, \%).}
+\label{tab:folds}
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrccc}
+\toprule
+& & \multicolumn{2}{c}{Exact (\%)} & \multicolumn{2}{c}{Spearman} & Argmax\\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Dataset & Model & Fold 0 & Fold 1 & Pooled & Within trace & moved (\%)\\
+\midrule
+miniF2F & DeepSeek & 24.43 & 23.67 & 0.895 & 0.852 / 0.813 & 38.1 / 41.5\\
+miniF2F & Goedel & 25.45 & 23.21 & 0.914 & 0.864 / 0.850 & 32.1 / 35.2\\
+miniF2F & Kimina & 17.28 & 14.20 & 0.857 & 0.824 / 0.810 & 31.2 / 32.8\\
+ProofNet & DeepSeek & 20.39 & 21.05 & 0.956 & 0.947 / 0.946 & 20.0 / 19.9\\
+ProofNet & Goedel & 29.39 & 25.57 & 0.967 & 0.931 / 0.922 & 14.9 / 18.2\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Eligibility and selection}\label{app:eligibility}
+
+An attempt enters the localization analyses when it fails verification, semantic replay identifies a reproducible first rejection, and token alignment maps every step to a complete token span (Section~\ref{sec:measure}). On ProofNet the learned-comparison population additionally requires $L\ge2$; it contains 452 DeepSeek and 259 Goedel attempts, 62.0\% and 34.0\% of their non-verified attempts.
+
+\paragraph{Categories without a first rejected step.} Parse errors stop Lean before any tactic runs; resource failures end execution by time or memory limits without a tactic being rejected; terminal unsolved goals arise when every tactic is accepted and goals remain at the end of the proof. For these attempts $t^*$ in~\eqref{eq:tstar} is undefined, and attributing the failure to the last tactic would create a label that no localizer can be meaningfully scored against. The estimand of this paper, exact localization of $t^*$, is therefore defined only on attempts with a rejected step.
+
+\paragraph{Categories with an unreliable label.} Unresolved localization covers attempts where semantic replay and token alignment do not agree on the first reproducible rejection (Appendix~\ref{app:readout}); incomplete token boundaries cover attempts where a step cannot be mapped to a contiguous token span, so $w_{it}$ and $q_{it}$ cannot be attached to it. In both cases the attempt is excluded as a whole and no candidate step is dropped from an included attempt (Appendix~\ref{app:incremental}), so the candidate sets of included attempts are complete.
+
+\paragraph{Consequences for the reported contrasts.} Exact localization decreases with proof length for every localizer, including the uniform reference (Tables~\ref{tab:strata} and~\ref{tab:strataL}), so absolute rates depend on the length distribution of the eligible population. All references (uniform, first step, positional prior, prefix control, M0) are evaluated on exactly the same attempts, with the same weights and the same bootstrap resamples, so every reported contrast holds that distribution fixed: the comparisons of the jump with position, surprisal and the learned baseline are comparisons on one population, and the prefix control draws its donors from the same eligible failures.

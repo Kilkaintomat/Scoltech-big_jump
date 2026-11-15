@@ -1,0 +1,106 @@
+{
+  "source_archive_name": "extreme_value_reasoning_failure_revised_v4_latex.zip",
+  "source_archive_sha256": "6b6be00b37c22f8a12b35149e79172e61391d6dbeb14e0aeedf1a08e19ec29a6",
+  "archive_members": [
+    {
+      "path": "iclr2027_conference.sty",
+      "bytes": 9025,
+      "sha256": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6"
+    },
+    {
+      "path": "fig_threshold.pdf",
+      "bytes": 23229,
+      "sha256": "a04f20e699ecc2d523bf2619d872bd43cdf8ba486d65403fd7bb1605738fca67"
+    },
+    {
+      "path": "app_proofs.tex",
+      "bytes": 10731,
+      "sha256": "94c3d482dd6ff6d3c7ba16551cc8aa0727078784992db9f956470d377cc64d82"
+    },
+    {
+      "path": "natbib.sty",
+      "bytes": 45154,
+      "sha256": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d"
+    },
+    {
+      "path": "sections.tex",
+      "bytes": 20626,
+      "sha256": "b6e3e7110d0ac6208677de95a513797cf8ba2a1da32e257d487c49b49f8fdf0e"
+    },
+    {
+      "path": "iclr2027_conference.bst",
+      "bytes": 26973,
+      "sha256": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5"
+    },
+    {
+      "path": "fancyhdr.sty",
+      "bytes": 20521,
+      "sha256": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea"
+    },
+    {
+      "path": "main.tex",
+      "bytes": 19400,
+      "sha256": "86543001a23a94fa354c4a4e1b37e47edb8ceab73ffa84bed5195bdf040c0a27"
+    },
+    {
+      "path": "app_rest.tex",
+      "bytes": 40968,
+      "sha256": "7fe3a25b489d359c2cd6f9c5d3e482dcd2245ce66ae818677da8bf0cee86ac9b"
+    },
+    {
+      "path": "refs.tex",
+      "bytes": 9370,
+      "sha256": "fb3f65818a7f20469d4b6db33738467770c01a489d6ff6fccccf345f1981f0cc"
+    }
+  ],
+  "local_dependencies": [
+    {
+      "source": "sections.tex",
+      "kind": "includegraphics",
+      "target": "fig_threshold.pdf",
+      "present": true
+    },
+    {
+      "source": "main.tex",
+      "kind": "input",
+      "target": "sections",
+      "present": true
+    },
+    {
+      "source": "main.tex",
+      "kind": "input",
+      "target": "refs",
+      "present": true
+    },
+    {
+      "source": "main.tex",
+      "kind": "input",
+      "target": "app_proofs",
+      "present": true
+    },
+    {
+      "source": "main.tex",
+      "kind": "input",
+      "target": "app_rest",
+      "present": true
+    }
+  ],
+  "source_files_edited": false,
+  "included_pdf": {
+    "path": "article_v4.pdf",
+    "sha256": "88eb57e02f8d93224995d289daa46ec4f3c7212a45e42269db8431ef9fdf87fb",
+    "pages": 24,
+    "origin": "existing v4 PDF; not rebuilt"
+  },
+  "distinct_reference_pdf": {
+    "name": "49433_An_Extreme_Value_Perspec (2).pdf",
+    "sha256": "ff001f57ff3b1f90caaa917b9aad98a2da5f5aeedd04b6209a8287308dd0a0c6",
+    "pages": 20,
+    "included": false
+  },
+  "exact_reference_pdf_source_identified": false,
+  "tex_build": {
+    "status": "not_run",
+    "reason": "pdflatex unavailable on checked Slurm node"
+  }
+}

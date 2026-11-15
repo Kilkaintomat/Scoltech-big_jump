@@ -1,0 +1,30 @@
+{
+  "utc": "2026-11-15T10:00:46.074653+00:00",
+  "host": "cn70.zhores",
+  "slurm_job": "8547582",
+  "publication_base_commit": "a289eab2bcff3a2936dd67e6c782f83a2e6ad2b5",
+  "source": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/experiments/models_projections_20261115_v1/publication_paper_v4.py": "b64ebf32bfb9770dd1301594e4ddcf81746cb0b1519825a093f6671faf13de3d"
+  },
+  "inputs": {
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/models_projections_latest_20261115_v1/inputs/extreme_value_reasoning_failure_revised_v4_latex.zip": "6b6be00b37c22f8a12b35149e79172e61391d6dbeb14e0aeedf1a08e19ec29a6",
+    "/beegfs/home/denis.rakhmankin/onebigjump/runs/models_projections_latest_20261115_v1/inputs/extreme_value_reasoning_failure_revised_v4.pdf": "88eb57e02f8d93224995d289daa46ec4f3c7212a45e42269db8431ef9fdf87fb"
+  },
+  "outputs": {
+    "fig_threshold.pdf": "a04f20e699ecc2d523bf2619d872bd43cdf8ba486d65403fd7bb1605738fca67",
+    "README.md": "08a154a5d0b90086d8b76aba746d6443c9ede945a8cd1b6306b4b1c0fccbd4ce",
+    ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "source_manifest.json": "29b6c8885309e518ee12fc389114c71a944e42286f3b7fec4e8fdc7e43f961f5",
+    "natbib.sty": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d",
+    "app_rest.tex": "7fe3a25b489d359c2cd6f9c5d3e482dcd2245ce66ae818677da8bf0cee86ac9b",
+    "sections.tex": "b6e3e7110d0ac6208677de95a513797cf8ba2a1da32e257d487c49b49f8fdf0e",
+    "source_archive.zip": "6b6be00b37c22f8a12b35149e79172e61391d6dbeb14e0aeedf1a08e19ec29a6",
+    "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "refs.tex": "fb3f65818a7f20469d4b6db33738467770c01a489d6ff6fccccf345f1981f0cc",
+    "fancyhdr.sty": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea",
+    "article_v4.pdf": "88eb57e02f8d93224995d289daa46ec4f3c7212a45e42269db8431ef9fdf87fb",
+    "main.tex": "86543001a23a94fa354c4a4e1b37e47edb8ceab73ffa84bed5195bdf040c0a27",
+    "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+    "app_proofs.tex": "94c3d482dd6ff6d3c7ba16551cc8aa0727078784992db9f956470d377cc64d82"
+  }
+}
